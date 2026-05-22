@@ -2,208 +2,806 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nisan'a Özel 🍒</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>B1 Almanca | Oyunlaştırılmış Kamp</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito (Duolingo'nun kullandığı fonta çok benzer) -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
-
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #4c0519; /* Derin Vişne Rengi */
-            overflow-x: hidden;
+            font-family: 'Nunito', sans-serif;
+            background-color: #ffffff;
+            color: #3c3c3c;
+            user-select: none; /* Metin seçimini kapat (uygulama hissi) */
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .cursive {
-            font-family: 'Dancing Script', cursive;
+        /* Sekme Sistemi */
+        .screen {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .screen.active {
+            display: flex;
+            opacity: 1;
         }
 
-        .cherry-bg {
-            background-image: url('https://www.transparentpng.com/download/cherry/cherry-png-images-9.png');
-            background-size: 100px;
-            opacity: 0.1;
+        /* Duolingo Tarzı Kalın Butonlar */
+        .duo-btn {
+            border-radius: 16px;
+            border: 2px solid transparent;
+            border-bottom-width: 4px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.1s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .duo-btn:active:not(:disabled) {
+            border-bottom-width: 2px;
+            transform: translateY(2px);
+        }
+        .duo-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-bottom-width: 2px;
+            transform: translateY(2px);
+        }
+
+        /* Renk Varyasyonları */
+        .btn-green { background: #58cc02; border-color: #58a700; color: white; }
+        .btn-green:hover:not(:disabled) { background: #61e002; }
+        
+        .btn-blue { background: #1cb0f6; border-color: #1899d6; color: white; }
+        .btn-blue:hover:not(:disabled) { background: #1ebcf9; }
+
+        .btn-red { background: #ff4b4b; border-color: #ea2b2b; color: white; }
+        .btn-red:hover:not(:disabled) { background: #ff5e5e; }
+
+        .btn-white { background: #ffffff; border-color: #e5e5e5; color: #1cb0f6; }
+        .btn-white:hover:not(:disabled) { background: #f7f7f7; }
+
+        /* Seçenek Butonları */
+        .opt-btn {
+            background: #ffffff;
+            border: 2px solid #e5e5e5;
+            border-bottom-width: 4px;
+            border-radius: 16px;
+            color: #4b4b4b;
+            font-weight: 700;
+            font-size: 1.125rem;
+            transition: all 0.1s;
+            cursor: pointer;
+        }
+        .opt-btn:active:not(:disabled) {
+            border-bottom-width: 2px;
+            transform: translateY(2px);
+        }
+        .opt-btn.selected {
+            border-color: #84d8ff;
+            background: #ddf4ff;
+            color: #1cb0f6;
+        }
+        .opt-btn.correct {
+            border-color: #58a700;
+            background: #d7ffb8;
+            color: #58a700;
+        }
+        .opt-btn.wrong {
+            border-color: #ea2b2b;
+            background: #ffdfe0;
+            color: #ea2b2b;
+        }
+
+        /* Geri Bildirim Alt Çekmecesi (Bottom Sheet) */
+        .bottom-sheet {
             position: fixed;
-            top: 0;
+            bottom: -100%;
             left: 0;
-            width: 100%;
+            right: 0;
+            transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 50;
+        }
+        .bottom-sheet.show {
+            bottom: 0;
+        }
+
+        /* Yükleme Ekranı */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background-color: #ffffff;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease-out;
+        }
+
+        /* Menu İkonları */
+        .nav-item {
+            color: #afafaf;
+            transition: all 0.2s;
+        }
+        .nav-item.active {
+            color: #1cb0f6;
+            background-color: #ddf4ff;
+            border-color: #84d8ff;
+        }
+        .nav-item:hover:not(.active) {
+            background-color: #f7f7f7;
+        }
+
+        /* İlerleme Çubuğu */
+        .progress-bar-bg {
+            background-color: #e5e5e5;
+            border-radius: 99px;
+            overflow: hidden;
+            height: 16px;
+        }
+        .progress-bar-fill {
+            background-color: #58cc02;
             height: 100%;
-            z-index: -1;
-            animation: float 20s linear infinite;
+            border-radius: 99px;
+            width: 0%;
+            transition: width 0.4s ease-out;
+            position: relative;
         }
-
-        @keyframes float {
-            from { background-position: 0 0; }
-            to { background-position: 500px 1000px; }
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-        }
-
-        .error-shake {
-            animation: shake 0.5s core;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        .floating-cherry {
+        /* Işık yansıması efekti */
+        .progress-bar-fill::after {
+            content: '';
             position: absolute;
-            pointer-events: none;
-            animation: fall linear infinite;
+            top: 4px;
+            left: 8px;
+            right: 8px;
+            height: 4px;
+            background-color: rgba(255,255,255,0.3);
+            border-radius: 99px;
         }
 
-        @keyframes fall {
-            to { transform: translateY(100vh) rotate(360deg); }
-        }
     </style>
 </head>
-<body class="text-white min-h-screen flex items-center justify-center p-4">
+<body class="h-screen w-full flex flex-col md:flex-row overflow-hidden bg-white">
 
-    <div class="cherry-bg"></div>
-
-    <!-- Giriş Ekranı -->
-    <div id="login-screen" class="glass p-8 w-full max-w-md shadow-2xl transition-all duration-700">
-        <div class="text-center mb-8">
-            <div class="text-6xl mb-4">🍒</div>
-            <h1 class="cursive text-4xl text-pink-200">Hoş Geldin Sevgilim</h1>
-            <p class="text-sm text-pink-300 mt-2">Bu kapı sadece sana özel...</p>
+    <!-- Sade ve Kişiselleştirilmiş Yükleme Ekranı -->
+    <div id="loader">
+        
+        <!-- Konuşma Balonu -->
+        <div class="relative bg-white border-2 border-gray-200 text-gray-800 font-extrabold rounded-2xl px-6 py-3 mb-6 shadow-sm">
+            <p class="text-center text-lg">"Für dich, Baby"<br><span class="text-gray-400 text-sm">-Talha</span></p>
+            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-t-gray-200 border-r-[10px] border-r-transparent"></div>
+            <div class="absolute -bottom-[6px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-t-[8px] border-t-white border-r-[8px] border-r-transparent"></div>
         </div>
-
-        <div class="space-y-4">
-            <div>
-                <label class="block text-xs font-semibold text-pink-200 uppercase tracking-wider mb-1">İsminiz</label>
-                <input type="text" id="username" placeholder="İsmini yaz..." 
-                    class="w-full bg-white/10 border border-white/20 rounded-lg p-3 outline-none focus:border-pink-400 transition-colors">
-            </div>
-            <div>
-                <label class="block text-xs font-semibold text-pink-200 uppercase tracking-wider mb-1">Şifre</label>
-                <input type="password" id="password" placeholder="Kalbimizin şifresi..." 
-                    class="w-full bg-white/10 border border-white/20 rounded-lg p-3 outline-none focus:border-pink-400 transition-colors">
-            </div>
-            
-            <!-- Hata Mesajı -->
-            <div id="error-box" class="hidden bg-red-500/20 border border-red-500/50 text-red-200 text-sm p-3 rounded-lg text-center">
-                Yanlış girdiniz sevgilim, tekrar dene. ❤️
-            </div>
-
-            <button onclick="checkLogin()" 
-                class="w-full bg-pink-600 hover:bg-pink-500 text-white font-bold py-3 rounded-lg transition-all transform active:scale-95 shadow-lg">
-                Giriş Yap
-            </button>
+        
+        <!-- Fotoğraf -->
+        <img src="assets/talhaarkaplansiz.png" alt="Talha" onerror="this.src='https://placehold.co/150x150/58cc02/ffffff?text=Talha'" class="h-32 md:h-40 object-contain mb-8 drop-shadow-md">
+        
+        <!-- Loading Bar -->
+        <div class="w-64 h-3 bg-gray-200 rounded-full overflow-hidden mb-8">
+            <div id="loader-progress" class="h-full bg-[#58cc02] rounded-full w-0 transition-all duration-[2.5s] ease-in-out"></div>
         </div>
+        
+        <!-- İmza -->
+        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.src='https://placehold.co/200x50/ffffff/58cc02?text=Talha+Ozturk'" class="h-10 md:h-12 object-contain opacity-80">
+        
     </div>
 
-    <!-- Hediye İçeriği (Başlangıçta Gizli) -->
-    <div id="content-screen" class="hidden w-full max-w-4xl">
-        <div class="glass p-10 text-center relative overflow-hidden">
-            <div class="relative z-10">
-                <h2 class="cursive text-6xl text-pink-200 mb-6 animate-bounce">Seni Çok Seviyorum Nisan!</h2>
-                <div class="w-32 h-1 bg-pink-400 mx-auto mb-8 rounded-full"></div>
+    <!-- MOBIL ALT NAVİGASYON & DESKTOP SOL MENÜ -->
+    <nav class="order-2 md:order-1 w-full md:w-64 border-t-2 md:border-t-0 md:border-r-2 border-gray-200 bg-white flex flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0">
+        
+        <div class="hidden md:flex items-center gap-3 mb-10 pl-2">
+            <h1 class="text-3xl font-black text-[#58cc02] tracking-tighter">b1-lingo</h1>
+        </div>
+
+        <button onclick="switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold">
+            <i class="ph ph-house text-2xl md:text-3xl"></i>
+            <span class="text-[10px] md:text-lg tracking-wide uppercase md:capitalize">Öğren</span>
+        </button>
+        
+        <button onclick="switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold">
+            <i class="ph ph-chats text-2xl md:text-3xl"></i>
+            <span class="text-[10px] md:text-lg tracking-wide uppercase md:capitalize">Diyalog</span>
+        </button>
+        
+        <button onclick="switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold">
+            <i class="ph ph-user text-2xl md:text-3xl"></i>
+            <span class="text-[10px] md:text-lg tracking-wide uppercase md:capitalize">Profil</span>
+        </button>
+    </nav>
+
+    <!-- ANA İÇERİK ALANI -->
+    <main class="order-1 md:order-2 flex-1 relative flex flex-col overflow-hidden bg-white">
+        
+        <!-- Üst Bar (XP, Streak, Can) -->
+        <header id="main-header" class="w-full p-4 flex justify-between items-center max-w-4xl mx-auto border-b-2 border-gray-100">
+            <div class="flex items-center gap-2 font-bold text-gray-400">
+                <i class="ph ph-book-open text-2xl text-blue-400"></i>
+                <span>B1 Kampı</span>
+            </div>
+            <div class="flex gap-4 md:gap-8 font-extrabold text-[1.1rem]">
+                <div class="flex items-center gap-1 text-[#ff9600]">
+                    <i class="ph-fill ph-fire text-2xl"></i>
+                    <span>1</span>
+                </div>
+                <div class="flex items-center gap-1 text-[#1cb0f6]">
+                    <i class="ph-fill ph-diamond text-2xl"></i>
+                    <span id="xp-counter">0</span>
+                </div>
+                <div class="flex items-center gap-1 text-[#ff4b4b]">
+                    <i class="ph-fill ph-heart text-2xl"></i>
+                    <span id="hearts-counter">5</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- EKRAN 1: DASHBOARD (ÖĞRENME YOLU) -->
+        <section id="screen-dashboard" class="screen active flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
+            
+            <div class="max-w-xl w-full">
+                <!-- Ünite Başlığı -->
+                <div class="bg-[#58cc02] rounded-2xl p-4 text-white shadow-sm mb-10 border-b-4 border-[#58a700]">
+                    <h2 class="text-2xl font-black tracking-wide">Ünite 1</h2>
+                    <p class="font-bold opacity-90">Schritte B1 & Arena B1 Kelimeleri</p>
+                </div>
+
+                <!-- Öğrenme Yolu (Düğmeler) -->
+                <div class="flex flex-col items-center gap-8 relative pb-20">
+                    <!-- Bağlantı çizgisi (Arkada) -->
+                    <div class="absolute w-2 bg-[#e5e5e5] top-8 bottom-0 -z-10"></div>
+
+                    <!-- Görev 1: Kelime -->
+                    <div class="relative">
+                        <div class="absolute -top-4 -right-10 bg-white border-2 border-gray-200 text-gray-500 font-bold px-3 py-1 rounded-xl shadow-sm text-sm z-10 animate-bounce">
+                            Başla!
+                        </div>
+                        <button onclick="startSession('vocab')" class="w-20 h-20 rounded-full bg-[#58cc02] border-b-8 border-[#58a700] flex items-center justify-center text-white active:border-b-0 active:translate-y-2 transition-all">
+                            <i class="ph-fill ph-star text-4xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Görev 2: Artikel -->
+                    <div class="relative ml-20">
+                        <button onclick="startSession('artikel')" class="w-20 h-20 rounded-full bg-[#1cb0f6] border-b-8 border-[#1899d6] flex items-center justify-center text-white active:border-b-0 active:translate-y-2 transition-all">
+                            <span class="font-black text-2xl">ART</span>
+                        </button>
+                    </div>
+
+                    <!-- Görev 3: Karma -->
+                    <div class="relative mr-20">
+                        <button onclick="startSession('mixed')" class="w-20 h-20 rounded-full bg-[#ce82ff] border-b-8 border-[#a552db] flex items-center justify-center text-white active:border-b-0 active:translate-y-2 transition-all">
+                            <i class="ph-fill ph-barbell text-4xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EKRAN 2: DİYALOGLAR -->
+        <section id="screen-dialogues" class="screen flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
+            <div class="max-w-xl w-full">
+                <div class="bg-[#ffc800] rounded-2xl p-4 text-white mb-8 border-b-4 border-[#e5b400]">
+                    <h2 class="text-2xl font-black tracking-wide">Hikayeler & Diyaloglar</h2>
+                    <p class="font-bold opacity-90">Sprechen Teil 2 için pratikler</p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Diyalog Kartı 1 -->
+                    <div class="border-2 border-gray-200 rounded-2xl p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-black text-lg">Havalimanında (Am Flughafen)</h3>
+                            <i class="ph-fill ph-airplane-tilt text-2xl text-[#1cb0f6]"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex gap-3 items-center">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-500 shrink-0">A</div>
+                                <p class="text-sm font-semibold text-gray-600 bg-gray-100 p-3 rounded-2xl rounded-tl-none">Entschuldigung, wo ist die Gepäckausgabe?</p>
+                            </div>
+                            <div class="flex gap-3 items-center flex-row-reverse">
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center font-bold text-green-500 shrink-0">B</div>
+                                <p class="text-sm font-semibold text-gray-600 bg-gray-100 p-3 rounded-2xl rounded-tr-none">Gehen Sie am Schalter vorbei. Haben Sie nur Handgepäck?</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diyalog Kartı 2 -->
+                    <div class="border-2 border-gray-200 rounded-2xl p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-black text-lg">Çevre (Umweltschutz)</h3>
+                            <i class="ph-fill ph-tree-evergreen text-2xl text-[#58cc02]"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex gap-3 items-center">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-500 shrink-0">A</div>
+                                <p class="text-sm font-semibold text-gray-600 bg-gray-100 p-3 rounded-2xl rounded-tl-none">Der Klimawandel ist ein großes Problem.</p>
+                            </div>
+                            <div class="flex gap-3 items-center flex-row-reverse">
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center font-bold text-green-500 shrink-0">B</div>
+                                <p class="text-sm font-semibold text-gray-600 bg-gray-100 p-3 rounded-2xl rounded-tr-none">Das stimmt. Wir müssen Müll trennen und Plastik vermeiden.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EKRAN 3: PROFİL -->
+        <section id="screen-profile" class="screen flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
+            <div class="max-w-xl w-full text-center">
+                <div class="w-24 h-24 rounded-full bg-gray-200 mx-auto mb-4 border-4 border-gray-300 overflow-hidden">
+                    <img src="assets/imzatalhaozturk.png" alt="Avatar" onerror="this.src='https://placehold.co/100/58cc02/ffffff?text=Sen'" class="w-full h-full object-cover">
+                </div>
+                <h2 class="text-2xl font-black text-gray-800">B1 Şampiyonu</h2>
+                <p class="text-gray-500 font-bold mb-8">Lektion 1-11 Öğrencisi</p>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="border-2 border-gray-200 rounded-2xl p-4 flex items-center gap-4">
+                        <i class="ph-fill ph-fire text-3xl text-[#ff9600]"></i>
+                        <div class="text-left">
+                            <p class="text-2xl font-black text-gray-800">1</p>
+                            <p class="text-xs font-bold text-gray-400 uppercase">Gün Serisi</p>
+                        </div>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-2xl p-4 flex items-center gap-4">
+                        <i class="ph-fill ph-diamond text-3xl text-[#1cb0f6]"></i>
+                        <div class="text-left">
+                            <p class="text-2xl font-black text-gray-800" id="profile-xp">0</p>
+                            <p class="text-xs font-bold text-gray-400 uppercase">Toplam XP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EKRAN 4: EĞİTİM / OYUN OTURUMU (Tam Ekran) -->
+        <section id="screen-session" class="screen flex-col flex-1 absolute inset-0 bg-white z-20">
+            
+            <!-- Eğitim Üst Barı -->
+            <div class="w-full max-w-4xl mx-auto p-4 flex items-center gap-4">
+                <button onclick="quitSession()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <i class="ph-bold ph-x text-3xl"></i>
+                </button>
+                <div class="flex-1 progress-bar-bg">
+                    <div id="session-progress" class="progress-bar-fill"></div>
+                </div>
+                <div class="flex items-center gap-1 font-extrabold text-[#ff4b4b]">
+                    <i class="ph-fill ph-heart text-2xl"></i>
+                    <span id="session-hearts">5</span>
+                </div>
+            </div>
+
+            <!-- Eğitim İçeriği (Soru) -->
+            <div class="flex-1 overflow-y-auto p-6 flex flex-col justify-center items-center max-w-3xl mx-auto w-full pb-32">
+                <h1 class="text-2xl md:text-3xl font-black text-gray-800 mb-8 self-start w-full text-left" id="question-title">Bunun anlamı nedir?</h1>
                 
-                <p class="text-xl leading-relaxed mb-8 font-light italic">
-                    "Vişne tadında bir hayatımız olsun istedim... <br> 
-                    Her anı taze, her anı tatlı ve her anı kıpkırmızı bir aşkla dolu."
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
-                        <div class="text-3xl mb-2">🍒</div>
-                        <h3 class="font-bold text-pink-300">En Tatlım</h3>
-                        <p class="text-sm">Hayatımın en güzel meyvesi sensin.</p>
+                <!-- Soru Balonu -->
+                <div class="w-full flex items-center gap-4 mb-8">
+                    <!-- Talha Fotoğrafı (Soru soran) -->
+                    <div class="w-20 h-20 hidden md:flex shrink-0 items-center justify-center rounded-full border-2 border-gray-200 overflow-hidden">
+                        <img src="assets/talhaarkaplansiz.png" onerror="this.src='https://placehold.co/100x100/1cb0f6/ffffff?text=?'" class="w-full h-full object-cover">
                     </div>
-                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
-                        <div class="text-3xl mb-2">❤️</div>
-                        <h3 class="font-bold text-pink-300">Sonsuzum</h3>
-                        <p class="text-sm">Her geçen gün daha çok bağlanıyorum.</p>
-                    </div>
-                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
-                        <div class="text-3xl mb-2">✨</div>
-                        <h3 class="font-bold text-pink-300">Işığım</h3>
-                        <p class="text-sm">Karanlık dünyamı aydınlatan sensin.</p>
+                    <!-- Balon -->
+                    <div class="border-2 border-gray-200 rounded-2xl p-6 text-center w-full relative">
+                        <div class="absolute w-4 h-4 border-l-2 border-b-2 border-gray-200 bg-white transform rotate-45 -left-2 top-8 hidden md:block"></div>
+                        <span id="q-article" class="text-xl font-bold uppercase tracking-widest text-gray-400 block mb-1"></span>
+                        <span id="q-word" class="text-3xl md:text-4xl font-black text-gray-800"></span>
                     </div>
                 </div>
 
-                <div class="p-4 bg-pink-900/40 rounded-xl inline-block border border-pink-500/30">
-                    <span class="text-pink-100">Burası bizim küçük dünyamız...</span>
+                <!-- Seçenekler Grid -->
+                <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                    <!-- Butonlar JS ile gelecek -->
                 </div>
             </div>
-            
-            <!-- Süslemeler -->
-            <div class="absolute -top-10 -left-10 text-6xl opacity-20">🍒</div>
-            <div class="absolute -bottom-10 -right-10 text-6xl opacity-20">🍒</div>
-        </div>
-    </div>
+
+            <!-- Kontrol Butonu Alanı (Alt) -->
+            <div class="w-full p-4 border-t-2 border-gray-200 bg-white flex justify-center fixed bottom-0 z-30">
+                <div class="max-w-4xl w-full">
+                    <button id="btn-check" onclick="checkAnswer()" disabled class="duo-btn btn-green w-full py-4 text-xl">Kontrol Et</button>
+                </div>
+            </div>
+
+            <!-- Geri Bildirim Çekmecesi (Bottom Sheet) -->
+            <div id="feedback-sheet" class="bottom-sheet p-6 pt-8 pb-10 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t-2">
+                <div class="flex items-center gap-4">
+                    <div id="feedback-icon" class="w-16 h-16 rounded-full flex items-center justify-center bg-white text-3xl font-black shrink-0"></div>
+                    <div>
+                        <h2 id="feedback-title" class="text-2xl font-black mb-1"></h2>
+                        <p id="feedback-desc" class="font-bold opacity-90"></p>
+                    </div>
+                </div>
+                <button id="btn-next" onclick="nextQuestion()" class="duo-btn w-full md:w-48 py-4 text-xl bg-white"></button>
+            </div>
+
+        </section>
+
+        <!-- EKRAN 5: DERS BİTİŞİ -->
+        <section id="screen-finish" class="screen flex-col flex-1 absolute inset-0 bg-white z-40 items-center justify-center p-6 text-center">
+            <h2 class="text-4xl font-black text-[#ffc800] mb-4">Ders Tamamlandı!</h2>
+            <div class="flex gap-4 mb-8">
+                <div class="bg-[#ffc800] text-white rounded-2xl border-b-4 border-[#e5b400] p-4 flex flex-col items-center w-32">
+                    <span class="text-xs font-bold uppercase tracking-widest mb-1">Kazanılan XP</span>
+                    <div class="flex items-center gap-1 font-black text-2xl">
+                        <i class="ph-fill ph-diamond"></i>
+                        <span id="earned-xp">+10</span>
+                    </div>
+                </div>
+                <div class="bg-[#58cc02] text-white rounded-2xl border-b-4 border-[#58a700] p-4 flex flex-col items-center w-32">
+                    <span class="text-xs font-bold uppercase tracking-widest mb-1">Doğru Oranı</span>
+                    <div class="flex items-center gap-1 font-black text-2xl">
+                        <i class="ph-fill ph-check-circle"></i>
+                        <span id="accuracy">100%</span>
+                    </div>
+                </div>
+            </div>
+            <button onclick="finishSession()" class="duo-btn btn-green w-full max-w-sm py-4 text-xl">Devam Et</button>
+        </section>
+
+    </main>
 
     <script>
-        function createCherry() {
-            const cherry = document.createElement('div');
-            cherry.innerHTML = '🍒';
-            cherry.className = 'floating-cherry';
-            cherry.style.left = Math.random() * 100 + 'vw';
-            cherry.style.fontSize = Math.random() * (30 - 15) + 15 + 'px';
-            cherry.style.animationDuration = Math.random() * (10 - 5) + 5 + 's';
-            cherry.style.opacity = Math.random();
-            document.body.appendChild(cherry);
+        // B1 Kelime Veritabanı (Schritte & Arena B1 özet)
+        const vocabData = [
+            // B1.1
+            { article: "der", word: "Abfall", tr: "atık" },
+            { article: "der", word: "Abflug", tr: "kalkış" },
+            { article: "die", word: "Absage", tr: "iptal" },
+            { article: "die", word: "Anzeigetafel", tr: "ilan panosu" },
+            { article: "der", word: "Ausgang", tr: "çıkış" },
+            { article: "der", word: "Behälter", tr: "kap / hazne" },
+            { article: "die", word: "Bordkarte", tr: "biniş kartı" },
+            { article: "der", word: "Campingplatz", tr: "kamp alanı" },
+            { article: "die", word: "Dienstreise", tr: "iş seyahati" },
+            { article: "das", word: "Doppelzimmer", tr: "iki kişilik oda" },
+            { article: "das", word: "Einzelzimmer", tr: "tek kişilik oda" },
+            { article: "der", word: "Fluggast", tr: "uçak yolcusu" },
+            { article: "die", word: "Fluggesellschaft", tr: "uçak şirketi" },
+            { article: "das", word: "Gepäck", tr: "bagaj" },
+            { article: "das", word: "Handgepäck", tr: "el bagajı" },
+            { article: "die", word: "Jugendherberge", tr: "öğrenci yurdu" },
+            { article: "die", word: "Passkontrolle", tr: "pasaport kontrolü" },
+            { article: "das", word: "Reisebüro", tr: "seyahat acentesi" },
+            { article: "der", word: "Zoll", tr: "gümrük" },
+            { article: "der", word: "Ärger", tr: "öfke / can sıkıntısı" },
+            { article: "die", word: "Ausnahme", tr: "istisna" },
+            { article: "die", word: "Beleidigung", tr: "hakaret" },
+            { article: "die", word: "Entscheidung", tr: "karar" },
+            { article: "die", word: "Freude", tr: "neşe / sevinç" },
+            { article: "der", word: "Konflikt", tr: "anlaşmazlık / çatışma" },
+            { article: "der", word: "Mietvertrag", tr: "kira sözleşmesi" },
+            { article: "der", word: "Schaden", tr: "hasar / zarar" },
+            { article: "das", word: "Urteil", tr: "hüküm / karar" },
+            { article: "das", word: "Verständnis", tr: "anlayış" },
+            
+            // B1.2
+            { article: "die", word: "Anerkennung", tr: "takdir / tanınma" },
+            { article: "die", word: "Fähigkeit", tr: "beceri / yetenek" },
+            { article: "das", word: "Heimweh", tr: "sıla hasreti" },
+            { article: "die", word: "Arbeitsstelle", tr: "çalışma yeri" },
+            { article: "die", word: "Berufserfahrung", tr: "mesleki tecrübe" },
+            { article: "das", word: "Gehalt", tr: "maaş" },
+            { article: "die", word: "Probezeit", tr: "deneme süresi" },
+            { article: "die", word: "Überstunde", tr: "fazla mesai" },
+            { article: "das", word: "Unternehmen", tr: "şirket" },
+            { article: "der", word: "Urlaubstag", tr: "tatil günü" },
+            { article: "die", word: "Allergie", tr: "alerji" },
+            { article: "die", word: "Bedingung", tr: "koşul / şart" },
+            { article: "die", word: "Ernährung", tr: "beslenme" },
+            { article: "das", word: "Fertiggericht", tr: "hazır yemek" },
+            { article: "der", word: "Geschmack", tr: "tat / zevk" },
+            { article: "die", word: "Autoversicherung", tr: "otomobil sigortası" },
+            { article: "der", word: "Unfall", tr: "kaza" },
+            
+            // Arena B1
+            { article: "das", word: "Netzwerk", tr: "ağ / şebeke" },
+            { article: "die", word: "Entscheidung", tr: "karar" },
+            { article: "das", word: "Gefühl", tr: "duygu" },
+            { article: "das", word: "Erlebnis", tr: "deneyim" },
+            { article: "die", word: "Langeweile", tr: "can sıkıntısı" },
+            { article: "der", word: "Klimawandel", tr: "iklim değişikliği" },
+            { article: "die", word: "Zukunft", tr: "gelecek" },
+            { article: "das", word: "Nahrungsmittel", tr: "besin / gıda" },
+            { article: "die", word: "Wirtschaft", tr: "ekonomi" },
+            { article: "der", word: "Umweltschutz", tr: "çevre koruma" },
+            { article: "das", word: "Plastik", tr: "plastik" }
+        ];
+
+        // Global State
+        let totalXP = 0;
+        let hearts = 5;
+        let currentScreen = 'dashboard';
+        
+        // Session State
+        let sessionType = 'vocab'; 
+        let sessionQuestions = [];
+        let currentQIndex = 0;
+        let selectedOptionBtn = null;
+        let correctAnswersCount = 0;
+
+        // Uygulama Başlatma
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.getElementById('loader');
+            const progress = document.getElementById('loader-progress');
+            
+            setTimeout(() => { progress.style.width = '100%'; }, 50);
             
             setTimeout(() => {
-                cherry.remove();
-            }, 10000);
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 400);
+            }, 3000);
+            
+            updateTopBar();
+        });
+
+        // Ekran Değiştirme
+        function switchScreen(screenName) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(`screen-${screenName}`).classList.add('active');
+            
+            // Menü seçim efekti
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            const navBtn = document.getElementById(`nav-${screenName}`);
+            if(navBtn) navBtn.classList.add('active');
+
+            // Header gizleme/gösterme
+            const header = document.getElementById('main-header');
+            if(screenName === 'session' || screenName === 'finish') {
+                header.style.display = 'none';
+            } else {
+                header.style.display = 'flex';
+            }
         }
 
-        function checkLogin() {
-            const nameInput = document.getElementById('username').value.trim();
-            const passInput = document.getElementById('password').value.trim();
-            const errorBox = document.getElementById('error-box');
-            const loginScreen = document.getElementById('login-screen');
-            const contentScreen = document.getElementById('content-screen');
+        function updateTopBar() {
+            document.getElementById('xp-counter').innerText = totalXP;
+            document.getElementById('profile-xp').innerText = totalXP;
+            document.getElementById('hearts-counter').innerText = hearts;
+            document.getElementById('session-hearts').innerText = hearts;
+        }
 
-            // İsim Nisan (küçük/büyük harf duyarsız) ve şifre kontrolü
-            if (nameInput.toLowerCase() === 'nisan' && passInput === 'M()()odŞebnemvejeteryan') {
-                errorBox.classList.add('hidden');
+        // ================= EĞİTİM MANTIĞI =================
+        
+        function startSession(type) {
+            if(hearts <= 0) {
+                alert("Canın bitti! Pratik yaparak can kazan (Şimdilik canlarını dolduruyorum).");
+                hearts = 5;
+                updateTopBar();
+            }
+
+            sessionType = type;
+            sessionQuestions = generateQuestions(10); // 10 soru üret
+            currentQIndex = 0;
+            correctAnswersCount = 0;
+            
+            updateProgressBar();
+            switchScreen('session');
+            loadQuestion();
+        }
+
+        function quitSession() {
+            switchScreen('dashboard');
+        }
+
+        function generateQuestions(amount) {
+            let questions = [];
+            let pool = [...vocabData];
+            
+            for(let i=0; i<amount; i++) {
+                if(pool.length === 0) pool = [...vocabData]; // Havuz biterse sıfırla
+                let randIdx = Math.floor(Math.random() * pool.length);
+                let wordObj = pool.splice(randIdx, 1)[0];
+                questions.push(wordObj);
+            }
+            return questions;
+        }
+
+        function loadQuestion() {
+            // UI Sıfırlama
+            selectedOptionBtn = null;
+            document.getElementById('btn-check').disabled = true;
+            document.getElementById('feedback-sheet').classList.remove('show');
+            
+            let q = sessionQuestions[currentQIndex];
+            
+            // Mod seçimi
+            let mode = sessionType;
+            if(sessionType === 'mixed') {
+                mode = Math.random() > 0.5 ? 'vocab' : 'artikel';
+            }
+
+            const titleEl = document.getElementById('question-title');
+            const qArticle = document.getElementById('q-article');
+            const qWord = document.getElementById('q-word');
+            const grid = document.getElementById('options-grid');
+            
+            grid.innerHTML = '';
+            
+            if(mode === 'vocab') {
+                titleEl.innerText = "Bunun anlamı nedir?";
                 
-                // Başarılı giriş animasyonu
-                loginScreen.style.opacity = '0';
-                loginScreen.style.transform = 'scale(0.9)';
+                let artClass = '';
+                if(q.article === 'der') artClass = 'text-[#1cb0f6]'; // Duo Blue
+                if(q.article === 'die') artClass = 'text-[#ff4b4b]'; // Duo Red/Pink
+                if(q.article === 'das') artClass = 'text-[#58cc02]'; // Duo Green
+
+                qArticle.innerText = q.article;
+                qArticle.className = `text-xl font-bold uppercase tracking-widest block mb-1 ${artClass}`;
+                qWord.innerText = q.word;
+
+                // Seçenekleri oluştur
+                let options = [q];
+                while(options.length < 4) {
+                    let w = vocabData[Math.floor(Math.random() * vocabData.length)];
+                    if(!options.includes(w)) options.push(w);
+                }
+                options.sort(() => Math.random() - 0.5);
+
+                options.forEach(opt => {
+                    let btn = document.createElement('button');
+                    btn.className = "opt-btn py-4 px-4 w-full flex items-center justify-center text-center";
+                    btn.innerText = opt.tr;
+                    btn.dataset.correct = (opt === q);
+                    btn.onclick = () => selectOption(btn);
+                    grid.appendChild(btn);
+                });
+
+            } else if (mode === 'artikel') {
+                titleEl.innerText = "Doğru artikeli seç!";
+                qArticle.innerText = "___";
+                qArticle.className = "text-xl font-bold uppercase tracking-widest block mb-1 text-gray-400";
+                qWord.innerText = q.word;
+
+                const artikels = [
+                    {art: 'der', color: '#1cb0f6'}, 
+                    {art: 'die', color: '#ff4b4b'}, 
+                    {art: 'das', color: '#58cc02'}
+                ];
                 
-                setTimeout(() => {
-                    loginScreen.classList.add('hidden');
-                    contentScreen.classList.remove('hidden');
-                    contentScreen.style.opacity = '0';
-                    contentScreen.style.transform = 'translateY(20px)';
-                    
-                    // İçeriği göster
-                    setTimeout(() => {
-                        contentScreen.style.transition = 'all 1s ease';
-                        contentScreen.style.opacity = '1';
-                        contentScreen.style.transform = 'translateY(0)';
-                        // Vişne yağmuru başlat
-                        setInterval(createCherry, 300);
-                    }, 50);
-                }, 700);
+                artikels.forEach(a => {
+                    let btn = document.createElement('button');
+                    btn.className = "opt-btn py-6 px-4 w-full text-2xl uppercase tracking-wider";
+                    btn.innerText = a.art;
+                    btn.dataset.correct = (a.art === q.article);
+                    btn.onclick = () => selectOption(btn);
+                    grid.appendChild(btn);
+                });
+            }
+        }
+
+        function selectOption(btn) {
+            // Önceki seçimi temizle
+            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+            
+            // Yeni seçim
+            btn.classList.add('selected');
+            selectedOptionBtn = btn;
+            
+            // Kontrol Et butonunu aktif yap
+            document.getElementById('btn-check').disabled = false;
+        }
+
+        function checkAnswer() {
+            if(!selectedOptionBtn) return;
+            
+            const isCorrect = selectedOptionBtn.dataset.correct === "true";
+            
+            // Butonları kilitle
+            document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+            document.getElementById('btn-check').disabled = true;
+
+            const sheet = document.getElementById('feedback-sheet');
+            const title = document.getElementById('feedback-title');
+            const desc = document.getElementById('feedback-desc');
+            const icon = document.getElementById('feedback-icon');
+            const nextBtn = document.getElementById('btn-next');
+
+            if(isCorrect) {
+                // DOĞRU
+                selectedOptionBtn.classList.remove('selected');
+                selectedOptionBtn.classList.add('correct');
+                
+                sheet.style.backgroundColor = '#d7ffb8';
+                sheet.style.borderColor = '#58cc02';
+                
+                icon.innerHTML = '<i class="ph-bold ph-check text-[#58cc02]"></i>';
+                
+                title.innerText = "Harika!";
+                title.className = "text-2xl font-black mb-1 text-[#58a700]";
+                desc.innerText = "Doğru bildin.";
+                desc.className = "font-bold text-[#58a700] opacity-80";
+                
+                nextBtn.innerText = "Devam Et";
+                nextBtn.className = "duo-btn w-full md:w-48 py-4 text-xl btn-green";
+                
+                correctAnswersCount++;
 
             } else {
-                // Hata durumu
-                errorBox.classList.remove('hidden');
-                loginScreen.classList.add('error-shake');
-                setTimeout(() => {
-                    loginScreen.classList.remove('error-shake');
-                }, 500);
+                // YANLIŞ
+                selectedOptionBtn.classList.remove('selected');
+                selectedOptionBtn.classList.add('wrong');
+                
+                hearts--;
+                updateTopBar();
+                
+                // Doğruyu göster
+                document.querySelectorAll('.opt-btn').forEach(b => {
+                    if(b.dataset.correct === "true") {
+                        b.classList.add('correct');
+                    }
+                });
+
+                sheet.style.backgroundColor = '#ffdfe0';
+                sheet.style.borderColor = '#ea2b2b';
+                
+                icon.innerHTML = '<i class="ph-bold ph-x text-[#ea2b2b]"></i>';
+                
+                title.innerText = "Yanlış!";
+                title.className = "text-2xl font-black mb-1 text-[#ea2b2b]";
+                
+                let q = sessionQuestions[currentQIndex];
+                desc.innerText = `Doğrusu: ${q.article} ${q.word} = ${q.tr}`;
+                desc.className = "font-bold text-[#ea2b2b] opacity-80";
+                
+                nextBtn.innerText = "Anladım";
+                nextBtn.className = "duo-btn w-full md:w-48 py-4 text-xl btn-red";
+            }
+
+            sheet.classList.add('show');
+        }
+
+        function nextQuestion() {
+            currentQIndex++;
+            updateProgressBar();
+            
+            if(hearts <= 0) {
+                alert("Canın bitti! Ana ekrana dönülüyor.");
+                hearts = 5;
+                quitSession();
+                return;
+            }
+
+            if(currentQIndex >= sessionQuestions.length) {
+                // Oturum bitti
+                showFinishScreen();
+            } else {
+                loadQuestion();
             }
         }
 
-        // Enter tuşu ile giriş yapma
-        document.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                checkLogin();
-            }
-        });
+        function updateProgressBar() {
+            const pct = (currentQIndex / sessionQuestions.length) * 100;
+            document.getElementById('session-progress').style.width = `${pct}%`;
+        }
+
+        function showFinishScreen() {
+            document.getElementById('feedback-sheet').classList.remove('show');
+            document.getElementById('screen-session').classList.remove('active');
+            
+            let xpGained = correctAnswersCount * 2; // Her doğruya 2 XP
+            totalXP += xpGained;
+            updateTopBar();
+
+            document.getElementById('earned-xp').innerText = `+${xpGained}`;
+            document.getElementById('accuracy').innerText = `${Math.round((correctAnswersCount / sessionQuestions.length)*100)}%`;
+            
+            document.getElementById('screen-finish').classList.add('active');
+        }
+
+        function finishSession() {
+            switchScreen('dashboard');
+        }
+
     </script>
 </body>
 </html>
