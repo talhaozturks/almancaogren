@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>B1 Almanca | Oyunlaştırılmış Mega Kamp</title>
+    <title>B1 Almanca | %100 Başarı Kampı</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -79,7 +79,6 @@
         .progress-bar-fill { background-color: #58cc02; height: 100%; border-radius: 99px; width: 0%; transition: width 0.4s ease-out; position: relative; }
         .progress-bar-fill::after { content: ''; position: absolute; top: 4px; left: 8px; right: 8px; height: 4px; background-color: rgba(255,255,255,0.3); border-radius: 99px; }
 
-        /* Uçan Yıldızlar Animasyonu */
         .star-particle {
             position: absolute; width: 24px; height: 24px; font-size: 24px; color: #ffc800;
             pointer-events: none; animation: floatUp 1.5s ease-out forwards; z-index: 100;
@@ -92,29 +91,24 @@
         .speaker-btn { animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
         
-        /* Harita Düğümü Kilidi */
         .node-locked { filter: grayscale(1); opacity: 0.5; pointer-events: none; }
         .node-completed { background-color: #ffc800 !important; border-color: #e5b400 !important; }
 
-        /* Karakter Animasyonları */
-        @keyframes talk-bounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-5px) scale(1.05); }
-        }
+        @keyframes talk-bounce { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-5px) scale(1.05); } }
         .anim-talk { animation: talk-bounce 0.6s infinite ease-in-out; }
-        
-        @keyframes sad-shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-4px) rotate(-5deg); }
-            75% { transform: translateX(4px) rotate(5deg); }
-        }
+        @keyframes sad-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px) rotate(-5deg); } 75% { transform: translateX(4px) rotate(5deg); } }
         .anim-sad { animation: sad-shake 0.4s ease-in-out; }
-        
-        @keyframes happy-jump {
-            0%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px) scale(1.1); }
-        }
+        @keyframes happy-jump { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px) scale(1.1); } }
         .anim-happy { animation: happy-jump 0.5s ease-out; }
+
+        /* Guarantee Badge */
+        .guarantee-badge {
+            background: linear-gradient(135deg, #ffc800 0%, #ff9600 100%);
+            color: white; padding: 0.5rem 1rem; border-radius: 99px;
+            font-weight: 900; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.1em; display: inline-flex; items-center; gap: 0.25rem;
+            box-shadow: 0 4px 10px rgba(255, 150, 0, 0.3); border: 2px solid #fff;
+        }
 
     </style>
 </head>
@@ -127,17 +121,18 @@
             <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-t-gray-200 border-r-[10px] border-r-transparent"></div>
             <div class="absolute -bottom-[6px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-t-[8px] border-t-white border-r-[8px] border-r-transparent"></div>
         </div>
-        <img src="assets/talha.png" alt="Talha" onerror="this.src='https://placehold.co/150x150/58cc02/ffffff?text=Talha'" class="h-32 md:h-40 object-contain mb-8 drop-shadow-md">
+        <img src="assets/talhaarkaplansiz.png" alt="Talha" onerror="this.onerror=null; this.src='https://placehold.co/150x150/58cc02/ffffff?text=Talha'" class="h-32 md:h-40 object-contain mb-8 drop-shadow-md">
         <div class="w-64 h-3 bg-gray-200 rounded-full overflow-hidden mb-8">
             <div id="loader-progress" class="h-full bg-[#58cc02] rounded-full w-0 transition-all duration-[2.5s] ease-in-out"></div>
         </div>
-        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.src='https://placehold.co/400x100/ffffff/58cc02?text=Talha+Ozturk'" class="h-32 md:h-40 object-contain opacity-80">
+        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/400x100/ffffff/58cc02?text=Talha+Ozturk'" class="h-32 md:h-40 object-contain opacity-80">
     </div>
 
     <!-- EKRAN 0: LOGIN -->
     <section id="screen-login" class="screen active flex-col flex-1 absolute inset-0 bg-white z-[60] items-center justify-center p-6 text-center">
         <div class="max-w-sm w-full bg-white border-2 border-gray-200 rounded-3xl p-8 shadow-sm">
-            <img src="assets/imzatalhaozturk.png" alt="Logo" onerror="this.src='https://placehold.co/300x80/58cc02/ffffff?text=Talha'" class="h-20 mx-auto mb-8 object-contain">
+            <div class="mb-6 flex justify-center"><div class="guarantee-badge"><i class="ph-fill ph-seal-check text-lg"></i> %100 Başarı Garantisi</div></div>
+            <img src="assets/imzatalhaozturk.png" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/300x80/58cc02/ffffff?text=Talha'" class="h-16 mx-auto mb-8 object-contain">
             <h2 class="text-2xl font-black text-gray-800 mb-6 uppercase tracking-wider">Mega Kampa Giriş</h2>
             <input type="text" id="login-user" placeholder="Hesap Adı (nisan)" class="w-full border-2 border-gray-200 rounded-xl px-4 py-4 mb-4 font-bold text-gray-700 outline-none focus:border-[#1cb0f6] bg-gray-50 focus:bg-white text-lg text-center">
             <input type="password" id="login-pass" placeholder="Şifre (talha)" class="w-full border-2 border-gray-200 rounded-xl px-4 py-4 mb-6 font-bold text-gray-700 outline-none focus:border-[#1cb0f6] bg-gray-50 focus:bg-white text-lg text-center">
@@ -149,7 +144,7 @@
     <!-- NAVİGASYON -->
     <nav id="side-nav" style="display: none;" class="order-2 md:order-1 w-full md:w-64 md:min-w-[16rem] border-t-2 md:border-t-0 md:border-r-2 border-gray-200 bg-white flex flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0">
         <div class="hidden md:flex items-center justify-center gap-3 mb-12 mt-4 px-2">
-            <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.src='https://placehold.co/300x100/ffffff/58cc02?text=Talha+Ozturk'" class="h-24 md:h-32 w-full object-contain">
+            <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/300x100/ffffff/58cc02?text=Talha+Ozturk'" class="h-24 md:h-32 w-full object-contain">
         </div>
         <button onclick="switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold">
             <i class="ph ph-house text-2xl md:text-3xl"></i><span class="text-[10px] md:text-lg tracking-wide uppercase md:capitalize">Öğren</span>
@@ -183,14 +178,15 @@
             <div class="max-w-xl w-full">
                 
                 <!-- PDF SEÇİMİ -->
-                <div id="view-stage-selection" class="w-full">
+                <div id="view-stage-selection" class="w-full relative">
                     <div class="flex items-center justify-between mb-6 pb-2 border-b-2 border-gray-100">
                         <h2 class="text-2xl font-black text-gray-800">Hedef PDF'i Seç</h2>
                         <i class="ph-fill ph-books text-3xl text-gray-300"></i>
                     </div>
                     
                     <button onclick="openStage('b1_1')" class="w-full mb-6 border-2 border-[#58cc02] border-b-8 bg-[#f2ffe5] rounded-2xl p-6 flex flex-col items-center hover:bg-[#eaffd4] active:translate-y-1 active:border-b-4 transition-all text-center relative overflow-hidden group">
-                        <div class="w-16 h-16 bg-[#58cc02] text-white rounded-full flex items-center justify-center mb-3 shadow-lg shadow-green-500/40"><i class="ph-fill ph-file-pdf text-3xl"></i></div>
+                        <div class="absolute top-4 left-4 guarantee-badge scale-75 transform origin-top-left"><i class="ph-fill ph-seal-check"></i> %100 Garanti</div>
+                        <div class="w-16 h-16 bg-[#58cc02] text-white rounded-full flex items-center justify-center mb-3 mt-4 shadow-lg shadow-green-500/40"><i class="ph-fill ph-file-pdf text-3xl"></i></div>
                         <h3 class="font-black text-xl w-full text-[#58a700] mb-3 uppercase tracking-wide">B1.1_Wortschatzliste_Tuerkisch.pdf</h3>
                         <p class="text-sm font-bold text-[#58cc02] mb-3">Tüm Kelimeler & Uzun Maraton</p>
                         <div class="w-full bg-white border-2 border-green-200 h-4 rounded-full relative">
@@ -210,7 +206,7 @@
                     </button>
 
                     <button onclick="openStage('arena')" class="w-full mb-6 border-2 border-[#1cb0f6] border-b-8 bg-[#e5f7ff] rounded-2xl p-6 flex flex-col items-center hover:bg-[#d4f1ff] active:translate-y-1 active:border-b-4 transition-all text-center relative overflow-hidden group">
-                        <img src="assets/arenab1wortliste.PNG" alt="Arena B1" onerror="this.src='https://placehold.co/300x120/1cb0f6/ffffff?text=Arena+B1+Logo'" class="h-24 md:h-28 object-contain mb-4 rounded-xl group-hover:scale-105 transition-transform">
+                        <img src="assets/arenab1wortliste.PNG" alt="Arena B1" onerror="this.onerror=null; this.src='https://placehold.co/300x120/1cb0f6/ffffff?text=Arena+B1+Logo'" class="h-24 md:h-28 object-contain mb-4 rounded-xl group-hover:scale-105 transition-transform">
                         <h3 class="font-black text-xl w-full text-[#1899d6] mb-3 uppercase tracking-wide">ArenaB1-Wortliste.pdf</h3>
                         <p class="text-sm font-bold text-[#1cb0f6] mb-3">Arena Serisi Tam Liste</p>
                         <div class="w-full bg-white border-2 border-blue-200 h-4 rounded-full relative">
@@ -223,22 +219,26 @@
                 <!-- SİHİRBAZ -->
                 <div id="view-survey" class="w-full hidden">
                     <button onclick="goBackToStages()" class="mb-6 text-gray-400 font-bold hover:text-gray-600 flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl border-2 border-gray-200"><i class="ph-bold ph-arrow-left"></i> Vazgeç</button>
-                    <div class="bg-blue-500 rounded-3xl p-6 text-white shadow-sm mb-8 border-b-4 border-blue-700">
-                        <h2 class="text-2xl md:text-3xl font-black tracking-wide mb-2">Hedef Belirle</h2>
-                        <p class="font-bold opacity-90 text-lg">0'dan 100'e uzanan bu devasa yolda en çok hangi alanda zorlanıyorsun?</p>
+                    <div class="bg-blue-500 rounded-3xl p-6 text-white shadow-sm mb-8 border-b-4 border-blue-700 relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 opacity-20"><i class="ph-fill ph-target text-9xl"></i></div>
+                        <h2 class="text-2xl md:text-3xl font-black tracking-wide mb-2 relative z-10">Hedef Belirle</h2>
+                        <p class="font-bold opacity-90 text-lg relative z-10">0'dan 100'e uzanan bu devasa yolda en çok hangi alanda zorlanıyorsun?</p>
                     </div>
                     <div class="space-y-4">
                         <button onclick="buildPath('artikel')" class="survey-btn"><div class="w-12 h-12 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-cards"></i></div><span>Artikeller (der/die/das) sürekli karışıyor!</span></button>
                         <button onclick="buildPath('vocab')" class="survey-btn"><div class="w-12 h-12 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-brain"></i></div><span>Kelimelerin anlamlarını çabuk unutuyorum.</span></button>
                         <button onclick="buildPath('listening')" class="survey-btn"><div class="w-12 h-12 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span>Duyduğumda kelimeyi çıkaramıyorum.</span></button>
                         <button onclick="buildPath('writing')" class="survey-btn"><div class="w-12 h-12 bg-purple-100 text-purple-500 rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span>Yazarken harf veya artikel hatası yapıyorum.</span></button>
-                        <button onclick="buildPath('mixed')" class="survey-btn border-green-500 bg-green-50 hover:bg-green-100"><div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-barbell"></i></div><span class="text-green-700">Hepsine sırayla, 0'dan 100'e DENGELİ maraton!</span></button>
+                        <button onclick="buildPath('mixed')" class="survey-btn border-green-500 bg-green-50 hover:bg-green-100"><div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-flag-checkered"></i></div><span class="text-green-700">0'dan 100'e DENGELİ MEGA MARATON!</span></button>
                     </div>
                 </div>
 
                 <!-- DİNAMİK YOL (HARİTA) -->
                 <div id="view-learning-path" class="w-full hidden">
-                    <button onclick="goBackToStages()" class="mb-6 text-gray-400 font-bold hover:text-gray-600 flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl border-2 border-gray-200"><i class="ph-bold ph-arrow-left"></i> PDF Seçimine Dön</button>
+                    <div class="flex justify-between items-center mb-6">
+                        <button onclick="goBackToStages()" class="text-gray-400 font-bold hover:text-gray-600 flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl border-2 border-gray-200"><i class="ph-bold ph-arrow-left"></i> PDF Seçimine Dön</button>
+                        <div class="guarantee-badge shadow-none border-none scale-90 origin-right"><i class="ph-fill ph-repeat"></i> Hata Yaparsan Tekrarlar</div>
+                    </div>
                     
                     <div id="path-header" class="rounded-3xl p-6 text-white shadow-sm mb-6 border-b-4">
                         <h2 class="text-2xl md:text-3xl font-black tracking-wide" id="path-title">Sana Özel Yol</h2>
@@ -285,7 +285,7 @@
         <section id="screen-profile" class="screen flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
             <div class="max-w-xl w-full text-center">
                 <div class="w-24 h-24 rounded-full bg-gray-200 mx-auto mb-4 border-4 border-gray-300 overflow-hidden">
-                    <img src="assets/nisan.png" alt="Avatar" onerror="this.src='https://placehold.co/100/58cc02/ffffff?text=Nisan'" class="w-full h-full object-cover">
+                    <img src="assets/nisan.png" alt="Avatar" onerror="this.onerror=null; this.src='https://placehold.co/100x100/58cc02/ffffff?text=Nisan'" class="w-full h-full object-cover">
                 </div>
                 <h2 class="text-2xl font-black text-gray-800">B1 Şampiyonu</h2>
                 <div class="grid grid-cols-2 gap-4 mt-8">
@@ -306,15 +306,13 @@
 
             <!-- ANİMASYONLU KARAKTER DİYALOG ALANI -->
             <div class="w-full max-w-3xl mx-auto px-6 pt-2 pb-4 flex justify-between items-end">
-                <!-- Talha -->
                 <div class="flex flex-col items-start w-1/2 pr-2">
                     <div id="talha-bubble" class="bg-blue-100 border-2 border-blue-200 text-blue-800 text-xs sm:text-sm font-bold py-2 px-3 sm:px-4 rounded-2xl rounded-bl-none mb-2 shadow-sm inline-block">Hadi başlayalım!</div>
-                    <img src="assets/talha.png" onerror="this.src='https://placehold.co/100/1cb0f6/ffffff?text=Talha'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-blue-200 object-cover bg-white shadow-md z-10" id="talha-avatar">
+                    <img src="assets/talhaarkaplansiz.png" data-current-src="assets/talhaarkaplansiz.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1cb0f6/ffffff?text=Talha'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-blue-200 object-cover bg-white shadow-md z-10 anim-talk" id="talha-avatar">
                 </div>
-                <!-- Nisan -->
                 <div class="flex flex-col items-end w-1/2 pl-2">
                     <div id="nisan-bubble" class="bg-orange-100 border-2 border-orange-200 text-orange-800 text-xs sm:text-sm font-bold py-2 px-3 sm:px-4 rounded-2xl rounded-br-none mb-2 shadow-sm inline-block">Hazırım!</div>
-                    <img src="assets/nisan.png" onerror="this.src='https://placehold.co/100/ff9600/ffffff?text=Nisan'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-orange-200 object-cover bg-white shadow-md z-10" id="nisan-avatar">
+                    <img src="assets/nisan.png" data-current-src="assets/nisan.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/ff9600/ffffff?text=Nisan'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-orange-200 object-cover bg-white shadow-md z-10" id="nisan-avatar">
                 </div>
             </div>
 
@@ -349,7 +347,7 @@
                     <div class="flex items-center gap-1 font-black text-2xl"><i class="ph-fill ph-diamond"></i><span id="earned-xp">+10</span></div>
                 </div>
                 <div class="bg-[#1cb0f6] text-white rounded-2xl border-b-4 border-[#1899d6] p-4 flex flex-col items-center w-32">
-                    <span class="text-xs font-bold uppercase tracking-widest mb-1">Doğru Sayısı</span>
+                    <span class="text-xs font-bold uppercase tracking-widest mb-1">Doğru Çözüm</span>
                     <div class="flex items-center gap-1 font-black text-2xl"><i class="ph-fill ph-check-circle"></i><span id="accuracy-display">25</span></div>
                 </div>
             </div>
@@ -362,39 +360,37 @@
     </main>
 
     <script>
+        // === GÖRSEL YÖNETİCİ ===
+        function setImgSrc(imgElement, src, fallbackText, color) {
+            if (imgElement.getAttribute('data-current-src') === src) return;
+            imgElement.setAttribute('data-current-src', src);
+            imgElement.onerror = function() {
+                this.onerror = null;
+                this.src = `https://placehold.co/100x100/${color}/ffffff?text=${fallbackText}`;
+            };
+            imgElement.src = src;
+        }
+
         // === SES MOTORU ===
         let audioCtx;
         function initAudio() {
-            if(!audioCtx) {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                audioCtx = new AudioContext();
-            }
+            if(!audioCtx) { const AudioContext = window.AudioContext || window.webkitAudioContext; audioCtx = new AudioContext(); }
             if (audioCtx.state === 'suspended') { audioCtx.resume(); }
         }
 
         function playCorrectSound() {
-            initAudio();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); 
-            osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); 
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
+            initAudio(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+            osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'sine';
+            osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); 
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
             osc.start(); osc.stop(audioCtx.currentTime + 0.3);
         }
 
         function playWrongSound() {
-            initAudio();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(300, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.3);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
+            initAudio(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+            osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(300, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.3);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
             osc.start(); osc.stop(audioCtx.currentTime + 0.3);
         }
 
@@ -402,23 +398,17 @@
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(word);
-                utterance.lang = 'de-DE';
-                utterance.rate = 0.9;
+                utterance.lang = 'de-DE'; utterance.rate = 0.9;
                 window.speechSynthesis.speak(utterance);
             }
         }
 
         function triggerStars() {
-            const container = document.getElementById('star-container');
-            container.innerHTML = '';
+            const container = document.getElementById('star-container'); container.innerHTML = '';
             for(let i=0; i<40; i++) {
-                const star = document.createElement('i');
-                star.className = 'ph-fill ph-star star-particle';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.bottom = '-50px';
-                star.style.animationDelay = (Math.random() * 0.5) + 's';
-                const colors = ['#ffc800', '#58cc02', '#1cb0f6', '#ce82ff'];
-                star.style.color = colors[Math.floor(Math.random() * colors.length)];
+                const star = document.createElement('i'); star.className = 'ph-fill ph-star star-particle';
+                star.style.left = Math.random() * 100 + '%'; star.style.bottom = '-50px'; star.style.animationDelay = (Math.random() * 0.5) + 's';
+                const colors = ['#ffc800', '#58cc02', '#1cb0f6', '#ce82ff']; star.style.color = colors[Math.floor(Math.random() * colors.length)];
                 container.appendChild(star);
             }
         }
@@ -451,7 +441,8 @@
                 { article: "die", word: "Amtssprache", tr: "resmi dil" }, { article: "die", word: "Arbeitslosigkeit", tr: "işsizlik" }, { article: "das", word: "Asyl", tr: "sığınma" },
                 { article: "die", word: "Demokratie", tr: "demokrasi" }, { article: "der", word: "Flüchtling", tr: "mülteci" }, { article: "die", word: "Grenze", tr: "sınır" },
                 { article: "die", word: "Heimat", tr: "vatan" }, { article: "der", word: "Krieg", tr: "savaş" }, { article: "die", word: "Mauer", tr: "duvar" },
-                { article: "die", word: "Regierung", tr: "hükümet" }, { article: "der", word: "Staat", tr: "devlet" }, { article: "das", word: "Visum", tr: "vize" }
+                { article: "die", word: "Regierung", tr: "hükümet" }, { article: "der", word: "Staat", tr: "devlet" }, { article: "das", word: "Visum", tr: "vize" },
+                { article: "die", word: "Wahl", tr: "seçim" }, { article: "-", word: "wählen", tr: "seçmek" }, { article: "-", word: "zustimmen", tr: "katılmak (fikre)" }
             ],
             'b1_2': [
                 { article: "die", word: "Anerkennung", tr: "takdir" }, { article: "die", word: "Fähigkeit", tr: "beceri" }, { article: "das", word: "Heimweh", tr: "sıla hasreti" },
@@ -471,7 +462,8 @@
                 { article: "-", word: "finanziell", tr: "mali" }, { article: "der", word: "Büroalltag", tr: "büro rutini" }, { article: "-", word: "langfristig", tr: "uzun vadeli" },
                 { article: "der", word: "Verbrauch", tr: "tüketim" }, { article: "die", word: "Wärme", tr: "ısı" }, { article: "-", word: "abnehmen", tr: "kaldırmak/zayıflamak" },
                 { article: "die", word: "Bevölkerung", tr: "nüfus" }, { article: "das", word: "Eiweiß", tr: "protein" }, { article: "das", word: "Getreide", tr: "tahıl" },
-                { article: "-", word: "vegan", tr: "vegan" }, { article: "der", word: "Diebstahl", tr: "hırsızlık" }, { article: "der", word: "Motor", tr: "motor" }
+                { article: "-", word: "vegan", tr: "vegan" }, { article: "der", word: "Diebstahl", tr: "hırsızlık" }, { article: "der", word: "Motor", tr: "motor" },
+                { article: "das", word: "Kennzeichen", tr: "plaka" }, { article: "der", word: "Reifen", tr: "lastik" }, { article: "die", word: "Vorfahrt", tr: "geçiş üstünlüğü" }
             ],
             'arena': [
                 { article: "-", word: "löschen", tr: "silmek" }, { article: "das", word: "Netzwerk", tr: "ağ / şebeke" }, { article: "die", word: "Entscheidung", tr: "karar" },
@@ -568,6 +560,7 @@
             activeStage = null;
         }
 
+        // ================= MEGA HARİTA OLUŞTURUCU (0'dan 100'e) =================
         function buildPath(choice) {
             document.getElementById('view-survey').classList.add('hidden');
             document.getElementById('view-learning-path').classList.remove('hidden');
@@ -585,51 +578,59 @@
 
             header.className = `rounded-3xl p-6 text-white shadow-sm mb-6 border-b-4 ${themeColor}`;
 
+            // Çok Çok Uzun Mega Nodeler. Soru sayıları (count) yüksek tutuldu!
             let nodes = [];
             if(choice === 'artikel') {
                 nodes = [
                     {type: 'artikel', count: 30, label: 'Isınma 1', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: 'artikel', count: 40, label: 'Isınma 2', color: 'orange', icon: '<span class="font-black">ART</span>'},
-                    {type: 'writing', count: 30, label: 'Yazarak Öğren', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
-                    {type: 'artikel', count: 50, label: 'Orta Seviye', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: 'vocab', count: 20, label: 'Kelime Molası', color: 'green', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'artikel', count: 75, label: 'Zorlu Aşama', color: 'red', icon: '<span class="font-black">ART</span>'},
+                    {type: 'artikel', count: 50, label: 'Isınma 2', color: 'orange', icon: '<span class="font-black">ART</span>'},
+                    {type: 'writing', count: 40, label: 'Yazarak Öğren', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
+                    {type: 'artikel', count: 75, label: 'Orta Seviye', color: 'red', icon: '<span class="font-black">ART</span>'},
+                    {type: 'vocab', count: 30, label: 'Kelime Molası', color: 'green', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: 'artikel', count: 100, label: 'Zorlu Aşama', color: 'red', icon: '<span class="font-black">ART</span>'},
                     {type: 'matching', count: 10, label: 'Eşleştirme', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'artikel', count: 100, label: 'Dev Sınav', color: 'red', icon: '<span class="font-black">ART</span>'}
+                    {type: 'artikel', count: 150, label: 'Dev Sınav', color: 'red', icon: '<span class="font-black">ART</span>'}
                 ];
             } else if (choice === 'vocab') {
                 nodes = [
                     {type: 'flashcards', count: 30, label: 'Kelime Kartları', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
                     {type: 'matching', count: 10, label: 'Eşleştirme', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'vocab', count: 50, label: 'Okuma Testi 1', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'listening', count: 30, label: 'Dinleme', color: 'blue', icon: '<i class="ph-fill ph-headphones"></i>'},
-                    {type: 'vocab', count: 75, label: 'Okuma Testi 2', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: 'vocab', count: 60, label: 'Okuma Testi 1', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: 'dictation', count: 40, label: 'Dinle & Yaz', color: 'blue', icon: '<i class="ph-fill ph-waveform"></i>'},
+                    {type: 'vocab', count: 80, label: 'Okuma Testi 2', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
                     {type: 'matching', count: 15, label: 'Zor Eşleştirme', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'flashcards', count: 40, label: 'Tekrar', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
-                    {type: 'vocab', count: 100, label: 'Mega Anlam Sınavı', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'}
+                    {type: 'flashcards', count: 50, label: 'Tekrar', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
+                    {type: 'vocab', count: 150, label: 'Mega Anlam Sınavı', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'}
                 ];
             } else if (choice === 'mixed') {
+                // MEGA MARATON (15 AŞAMA)
                 nodes = [
                     {type: 'flashcards', count: 20, label: 'Başlangıç', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
-                    {type: 'vocab', count: 30, label: 'Temel Anlam', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'artikel', count: 30, label: 'Artikel Testi', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: 'listening', count: 40, label: 'Dinleme', color: 'blue', icon: '<i class="ph-fill ph-headphones"></i>'},
+                    {type: 'vocab', count: 40, label: 'Temel Anlam', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: 'artikel', count: 40, label: 'Artikel Testi', color: 'red', icon: '<span class="font-black">ART</span>'},
+                    {type: 'listening', count: 50, label: 'Dinleme', color: 'blue', icon: '<i class="ph-fill ph-headphones"></i>'},
                     {type: 'matching', count: 10, label: 'Eşleştirme', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'writing', count: 30, label: 'Yazma Sınavı', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
-                    {type: 'vocab', count: 50, label: 'Uzun Test', color: 'green', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'artikel', count: 50, label: 'Hafıza Testi', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: 'listening', count: 50, label: 'İleri Dinleme', color: 'blue', icon: '<i class="ph-fill ph-headphones"></i>'},
-                    {type: 'vocab', count: 100, label: 'Mega B1 Boss Sınavı', color: 'yellow', icon: '<i class="ph-fill ph-crown"></i>'}
+                    {type: 'writing', count: 40, label: 'Yazma Sınavı', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
+                    {type: 'dictation', count: 30, label: 'Dinle & Yaz', color: 'blue', icon: '<i class="ph-fill ph-waveform"></i>'},
+                    {type: 'vocab', count: 60, label: 'Orta Test', color: 'green', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: 'artikel', count: 60, label: 'Hafıza Testi', color: 'red', icon: '<span class="font-black">ART</span>'},
+                    {type: 'listening', count: 60, label: 'İleri Dinleme', color: 'blue', icon: '<i class="ph-fill ph-headphones"></i>'},
+                    {type: 'matching', count: 15, label: 'Zor Eşleştir', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
+                    {type: 'flashcards', count: 30, label: 'Son Tekrar', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
+                    {type: 'writing', count: 50, label: 'İleri Yazma', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
+                    {type: 'dictation', count: 40, label: 'Zor Dikte', color: 'blue', icon: '<i class="ph-fill ph-waveform"></i>'},
+                    {type: 'vocab', count: 150, label: 'Mega B1 Boss', color: 'yellow', icon: '<i class="ph-fill ph-crown"></i>'}
                 ];
             } else {
                 nodes = [
-                    {type: choice, count: 30, label: 'Isınma', color: 'blue', icon: '<i class="ph-fill ph-rocket"></i>'},
+                    {type: choice, count: 40, label: 'Isınma', color: 'blue', icon: '<i class="ph-fill ph-rocket"></i>'},
                     {type: 'matching', count: 10, label: 'Eşleştirme', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: choice, count: 50, label: 'Gelişme', color: 'blue', icon: '<i class="ph-fill ph-rocket"></i>'},
-                    {type: 'vocab', count: 30, label: 'Kelime Testi', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: choice, count: 75, label: 'Zorlu Bölüm', color: 'blue', icon: '<i class="ph-fill ph-rocket"></i>'},
-                    {type: 'artikel', count: 40, label: 'Artikel', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: choice, count: 100, label: 'Final Sınavı', color: 'green', icon: '<i class="ph-fill ph-flag-checkered"></i>'}
+                    {type: 'dictation', count: 30, label: 'Dinle & Yaz', color: 'purple', icon: '<i class="ph-fill ph-waveform"></i>'},
+                    {type: choice, count: 60, label: 'Gelişme', color: 'blue', icon: '<i class="ph-fill ph-rocket"></i>'},
+                    {type: 'vocab', count: 40, label: 'Kelime Testi', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: choice, count: 80, label: 'Zorlu Bölüm', color: 'blue', icon: '<i class="ph-fill ph-rocket"></i>'},
+                    {type: 'artikel', count: 50, label: 'Artikel', color: 'red', icon: '<span class="font-black">ART</span>'},
+                    {type: choice, count: 120, label: 'Final Sınavı', color: 'green', icon: '<i class="ph-fill ph-flag-checkered"></i>'}
                 ];
             }
 
@@ -734,30 +735,22 @@
             const talhaImg = document.getElementById('talha-avatar');
             const talhaBubble = document.getElementById('talha-bubble');
 
-            // Reset Animasyonlar & İmajlar
-            nisanImg.src = "assets/nisan.png";
+            setImgSrc(nisanImg, "assets/nisan.png", "Nisan", "ff9600");
             nisanImg.className = "w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-orange-200 object-cover bg-white shadow-md z-10";
             
+            setImgSrc(talhaImg, "assets/talhaarkaplansiz.png", "Talha", "1cb0f6");
             talhaImg.className = "w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-blue-200 object-cover bg-white shadow-md z-10 anim-talk";
             
-            setTimeout(() => { talhaImg.classList.remove('anim-talk'); }, 2000); // 2 saniye sonra konuşma animasyonu dursun
+            setTimeout(() => { talhaImg.classList.remove('anim-talk'); }, 2000); 
 
-            // Moda Özel Diyaloglar
-            if(mode === 'flashcards') {
-                talhaBubble.innerText = "Dinle ve ezberle bebeğim!";
-            } else if(mode === 'listening') {
-                talhaBubble.innerText = "Ne duyduğunu anladın mı?";
-            } else if(mode === 'writing') {
-                talhaBubble.innerText = "Hadi, hatasız yaz bakalım!";
-            } else if(mode === 'matching') {
-                talhaBubble.innerText = "Hepsini doğru eşleştirebilecek misin?";
-            } else if(mode === 'artikel') {
-                talhaBubble.innerText = "Der mi, Die mi, Das mı?";
-            } else {
-                talhaBubble.innerText = "Bunun anlamı nedir hayatım?";
-            }
+            if(mode === 'flashcards') { talhaBubble.innerText = "Dinle ve ezberle bebeğim!"; }
+            else if(mode === 'listening') { talhaBubble.innerText = "Ne duyduğunu anladın mı?"; }
+            else if(mode === 'writing') { talhaBubble.innerText = "Hadi, hatasız yaz bakalım!"; }
+            else if(mode === 'dictation') { talhaBubble.innerText = "Duyduğunu kelimesi kelimesine yaz!"; }
+            else if(mode === 'matching') { talhaBubble.innerText = "Hepsini doğru eşleştirebilecek misin?"; }
+            else if(mode === 'artikel') { talhaBubble.innerText = "Der mi, Die mi, Das mı?"; }
+            else { talhaBubble.innerText = "Bunun anlamı nedir hayatım?"; }
 
-            // Nisan Başlangıç Düşünceleri
             const nisanThoughts = ["Hımm, düşünüyoruum...", "Bunu biliyorum galiba!", "Biraz zor gibi ama yaparım!", "Odaklanmam lazım..."];
             nisanBubble.innerText = nisanThoughts[Math.floor(Math.random() * nisanThoughts.length)];
         }
@@ -766,17 +759,16 @@
             const nisanImg = document.getElementById('nisan-avatar');
             const nisanBubble = document.getElementById('nisan-bubble');
             
-            // Temizle
             nisanImg.classList.remove('anim-happy', 'anim-sad');
-            void nisanImg.offsetWidth; // Reflow for animation restart
+            void nisanImg.offsetWidth; 
 
             if(isCorrect) {
-                nisanImg.src = "assets/nisanmutlu.png";
+                setImgSrc(nisanImg, "assets/nisanmutlu.png", "Mutlu", "58cc02");
                 nisanImg.classList.add('anim-happy');
                 const happyTexts = ["İşte bu kadar!", "Bildiim! 😎", "Çok kolaydı sevgilim!", "Bana mısın demem!"];
                 nisanBubble.innerText = happyTexts[Math.floor(Math.random() * happyTexts.length)];
             } else {
-                nisanImg.src = "assets/nisanuzuluyor.png";
+                setImgSrc(nisanImg, "assets/nisanuzuluyor.png", "Uzgun", "ea2b2b");
                 nisanImg.classList.add('anim-sad');
                 const sadTexts = ["Tüh ya, nasıl kaçırdım...", "Off, yanlış oldu 😔", "Bir dahakine bileceğim!", "Aklım karıştı..."];
                 nisanBubble.innerText = sadTexts[Math.floor(Math.random() * sadTexts.length)];
@@ -786,16 +778,19 @@
 
         // ================= OYUN/EĞİTİM MOTORU =================
         let activeSessionNodeIdx = 0; 
+        // Dynamic Question Array for Spaced Repetition (Wrong answers are appended)
+        let totalQuestionsAtStart = 0; 
 
         function startSession(type, count, nodeIdx) {
             if(hearts <= 0) {
-                alert("Canın bitti! Devam edebilmen için sana ekstra 10 can veriyorum."); 
+                alert("Canın bitti! Maratonu tamamlaman için sana 10 can daha!"); 
                 hearts = 10; 
                 updateTopBar();
             }
             sessionType = type;
             activeSessionNodeIdx = nodeIdx;
             sessionQuestions = generateQuestions(type, count); 
+            totalQuestionsAtStart = sessionQuestions.length; // For accurate progress %
             currentQIndex = 0;
             correctAnswersCount = 0;
             
@@ -842,15 +837,12 @@
             content.innerHTML = ''; 
 
             let mode = sessionType;
-
-            // Karakter Diyaloglarını Ayarla
             setAvatars(mode);
 
-            // --- MOD 1: EZBER (FLASHCARDS) ---
+            // --- 1. EZBER (FLASHCARDS) ---
             if(mode === 'flashcards') {
                 document.getElementById('btn-check').innerText = "Sonraki";
                 document.getElementById('btn-check').disabled = false;
-                
                 content.innerHTML = `
                     <div class="bg-white border-2 border-gray-200 rounded-3xl p-8 w-full text-center shadow-lg transform transition-transform hover:scale-105 mt-4">
                         <button onclick="speakWord('${q.word}')" class="mb-6 w-20 h-20 bg-blue-100 text-blue-500 rounded-full text-4xl mx-auto flex items-center justify-center speaker-btn border-b-4 border-blue-300 active:border-b-0 active:translate-y-1">
@@ -866,7 +858,7 @@
                 speakWord(q.word);
             }
 
-            // --- MOD 2: DINLEME (LISTENING) ---
+            // --- 2. DINLEME (LISTENING) ---
             else if(mode === 'listening') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 content.innerHTML = `
@@ -875,28 +867,11 @@
                     </button>
                     <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full"></div>
                 `;
-                
                 speakWord(q.word);
-                let options = [q];
-                let pool = db[activeStage] || db['b1_1'];
-                while(options.length < 4) {
-                    let w = pool[Math.floor(Math.random() * pool.length)];
-                    if(!options.includes(w)) options.push(w);
-                }
-                options.sort(() => Math.random() - 0.5);
-                
-                const grid = document.getElementById('options-grid');
-                options.forEach(opt => {
-                    let btn = document.createElement('button');
-                    btn.className = "opt-btn py-4 px-4 w-full flex items-center justify-center text-center";
-                    btn.innerText = opt.tr;
-                    btn.dataset.correct = (opt === q);
-                    btn.onclick = () => { selectOption(btn); speakWord(opt.word); }; 
-                    grid.appendChild(btn);
-                });
+                generateOptions(q, 'options-grid');
             }
 
-            // --- MOD 3: YAZMA (WRITING) ---
+            // --- 3. YAZMA (WRITING) ---
             else if(mode === 'writing') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 document.getElementById('btn-check').disabled = false; 
@@ -911,13 +886,27 @@
                     </div>
                 `;
                 setTimeout(() => document.getElementById('write-input').focus(), 100);
-                
-                document.getElementById('write-input').addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') checkAnswer();
-                });
+                document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') checkAnswer(); });
             }
 
-            // --- MOD 4: EŞLEŞTİRME (MATCHING) ---
+            // --- 4. DİNLE & YAZ (DICTATION - YENİ MOD) ---
+            else if(mode === 'dictation') {
+                document.getElementById('btn-check').innerText = "Kontrol Et";
+                document.getElementById('btn-check').disabled = false; 
+                content.innerHTML = `
+                    <button onclick="speakWord('${q.word}')" class="mt-4 mb-8 w-24 h-24 bg-purple-500 text-white rounded-full text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-purple-500/50 active:translate-y-1">
+                        <i class="ph-fill ph-waveform"></i>
+                    </button>
+                    <div class="w-full relative">
+                        <input type="text" id="write-input" placeholder="Duyduğun kelimeyi yaz" autocomplete="off" autocorrect="off" class="w-full border-2 border-gray-200 border-b-4 rounded-2xl px-6 py-6 font-bold text-gray-800 outline-none focus:border-[#1cb0f6] bg-white text-xl sm:text-2xl text-center shadow-sm">
+                    </div>
+                `;
+                speakWord(q.word);
+                setTimeout(() => document.getElementById('write-input').focus(), 100);
+                document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') checkAnswer(); });
+            }
+
+            // --- 5. EŞLEŞTİRME (MATCHING) ---
             else if(mode === 'matching') {
                 document.getElementById('btn-check').classList.add('hidden'); 
                 
@@ -940,7 +929,7 @@
                 content.dataset.pairsFound = 0;
             }
 
-            // --- MOD 5: ARTIKEL SEÇİMİ ---
+            // --- 6. ARTIKEL SEÇİMİ ---
             else if(mode === 'artikel') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 content.innerHTML = `
@@ -964,12 +953,10 @@
                 });
             }
 
-            // --- MOD 6: KLASİK VOCAB (OKUMA/ANLAM) ---
+            // --- 7. KLASİK VOCAB (OKUMA/ANLAM) ---
             else {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
-                
                 let dispArticle = q.article === '-' ? '' : `<span class="text-xl font-bold uppercase tracking-widest text-gray-400 block mb-1">${q.article}</span>`;
-                
                 content.innerHTML = `
                     <div class="w-full flex items-center gap-4 mb-8 mt-4">
                         <div class="border-2 border-gray-200 rounded-2xl p-6 text-center w-full relative bg-gray-50 shadow-sm">
@@ -982,25 +969,28 @@
                     </div>
                     <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full"></div>
                 `;
-                
-                let options = [q];
-                let pool = db[activeStage] || db['b1_1'];
-                while(options.length < 4) {
-                    let w = pool[Math.floor(Math.random() * pool.length)];
-                    if(!options.includes(w)) options.push(w);
-                }
-                options.sort(() => Math.random() - 0.5);
-                
-                const grid = document.getElementById('options-grid');
-                options.forEach(opt => {
-                    let btn = document.createElement('button');
-                    btn.className = "opt-btn py-4 px-4 w-full flex items-center justify-center text-center";
-                    btn.innerText = opt.tr;
-                    btn.dataset.correct = (opt === q);
-                    btn.onclick = () => selectOption(btn);
-                    grid.appendChild(btn);
-                });
+                generateOptions(q, 'options-grid');
             }
+        }
+
+        // Seçenekleri oluşturma yardımcısı
+        function generateOptions(q, gridId) {
+            let options = [q];
+            let pool = db[activeStage] || db['b1_1'];
+            while(options.length < 4) {
+                let w = pool[Math.floor(Math.random() * pool.length)];
+                if(!options.includes(w)) options.push(w);
+            }
+            options.sort(() => Math.random() - 0.5);
+            const grid = document.getElementById(gridId);
+            options.forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = "opt-btn py-4 px-4 w-full flex items-center justify-center text-center";
+                btn.innerText = opt.tr;
+                btn.dataset.correct = (opt === q);
+                btn.onclick = () => { selectOption(btn); if(sessionType === 'listening') speakWord(opt.word); };
+                grid.appendChild(btn);
+            });
         }
 
         // ================= SEÇİM & KONTROL MANTIĞI =================
@@ -1013,51 +1003,40 @@
 
         function selectMatch(btn, lang, id) {
             if(btn.disabled || btn.classList.contains('correct')) return;
-            if(btn.classList.contains('selected')) {
-                btn.classList.remove('selected');
-                matchSelections = [];
-                return;
-            }
+            if(btn.classList.contains('selected')) { btn.classList.remove('selected'); matchSelections = []; return; }
 
             btn.classList.add('selected');
             matchSelections.push({btn, lang, id});
 
             if(matchSelections.length === 2) {
-                let first = matchSelections[0];
-                let second = matchSelections[1];
+                let first = matchSelections[0]; let second = matchSelections[1];
 
                 if(first.lang !== second.lang && first.id === second.id) {
-                    first.btn.classList.replace('selected', 'correct');
-                    second.btn.classList.replace('selected', 'correct');
+                    first.btn.classList.replace('selected', 'correct'); second.btn.classList.replace('selected', 'correct');
                     first.btn.disabled = true; second.btn.disabled = true;
-                    
                     playCorrectSound();
                     
                     let content = document.getElementById('session-content');
                     content.dataset.pairsFound = parseInt(content.dataset.pairsFound) + 1;
                     
                     if(parseInt(content.dataset.pairsFound) === 4) {
-                        correctAnswersCount++;
-                        reactNisan(true); // Tüm eşleştirmeler doğru bitince sevin
+                        correctAnswersCount++; reactNisan(true); 
                         setTimeout(() => showFeedback(true, "Harika Eşleştirme!", ""), 800);
                     } else {
-                        // Bir çift bulundu, küçük tebrik
-                        reactNisan(true);
-                        setTimeout(() => setAvatars(sessionType), 1000); // 1 sn sonra normale dön
+                        reactNisan(true); setTimeout(() => setAvatars(sessionType), 1000); 
                     }
                 } else {
-                    first.btn.classList.replace('selected', 'wrong');
-                    second.btn.classList.replace('selected', 'wrong');
-                    playWrongSound();
-                    reactNisan(false); // Nisan üzülsün
-                    
+                    first.btn.classList.replace('selected', 'wrong'); second.btn.classList.replace('selected', 'wrong');
+                    playWrongSound(); reactNisan(false); 
                     hearts--; updateTopBar();
                     
+                    // Eşleştirmede de yanlış yaparsa, o soruyu listenin sonuna ekle (SPACED REPETITION)
+                    sessionQuestions.push(sessionQuestions[currentQIndex]);
+                    
                     setTimeout(() => {
-                        first.btn.classList.remove('wrong');
-                        second.btn.classList.remove('wrong');
+                        first.btn.classList.remove('wrong'); second.btn.classList.remove('wrong');
                         if(hearts <= 0) { alert("Canın bitti!"); quitSession(); }
-                        else { setAvatars(sessionType); } // Normale dön
+                        else { setAvatars(sessionType); } 
                     }, 800);
                 }
                 matchSelections = [];
@@ -1069,35 +1048,30 @@
             let q = sessionQuestions[currentQIndex];
 
             if(mode === 'flashcards') {
-                correctAnswersCount++;
-                nextQuestion();
-                return;
+                correctAnswersCount++; nextQuestion(); return;
             }
 
-            if(mode === 'writing') {
+            if(mode === 'writing' || mode === 'dictation') {
                 const inputEl = document.getElementById('write-input');
                 const userText = inputEl.value.toLowerCase().trim();
                 const expectedWithArticle = (q.article + " " + q.word).toLowerCase().trim();
                 const expectedWordOnly = q.word.toLowerCase().trim();
                 
-                document.getElementById('btn-check').disabled = true;
-                inputEl.disabled = true;
+                document.getElementById('btn-check').disabled = true; inputEl.disabled = true;
 
                 let isCorrectStr = false;
                 if(q.article === '-' && userText === expectedWordOnly) isCorrectStr = true;
                 else if(userText === expectedWithArticle || userText === expectedWordOnly) isCorrectStr = true;
 
                 if(isCorrectStr) {
-                    correctAnswersCount++;
-                    playCorrectSound();
-                    reactNisan(true);
+                    correctAnswersCount++; playCorrectSound(); reactNisan(true);
                     showFeedback(true, "Harika!", "Doğru yazdın.");
                 } else {
-                    hearts--; updateTopBar();
-                    playWrongSound();
-                    reactNisan(false);
+                    hearts--; updateTopBar(); playWrongSound(); reactNisan(false);
                     let corr = q.article === '-' ? q.word : `${q.article} ${q.word}`;
                     showFeedback(false, "Yanlış!", `Doğrusu: ${corr}`);
+                    // YANLIŞ YAPILDI -> DİZİNİN SONUNA EKLE (ÖĞRENENE KADAR BİTMEZ)
+                    sessionQuestions.push(q);
                 }
                 return;
             }
@@ -1110,22 +1084,18 @@
 
             if(isCorrect) {
                 selectedOptionBtn.classList.replace('selected', 'correct');
-                correctAnswersCount++;
-                playCorrectSound();
-                reactNisan(true);
+                correctAnswersCount++; playCorrectSound(); reactNisan(true);
                 showFeedback(true, "Doğru!", "Harika gidiyorsun.");
             } else {
                 selectedOptionBtn.classList.replace('selected', 'wrong');
-                hearts--; updateTopBar();
-                playWrongSound();
-                reactNisan(false);
+                hearts--; updateTopBar(); playWrongSound(); reactNisan(false);
                 
-                document.querySelectorAll('.opt-btn').forEach(b => {
-                    if(b.dataset.correct === "true") b.classList.add('correct');
-                });
-                
+                document.querySelectorAll('.opt-btn').forEach(b => { if(b.dataset.correct === "true") b.classList.add('correct'); });
                 let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : `Doğrusu: ${q.tr}`;
                 showFeedback(false, "Yanlış!", desc);
+                
+                // YANLIŞ YAPILDI -> DİZİNİN SONUNA EKLE (ÖĞRENENE KADAR BİTMEZ)
+                sessionQuestions.push(q);
             }
         }
 
@@ -1142,7 +1112,12 @@
             icon.innerHTML = isCorrect ? '<i class="ph-bold ph-check text-[#58cc02]"></i>' : '<i class="ph-bold ph-x text-[#ea2b2b]"></i>';
             title.innerText = titleText;
             title.className = `text-2xl font-black mb-1 ${isCorrect ? 'text-[#58a700]' : 'text-[#ea2b2b]'}`;
-            desc.innerText = descText;
+            
+            if(!isCorrect) {
+                desc.innerHTML = `${descText} <br><span class="text-xs mt-1 block opacity-70">Bu soru, öğrenene kadar tekrar karşına çıkacak.</span>`;
+            } else {
+                desc.innerText = descText;
+            }
             desc.className = `font-bold opacity-80 ${isCorrect ? 'text-[#58a700]' : 'text-[#ea2b2b]'}`;
             
             nextBtn.innerText = isCorrect ? "Devam Et" : "Anladım";
@@ -1157,6 +1132,7 @@
             
             if(hearts <= 0) { alert("Canın bitti!"); quitSession(); return; }
 
+            // sessionQuestions.length dinamik olarak artabilir (yanlış yaptıkça)
             if(currentQIndex >= sessionQuestions.length) {
                 showFinishScreen();
             } else {
@@ -1165,6 +1141,7 @@
         }
 
         function updateProgressBar() {
+            // İlerleme çubuğunu toplam bitirilmesi gereken (başlangıçtaki veya o anki total) üzerinden hesapla
             const pct = (currentQIndex / sessionQuestions.length) * 100;
             document.getElementById('session-progress').style.width = `${pct}%`;
         }
@@ -1175,9 +1152,9 @@
             document.getElementById('screen-session').classList.remove('active');
             
             triggerStars();
-            setTimeout(playCorrectSound, 100);
-            setTimeout(playCorrectSound, 400);
+            setTimeout(playCorrectSound, 100); setTimeout(playCorrectSound, 400);
 
+            // Uzun maraton olduğu için XP daha cömert
             let xpGained = correctAnswersCount * 5; 
             totalXP += xpGained;
             
@@ -1185,17 +1162,13 @@
             
             let hasNextNode = activePathNodes.findIndex(n => !n.completed) !== -1;
             const btnNextLvl = document.getElementById('btn-next-level');
-            if(hasNextNode) {
-                btnNextLvl.style.display = 'flex';
-            } else {
-                btnNextLvl.style.display = 'none';
-            }
+            if(hasNextNode) { btnNextLvl.style.display = 'flex'; } else { btnNextLvl.style.display = 'none'; }
 
             updatePathProgressUI();
             updateTopBar();
             
             document.getElementById('earned-xp').innerText = `+${xpGained}`;
-            document.getElementById('accuracy-display').innerText = `${correctAnswersCount} / ${sessionQuestions.length}`;
+            document.getElementById('accuracy-display').innerText = `${totalQuestionsAtStart} / ${sessionQuestions.length}`; // Kaç tekrarda bitirdi
             
             document.getElementById('screen-finish').classList.add('active');
         }
@@ -1212,9 +1185,7 @@
                 if (currentPathNodeIndex !== -1) {
                     let nextNode = activePathNodes[currentPathNodeIndex];
                     renderDynamicPath(); 
-                    setTimeout(() => {
-                        startSession(nextNode.type, nextNode.count, currentPathNodeIndex);
-                    }, 500); 
+                    setTimeout(() => { startSession(nextNode.type, nextNode.count, currentPathNodeIndex); }, 500); 
                 }
             } else {
                 renderDynamicPath();
