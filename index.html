@@ -8,17 +8,26 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Nunito -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
+        :root {
+            --c-indigo: #6366f1; --c-indigo-dark: #4f46e5;
+            --c-teal: #14b8a6; --c-teal-dark: #0d9488;
+            --c-rose: #f43f5e; --c-rose-dark: #e11d48;
+            --c-amber: #f59e0b; --c-amber-dark: #d97706;
+            --c-purple: #a855f7; --c-purple-dark: #9333ea;
+            --bg-main: #f8fafc;
+        }
+
         body {
-            font-family: 'Nunito', sans-serif;
-            background-color: #ffffff;
-            color: #3c3c3c;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-main);
+            color: #1e293b;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
@@ -26,229 +35,255 @@
         .screen { display: none; opacity: 0; transition: opacity 0.3s ease; }
         .screen.active { display: flex; opacity: 1; }
 
-        /* Duolingo Tarzı Kalın Butonlar */
-        .duo-btn {
-            border-radius: 16px; border: 2px solid transparent; border-bottom-width: 4px;
-            font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;
+        .app-btn {
+            border-radius: 18px; border: 2px solid transparent; border-bottom-width: 4px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
             transition: all 0.1s; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
-        .duo-btn:active:not(:disabled) { border-bottom-width: 2px; transform: translateY(2px); }
-        .duo-btn:disabled { opacity: 0.5; cursor: not-allowed; border-bottom-width: 2px; transform: translateY(2px); filter: grayscale(1); }
+        .app-btn:active:not(:disabled) { border-bottom-width: 2px; transform: translateY(2px); }
+        .app-btn:disabled { opacity: 0.6; cursor: not-allowed; border-bottom-width: 2px; transform: translateY(2px); filter: grayscale(0.8); }
 
-        .btn-green { background: #58cc02; border-color: #58a700; color: white; }
-        .btn-green:hover:not(:disabled) { background: #61e002; }
-        .btn-blue { background: #1cb0f6; border-color: #1899d6; color: white; }
-        .btn-blue:hover:not(:disabled) { background: #1ebcf9; }
-        .btn-red { background: #ff4b4b; border-color: #ea2b2b; color: white; }
-        .btn-red:hover:not(:disabled) { background: #ff5e5e; }
-        .btn-orange { background: #ff9600; border-color: #e58700; color: white; }
-        .btn-orange:hover:not(:disabled) { background: #ffaa33; }
-        .btn-purple { background: #ce82ff; border-color: #a552db; color: white; }
-        .btn-yellow { background: #ffc800; border-color: #e5b400; color: white; }
-        .btn-white { background: #ffffff; border-color: #e5e5e5; color: #1cb0f6; }
+        .btn-teal { background: var(--c-teal); border-color: var(--c-teal-dark); color: white; }
+        .btn-teal:hover:not(:disabled) { filter: brightness(1.1); }
+        .btn-indigo { background: var(--c-indigo); border-color: var(--c-indigo-dark); color: white; }
+        .btn-indigo:hover:not(:disabled) { filter: brightness(1.1); }
+        .btn-rose { background: var(--c-rose); border-color: var(--c-rose-dark); color: white; }
+        .btn-rose:hover:not(:disabled) { filter: brightness(1.1); }
+        .btn-amber { background: var(--c-amber); border-color: var(--c-amber-dark); color: white; }
+        .btn-amber:hover:not(:disabled) { filter: brightness(1.1); }
+        .btn-purple { background: var(--c-purple); border-color: var(--c-purple-dark); color: white; }
+        .btn-purple:hover:not(:disabled) { filter: brightness(1.1); }
+        .btn-white { background: #ffffff; border-color: #cbd5e1; color: var(--c-indigo); }
+        .btn-white:hover:not(:disabled) { background: #f1f5f9; }
 
-        /* Seçenek Butonları */
         .opt-btn {
-            background: #ffffff; border: 2px solid #e5e5e5; border-bottom-width: 4px; border-radius: 16px;
-            color: #4b4b4b; font-weight: 700; font-size: 1.125rem; transition: all 0.1s; cursor: pointer;
-            text-align: left; padding: 1rem 1.5rem;
+            background: #ffffff; border: 2px solid #e2e8f0; border-bottom-width: 4px; border-radius: 16px;
+            color: #334155; font-weight: 600; font-size: 1.125rem; transition: all 0.15s; cursor: pointer;
+            text-align: left; padding: 1rem 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-        .opt-btn:active:not(:disabled) { border-bottom-width: 2px; transform: translateY(2px); }
-        .opt-btn.selected { border-color: #84d8ff; background: #ddf4ff; color: #1cb0f6; }
-        .opt-btn.correct { border-color: #58a700; background: #d7ffb8; color: #58a700; }
-        .opt-btn.wrong { border-color: #ea2b2b; background: #ffdfe0; color: #ea2b2b; }
+        .opt-btn:active:not(:disabled) { border-bottom-width: 2px; transform: translateY(2px); box-shadow: none; }
+        .opt-btn.selected { border-color: var(--c-indigo); background: #e0e7ff; color: var(--c-indigo-dark); }
+        .opt-btn.correct { border-color: var(--c-teal); background: #ccfbf1; color: var(--c-teal-dark); }
+        .opt-btn.wrong { border-color: var(--c-rose); background: #ffe4e6; color: var(--c-rose-dark); }
 
         .survey-btn {
-            display: flex; align-items: center; gap: 1rem; background: #ffffff; border: 2px solid #e5e5e5; border-bottom-width: 4px; border-radius: 16px;
-            color: #4b4b4b; font-weight: 800; font-size: 1.1rem; transition: all 0.1s; cursor: pointer;
-            padding: 1.2rem; margin-bottom: 1rem; width: 100%; text-align: left;
+            display: flex; align-items: center; gap: 1rem; background: #ffffff; border: 2px solid #e2e8f0; border-bottom-width: 4px; border-radius: 18px;
+            color: #334155; font-weight: 700; font-size: 1.05rem; transition: all 0.1s; cursor: pointer;
+            padding: 1.2rem; margin-bottom: 1rem; width: 100%; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
         .survey-btn:active { border-bottom-width: 2px; transform: translateY(2px); }
-        .survey-btn:hover { background-color: #f7f7f7; }
+        .survey-btn:hover { background-color: #f8fafc; border-color: #cbd5e1; }
 
-        .bottom-sheet { position: fixed; bottom: -100%; left: 0; right: 0; transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 50; }
+        .bottom-sheet { position: fixed; bottom: -100%; left: 0; right: 0; transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 50; box-shadow: 0 -10px 25px rgba(0,0,0,0.05); border-top-left-radius: 24px; border-top-right-radius: 24px; }
         .bottom-sheet.show { bottom: 0; }
 
-        #loader { position: fixed; inset: 0; background-color: #ffffff; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.4s ease-out; }
+        #loader { position: fixed; inset: 0; background-color: var(--bg-main); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.4s ease-out; }
 
-        .nav-item { color: #afafaf; transition: all 0.2s; }
-        .nav-item.active { color: #1cb0f6; background-color: #ddf4ff; border-color: #84d8ff; }
-        .nav-item:hover:not(.active) { background-color: #f7f7f7; }
+        .nav-item { color: #94a3b8; transition: all 0.2s; position: relative; }
+        .nav-item.active { color: var(--c-indigo); background-color: #e0e7ff; border-color: #a5b4fc; }
+        .nav-item:hover:not(.active) { background-color: #f1f5f9; }
 
-        .progress-bar-bg { background-color: #e5e5e5; border-radius: 99px; overflow: hidden; height: 16px; }
-        .progress-bar-fill { background-color: #58cc02; height: 100%; border-radius: 99px; width: 0%; transition: width 0.4s ease-out; position: relative; }
-        .progress-bar-fill::after { content: ''; position: absolute; top: 4px; left: 8px; right: 8px; height: 4px; background-color: rgba(255,255,255,0.3); border-radius: 99px; }
+        .progress-bar-bg { background-color: #e2e8f0; border-radius: 99px; overflow: hidden; height: 14px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+        .progress-bar-fill { background-color: var(--c-teal); height: 100%; border-radius: 99px; width: 0%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+        .progress-bar-fill::after { content: ''; position: absolute; top: 3px; left: 8px; right: 8px; height: 3px; background-color: rgba(255,255,255,0.4); border-radius: 99px; }
 
-        .star-particle {
-            position: absolute; width: 24px; height: 24px; font-size: 24px; color: #ffc800;
-            pointer-events: none; animation: floatUp 1.5s ease-out forwards; z-index: 100;
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-150px) scale(1.5) rotate(180deg); opacity: 0; }
-        }
+        .star-particle { position: absolute; width: 24px; height: 24px; font-size: 24px; color: var(--c-amber); pointer-events: none; animation: floatUp 1.5s ease-out forwards; z-index: 100; }
+        @keyframes floatUp { 0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 1; } 100% { transform: translateY(-150px) scale(1.5) rotate(180deg); opacity: 0; } }
 
         .speaker-btn { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); } 50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); } }
         
-        .node-locked { filter: grayscale(1); opacity: 0.5; pointer-events: none; }
-        .node-completed { background-color: #ffc800 !important; border-color: #e5b400 !important; }
+        .node-locked { filter: grayscale(1); opacity: 0.6; pointer-events: none; }
+        .node-completed { background-color: var(--c-amber) !important; border-color: var(--c-amber-dark) !important; color: white !important; }
 
-        @keyframes talk-bounce { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-5px) scale(1.05); } }
-        .anim-talk { animation: talk-bounce 0.6s infinite ease-in-out; }
-        @keyframes sad-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px) rotate(-5deg); } 75% { transform: translateX(4px) rotate(5deg); } }
-        .anim-sad { animation: sad-shake 0.4s ease-in-out; }
-        @keyframes happy-jump { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px) scale(1.1); } }
-        .anim-happy { animation: happy-jump 0.5s ease-out; }
+        @keyframes talk-bounce { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-4px) scale(1.02); } }
+        .anim-talk { animation: talk-bounce 0.8s infinite ease-in-out; }
+        @keyframes sad-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px) rotate(-3deg); } 75% { transform: translateX(4px) rotate(3deg); } }
+        .anim-sad { animation: sad-shake 0.5s ease-in-out; }
+        @keyframes happy-jump { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-8px) scale(1.05); } }
+        .anim-happy { animation: happy-jump 0.6s ease-out; }
 
-        /* Guarantee Badge */
         .guarantee-badge {
-            background: linear-gradient(135deg, #ffc800 0%, #ff9600 100%);
-            color: white; padding: 0.5rem 1rem; border-radius: 99px;
-            font-weight: 900; font-size: 0.75rem; text-transform: uppercase;
-            letter-spacing: 0.1em; display: inline-flex; items-center; gap: 0.25rem;
-            box-shadow: 0 4px 10px rgba(255, 150, 0, 0.3); border: 2px solid #fff;
+            background: linear-gradient(135deg, var(--c-amber) 0%, #f97316 100%);
+            color: white; padding: 0.4rem 1rem; border-radius: 99px;
+            font-weight: 800; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.3rem;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); border: 2px solid #fff;
+        }
+
+        .chat-bubble {
+            position: relative; padding: 0.75rem 1.25rem; font-weight: 600; font-size: 0.85rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); max-width: 80%;
         }
 
     </style>
 </head>
-<body class="h-screen w-full flex flex-col md:flex-row overflow-hidden bg-white relative">
+<body class="h-screen w-full flex flex-col md:flex-row overflow-hidden relative">
 
     <!-- YÜKLEME EKRANI -->
     <div id="loader">
-        <div class="relative bg-white border-2 border-gray-200 text-gray-800 font-extrabold rounded-2xl px-6 py-3 mb-6 shadow-sm">
-            <p class="text-center text-lg">"Für dich, Baby"<br><span class="text-gray-400 text-sm">-Talha</span></p>
-            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-t-gray-200 border-r-[10px] border-r-transparent"></div>
-            <div class="absolute -bottom-[6px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-t-[8px] border-t-white border-r-[8px] border-r-transparent"></div>
+        <div class="chat-bubble bg-white border border-slate-200 text-slate-700 rounded-3xl rounded-br-none mb-6">
+            <p class="text-center text-lg font-bold">"Für dich, Baby"<br><span class="text-slate-400 text-sm font-medium">-Talha</span></p>
         </div>
-        <img src="assets/talhaarkaplansiz.png" alt="Talha" onerror="this.onerror=null; this.src='https://placehold.co/150x150/58cc02/ffffff?text=Talha'" class="h-32 md:h-40 object-contain mb-8 drop-shadow-md">
-        <div class="w-64 h-3 bg-gray-200 rounded-full overflow-hidden mb-8">
-            <div id="loader-progress" class="h-full bg-[#58cc02] rounded-full w-0 transition-all duration-[2.5s] ease-in-out"></div>
+        <img src="assets/talhaarkaplansiz.png" alt="Talha" onerror="this.onerror=null; this.src='https://placehold.co/150x150/6366f1/ffffff?text=Talha'" class="h-32 md:h-40 object-contain mb-8 drop-shadow-lg">
+        <div class="w-64 h-2 bg-slate-200 rounded-full overflow-hidden mb-8 shadow-inner">
+            <div id="loader-progress" class="h-full bg-indigo-500 rounded-full w-0 transition-all duration-[2.5s] ease-in-out"></div>
         </div>
-        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/400x100/ffffff/58cc02?text=Talha+Ozturk'" class="h-32 md:h-40 object-contain opacity-80">
+        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/400x100/ffffff/6366f1?text=Talha+Ozturk'" class="h-32 md:h-40 object-contain opacity-80">
+        <p id="cloud-sync-text" class="text-indigo-400 font-bold mt-4 animate-pulse hidden">Bulut verileri eşitleniyor...</p>
     </div>
 
     <!-- EKRAN 0: LOGIN -->
-    <section id="screen-login" class="screen active flex-col flex-1 absolute inset-0 bg-white z-[60] items-center justify-center p-6 text-center">
-        <div class="max-w-sm w-full bg-white border-2 border-gray-200 rounded-3xl p-8 shadow-sm">
-            <div class="mb-6 flex justify-center"><div class="guarantee-badge"><i class="ph-fill ph-seal-check text-lg"></i> %100 Başarı Garantisi</div></div>
-            <img src="assets/imzatalhaozturk.png" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/300x80/58cc02/ffffff?text=Talha'" class="h-16 mx-auto mb-8 object-contain">
-            <h2 class="text-2xl font-black text-gray-800 mb-6 uppercase tracking-wider">Mega Kampa Giriş</h2>
-            <input type="text" id="login-user" placeholder="Hesap Adı (nisan)" class="w-full border-2 border-gray-200 rounded-xl px-4 py-4 mb-4 font-bold text-gray-700 outline-none focus:border-[#1cb0f6] bg-gray-50 focus:bg-white text-lg text-center">
-            <input type="password" id="login-pass" placeholder="Şifre (talha)" class="w-full border-2 border-gray-200 rounded-xl px-4 py-4 mb-6 font-bold text-gray-700 outline-none focus:border-[#1cb0f6] bg-gray-50 focus:bg-white text-lg text-center">
-            <p id="login-error" class="text-red-500 font-bold mb-4 hidden bg-red-50 p-2 rounded-lg">Kullanıcı adı veya şifre hatalı!</p>
-            <button onclick="attemptLogin()" class="duo-btn btn-green w-full py-4 text-xl mt-2">GİRİŞ YAP</button>
+    <section id="screen-login" class="screen active flex-col flex-1 absolute inset-0 z-[60] items-center justify-center p-6 text-center" style="background: radial-gradient(circle at center, #ffffff 0%, var(--bg-main) 100%);">
+        <div class="max-w-sm w-full bg-white border border-slate-200 rounded-[2rem] p-8 shadow-xl">
+            <div class="mb-6 flex justify-center"><div class="guarantee-badge"><i class="ph-fill ph-cloud-check text-lg"></i> Bulut Kayıtlı</div></div>
+            <img src="assets/imzatalhaozturk.png" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/300x80/6366f1/ffffff?text=Talha'" class="h-16 mx-auto mb-8 object-contain">
+            <h2 class="text-2xl font-black text-slate-800 mb-6 uppercase tracking-wider">Akademiye Giriş</h2>
+            
+            <input type="text" id="login-user" placeholder="Hesap Adı (nisan)" class="w-full border-2 border-slate-200 rounded-xl px-4 py-4 mb-4 font-semibold text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white text-lg text-center transition-all">
+            <input type="password" id="login-pass" placeholder="Şifre (talha)" class="w-full border-2 border-slate-200 rounded-xl px-4 py-4 mb-6 font-semibold text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white text-lg text-center transition-all">
+            
+            <p id="login-error" class="text-rose-500 font-bold mb-4 hidden bg-rose-50 p-3 rounded-xl border border-rose-100">Kullanıcı adı veya şifre hatalı!</p>
+            
+            <button id="btn-login" onclick="attemptLogin()" class="app-btn btn-indigo w-full py-4 text-xl mt-2 shadow-lg shadow-indigo-500/30">GİRİŞ YAP</button>
+        </div>
+    </section>
+
+    <!-- SİHİRBAZ (HEDEF BELİRLEME - YALNIZCA İLK GİRİŞTE VEYA PROFİLDEN) -->
+    <section id="screen-survey" class="screen flex-col flex-1 absolute inset-0 bg-white z-[55] items-center p-6 overflow-y-auto pt-16">
+        <div class="max-w-xl w-full">
+            <div class="bg-gradient-to-r from-indigo-500 to-indigo-700 rounded-[2rem] p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+                <div class="absolute -right-4 -bottom-4 opacity-20"><i class="ph-fill ph-target text-9xl"></i></div>
+                <h2 class="text-2xl md:text-3xl font-black tracking-wide mb-2 relative z-10">Hedefini Belirle</h2>
+                <p class="font-medium text-indigo-100 text-lg relative z-10">0'dan 100'e uzanan bu yolda sistemin seni nasıl çalıştırmasını istersin?</p>
+            </div>
+
+            <div class="space-y-4">
+                <button onclick="setGoal('artikel')" class="survey-btn hover:border-rose-400 hover:shadow-md"><div class="w-14 h-14 bg-rose-100 text-rose-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-cards"></i></div><span>Artikeller (der/die/das) sürekli karışıyor!</span></button>
+                <button onclick="setGoal('vocab')" class="survey-btn hover:border-amber-400 hover:shadow-md"><div class="w-14 h-14 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-brain"></i></div><span>Kelimelerin anlamlarını çabuk unutuyorum.</span></button>
+                <button onclick="setGoal('listening')" class="survey-btn hover:border-blue-400 hover:shadow-md"><div class="w-14 h-14 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span>Duyduğumda kelimeyi çıkaramıyorum.</span></button>
+                <button onclick="setGoal('writing')" class="survey-btn hover:border-purple-400 hover:shadow-md"><div class="w-14 h-14 bg-purple-100 text-purple-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span>Yazarken harf veya artikel hatası yapıyorum.</span></button>
+                <button onclick="setGoal('grammar')" class="survey-btn hover:border-teal-400 hover:shadow-md"><div class="w-14 h-14 bg-teal-100 text-teal-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-text-t"></i></div><span>Gramerim zayıf, kurallara çalışmam lazım.</span></button>
+                <button onclick="setGoal('mixed')" class="survey-btn border-teal-500 bg-teal-50 hover:bg-teal-100 hover:shadow-lg transform transition-transform hover:-translate-y-1"><div class="w-14 h-14 bg-gradient-to-br from-teal-400 to-teal-600 text-white rounded-2xl flex items-center justify-center text-2xl shrink-0 shadow-md"><i class="ph-fill ph-flag-checkered"></i></div><span class="text-teal-800 font-black tracking-wide">0'DAN 100'E MEGA MARATON!</span></button>
+            </div>
         </div>
     </section>
 
     <!-- NAVİGASYON -->
-    <nav id="side-nav" style="display: none;" class="order-2 md:order-1 w-full md:w-64 md:min-w-[16rem] border-t-2 md:border-t-0 md:border-r-2 border-gray-200 bg-white flex flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0">
+    <nav id="side-nav" style="display: none;" class="order-2 md:order-1 w-full md:w-64 md:min-w-[16rem] border-t md:border-t-0 md:border-r border-slate-200 bg-white flex flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] md:shadow-none">
         <div class="hidden md:flex items-center justify-center gap-3 mb-12 mt-4 px-2">
-            <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/300x100/ffffff/58cc02?text=Talha+Ozturk'" class="h-24 md:h-32 w-full object-contain">
+            <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/300x100/ffffff/6366f1?text=Talha+Ozturk'" class="h-24 md:h-32 w-full object-contain">
         </div>
-        <button onclick="switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold">
-            <i class="ph ph-house text-2xl md:text-3xl"></i><span class="text-[10px] md:text-lg tracking-wide uppercase md:capitalize">Öğren</span>
+        <button onclick="switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold">
+            <i class="ph ph-compass text-2xl md:text-3xl"></i><span class="text-[10px] md:text-base tracking-wide uppercase md:capitalize">Keşfet</span>
         </button>
-        <button onclick="switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold mt-0 md:mt-2">
-            <i class="ph ph-chats text-2xl md:text-3xl"></i><span class="text-[10px] md:text-lg tracking-wide uppercase md:capitalize">Diyalog</span>
+        <button onclick="switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold mt-0 md:mt-2">
+            <i class="ph ph-chats-circle text-2xl md:text-3xl"></i><span class="text-[10px] md:text-base tracking-wide uppercase md:capitalize">Diyalog</span>
         </button>
-        <button onclick="switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold mt-0 md:mt-2">
-            <i class="ph ph-user text-2xl md:text-3xl"></i><span class="text-[10px] md:text-lg tracking-wide uppercase md:capitalize">Profil</span>
+        <button onclick="switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold mt-0 md:mt-2">
+            <i class="ph ph-user-circle text-2xl md:text-3xl"></i><span class="text-[10px] md:text-base tracking-wide uppercase md:capitalize">Profil</span>
         </button>
     </nav>
 
     <!-- ANA İÇERİK -->
-    <main class="order-1 md:order-2 flex-1 relative flex flex-col overflow-hidden bg-white">
+    <main class="order-1 md:order-2 flex-1 relative flex flex-col overflow-hidden">
         
         <!-- ÜST BAR -->
-        <header id="main-header" style="display: none;" class="w-full p-4 flex justify-between items-center max-w-5xl mx-auto border-b-2 border-gray-100 bg-white z-10">
-            <div class="flex items-center gap-2 font-bold text-gray-500">
-                <i class="ph ph-book-open text-2xl text-[#1cb0f6] hidden md:block"></i>
-                <span id="header-title" class="text-sm sm:text-base md:text-lg text-[#3c3c3c] whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px] md:max-w-[400px]">B1'e hazırlanıp o sınavı geçeceksin <3</span>
+        <header id="main-header" style="display: none;" class="w-full p-4 md:p-6 flex justify-between items-center max-w-5xl mx-auto border-b border-slate-200 bg-white/80 backdrop-blur-md z-10 sticky top-0">
+            <div class="flex items-center gap-3 font-bold text-slate-500 bg-slate-100 px-4 py-2 rounded-xl shadow-sm">
+                <i class="ph-fill ph-student text-indigo-500 hidden md:block text-xl"></i>
+                <span id="header-title" class="text-xs sm:text-sm md:text-base text-slate-700 whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px] md:max-w-[400px]">B1'e hazırlanıp o sınavı geçeceksin <3</span>
             </div>
-            <div class="flex gap-3 md:gap-6 font-extrabold text-[1rem] sm:text-[1.1rem]">
-                <div class="flex items-center gap-1 text-[#ff9600]"><i class="ph-fill ph-fire text-xl sm:text-2xl"></i><span>1</span></div>
-                <div class="flex items-center gap-1 text-[#1cb0f6]"><i class="ph-fill ph-diamond text-xl sm:text-2xl"></i><span id="xp-counter">0</span></div>
-                <div class="flex items-center gap-1 text-[#ff4b4b]"><i class="ph-fill ph-heart text-xl sm:text-2xl"></i><span id="hearts-counter">10</span></div>
+            <div class="flex gap-2 md:gap-4 font-extrabold text-sm sm:text-base">
+                <div class="flex items-center gap-1.5 text-amber-500 bg-amber-50 px-3 py-1.5 rounded-xl border border-amber-100"><i class="ph-fill ph-fire text-lg sm:text-xl"></i><span>1</span></div>
+                <div class="flex items-center gap-1.5 text-indigo-500 bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-100"><i class="ph-fill ph-lightning text-lg sm:text-xl"></i><span id="xp-counter">0</span></div>
+                <div class="flex items-center gap-1.5 text-rose-500 bg-rose-50 px-3 py-1.5 rounded-xl border border-rose-100"><i class="ph-fill ph-heart text-lg sm:text-xl"></i><span id="hearts-counter">10</span></div>
             </div>
         </header>
 
         <!-- EKRAN 1: DASHBOARD -->
-        <section id="screen-dashboard" class="screen flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
-            <div class="max-w-xl w-full">
+        <section id="screen-dashboard" class="screen flex-col flex-1 overflow-y-auto items-center p-4 md:p-8 pb-24">
+            <div class="max-w-2xl w-full">
                 
                 <!-- PDF SEÇİMİ -->
                 <div id="view-stage-selection" class="w-full relative">
-                    <div class="flex items-center justify-between mb-6 pb-2 border-b-2 border-gray-100">
-                        <h2 class="text-2xl font-black text-gray-800">Hedef PDF'i Seç</h2>
-                        <i class="ph-fill ph-books text-3xl text-gray-300"></i>
+                    <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-200">
+                        <h2 class="text-2xl font-black text-slate-800">Eğitim Modülleri</h2>
+                        <i class="ph-fill ph-stack text-3xl text-indigo-300"></i>
                     </div>
                     
-                    <button onclick="openStage('b1_1')" class="w-full mb-6 border-2 border-[#58cc02] border-b-8 bg-[#f2ffe5] rounded-2xl p-6 flex flex-col items-center hover:bg-[#eaffd4] active:translate-y-1 active:border-b-4 transition-all text-center relative overflow-hidden group">
-                        <div class="absolute top-4 left-4 guarantee-badge scale-75 transform origin-top-left"><i class="ph-fill ph-seal-check"></i> %100 Garanti</div>
-                        <div class="w-16 h-16 bg-[#58cc02] text-white rounded-full flex items-center justify-center mb-3 mt-4 shadow-lg shadow-green-500/40"><i class="ph-fill ph-file-pdf text-3xl"></i></div>
-                        <h3 class="font-black text-xl w-full text-[#58a700] mb-3 uppercase tracking-wide">B1.1_Wortschatzliste_Tuerkisch.pdf</h3>
-                        <p class="text-sm font-bold text-[#58cc02] mb-3">Tüm Kelimeler & Uzun Maraton</p>
-                        <div class="w-full bg-white border-2 border-green-200 h-4 rounded-full relative">
-                            <div id="prog-bar-b1_1" class="bg-[#58cc02] h-full rounded-full transition-all duration-1000 w-0"></div>
-                            <span class="absolute inset-0 flex items-center justify-center text-[10px] font-black text-gray-600"><span id="pct-b1_1">0</span>%</span>
+                    <button onclick="openStage('b1_1')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-teal-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
+                        <div class="absolute top-4 right-4 guarantee-badge scale-75 transform origin-top-right"><i class="ph-fill ph-seal-check"></i> %100 Garanti</div>
+                        <div class="w-20 h-20 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform"><i class="ph-fill ph-file-pdf text-4xl"></i></div>
+                        <div class="flex-1 w-full text-center md:text-left">
+                            <h3 class="font-black text-xl text-slate-800 mb-1">B1.1 Sözlük & Maraton</h3>
+                            <p class="text-sm font-medium text-slate-500 mb-4">Temel kelimeler, uzun ezber ve tekrar maratonu.</p>
+                            <div class="w-full bg-slate-100 h-3 rounded-full relative overflow-hidden">
+                                <div id="prog-bar-b1_1" class="bg-teal-500 h-full rounded-full transition-all duration-1000 w-0"></div>
+                            </div>
+                            <p class="text-xs font-bold text-slate-400 mt-2 text-right"><span id="pct-b1_1">0</span>% Tamamlandı</p>
                         </div>
                     </button>
 
-                    <button onclick="openStage('b1_2')" class="w-full mb-6 border-2 border-[#ff9600] border-b-8 bg-[#fff5e5] rounded-2xl p-6 flex flex-col items-center hover:bg-[#ffead4] active:translate-y-1 active:border-b-4 transition-all text-center relative overflow-hidden">
-                        <div class="w-16 h-16 bg-[#ff9600] text-white rounded-full flex items-center justify-center mb-3 shadow-lg shadow-orange-500/40"><i class="ph-fill ph-file-pdf text-3xl"></i></div>
-                        <h3 class="font-black text-xl w-full text-[#e58700] mb-3 uppercase tracking-wide">B1.2_Wortschatzliste_Tuerkisch.pdf</h3>
-                        <p class="text-sm font-bold text-[#ff9600] mb-3">İleri Seviye Kelimeler</p>
-                        <div class="w-full bg-white border-2 border-orange-200 h-4 rounded-full relative">
-                            <div id="prog-bar-b1_2" class="bg-[#ff9600] h-full rounded-full transition-all duration-1000 w-0"></div>
-                            <span class="absolute inset-0 flex items-center justify-center text-[10px] font-black text-gray-600"><span id="pct-b1_2">0</span>%</span>
+                    <button onclick="openStage('b1_2')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-amber-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
+                        <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform"><i class="ph-fill ph-file-pdf text-4xl"></i></div>
+                        <div class="flex-1 w-full text-center md:text-left">
+                            <h3 class="font-black text-xl text-slate-800 mb-1">B1.2 İleri Seviye Kelimeler</h3>
+                            <p class="text-sm font-medium text-slate-500 mb-4">Sınav metinlerinde sık çıkan zorlu kelime grupları.</p>
+                            <div class="w-full bg-slate-100 h-3 rounded-full relative overflow-hidden">
+                                <div id="prog-bar-b1_2" class="bg-amber-500 h-full rounded-full transition-all duration-1000 w-0"></div>
+                            </div>
+                            <p class="text-xs font-bold text-slate-400 mt-2 text-right"><span id="pct-b1_2">0</span>% Tamamlandı</p>
                         </div>
                     </button>
 
-                    <button onclick="openStage('arena')" class="w-full mb-6 border-2 border-[#1cb0f6] border-b-8 bg-[#e5f7ff] rounded-2xl p-6 flex flex-col items-center hover:bg-[#d4f1ff] active:translate-y-1 active:border-b-4 transition-all text-center relative overflow-hidden group">
-                        <img src="assets/arenab1wortliste.PNG" alt="Arena B1" onerror="this.onerror=null; this.src='https://placehold.co/300x120/1cb0f6/ffffff?text=Arena+B1+Logo'" class="h-24 md:h-28 object-contain mb-4 rounded-xl group-hover:scale-105 transition-transform">
-                        <h3 class="font-black text-xl w-full text-[#1899d6] mb-3 uppercase tracking-wide">ArenaB1-Wortliste.pdf</h3>
-                        <p class="text-sm font-bold text-[#1cb0f6] mb-3">Arena Serisi Tam Liste</p>
-                        <div class="w-full bg-white border-2 border-blue-200 h-4 rounded-full relative">
-                            <div id="prog-bar-arena" class="bg-[#1cb0f6] h-full rounded-full transition-all duration-1000 w-0"></div>
-                            <span class="absolute inset-0 flex items-center justify-center text-[10px] font-black text-gray-600"><span id="pct-arena">0</span>%</span>
+                    <button onclick="openStage('arena')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-indigo-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
+                        <div class="w-20 h-20 bg-indigo-50 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform overflow-hidden p-2">
+                            <img src="assets/arenab1wortliste.PNG" alt="Arena B1" onerror="this.onerror=null; this.src='https://placehold.co/100x100/6366f1/ffffff?text=Arena'" class="w-full h-full object-contain">
+                        </div>
+                        <div class="flex-1 w-full text-center md:text-left">
+                            <h3 class="font-black text-xl text-slate-800 mb-1">Arena B1 Tam Liste</h3>
+                            <p class="text-sm font-medium text-slate-500 mb-4">Özel Arena serisi sınav hazırlık kelimeleri.</p>
+                            <div class="w-full bg-slate-100 h-3 rounded-full relative overflow-hidden">
+                                <div id="prog-bar-arena" class="bg-indigo-500 h-full rounded-full transition-all duration-1000 w-0"></div>
+                            </div>
+                            <p class="text-xs font-bold text-slate-400 mt-2 text-right"><span id="pct-arena">0</span>% Tamamlandı</p>
                         </div>
                     </button>
-                </div>
 
-                <!-- SİHİRBAZ -->
-                <div id="view-survey" class="w-full hidden">
-                    <button onclick="goBackToStages()" class="mb-6 text-gray-400 font-bold hover:text-gray-600 flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl border-2 border-gray-200"><i class="ph-bold ph-arrow-left"></i> Vazgeç</button>
-                    <div class="bg-blue-500 rounded-3xl p-6 text-white shadow-sm mb-8 border-b-4 border-blue-700 relative overflow-hidden">
-                        <div class="absolute -right-6 -top-6 opacity-20"><i class="ph-fill ph-target text-9xl"></i></div>
-                        <h2 class="text-2xl md:text-3xl font-black tracking-wide mb-2 relative z-10">Hedef Belirle</h2>
-                        <p class="font-bold opacity-90 text-lg relative z-10">0'dan 100'e uzanan bu devasa yolda en çok hangi alanda zorlanıyorsun?</p>
-                    </div>
-                    <div class="space-y-4">
-                        <button onclick="buildPath('artikel')" class="survey-btn"><div class="w-12 h-12 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-cards"></i></div><span>Artikeller (der/die/das) sürekli karışıyor!</span></button>
-                        <button onclick="buildPath('vocab')" class="survey-btn"><div class="w-12 h-12 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-brain"></i></div><span>Kelimelerin anlamlarını çabuk unutuyorum.</span></button>
-                        <button onclick="buildPath('listening')" class="survey-btn"><div class="w-12 h-12 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span>Duyduğumda kelimeyi çıkaramıyorum.</span></button>
-                        <button onclick="buildPath('writing')" class="survey-btn"><div class="w-12 h-12 bg-purple-100 text-purple-500 rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span>Yazarken harf veya artikel hatası yapıyorum.</span></button>
-                        <button onclick="buildPath('mixed')" class="survey-btn border-green-500 bg-green-50 hover:bg-green-100"><div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-flag-checkered"></i></div><span class="text-green-700">0'dan 100'e DENGELİ MEGA MARATON!</span></button>
-                    </div>
+                    <!-- GRAMER MODÜLÜ -->
+                    <button onclick="openStage('gramer')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-purple-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
+                        <div class="absolute top-4 right-4 guarantee-badge scale-75 transform origin-top-right bg-purple-500 border-none shadow-purple-500/30"><i class="ph-fill ph-sparkle"></i> Yeni</div>
+                        <div class="w-20 h-20 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform"><i class="ph-fill ph-text-t text-4xl"></i></div>
+                        <div class="flex-1 w-full text-center md:text-left">
+                            <h3 class="font-black text-xl text-slate-800 mb-1">Gramer Kampı</h3>
+                            <p class="text-sm font-medium text-slate-500 mb-4">Akkusativ, Dativ, Bağlaçlar ve zorlu kurallar.</p>
+                            <div class="w-full bg-slate-100 h-3 rounded-full relative overflow-hidden">
+                                <div id="prog-bar-gramer" class="bg-purple-500 h-full rounded-full transition-all duration-1000 w-0"></div>
+                            </div>
+                            <p class="text-xs font-bold text-slate-400 mt-2 text-right"><span id="pct-gramer">0</span>% Tamamlandı</p>
+                        </div>
+                    </button>
                 </div>
 
                 <!-- DİNAMİK YOL (HARİTA) -->
                 <div id="view-learning-path" class="w-full hidden">
                     <div class="flex justify-between items-center mb-6">
-                        <button onclick="goBackToStages()" class="text-gray-400 font-bold hover:text-gray-600 flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl border-2 border-gray-200"><i class="ph-bold ph-arrow-left"></i> PDF Seçimine Dön</button>
-                        <div class="guarantee-badge shadow-none border-none scale-90 origin-right"><i class="ph-fill ph-repeat"></i> Hata Yaparsan Tekrarlar</div>
+                        <button onclick="goBackToStages()" class="text-slate-500 font-bold hover:text-slate-700 flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> Modüllere Dön</button>
+                        <div class="guarantee-badge shadow-none border-none scale-90 origin-right text-[10px] bg-slate-100 text-slate-600"><i class="ph-bold ph-repeat text-indigo-500"></i> Hatalar Tekrarlanır</div>
                     </div>
                     
-                    <div id="path-header" class="rounded-3xl p-6 text-white shadow-sm mb-6 border-b-4">
-                        <h2 class="text-2xl md:text-3xl font-black tracking-wide" id="path-title">Sana Özel Yol</h2>
-                        <p class="font-bold opacity-90 text-lg mt-1" id="path-subtitle">Maraton başlıyor!</p>
+                    <div id="path-header" class="rounded-[2rem] p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+                        <h2 class="text-2xl md:text-3xl font-black tracking-wide relative z-10" id="path-title">Sana Özel Yol</h2>
+                        <p class="font-medium opacity-90 text-lg mt-1 relative z-10" id="path-subtitle">Maraton başlıyor!</p>
                     </div>
 
                     <!-- Büyük İlerleme Çubuğu -->
-                    <div class="w-full bg-gray-200 h-6 rounded-full mb-12 relative shadow-inner">
-                        <div id="path-main-progress" class="bg-yellow-400 h-full rounded-full transition-all duration-1000 w-0 relative border-b-4 border-yellow-600"></div>
-                        <span class="absolute inset-0 flex items-center justify-center text-sm font-black text-gray-700 z-10">% <span id="path-main-pct">0</span> TAMAMLANDI</span>
+                    <div class="w-full bg-slate-200 h-6 rounded-full mb-12 relative shadow-inner overflow-hidden border border-slate-300">
+                        <div id="path-main-progress" class="bg-gradient-to-r from-amber-400 to-amber-500 h-full rounded-full transition-all duration-1000 w-0 relative">
+                            <div class="absolute top-1.5 left-2 right-2 h-1.5 bg-white/30 rounded-full"></div>
+                        </div>
+                        <span class="absolute inset-0 flex items-center justify-center text-[11px] font-black text-slate-700 z-10 tracking-widest uppercase shadow-white">% <span id="path-main-pct">0</span> Tamamlandı</span>
                     </div>
 
                     <div id="path-nodes-container" class="flex flex-col items-center gap-6 relative pb-20 w-full">
@@ -261,36 +296,44 @@
 
         <!-- EKRAN 2: DİYALOGLAR -->
         <section id="screen-dialogues" class="screen flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
-            <div class="max-w-xl w-full">
-                <div class="bg-[#ffc800] rounded-2xl p-4 text-white mb-8 border-b-4 border-[#e5b400]">
-                    <h2 class="text-2xl font-black tracking-wide">Diyaloglar</h2>
-                    <p class="font-bold opacity-90">Sprechen Teil 2 için pratikler</p>
+            <div class="max-w-2xl w-full">
+                <div class="bg-gradient-to-r from-indigo-500 to-purple-500 rounded-[2rem] p-8 text-white shadow-lg mb-8 relative overflow-hidden">
+                    <i class="ph-fill ph-chats-circle absolute -right-4 -bottom-4 text-8xl opacity-20"></i>
+                    <h2 class="text-2xl font-black tracking-wide relative z-10">Diyalog Kütüphanesi</h2>
+                    <p class="font-medium opacity-90 relative z-10">Sprechen Teil 2 için partner pratikleri</p>
                 </div>
-                <div class="space-y-4">
-                    <div class="border-2 border-gray-200 rounded-2xl p-5 hover:bg-gray-50 transition-colors">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-black text-lg">Havalimanında (Am Flughafen)</h3>
-                            <i class="ph-fill ph-airplane-tilt text-2xl text-[#1cb0f6]"></i>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex gap-3 items-center"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-500 shrink-0">A</div><p class="text-sm font-semibold text-gray-600 bg-gray-100 p-3 rounded-2xl rounded-tl-none">Entschuldigung, wo ist die Gepäckausgabe?</p></div>
-                            <div class="flex gap-3 items-center flex-row-reverse"><div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center font-bold text-green-500 shrink-0">B</div><p class="text-sm font-semibold text-gray-600 bg-gray-100 p-3 rounded-2xl rounded-tr-none">Gehen Sie am Schalter vorbei.</p></div>
-                        </div>
-                    </div>
+                
+                <div class="space-y-6" id="dialogues-container">
+                    <!-- JS ile eklenecek -->
                 </div>
             </div>
         </section>
 
         <!-- EKRAN 3: PROFİL -->
         <section id="screen-profile" class="screen flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
-            <div class="max-w-xl w-full text-center">
-                <div class="w-24 h-24 rounded-full bg-gray-200 mx-auto mb-4 border-4 border-gray-300 overflow-hidden">
-                    <img src="assets/nisan.png" alt="Avatar" onerror="this.onerror=null; this.src='https://placehold.co/100x100/58cc02/ffffff?text=Nisan'" class="w-full h-full object-cover">
-                </div>
-                <h2 class="text-2xl font-black text-gray-800">B1 Şampiyonu</h2>
-                <div class="grid grid-cols-2 gap-4 mt-8">
-                    <div class="border-2 border-gray-200 rounded-2xl p-4 flex items-center gap-4"><i class="ph-fill ph-fire text-3xl text-[#ff9600]"></i><div class="text-left"><p class="text-2xl font-black text-gray-800">1</p><p class="text-xs font-bold text-gray-400 uppercase">Gün Serisi</p></div></div>
-                    <div class="border-2 border-gray-200 rounded-2xl p-4 flex items-center gap-4"><i class="ph-fill ph-diamond text-3xl text-[#1cb0f6]"></i><div class="text-left"><p class="text-2xl font-black text-gray-800" id="profile-xp">0</p><p class="text-xs font-bold text-gray-400 uppercase">Toplam XP</p></div></div>
+            <div class="max-w-md w-full text-center mt-8">
+                <div class="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm relative pt-16">
+                    <div class="w-28 h-28 rounded-full bg-white mx-auto absolute -top-14 left-1/2 transform -translate-x-1/2 border-4 border-white shadow-lg overflow-hidden">
+                        <img src="assets/nisan.png" alt="Avatar" onerror="this.onerror=null; this.src='https://placehold.co/100x100/6366f1/ffffff?text=Nisan'" class="w-full h-full object-cover">
+                    </div>
+                    <h2 class="text-2xl font-black text-slate-800">Geleceğin B1 Uzmanı</h2>
+                    <p class="text-slate-500 font-medium mb-8">Akademi Öğrencisi</p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col items-center gap-2">
+                            <i class="ph-fill ph-fire text-4xl text-amber-500"></i>
+                            <p class="text-3xl font-black text-slate-800">1</p>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Gün Serisi</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col items-center gap-2">
+                            <i class="ph-fill ph-lightning text-4xl text-indigo-500"></i>
+                            <p class="text-3xl font-black text-slate-800" id="profile-xp">0</p>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Toplam XP</p>
+                        </div>
+                    </div>
+
+                    <button onclick="changeGoal()" class="app-btn btn-white w-full py-4 text-sm font-bold shadow-sm border-slate-200"><i class="ph-bold ph-target mr-2"></i> Hedefimi Değiştir</button>
+                    <button onclick="window.location.reload()" class="app-btn btn-rose w-full py-4 text-sm font-bold shadow-sm mt-3"><i class="ph-bold ph-sign-out mr-2"></i> Çıkış Yap</button>
                 </div>
             </div>
         </section>
@@ -298,70 +341,188 @@
         <!-- EKRAN 4: EĞİTİM / OYUN OTURUMU -->
         <section id="screen-session" class="screen flex-col flex-1 absolute inset-0 bg-white z-20">
             <!-- ÜST BAR -->
-            <div class="w-full max-w-4xl mx-auto p-4 flex items-center gap-4">
-                <button onclick="quitSession()" class="text-gray-400 hover:text-gray-600 transition-colors"><i class="ph-bold ph-x text-3xl"></i></button>
+            <div class="w-full max-w-4xl mx-auto p-4 md:p-6 flex items-center gap-6">
+                <button onclick="quitSession()" class="text-slate-400 hover:text-slate-600 transition-colors bg-slate-100 hover:bg-slate-200 p-2 rounded-full"><i class="ph-bold ph-x text-2xl"></i></button>
                 <div class="flex-1 progress-bar-bg"><div id="session-progress" class="progress-bar-fill"></div></div>
-                <div class="flex items-center gap-1 font-extrabold text-[#ff4b4b]"><i class="ph-fill ph-heart text-2xl"></i><span id="session-hearts">10</span></div>
+                <div class="flex items-center gap-1.5 font-bold text-rose-500 bg-rose-50 px-3 py-1.5 rounded-xl border border-rose-100"><i class="ph-fill ph-heart text-xl"></i><span id="session-hearts">10</span></div>
             </div>
 
             <!-- ANİMASYONLU KARAKTER DİYALOG ALANI -->
             <div class="w-full max-w-3xl mx-auto px-6 pt-2 pb-4 flex justify-between items-end">
                 <div class="flex flex-col items-start w-1/2 pr-2">
-                    <div id="talha-bubble" class="bg-blue-100 border-2 border-blue-200 text-blue-800 text-xs sm:text-sm font-bold py-2 px-3 sm:px-4 rounded-2xl rounded-bl-none mb-2 shadow-sm inline-block">Hadi başlayalım!</div>
-                    <img src="assets/talhaarkaplansiz.png" data-current-src="assets/talhaarkaplansiz.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1cb0f6/ffffff?text=Talha'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-blue-200 object-cover bg-white shadow-md z-10 anim-talk" id="talha-avatar">
+                    <div id="talha-bubble" class="chat-bubble bg-indigo-50 border border-indigo-100 text-indigo-800 rounded-2xl rounded-bl-none mb-3 inline-block">Hadi başlayalım!</div>
+                    <img src="assets/talhaarkaplansiz.png" data-current-src="assets/talhaarkaplansiz.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/6366f1/ffffff?text=Talha'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-indigo-100 object-cover bg-white shadow-md z-10 anim-talk" id="talha-avatar">
                 </div>
                 <div class="flex flex-col items-end w-1/2 pl-2">
-                    <div id="nisan-bubble" class="bg-orange-100 border-2 border-orange-200 text-orange-800 text-xs sm:text-sm font-bold py-2 px-3 sm:px-4 rounded-2xl rounded-br-none mb-2 shadow-sm inline-block">Hazırım!</div>
-                    <img src="assets/nisan.png" data-current-src="assets/nisan.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/ff9600/ffffff?text=Nisan'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-orange-200 object-cover bg-white shadow-md z-10" id="nisan-avatar">
+                    <div id="nisan-bubble" class="chat-bubble bg-amber-50 border border-amber-100 text-amber-800 rounded-2xl rounded-br-none mb-3 inline-block">Hazırım!</div>
+                    <img src="assets/nisan.png" data-current-src="assets/nisan.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f59e0b/ffffff?text=Nisan'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-amber-100 object-cover bg-white shadow-md z-10" id="nisan-avatar">
                 </div>
             </div>
 
             <!-- SORU İÇERİĞİ -->
-            <div class="flex-1 overflow-y-auto px-6 pt-2 pb-32 flex flex-col justify-start items-center max-w-3xl mx-auto w-full" id="session-content">
+            <div class="flex-1 overflow-y-auto px-4 md:px-8 pt-2 pb-32 flex flex-col justify-start items-center max-w-3xl mx-auto w-full" id="session-content">
                 <!-- Soru İçeriği JS ile Gelecek -->
             </div>
 
             <!-- ALT KONTROL -->
-            <div class="w-full p-4 border-t-2 border-gray-200 bg-white flex justify-center fixed bottom-0 z-30">
+            <div class="w-full p-4 md:p-6 bg-white/90 backdrop-blur-sm border-t border-slate-200 flex justify-center fixed bottom-0 z-30">
                 <div class="max-w-4xl w-full">
-                    <button id="btn-check" onclick="checkAnswer()" disabled class="duo-btn btn-green w-full py-4 text-xl">Kontrol Et</button>
+                    <button id="btn-check" onclick="checkAnswer()" disabled class="app-btn btn-teal w-full py-4 text-xl shadow-lg shadow-teal-500/20">Kontrol Et</button>
                 </div>
             </div>
 
             <!-- GERİ BİLDİRİM (BOTTOM SHEET) -->
-            <div id="feedback-sheet" class="bottom-sheet p-6 pt-8 pb-10 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t-2">
-                <div class="flex items-center gap-4">
-                    <div id="feedback-icon" class="w-16 h-16 rounded-full flex items-center justify-center bg-white text-3xl font-black shrink-0"></div>
-                    <div><h2 id="feedback-title" class="text-2xl font-black mb-1"></h2><p id="feedback-desc" class="font-bold opacity-90"></p></div>
+            <div id="feedback-sheet" class="bottom-sheet p-6 pt-8 pb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t-2 bg-white">
+                <div class="flex items-center gap-5">
+                    <div id="feedback-icon" class="w-14 h-14 rounded-2xl flex items-center justify-center bg-white shadow-sm text-3xl shrink-0 border border-slate-100"></div>
+                    <div><h2 id="feedback-title" class="text-2xl font-black mb-1 tracking-tight"></h2><p id="feedback-desc" class="font-medium text-slate-600"></p></div>
                 </div>
-                <button id="btn-next" onclick="nextQuestion()" class="duo-btn w-full md:w-48 py-4 text-xl bg-white"></button>
+                <button id="btn-next" onclick="nextQuestion()" class="app-btn w-full md:w-48 py-4 text-lg"></button>
             </div>
         </section>
 
         <!-- EKRAN 5: DERS BİTİŞİ -->
-        <section id="screen-finish" class="screen flex-col flex-1 absolute inset-0 bg-white z-40 items-center justify-center p-6 text-center overflow-hidden">
-            <h2 class="text-4xl font-black text-[#ffc800] mb-4 relative z-10">Bölüm Tamamlandı!</h2>
-            <div class="flex gap-4 mb-8 relative z-10">
-                <div class="bg-[#ffc800] text-white rounded-2xl border-b-4 border-[#e5b400] p-4 flex flex-col items-center w-32">
-                    <span class="text-xs font-bold uppercase tracking-widest mb-1">Kazanılan XP</span>
-                    <div class="flex items-center gap-1 font-black text-2xl"><i class="ph-fill ph-diamond"></i><span id="earned-xp">+10</span></div>
+        <section id="screen-finish" class="screen flex-col flex-1 absolute inset-0 bg-indigo-50 z-40 items-center justify-center p-6 text-center overflow-hidden">
+            
+            <div class="w-24 h-24 bg-gradient-to-br from-amber-400 to-amber-600 rounded-3xl flex items-center justify-center text-white mb-6 shadow-xl shadow-amber-500/30 transform rotate-12 relative z-10">
+                <i class="ph-fill ph-trophy text-5xl transform -rotate-12"></i>
+            </div>
+
+            <h2 class="text-3xl md:text-4xl font-black text-indigo-900 mb-2 relative z-10 tracking-tight">Harika İş Çıkardın!</h2>
+            <p class="text-indigo-600 font-medium mb-10 relative z-10">Zorlu antrenmanı başarıyla tamamladın.</p>
+            
+            <div class="flex gap-4 mb-10 relative z-10">
+                <div class="bg-white rounded-3xl border border-indigo-100 p-5 flex flex-col items-center w-36 shadow-sm">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Kazanılan XP</span>
+                    <div class="flex items-center gap-1.5 font-black text-3xl text-indigo-500"><i class="ph-fill ph-lightning"></i><span id="earned-xp">+10</span></div>
                 </div>
-                <div class="bg-[#1cb0f6] text-white rounded-2xl border-b-4 border-[#1899d6] p-4 flex flex-col items-center w-32">
-                    <span class="text-xs font-bold uppercase tracking-widest mb-1">Doğru Çözüm</span>
-                    <div class="flex items-center gap-1 font-black text-2xl"><i class="ph-fill ph-check-circle"></i><span id="accuracy-display">25</span></div>
+                <div class="bg-white rounded-3xl border border-indigo-100 p-5 flex flex-col items-center w-36 shadow-sm">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Çözülen Soru</span>
+                    <div class="flex items-center gap-1.5 font-black text-3xl text-teal-500"><i class="ph-fill ph-target"></i><span id="accuracy-display">25</span></div>
                 </div>
             </div>
             
-            <button onclick="finishSession(false)" class="duo-btn btn-white w-full max-w-sm py-4 text-xl relative z-10 mb-4">Haritaya Dön</button>
-            <button onclick="finishSession(true)" id="btn-next-level" class="duo-btn btn-green w-full max-w-sm py-4 text-xl relative z-10 shadow-xl shadow-green-500/50">Sonraki Bölüme Geç <i class="ph-bold ph-arrow-right ml-2"></i></button>
+            <button onclick="finishSession(false)" class="app-btn btn-white w-full max-w-sm py-4 text-lg relative z-10 mb-4 font-bold shadow-sm">Haritaya Dön</button>
+            <button onclick="finishSession(true)" id="btn-next-level" class="app-btn btn-indigo w-full max-w-sm py-4 text-lg relative z-10 shadow-xl shadow-indigo-500/30 font-bold">Sonraki Bölüme Geç <i class="ph-bold ph-arrow-right ml-2"></i></button>
             
             <div id="star-container" class="absolute inset-0 pointer-events-none"></div>
         </section>
     </main>
 
-    <script>
-        // === GÖRSEL YÖNETİCİ ===
-        function setImgSrc(imgElement, src, fallbackText, color) {
+    <!-- FIREBASE & UYGULAMA LOGIC -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        let auth, db, appId, currentUser = null;
+
+        // Global State (Firebase ile eşitlenecek)
+        window.totalXP = 0;
+        window.hearts = 10;
+        window.stageProgress = { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 };
+        window.selectedGoal = null;
+
+        // Initialize Firebase
+        async function initFirebase() {
+            try {
+                const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            } catch(e) { console.error("Firebase init err:", e); }
+        }
+
+        // Firebase Progress Yükleme
+        async function loadProgress() {
+            if(!currentUser) return;
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    window.totalXP = data.totalXP || 0;
+                    window.hearts = data.hearts || 10;
+                    window.stageProgress = data.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 };
+                    window.selectedGoal = data.selectedGoal || null;
+                }
+            } catch(e) { console.error("Load progress err:", e); }
+        }
+
+        // Firebase Progress Kaydetme
+        window.saveProgress = async function() {
+            if(!currentUser) return;
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
+                await setDoc(docRef, {
+                    totalXP: window.totalXP,
+                    hearts: window.hearts,
+                    stageProgress: window.stageProgress,
+                    selectedGoal: window.selectedGoal
+                }, { merge: true });
+            } catch(e) { console.error("Save progress err:", e); }
+        };
+
+        // Giriş İşlemi
+        window.attemptLogin = async function() {
+            const user = document.getElementById('login-user').value.toLowerCase().trim();
+            const pass = document.getElementById('login-pass').value.toLowerCase().trim();
+            
+            if(user === 'nisan' && pass === 'talha') {
+                document.getElementById('login-error').classList.add('hidden');
+                document.getElementById('btn-login').innerText = "BULUTA BAĞLANILIYOR...";
+                document.getElementById('btn-login').disabled = true;
+
+                await initFirebase();
+                
+                // Auth
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch(e) { console.error("Auth err", e); }
+
+                onAuthStateChanged(auth, async (user) => {
+                    if(user) {
+                        currentUser = user;
+                        await loadProgress();
+                        
+                        document.getElementById('side-nav').style.display = '';
+                        document.getElementById('main-header').style.display = 'flex';
+                        initAudio(); 
+                        
+                        if(window.selectedGoal) {
+                            window.switchScreen('dashboard');
+                        } else {
+                            window.switchScreen('survey');
+                        }
+                        
+                        window.updateTopBar();
+                        window.updateDashboardProgress();
+                    }
+                });
+
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        };
+
+        // Hedef Belirleme (Survey)
+        window.setGoal = async function(goal) {
+            window.selectedGoal = goal;
+            await window.saveProgress();
+            window.switchScreen('dashboard');
+        };
+
+        window.changeGoal = function() {
+            window.switchScreen('survey');
+        };
+
+        // Görsel Yükleyici
+        window.setImgSrc = function(imgElement, src, fallbackText, color) {
             if (imgElement.getAttribute('data-current-src') === src) return;
             imgElement.setAttribute('data-current-src', src);
             imgElement.onerror = function() {
@@ -369,32 +530,29 @@
                 this.src = `https://placehold.co/100x100/${color}/ffffff?text=${fallbackText}`;
             };
             imgElement.src = src;
-        }
+        };
 
-        // === SES MOTORU ===
+        // Ses Motoru
         let audioCtx;
-        function initAudio() {
+        window.initAudio = function() {
             if(!audioCtx) { const AudioContext = window.AudioContext || window.webkitAudioContext; audioCtx = new AudioContext(); }
             if (audioCtx.state === 'suspended') { audioCtx.resume(); }
         }
-
-        function playCorrectSound() {
-            initAudio(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+        window.playCorrectSound = function() {
+            window.initAudio(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
             osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'sine';
             osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); 
             gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
             osc.start(); osc.stop(audioCtx.currentTime + 0.3);
         }
-
-        function playWrongSound() {
-            initAudio(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+        window.playWrongSound = function() {
+            window.initAudio(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
             osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'sawtooth';
             osc.frequency.setValueAtTime(300, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.3);
             gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
             osc.start(); osc.stop(audioCtx.currentTime + 0.3);
         }
-
-        function speakWord(word) {
+        window.speakWord = function(word) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(word);
@@ -403,18 +561,18 @@
             }
         }
 
-        function triggerStars() {
+        window.triggerStars = function() {
             const container = document.getElementById('star-container'); container.innerHTML = '';
             for(let i=0; i<40; i++) {
                 const star = document.createElement('i'); star.className = 'ph-fill ph-star star-particle';
                 star.style.left = Math.random() * 100 + '%'; star.style.bottom = '-50px'; star.style.animationDelay = (Math.random() * 0.5) + 's';
-                const colors = ['#ffc800', '#58cc02', '#1cb0f6', '#ce82ff']; star.style.color = colors[Math.floor(Math.random() * colors.length)];
+                const colors = ['#f59e0b', '#14b8a6', '#6366f1', '#a855f7']; star.style.color = colors[Math.floor(Math.random() * colors.length)];
                 container.appendChild(star);
             }
         }
 
-        // === DEV VERİTABANI ===
-        const db = {
+        // DEV VERİTABANI
+        const dbContent = {
             'b1_1': [
                 { article: "der", word: "Abfall", tr: "atık" }, { article: "der", word: "Abflug", tr: "kalkış" }, { article: "die", word: "Absage", tr: "iptal" },
                 { article: "-", word: "aktiv", tr: "faal" }, { article: "der", word: "Alkohol", tr: "alkol" }, { article: "-", word: "angenehm", tr: "rahat" },
@@ -442,7 +600,14 @@
                 { article: "die", word: "Demokratie", tr: "demokrasi" }, { article: "der", word: "Flüchtling", tr: "mülteci" }, { article: "die", word: "Grenze", tr: "sınır" },
                 { article: "die", word: "Heimat", tr: "vatan" }, { article: "der", word: "Krieg", tr: "savaş" }, { article: "die", word: "Mauer", tr: "duvar" },
                 { article: "die", word: "Regierung", tr: "hükümet" }, { article: "der", word: "Staat", tr: "devlet" }, { article: "das", word: "Visum", tr: "vize" },
-                { article: "die", word: "Wahl", tr: "seçim" }, { article: "-", word: "wählen", tr: "seçmek" }, { article: "-", word: "zustimmen", tr: "katılmak (fikre)" }
+                { article: "die", word: "Wahl", tr: "seçim" }, { article: "-", word: "wählen", tr: "seçmek" }, { article: "-", word: "zustimmen", tr: "katılmak (fikre)" },
+                { article: "die", word: "Bewerbung", tr: "başvuru" }, { article: "der", word: "Lebenslauf", tr: "özgeçmiş" }, { article: "das", word: "Vorstellungsgespräch", tr: "iş görüşmesi" },
+                { article: "der", word: "Feierabend", tr: "paydos" }, { article: "die", word: "Gewerkschaft", tr: "sendika" }, { article: "die", word: "Steuer", tr: "vergi" },
+                { article: "das", word: "Einkommen", tr: "gelir" }, { article: "-", word: "kündigen", tr: "işten ayrılmak/çıkarmak" }, { article: "-", word: "einstellen", tr: "işe almak" },
+                { article: "die", word: "Wirtschaft", tr: "ekonomi" }, { article: "der", word: "Markt", tr: "piyasa" }, { article: "der", word: "Konsument", tr: "tüketici" },
+                { article: "der", word: "Hersteller", tr: "üretici" }, { article: "die", word: "Globalisierung", tr: "küreselleşme" }, { article: "der", word: "Export", tr: "ihracat" },
+                { article: "der", word: "Import", tr: "ithalat" }, { article: "die", word: "Qualität", tr: "kalite" }, { article: "der", word: "Rabatt", tr: "indirim" },
+                { article: "das", word: "Angebot", tr: "teklif/arz" }, { article: "die", word: "Nachfrage", tr: "talep" }
             ],
             'b1_2': [
                 { article: "die", word: "Anerkennung", tr: "takdir" }, { article: "die", word: "Fähigkeit", tr: "beceri" }, { article: "das", word: "Heimweh", tr: "sıla hasreti" },
@@ -463,7 +628,14 @@
                 { article: "der", word: "Verbrauch", tr: "tüketim" }, { article: "die", word: "Wärme", tr: "ısı" }, { article: "-", word: "abnehmen", tr: "kaldırmak/zayıflamak" },
                 { article: "die", word: "Bevölkerung", tr: "nüfus" }, { article: "das", word: "Eiweiß", tr: "protein" }, { article: "das", word: "Getreide", tr: "tahıl" },
                 { article: "-", word: "vegan", tr: "vegan" }, { article: "der", word: "Diebstahl", tr: "hırsızlık" }, { article: "der", word: "Motor", tr: "motor" },
-                { article: "das", word: "Kennzeichen", tr: "plaka" }, { article: "der", word: "Reifen", tr: "lastik" }, { article: "die", word: "Vorfahrt", tr: "geçiş üstünlüğü" }
+                { article: "das", word: "Kennzeichen", tr: "plaka" }, { article: "der", word: "Reifen", tr: "lastik" }, { article: "die", word: "Vorfahrt", tr: "geçiş üstünlüğü" },
+                { article: "das", word: "Medikament", tr: "ilaç" }, { article: "die", word: "Apotheke", tr: "eczane" }, { article: "das", word: "Rezept", tr: "reçete" },
+                { article: "die", word: "Versicherung", tr: "sigorta" }, { article: "der", word: "Beitrag", tr: "katkı/prim" }, { article: "die", word: "Verletzung", tr: "yaralanma" },
+                { article: "der", word: "Notarzt", tr: "acil doktoru" }, { article: "die", word: "Operation", tr: "ameliyat" }, { article: "das", word: "Symptom", tr: "belirti" },
+                { article: "das", word: "Virus", tr: "virüs" }, { article: "die", word: "Infektion", tr: "enfeksiyon" }, { article: "die", word: "Therapie", tr: "terapi" },
+                { article: "die", word: "Forschung", tr: "araştırma" }, { article: "die", word: "Wissenschaft", tr: "bilim" }, { article: "das", word: "Experiment", tr: "deney" },
+                { article: "der", word: "Beweis", tr: "kanıt" }, { article: "die", word: "Methode", tr: "yöntem" }, { article: "das", word: "Ergebnis", tr: "sonuç" },
+                { article: "die", word: "Analyse", tr: "analiz" }
             ],
             'arena': [
                 { article: "-", word: "löschen", tr: "silmek" }, { article: "das", word: "Netzwerk", tr: "ağ / şebeke" }, { article: "die", word: "Entscheidung", tr: "karar" },
@@ -486,48 +658,79 @@
                 { article: "die", word: "Tradition", tr: "gelenek" }, { article: "das", word: "Werk", tr: "eser/yapıt" }, { article: "das", word: "Publikum", tr: "seyirci/kitle" },
                 { article: "die", word: "Liebesgeschichte", tr: "aşk hikayesi" }, { article: "die", word: "Werbung", tr: "reklam" }, { article: "die", word: "Leistung", tr: "performans" },
                 { article: "das", word: "Risiko", tr: "risk" }, { article: "-", word: "konsumieren", tr: "tüketmek" }, { article: "-", word: "abhängig", tr: "bağımlı" },
-                { article: "der", word: "Eindruck", tr: "izlenim" }, { article: "die", word: "Lektion", tr: "ders" }, { article: "das", word: "Gedicht", tr: "şiir" }
+                { article: "der", word: "Eindruck", tr: "izlenim" }, { article: "die", word: "Lektion", tr: "ders" }, { article: "das", word: "Gedicht", tr: "şiir" },
+                { article: "die", word: "Gesellschaft", tr: "toplum" }, { article: "die", word: "Kultur", tr: "kültür" }, { article: "die", word: "Kunst", tr: "sanat" },
+                { article: "das", word: "Theater", tr: "tiyatro" }, { article: "die", word: "Ausstellung", tr: "sergi" }, { article: "das", word: "Konzert", tr: "konser" },
+                { article: "der", word: "Autor", tr: "yazar" }, { article: "der", word: "Regisseur", tr: "yönetmen" }, { article: "der", word: "Schauspieler", tr: "aktör" },
+                { article: "die", word: "Bühne", tr: "sahne" }, { article: "die", word: "Leinwand", tr: "tuval/perde" }, { article: "der", word: "Zuschauer", tr: "seyirci" },
+                { article: "die", word: "Kritik", tr: "eleştiri" }, { article: "der", word: "Erfolg", tr: "başarı" }, { article: "der", word: "Misserfolg", tr: "başarısızlık" },
+                { article: "die", word: "Medien", tr: "medya" }, { article: "das", word: "Internet", tr: "internet" }, { article: "die", word: "Suchmaschine", tr: "arama motoru" },
+                { article: "das", word: "Profil", tr: "profil" }, { article: "der", word: "Kommentar", tr: "yorum" }, { article: "-", word: "abonnieren", tr: "abone olmak" },
+                { article: "-", word: "teilen", tr: "paylaşmak" }, { article: "-", word: "liken", tr: "beğenmek" }
+            ],
+            // YENİ: GRAMER KÜTÜPHANESİ
+            'gramer': [
+                { type: 'grammar', text: "Ich bleibe zu Hause, ___ es regnet.", options: ["weil", "obwohl", "dass", "wenn"], answer: "weil", tr: "Evde kalıyorum, çünkü yağmur yağıyor." },
+                { type: 'grammar', text: "___ es regnet, gehe ich spazieren.", options: ["Obwohl", "Weil", "Dass", "Wenn"], answer: "Obwohl", tr: "Yağmur yağmasına rağmen, yürüyüşe çıkıyorum." },
+                { type: 'grammar', text: "Ich denke, ___ du recht hast.", options: ["dass", "weil", "obwohl", "als"], answer: "dass", tr: "Bence haklısın." },
+                { type: 'grammar', text: "Das ist der Mann, ___ ich gestern gesehen habe.", options: ["den", "dem", "der", "des"], answer: "den", tr: "Bu dün gördüğüm adam. (Akkusativ)" },
+                { type: 'grammar', text: "Das ist die Frau, ___ ich das Buch gegeben habe.", options: ["der", "die", "dem", "den"], answer: "der", tr: "Bu kitabı verdiğim kadın. (Dativ)" },
+                { type: 'grammar', text: "Ich lege das Buch auf ___ Tisch.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Kitabı masanın üzerine koyuyorum. (Akk. Yönelme)" },
+                { type: 'grammar', text: "Das Buch liegt auf ___ Tisch.", options: ["dem", "den", "der", "das"], answer: "dem", tr: "Kitap masanın üzerinde duruyor. (Dativ Konum)" },
+                { type: 'grammar', text: "Wir fahren ___ die Türkei.", options: ["in", "nach", "zu", "auf"], answer: "in", tr: "Türkiye'ye gidiyoruz. (in die)" },
+                { type: 'grammar', text: "Ich fahre ___ Berlin.", options: ["nach", "in", "zu", "auf"], answer: "nach", tr: "Berlin'e gidiyorum." },
+                { type: 'grammar', text: "Wenn ich reich ___, würde ich ein Haus kaufen.", options: ["wäre", "hätte", "bin", "habe"], answer: "wäre", tr: "Eğer zengin olsaydım, bir ev alırdım. (Konjunktiv II)" },
+                { type: 'grammar', text: "Ich ___ gerne ein Auto.", options: ["hätte", "wäre", "habe", "bin"], answer: "hätte", tr: "Bir arabam olsun isterdim. (Konjunktiv II)" },
+                { type: 'grammar', text: "Das Auto wird von ___ Mechaniker repariert.", options: ["dem", "den", "der", "das"], answer: "dem", tr: "Araba tamirci tarafından tamir ediliyor. (Passiv + von Dativ)" },
+                { type: 'grammar', text: "Er geht ___ Arzt.", options: ["zum", "zur", "nach", "in"], answer: "zum", tr: "Doktora gidiyor." },
+                { type: 'grammar', text: "Sie kommt ___ Apotheke.", options: ["aus der", "aus dem", "von der", "von dem"], answer: "aus der", tr: "Eczaneden geliyor." },
+                { type: 'grammar', text: "Wir interessieren uns ___ Musik.", options: ["für", "an", "über", "auf"], answer: "für", tr: "Müzikle ilgileniyoruz." },
+                { type: 'grammar', text: "Ich freue mich ___ das Geschenk.", options: ["über", "auf", "für", "an"], answer: "über", tr: "Hediye için seviniyorum. (Geçmiş/Şu an)" },
+                { type: 'grammar', text: "Ich freue mich ___ den Urlaub nächste Woche.", options: ["auf", "über", "für", "an"], answer: "auf", tr: "Haftaya tatil için seviniyorum/sabırsızlanıyorum. (Gelecek)" }
             ]
         };
 
-        let stageProgress = { 'b1_1': 0, 'b1_2': 0, 'arena': 0 };
+        // DİYALOGLAR (Genişletildi)
+        const dialoguesData = [
+            {
+                title: "Havalimanında (Am Flughafen)", icon: "ph-airplane-tilt", color: "indigo",
+                a: "Entschuldigung, wissen Sie, wo die <span class='font-bold text-indigo-600'>Gepäckausgabe</span> ist?",
+                b: "Ja, natürlich. Gehen Sie am <span class='font-bold text-teal-600'>Schalter</span> vorbei."
+            },
+            {
+                title: "Çevre (Umweltschutz)", icon: "ph-tree-evergreen", color: "teal",
+                a: "Der <span class='font-bold text-indigo-600'>Klimawandel</span> ist ein großes Problem für die Erde.",
+                b: "Das stimmt. Wir müssen Müll trennen und Plastik vermeiden."
+            },
+            {
+                title: "Parti Planlama (Party planen)", icon: "ph-confetti", color: "amber",
+                a: "Wir sollten eine Überraschungsparty für Anna organisieren. Hast du Lust?",
+                b: "Klar! Ich kann mich um die <span class='font-bold text-teal-600'>Getränke</span> kümmern."
+            },
+            {
+                title: "Doktorda (Beim Arzt)", icon: "ph-first-aid", color: "rose",
+                a: "Guten Tag, Herr Doktor. Ich habe starke <span class='font-bold text-indigo-600'>Kopfschmerzen</span> und Fieber.",
+                b: "Ich verschreibe Ihnen ein <span class='font-bold text-teal-600'>Medikament</span>. Bleiben Sie im Bett."
+            },
+            {
+                title: "Şikayet (Reklamation)", icon: "ph-warning-circle", color: "purple",
+                a: "Entschuldigung, meine Suppe ist leider völlig kalt.",
+                b: "Oh, das tut mir sehr leid. Ich bringe Ihnen sofort eine neue."
+            }
+        ];
+
         let activePathNodes = [];
         let currentPathNodeIndex = 0;
-        
-        let totalXP = 0, hearts = 10, activeStage = null; 
-        let sessionType = 'vocab'; 
+        let activeSessionNodeIdx = 0; 
+        let totalQuestionsAtStart = 0; 
         let sessionQuestions = [];
         let currentQIndex = 0;
         let selectedOptionBtn = null;
         let correctAnswersCount = 0;
         let matchSelections = []; 
 
-        // === BAŞLANGIÇ & GİRİŞ ===
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('loader-progress').style.width = '100%';
-            setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(() => document.getElementById('loader').style.display = 'none', 400);
-            }, 3000);
-        });
-
-        function attemptLogin() {
-            const user = document.getElementById('login-user').value.toLowerCase().trim();
-            const pass = document.getElementById('login-pass').value.toLowerCase().trim();
-            if(user === 'nisan' && pass === 'talha') {
-                document.getElementById('login-error').classList.add('hidden');
-                document.getElementById('side-nav').style.display = '';
-                document.getElementById('main-header').style.display = 'flex';
-                initAudio(); 
-                switchScreen('dashboard');
-                updateTopBar();
-                updateDashboardProgress();
-            } else {
-                document.getElementById('login-error').classList.remove('hidden');
-            }
-        }
-
-        function switchScreen(screenName) {
+        // Ekran ve UI Değiştirme
+        window.switchScreen = function(screenName) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(`screen-${screenName}`).classList.add('active');
             
@@ -536,107 +739,158 @@
             if(navBtn) navBtn.classList.add('active');
 
             const header = document.getElementById('main-header');
-            if(screenName === 'login' || screenName === 'session' || screenName === 'finish') {
+            if(screenName === 'login' || screenName === 'session' || screenName === 'finish' || screenName === 'survey') {
                 header.style.display = 'none';
             } else {
                 header.style.display = 'flex';
                 if(screenName === 'dashboard') {
-                    goBackToStages();
-                    updateDashboardProgress();
+                    window.goBackToStages();
+                    window.updateDashboardProgress();
+                } else if(screenName === 'dialogues') {
+                    renderDialogues();
                 }
             }
+        };
+
+        function renderDialogues() {
+            const container = document.getElementById('dialogues-container');
+            container.innerHTML = '';
+            dialoguesData.forEach(d => {
+                container.innerHTML += `
+                    <div class="bg-white border border-slate-200 rounded-[2rem] p-6 md:p-8 hover:shadow-lg transition-shadow">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <div class="w-10 h-10 bg-${d.color}-100 text-${d.color}-500 rounded-xl flex items-center justify-center"><i class="ph-fill ${d.icon} text-xl"></i></div>
+                            <h3 class="font-black text-lg text-slate-800">${d.title}</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center font-bold text-indigo-600 shrink-0">A</div>
+                                <div class="bg-slate-50 p-4 rounded-2xl rounded-tl-none border border-slate-100 w-full text-slate-700"><p class="text-sm font-medium">${d.a}</p></div>
+                            </div>
+                            <div class="flex gap-4 flex-row-reverse">
+                                <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center font-bold text-teal-600 shrink-0">B</div>
+                                <div class="bg-white p-4 rounded-2xl rounded-tr-none border border-slate-200 w-full text-slate-700 shadow-sm"><p class="text-sm font-medium">${d.b}</p></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
         }
 
-        function openStage(stageId) {
-            activeStage = stageId;
+        window.openStage = function(stageId) {
+            window.activeStage = stageId;
             document.getElementById('view-stage-selection').classList.add('hidden');
-            document.getElementById('view-survey').classList.remove('hidden');
-        }
+            
+            // Eğer gramer seçildiyse hedef bellidir (grammar), sihirbaza gerek yok
+            if(stageId === 'gramer') {
+                window.buildPath('grammar');
+            } else if(window.selectedGoal) {
+                // Önceden bir hedef seçmişse sihirbazı atla
+                window.buildPath(window.selectedGoal);
+            } else {
+                window.switchScreen('survey');
+            }
+        };
 
-        function goBackToStages() {
-            document.getElementById('view-survey').classList.add('hidden');
+        window.goBackToStages = function() {
             document.getElementById('view-learning-path').classList.add('hidden');
             document.getElementById('view-stage-selection').classList.remove('hidden');
-            activeStage = null;
-        }
+            window.activeStage = null;
+        };
 
-        // ================= MEGA HARİTA OLUŞTURUCU (0'dan 100'e) =================
-        function buildPath(choice) {
-            document.getElementById('view-survey').classList.add('hidden');
+        // ================= MEGA HARİTA OLUŞTURUCU =================
+        window.buildPath = function(choice) {
+            if(document.getElementById('screen-survey').classList.contains('active')) {
+                window.switchScreen('dashboard');
+            }
+            
+            document.getElementById('view-stage-selection').classList.add('hidden');
             document.getElementById('view-learning-path').classList.remove('hidden');
 
             const header = document.getElementById('path-header');
             const title = document.getElementById('path-title');
             const subtitle = document.getElementById('path-subtitle');
             
-            let themeColor = '';
-            if(choice === 'artikel') { themeColor = 'bg-red-500 border-red-700'; title.innerText = "Artikel Ustası"; subtitle.innerText = "Sadece isimleri içeren dev artikel kampı."; }
-            else if(choice === 'vocab') { themeColor = 'bg-orange-500 border-orange-700'; title.innerText = "Kelime Avcısı"; subtitle.innerText = "Ezber ve eşleştirme ağırlıklı maraton."; }
-            else if(choice === 'listening') { themeColor = 'bg-blue-500 border-blue-700'; title.innerText = "Keskin Kulaklar"; subtitle.innerText = "Duyduğunu anlama üzerine kurulu uzun yol."; }
-            else if(choice === 'writing') { themeColor = 'bg-purple-500 border-purple-700'; title.innerText = "Kusursuz Yazarlık"; subtitle.innerText = "Hatasız yazım için klavye sınavları."; }
-            else { themeColor = 'bg-green-500 border-green-700'; title.innerText = "Mega Maraton (0-100)"; subtitle.innerText = "Tüm modları kapsayan en uzun ve dengeli yol."; }
+            let themeClass = '';
+            if(choice === 'grammar') { themeClass = 'bg-gradient-to-r from-purple-600 to-purple-800 border-purple-900'; title.innerText = "Gramer Kampı"; subtitle.innerText = "B1 sınavı için en kritik kurallar."; }
+            else if(choice === 'artikel') { themeClass = 'bg-gradient-to-r from-rose-500 to-rose-600 border-rose-700'; title.innerText = "Artikel Ustası"; subtitle.innerText = "Sadece isimleri içeren dev artikel kampı."; }
+            else if(choice === 'vocab') { themeClass = 'bg-gradient-to-r from-amber-500 to-amber-600 border-amber-700'; title.innerText = "Kelime Avcısı"; subtitle.innerText = "Ezber ve eşleştirme ağırlıklı maraton."; }
+            else if(choice === 'listening') { themeClass = 'bg-gradient-to-r from-indigo-500 to-indigo-600 border-indigo-700'; title.innerText = "Keskin Kulaklar"; subtitle.innerText = "Duyduğunu anlama üzerine kurulu uzun yol."; }
+            else if(choice === 'writing') { themeClass = 'bg-gradient-to-r from-purple-500 to-purple-600 border-purple-700'; title.innerText = "Kusursuz Yazarlık"; subtitle.innerText = "Hatasız yazım için klavye sınavları."; }
+            else { themeClass = 'bg-gradient-to-r from-teal-500 to-teal-600 border-teal-700'; title.innerText = "Mega Maraton (0-100)"; subtitle.innerText = "Tüm modları kapsayan en uzun ve dengeli yol."; }
 
-            header.className = `rounded-3xl p-6 text-white shadow-sm mb-6 border-b-4 ${themeColor}`;
+            header.className = `rounded-[2rem] p-8 text-white shadow-lg mb-8 border-b-4 relative overflow-hidden ${themeClass}`;
 
-            // Çok Çok Uzun Mega Nodeler. Soru sayıları (count) yüksek tutuldu!
             let nodes = [];
-            if(choice === 'artikel') {
+            
+            // GRAMER MODU ÖZEL YOL
+            if(choice === 'grammar' || window.activeStage === 'gramer') {
                 nodes = [
-                    {type: 'artikel', count: 30, label: 'Isınma 1', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: 'artikel', count: 50, label: 'Isınma 2', color: 'orange', icon: '<span class="font-black">ART</span>'},
+                    {type: 'grammar', count: 10, label: 'Bağlaçlar 1', color: 'purple', icon: '<i class="ph-fill ph-text-t"></i>'},
+                    {type: 'grammar', count: 15, label: 'Bağlaçlar 2', color: 'indigo', icon: '<i class="ph-fill ph-text-t"></i>'},
+                    {type: 'grammar', count: 20, label: 'İsmin Halleri', color: 'rose', icon: '<i class="ph-fill ph-text-t"></i>'},
+                    {type: 'grammar', count: 25, label: 'Akk. / Dativ', color: 'amber', icon: '<i class="ph-fill ph-text-t"></i>'},
+                    {type: 'grammar', count: 30, label: 'Relativsatz', color: 'teal', icon: '<i class="ph-fill ph-text-t"></i>'},
+                    {type: 'grammar', count: 50, label: 'Mega Sınav', color: 'purple', icon: '<i class="ph-fill ph-crown"></i>'}
+                ];
+                window.activeStage = 'gramer'; // Zorla
+            }
+            else if(choice === 'artikel') {
+                nodes = [
+                    {type: 'artikel', count: 30, label: 'Isınma 1', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
+                    {type: 'artikel', count: 50, label: 'Isınma 2', color: 'amber', icon: '<span class="font-black text-xl">ART</span>'},
                     {type: 'writing', count: 40, label: 'Yazarak Öğren', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
-                    {type: 'artikel', count: 75, label: 'Orta Seviye', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: 'vocab', count: 30, label: 'Kelime Molası', color: 'green', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'artikel', count: 100, label: 'Zorlu Aşama', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: 'matching', count: 10, label: 'Eşleştirme', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'artikel', count: 150, label: 'Dev Sınav', color: 'red', icon: '<span class="font-black">ART</span>'}
+                    {type: 'artikel', count: 75, label: 'Orta Seviye', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
+                    {type: 'vocab', count: 30, label: 'Kelime Molası', color: 'teal', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: 'artikel', count: 100, label: 'Zorlu Aşama', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
+                    {type: 'matching', count: 15, label: 'Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
+                    {type: 'artikel', count: 150, label: 'Dev Sınav', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'}
                 ];
             } else if (choice === 'vocab') {
                 nodes = [
-                    {type: 'flashcards', count: 30, label: 'Kelime Kartları', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
-                    {type: 'matching', count: 10, label: 'Eşleştirme', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'vocab', count: 60, label: 'Okuma Testi 1', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'dictation', count: 40, label: 'Dinle & Yaz', color: 'blue', icon: '<i class="ph-fill ph-waveform"></i>'},
-                    {type: 'vocab', count: 80, label: 'Okuma Testi 2', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'matching', count: 15, label: 'Zor Eşleştirme', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
+                    {type: 'flashcards', count: 40, label: 'Kelime Kartları', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
+                    {type: 'matching', count: 15, label: 'Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
+                    {type: 'vocab', count: 60, label: 'Okuma Testi 1', color: 'amber', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: 'dictation', count: 40, label: 'Dinle & Yaz', color: 'indigo', icon: '<i class="ph-fill ph-waveform"></i>'},
+                    {type: 'vocab', count: 80, label: 'Okuma Testi 2', color: 'amber', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: 'matching', count: 20, label: 'Zor Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
                     {type: 'flashcards', count: 50, label: 'Tekrar', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
-                    {type: 'vocab', count: 150, label: 'Mega Anlam Sınavı', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'}
+                    {type: 'vocab', count: 150, label: 'Mega Anlam Sınavı', color: 'amber', icon: '<i class="ph-fill ph-star"></i>'}
                 ];
             } else if (choice === 'mixed') {
-                // MEGA MARATON (15 AŞAMA)
                 nodes = [
-                    {type: 'flashcards', count: 20, label: 'Başlangıç', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
-                    {type: 'vocab', count: 40, label: 'Temel Anlam', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'artikel', count: 40, label: 'Artikel Testi', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: 'listening', count: 50, label: 'Dinleme', color: 'blue', icon: '<i class="ph-fill ph-headphones"></i>'},
-                    {type: 'matching', count: 10, label: 'Eşleştirme', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
+                    {type: 'flashcards', count: 30, label: 'Başlangıç', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
+                    {type: 'vocab', count: 40, label: 'Temel Anlam', color: 'amber', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: 'artikel', count: 40, label: 'Artikel Testi', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
+                    {type: 'listening', count: 50, label: 'Dinleme', color: 'indigo', icon: '<i class="ph-fill ph-headphones"></i>'},
+                    {type: 'matching', count: 10, label: 'Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
                     {type: 'writing', count: 40, label: 'Yazma Sınavı', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
-                    {type: 'dictation', count: 30, label: 'Dinle & Yaz', color: 'blue', icon: '<i class="ph-fill ph-waveform"></i>'},
-                    {type: 'vocab', count: 60, label: 'Orta Test', color: 'green', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'artikel', count: 60, label: 'Hafıza Testi', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: 'listening', count: 60, label: 'İleri Dinleme', color: 'blue', icon: '<i class="ph-fill ph-headphones"></i>'},
-                    {type: 'matching', count: 15, label: 'Zor Eşleştir', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'flashcards', count: 30, label: 'Son Tekrar', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
+                    {type: 'dictation', count: 30, label: 'Dinle & Yaz', color: 'indigo', icon: '<i class="ph-fill ph-waveform"></i>'},
+                    {type: 'vocab', count: 60, label: 'Orta Test', color: 'teal', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: 'artikel', count: 60, label: 'Hafıza Testi', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
+                    {type: 'listening', count: 60, label: 'İleri Dinleme', color: 'indigo', icon: '<i class="ph-fill ph-headphones"></i>'},
+                    {type: 'matching', count: 15, label: 'Zor Eşleştir', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
+                    {type: 'flashcards', count: 40, label: 'Son Tekrar', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
                     {type: 'writing', count: 50, label: 'İleri Yazma', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
-                    {type: 'dictation', count: 40, label: 'Zor Dikte', color: 'blue', icon: '<i class="ph-fill ph-waveform"></i>'},
-                    {type: 'vocab', count: 150, label: 'Mega B1 Boss', color: 'yellow', icon: '<i class="ph-fill ph-crown"></i>'}
+                    {type: 'dictation', count: 50, label: 'Zor Dikte', color: 'indigo', icon: '<i class="ph-fill ph-waveform"></i>'},
+                    {type: 'vocab', count: 200, label: 'Mega B1 Boss', color: 'amber', icon: '<i class="ph-fill ph-crown"></i>'}
                 ];
             } else {
                 nodes = [
-                    {type: choice, count: 40, label: 'Isınma', color: 'blue', icon: '<i class="ph-fill ph-rocket"></i>'},
-                    {type: 'matching', count: 10, label: 'Eşleştirme', color: 'yellow', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
+                    {type: choice, count: 40, label: 'Isınma', color: 'indigo', icon: '<i class="ph-fill ph-rocket"></i>'},
+                    {type: 'matching', count: 10, label: 'Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
                     {type: 'dictation', count: 30, label: 'Dinle & Yaz', color: 'purple', icon: '<i class="ph-fill ph-waveform"></i>'},
-                    {type: choice, count: 60, label: 'Gelişme', color: 'blue', icon: '<i class="ph-fill ph-rocket"></i>'},
-                    {type: 'vocab', count: 40, label: 'Kelime Testi', color: 'orange', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: choice, count: 80, label: 'Zorlu Bölüm', color: 'blue', icon: '<i class="ph-fill ph-rocket"></i>'},
-                    {type: 'artikel', count: 50, label: 'Artikel', color: 'red', icon: '<span class="font-black">ART</span>'},
-                    {type: choice, count: 120, label: 'Final Sınavı', color: 'green', icon: '<i class="ph-fill ph-flag-checkered"></i>'}
+                    {type: choice, count: 60, label: 'Gelişme', color: 'indigo', icon: '<i class="ph-fill ph-rocket"></i>'},
+                    {type: 'vocab', count: 40, label: 'Kelime Testi', color: 'amber', icon: '<i class="ph-fill ph-star"></i>'},
+                    {type: choice, count: 80, label: 'Zorlu Bölüm', color: 'indigo', icon: '<i class="ph-fill ph-rocket"></i>'},
+                    {type: 'artikel', count: 50, label: 'Artikel', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
+                    {type: choice, count: 150, label: 'Final Sınavı', color: 'teal', icon: '<i class="ph-fill ph-flag-checkered"></i>'}
                 ];
             }
 
             activePathNodes = nodes.map(n => ({...n, completed: false}));
             
-            let currentPct = stageProgress[activeStage];
+            let currentPct = window.stageProgress[window.activeStage];
             let completedCount = Math.floor((currentPct / 100) * activePathNodes.length);
             for(let i=0; i<completedCount; i++) {
                 if(activePathNodes[i]) activePathNodes[i].completed = true;
@@ -645,29 +899,23 @@
             currentPathNodeIndex = activePathNodes.findIndex(n => !n.completed);
             if(currentPathNodeIndex === -1) currentPathNodeIndex = activePathNodes.length - 1; 
 
-            renderDynamicPath();
-            updatePathProgressUI();
-        }
+            window.renderDynamicPath();
+            window.updatePathProgressUI();
+        };
 
-        function renderDynamicPath() {
+        window.renderDynamicPath = function() {
             const container = document.getElementById('path-nodes-container');
-            let html = `<div class="absolute w-4 bg-[#e5e5e5] top-10 bottom-10 -z-10 rounded-full shadow-inner"></div>`;
+            let html = `<div class="absolute w-4 bg-slate-200 top-10 bottom-10 -z-10 rounded-full shadow-inner"></div>`;
             
-            const positions = ['-translate-x-16', 'translate-x-0', 'translate-x-16', 'translate-x-0'];
+            const positions = ['-translate-x-12 md:-translate-x-16', 'translate-x-0', 'translate-x-12 md:translate-x-16', 'translate-x-0'];
 
             activePathNodes.forEach((node, idx) => {
                 let posClass = positions[idx % 4];
                 
-                let btnStyle = '';
-                if(node.color === 'red') btnStyle = 'background: #ff4b4b; border-color: #ea2b2b; color: white;';
-                if(node.color === 'orange') btnStyle = 'background: #ff9600; border-color: #e58700; color: white;';
-                if(node.color === 'blue') btnStyle = 'background: #1cb0f6; border-color: #1899d6; color: white;';
-                if(node.color === 'purple') btnStyle = 'background: #ce82ff; border-color: #a552db; color: white;';
-                if(node.color === 'green') btnStyle = 'background: #58cc02; border-color: #58a700; color: white;';
-                if(node.color === 'yellow') btnStyle = 'background: #ffc800; border-color: #e5b400; color: white;';
-
+                let btnClassStr = `btn-${node.color}`;
+                
                 let isBoss = (idx === activePathNodes.length - 1);
-                let btnClass = isBoss ? 'w-24 h-24 text-4xl' : 'w-20 h-20 text-3xl';
+                let btnSize = isBoss ? 'w-20 h-20 md:w-24 md:h-24 text-3xl md:text-4xl' : 'w-16 h-16 md:w-20 md:h-20 text-2xl md:text-3xl';
                 let bounceClass = '';
                 
                 let stateClass = '';
@@ -680,19 +928,19 @@
                 } else if (idx > currentPathNodeIndex) {
                     stateClass = 'node-locked'; 
                     clickAction = '';
-                    displayIcon = '<i class="ph-bold ph-lock-key text-gray-500"></i>';
-                    btnStyle = 'background: #e5e5e5; border-color: #cecece; color: #afafaf;';
+                    displayIcon = '<i class="ph-bold ph-lock-key text-slate-400"></i>';
+                    btnClassStr = 'bg-slate-200 border-slate-300 text-slate-400';
                 } else if (idx === currentPathNodeIndex) {
-                    bounceClass = 'animate-bounce border-white border-[4px] ring-4 ring-blue-300'; 
+                    bounceClass = 'animate-bounce border-white border-[4px] ring-4 ring-indigo-200 shadow-xl'; 
                 }
 
                 html += `
                     <div class="relative w-full flex justify-center mb-8">
                         <div class="flex flex-col items-center transform ${posClass} transition-transform hover:scale-105">
-                            <div class="bg-white border-2 border-gray-200 text-gray-700 font-extrabold px-5 py-2 rounded-2xl shadow-sm text-sm mb-3 text-center z-10 w-32">
-                                ${node.label}<br><span class="text-xs text-gray-400 font-bold">${node.count} Soru</span>
+                            <div class="bg-white border border-slate-200 text-slate-700 font-bold px-4 md:px-5 py-2 rounded-[1rem] shadow-sm text-[11px] md:text-sm mb-3 text-center z-10 w-28 md:w-32">
+                                ${node.label}<br><span class="text-[10px] md:text-xs text-indigo-400 font-extrabold uppercase">${node.count} Soru</span>
                             </div>
-                            <button onclick="${clickAction}" class="duo-btn ${btnClass} rounded-full shadow-lg ${bounceClass} ${stateClass}" style="${btnStyle}">
+                            <button onclick="${clickAction}" class="app-btn ${btnSize} rounded-[1.2rem] md:rounded-[1.5rem] shadow-md ${bounceClass} ${stateClass} ${btnClassStr}">
                                 ${displayIcon}
                             </button>
                         </div>
@@ -700,62 +948,64 @@
                 `;
             });
             container.innerHTML = html;
-        }
+        };
 
-        function updatePathProgressUI() {
+        window.updatePathProgressUI = function() {
             let pct = Math.floor((currentPathNodeIndex / activePathNodes.length) * 100);
             if (activePathNodes.every(n => n.completed)) pct = 100;
             
             document.getElementById('path-main-progress').style.width = `${pct}%`;
             document.getElementById('path-main-pct').innerText = pct;
-            stageProgress[activeStage] = pct;
-        }
+            window.stageProgress[window.activeStage] = pct;
+            window.saveProgress();
+        };
 
-        function updateDashboardProgress() {
-            const keys = ['arena', 'b1_1', 'b1_2'];
+        window.updateDashboardProgress = function() {
+            const keys = ['arena', 'b1_1', 'b1_2', 'gramer'];
             keys.forEach(k => {
                 let bar = document.getElementById(`prog-bar-${k}`);
-                if(bar) bar.style.width = `${stageProgress[k]}%`;
+                if(bar) bar.style.width = `${window.stageProgress[k]}%`;
                 let pctTxt = document.getElementById(`pct-${k}`);
-                if(pctTxt) pctTxt.innerText = stageProgress[k];
+                if(pctTxt) pctTxt.innerText = window.stageProgress[k];
             });
-        }
+        };
 
-        function updateTopBar() {
-            document.getElementById('xp-counter').innerText = totalXP;
-            document.getElementById('profile-xp').innerText = totalXP;
-            document.getElementById('hearts-counter').innerText = hearts;
-            document.getElementById('session-hearts').innerText = hearts;
-        }
+        window.updateTopBar = function() {
+            document.getElementById('xp-counter').innerText = window.totalXP;
+            document.getElementById('profile-xp').innerText = window.totalXP;
+            document.getElementById('hearts-counter').innerText = window.hearts;
+            document.getElementById('session-hearts').innerText = window.hearts;
+        };
 
         // ================= KARAKTER DİYALOG YÖNETİMİ =================
-        function setAvatars(mode) {
+        window.setAvatars = function(mode) {
             const nisanImg = document.getElementById('nisan-avatar');
             const nisanBubble = document.getElementById('nisan-bubble');
             const talhaImg = document.getElementById('talha-avatar');
             const talhaBubble = document.getElementById('talha-bubble');
 
-            setImgSrc(nisanImg, "assets/nisan.png", "Nisan", "ff9600");
-            nisanImg.className = "w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-orange-200 object-cover bg-white shadow-md z-10";
+            window.setImgSrc(nisanImg, "assets/nisan.png", "Nisan", "f59e0b");
+            nisanImg.className = "w-14 h-14 md:w-20 md:h-20 rounded-full border-[3px] md:border-4 border-amber-200 object-cover bg-white shadow-md z-10";
             
-            setImgSrc(talhaImg, "assets/talhaarkaplansiz.png", "Talha", "1cb0f6");
-            talhaImg.className = "w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-blue-200 object-cover bg-white shadow-md z-10 anim-talk";
+            window.setImgSrc(talhaImg, "assets/talhaarkaplansiz.png", "Talha", "6366f1");
+            talhaImg.className = "w-14 h-14 md:w-20 md:h-20 rounded-full border-[3px] md:border-4 border-indigo-200 object-cover bg-white shadow-md z-10 anim-talk";
             
             setTimeout(() => { talhaImg.classList.remove('anim-talk'); }, 2000); 
 
-            if(mode === 'flashcards') { talhaBubble.innerText = "Dinle ve ezberle bebeğim!"; }
+            if(mode === 'grammar') { talhaBubble.innerText = "Kuralları hatırlayalım!"; }
+            else if(mode === 'flashcards') { talhaBubble.innerText = "Dinle ve ezberle bebeğim!"; }
             else if(mode === 'listening') { talhaBubble.innerText = "Ne duyduğunu anladın mı?"; }
             else if(mode === 'writing') { talhaBubble.innerText = "Hadi, hatasız yaz bakalım!"; }
-            else if(mode === 'dictation') { talhaBubble.innerText = "Duyduğunu kelimesi kelimesine yaz!"; }
-            else if(mode === 'matching') { talhaBubble.innerText = "Hepsini doğru eşleştirebilecek misin?"; }
+            else if(mode === 'dictation') { talhaBubble.innerText = "Duyduğunu tam olarak yaz!"; }
+            else if(mode === 'matching') { talhaBubble.innerText = "Çiftleri doğru eşleştirebilecek misin?"; }
             else if(mode === 'artikel') { talhaBubble.innerText = "Der mi, Die mi, Das mı?"; }
             else { talhaBubble.innerText = "Bunun anlamı nedir hayatım?"; }
 
-            const nisanThoughts = ["Hımm, düşünüyoruum...", "Bunu biliyorum galiba!", "Biraz zor gibi ama yaparım!", "Odaklanmam lazım..."];
+            const nisanThoughts = ["Hımm, düşünüyoruum...", "Bunu biliyorum galiba!", "Odaklanmam lazım...", "Hallettim say!"];
             nisanBubble.innerText = nisanThoughts[Math.floor(Math.random() * nisanThoughts.length)];
-        }
+        };
 
-        function reactNisan(isCorrect) {
+        window.reactNisan = function(isCorrect) {
             const nisanImg = document.getElementById('nisan-avatar');
             const nisanBubble = document.getElementById('nisan-bubble');
             
@@ -763,55 +1013,53 @@
             void nisanImg.offsetWidth; 
 
             if(isCorrect) {
-                setImgSrc(nisanImg, "assets/nisanmutlu.png", "Mutlu", "58cc02");
+                window.setImgSrc(nisanImg, "assets/nisanmutlu.png", "Mutlu", "14b8a6");
                 nisanImg.classList.add('anim-happy');
                 const happyTexts = ["İşte bu kadar!", "Bildiim! 😎", "Çok kolaydı sevgilim!", "Bana mısın demem!"];
                 nisanBubble.innerText = happyTexts[Math.floor(Math.random() * happyTexts.length)];
             } else {
-                setImgSrc(nisanImg, "assets/nisanuzuluyor.png", "Uzgun", "ea2b2b");
+                window.setImgSrc(nisanImg, "assets/nisanuzuluyor.png", "Uzgun", "f43f5e");
                 nisanImg.classList.add('anim-sad');
                 const sadTexts = ["Tüh ya, nasıl kaçırdım...", "Off, yanlış oldu 😔", "Bir dahakine bileceğim!", "Aklım karıştı..."];
                 nisanBubble.innerText = sadTexts[Math.floor(Math.random() * sadTexts.length)];
             }
-        }
-
+        };
 
         // ================= OYUN/EĞİTİM MOTORU =================
-        let activeSessionNodeIdx = 0; 
-        // Dynamic Question Array for Spaced Repetition (Wrong answers are appended)
-        let totalQuestionsAtStart = 0; 
-
-        function startSession(type, count, nodeIdx) {
-            if(hearts <= 0) {
-                alert("Canın bitti! Maratonu tamamlaman için sana 10 can daha!"); 
-                hearts = 10; 
-                updateTopBar();
+        window.startSession = function(type, count, nodeIdx) {
+            if(window.hearts <= 0) {
+                alert("Canın bitti! Devam etmen için sana ekstra can veriyorum."); 
+                window.hearts = 10; 
+                window.updateTopBar();
+                window.saveProgress();
             }
             sessionType = type;
             activeSessionNodeIdx = nodeIdx;
             sessionQuestions = generateQuestions(type, count); 
-            totalQuestionsAtStart = sessionQuestions.length; // For accurate progress %
+            totalQuestionsAtStart = sessionQuestions.length; 
             currentQIndex = 0;
             correctAnswersCount = 0;
             
-            updateProgressBar();
-            switchScreen('session');
-            loadQuestion();
-        }
+            window.updateProgressBar();
+            window.switchScreen('session');
+            window.loadQuestion();
+        };
 
-        function quitSession() {
+        window.quitSession = function() {
             window.speechSynthesis.cancel();
-            switchScreen('dashboard');
+            window.switchScreen('dashboard');
             document.getElementById('view-stage-selection').classList.add('hidden');
             document.getElementById('view-survey').classList.add('hidden');
             document.getElementById('view-learning-path').classList.remove('hidden');
-        }
+        };
 
         function generateQuestions(type, amount) {
             let questions = [];
-            let activePoolData = db[activeStage] || db['b1_1']; 
+            let activePoolData = dbContent[window.activeStage] || dbContent['b1_1']; 
             
-            if(type === 'artikel' || type === 'writing') {
+            if(type === 'grammar') {
+                activePoolData = dbContent['gramer'];
+            } else if(type === 'artikel' || type === 'writing') {
                 activePoolData = activePoolData.filter(item => item.article !== '-');
             }
 
@@ -825,7 +1073,7 @@
             return questions;
         }
 
-        function loadQuestion() {
+        window.loadQuestion = function() {
             selectedOptionBtn = null;
             matchSelections = [];
             document.getElementById('btn-check').disabled = true;
@@ -837,37 +1085,65 @@
             content.innerHTML = ''; 
 
             let mode = sessionType;
-            setAvatars(mode);
+            window.setAvatars(mode);
+
+            // --- 0. GRAMER ---
+            if(mode === 'grammar') {
+                document.getElementById('btn-check').innerText = "Kontrol Et";
+                let textParts = q.text.split('___');
+                
+                content.innerHTML = `
+                    <div class="w-full flex items-center gap-4 mb-8 mt-4">
+                        <div class="border border-slate-200 rounded-[2rem] p-6 text-center w-full relative bg-slate-50 shadow-inner">
+                            <span class="text-2xl md:text-3xl font-black text-slate-800 tracking-tight leading-relaxed">
+                                ${textParts[0]}<span class="text-indigo-500 underline decoration-4 underline-offset-4">_____</span>${textParts[1]}
+                            </span>
+                        </div>
+                    </div>
+                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full"></div>
+                `;
+                
+                const grid = document.getElementById('options-grid');
+                let opts = [...q.options].sort(() => Math.random() - 0.5);
+                opts.forEach(opt => {
+                    let btn = document.createElement('button');
+                    btn.className = "opt-btn py-4 px-4 w-full flex items-center justify-center text-center text-sm md:text-base";
+                    btn.innerText = opt;
+                    btn.dataset.correct = (opt === q.answer);
+                    btn.onclick = () => window.selectOption(btn);
+                    grid.appendChild(btn);
+                });
+            }
 
             // --- 1. EZBER (FLASHCARDS) ---
-            if(mode === 'flashcards') {
+            else if(mode === 'flashcards') {
                 document.getElementById('btn-check').innerText = "Sonraki";
                 document.getElementById('btn-check').disabled = false;
                 content.innerHTML = `
-                    <div class="bg-white border-2 border-gray-200 rounded-3xl p-8 w-full text-center shadow-lg transform transition-transform hover:scale-105 mt-4">
-                        <button onclick="speakWord('${q.word}')" class="mb-6 w-20 h-20 bg-blue-100 text-blue-500 rounded-full text-4xl mx-auto flex items-center justify-center speaker-btn border-b-4 border-blue-300 active:border-b-0 active:translate-y-1">
+                    <div class="bg-white border border-slate-200 rounded-[2rem] p-8 w-full text-center shadow-md transform transition-transform hover:-translate-y-1 mt-4">
+                        <button onclick="speakWord('${q.word}')" class="mb-6 w-20 h-20 bg-indigo-50 text-indigo-500 rounded-full text-4xl mx-auto flex items-center justify-center speaker-btn border border-indigo-100 shadow-sm active:translate-y-1">
                             <i class="ph-fill ph-speaker-high"></i>
                         </button>
-                        <p class="text-xl font-bold uppercase tracking-widest text-gray-400 mb-2">${q.article === '-' ? '' : q.article}</p>
-                        <h2 class="text-5xl font-black text-gray-800 mb-8">${q.word}</h2>
-                        <div class="border-t-2 border-dashed border-gray-200 pt-6">
-                            <p class="text-2xl font-bold text-[#58cc02]">${q.tr}</p>
+                        <p class="text-lg font-extrabold uppercase tracking-widest text-slate-400 mb-1">${q.article === '-' ? '' : q.article}</p>
+                        <h2 class="text-4xl md:text-5xl font-black text-slate-800 mb-8 tracking-tight">${q.word}</h2>
+                        <div class="border-t-2 border-dashed border-slate-100 pt-6">
+                            <p class="text-2xl font-bold text-teal-600">${q.tr}</p>
                         </div>
                     </div>
                 `;
-                speakWord(q.word);
+                window.speakWord(q.word);
             }
 
             // --- 2. DINLEME (LISTENING) ---
             else if(mode === 'listening') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 content.innerHTML = `
-                    <button onclick="speakWord('${q.word}')" class="mt-4 mb-8 w-24 h-24 bg-blue-500 text-white rounded-full text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-blue-500/50 active:translate-y-1">
+                    <button onclick="speakWord('${q.word}')" class="mt-4 mb-8 w-20 h-20 md:w-24 md:h-24 bg-indigo-500 text-white rounded-full text-4xl md:text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-indigo-500/40 active:translate-y-1">
                         <i class="ph-fill ph-speaker-high"></i>
                     </button>
-                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full"></div>
+                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full"></div>
                 `;
-                speakWord(q.word);
+                window.speakWord(q.word);
                 generateOptions(q, 'options-grid');
             }
 
@@ -877,33 +1153,33 @@
                 document.getElementById('btn-check').disabled = false; 
                 content.innerHTML = `
                     <div class="w-full flex items-center gap-4 mb-8 mt-4">
-                        <div class="border-2 border-gray-200 rounded-3xl p-6 text-center w-full relative bg-gray-50 shadow-inner">
-                            <span class="text-2xl sm:text-3xl font-black text-gray-800">${q.tr}</span>
+                        <div class="border border-slate-200 rounded-[2rem] p-6 text-center w-full relative bg-slate-50 shadow-inner">
+                            <span class="text-2xl sm:text-3xl font-black text-slate-800">${q.tr}</span>
                         </div>
                     </div>
                     <div class="w-full relative">
-                        <input type="text" id="write-input" placeholder="Artikel ile birlikte (Örn: der Tisch)" autocomplete="off" autocorrect="off" class="w-full border-2 border-gray-200 border-b-4 rounded-2xl px-6 py-6 font-bold text-gray-800 outline-none focus:border-[#1cb0f6] bg-white text-xl sm:text-2xl text-center shadow-sm">
+                        <input type="text" id="write-input" placeholder="Artikel ile birlikte (Örn: der Tisch)" autocomplete="off" autocorrect="off" class="w-full border-2 border-slate-200 border-b-4 rounded-[1.5rem] px-6 py-5 font-bold text-slate-800 outline-none focus:border-indigo-400 bg-white text-xl sm:text-2xl text-center shadow-sm transition-colors">
                     </div>
                 `;
                 setTimeout(() => document.getElementById('write-input').focus(), 100);
-                document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') checkAnswer(); });
+                document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') window.checkAnswer(); });
             }
 
-            // --- 4. DİNLE & YAZ (DICTATION - YENİ MOD) ---
+            // --- 4. DİNLE & YAZ (DICTATION) ---
             else if(mode === 'dictation') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 document.getElementById('btn-check').disabled = false; 
                 content.innerHTML = `
-                    <button onclick="speakWord('${q.word}')" class="mt-4 mb-8 w-24 h-24 bg-purple-500 text-white rounded-full text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-purple-500/50 active:translate-y-1">
+                    <button onclick="speakWord('${q.word}')" class="mt-4 mb-8 w-20 h-20 md:w-24 md:h-24 bg-purple-500 text-white rounded-full text-4xl md:text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-purple-500/40 active:translate-y-1">
                         <i class="ph-fill ph-waveform"></i>
                     </button>
                     <div class="w-full relative">
-                        <input type="text" id="write-input" placeholder="Duyduğun kelimeyi yaz" autocomplete="off" autocorrect="off" class="w-full border-2 border-gray-200 border-b-4 rounded-2xl px-6 py-6 font-bold text-gray-800 outline-none focus:border-[#1cb0f6] bg-white text-xl sm:text-2xl text-center shadow-sm">
+                        <input type="text" id="write-input" placeholder="Duyduğun kelimeyi yaz" autocomplete="off" autocorrect="off" class="w-full border-2 border-slate-200 border-b-4 rounded-[1.5rem] px-6 py-5 font-bold text-slate-800 outline-none focus:border-indigo-400 bg-white text-xl sm:text-2xl text-center shadow-sm transition-colors">
                     </div>
                 `;
-                speakWord(q.word);
+                window.speakWord(q.word);
                 setTimeout(() => document.getElementById('write-input').focus(), 100);
-                document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') checkAnswer(); });
+                document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') window.checkAnswer(); });
             }
 
             // --- 5. EŞLEŞTİRME (MATCHING) ---
@@ -911,7 +1187,7 @@
                 document.getElementById('btn-check').classList.add('hidden'); 
                 
                 let pairs = [q];
-                let pool = db[activeStage] || db['b1_1'];
+                let pool = dbContent[window.activeStage] || dbContent['b1_1'];
                 while(pairs.length < 4) {
                     let w = pool[Math.floor(Math.random() * pool.length)];
                     if(!pairs.includes(w)) pairs.push(w);
@@ -920,12 +1196,12 @@
                 let buttonsHTML = [];
                 pairs.forEach((p, idx) => {
                     let dispWord = p.article === '-' ? p.word : `${p.article} ${p.word}`;
-                    buttonsHTML.push(`<button onclick="selectMatch(this, 'de', ${idx})" class="opt-btn py-4 px-2 w-full text-center text-sm sm:text-lg shadow-sm">${dispWord}</button>`);
-                    buttonsHTML.push(`<button onclick="selectMatch(this, 'tr', ${idx})" class="opt-btn py-4 px-2 w-full text-center text-sm sm:text-lg shadow-sm">${p.tr}</button>`);
+                    buttonsHTML.push(`<button onclick="selectMatch(this, 'de', ${idx})" class="opt-btn py-3 md:py-4 px-2 w-full text-center text-sm sm:text-base font-bold shadow-sm">${dispWord}</button>`);
+                    buttonsHTML.push(`<button onclick="selectMatch(this, 'tr', ${idx})" class="opt-btn py-3 md:py-4 px-2 w-full text-center text-sm sm:text-base font-bold shadow-sm">${p.tr}</button>`);
                 });
                 
                 buttonsHTML.sort(() => Math.random() - 0.5);
-                content.innerHTML += `<div class="grid grid-cols-2 gap-4 w-full mt-4" id="matching-grid">${buttonsHTML.join('')}</div>`;
+                content.innerHTML += `<div class="grid grid-cols-2 gap-3 md:gap-4 w-full mt-2" id="matching-grid">${buttonsHTML.join('')}</div>`;
                 content.dataset.pairsFound = 0;
             }
 
@@ -933,22 +1209,22 @@
             else if(mode === 'artikel') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 content.innerHTML = `
-                    <div class="w-full flex flex-col items-center mb-8 mt-4">
-                        <span class="text-xl font-bold uppercase tracking-widest text-gray-400 block mb-2">___</span>
-                        <span class="text-4xl md:text-5xl font-black text-gray-800 text-center">${q.word}</span>
-                        <span class="text-lg font-bold text-[#1cb0f6] mt-4 bg-blue-50 px-4 py-1 rounded-full">${q.tr}</span>
+                    <div class="w-full flex flex-col items-center mb-8 mt-4 bg-white border border-slate-100 rounded-[2rem] p-6 shadow-sm">
+                        <span class="text-xl font-bold uppercase tracking-widest text-slate-300 block mb-1">___</span>
+                        <span class="text-3xl md:text-5xl font-black text-slate-800 text-center tracking-tight">${q.word}</span>
+                        <span class="text-sm md:text-base font-bold text-indigo-500 mt-4 bg-indigo-50 border border-indigo-100 px-4 py-1.5 rounded-full">${q.tr}</span>
                     </div>
-                    <div id="options-grid" class="grid grid-cols-3 gap-4 w-full"></div>
+                    <div id="options-grid" class="grid grid-cols-3 gap-3 md:gap-4 w-full"></div>
                 `;
                 
                 const artikels = ['der', 'die', 'das'];
                 const grid = document.getElementById('options-grid');
                 artikels.forEach(art => {
                     let btn = document.createElement('button');
-                    btn.className = "opt-btn py-8 px-2 w-full text-2xl sm:text-3xl font-black uppercase tracking-wider text-center";
+                    btn.className = "opt-btn py-6 md:py-8 px-2 w-full text-xl sm:text-2xl font-black uppercase tracking-wider text-center";
                     btn.innerText = art;
                     btn.dataset.correct = (art === q.article);
-                    btn.onclick = () => selectOption(btn);
+                    btn.onclick = () => window.selectOption(btn);
                     grid.appendChild(btn);
                 });
             }
@@ -956,27 +1232,26 @@
             // --- 7. KLASİK VOCAB (OKUMA/ANLAM) ---
             else {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
-                let dispArticle = q.article === '-' ? '' : `<span class="text-xl font-bold uppercase tracking-widest text-gray-400 block mb-1">${q.article}</span>`;
+                let dispArticle = q.article === '-' ? '' : `<span class="text-sm md:text-base font-bold uppercase tracking-[0.2em] text-slate-400 block mb-1">${q.article}</span>`;
                 content.innerHTML = `
                     <div class="w-full flex items-center gap-4 mb-8 mt-4">
-                        <div class="border-2 border-gray-200 rounded-2xl p-6 text-center w-full relative bg-gray-50 shadow-sm">
+                        <div class="border border-slate-200 rounded-[2rem] p-6 text-center w-full relative bg-slate-50 shadow-inner">
                             ${dispArticle}
-                            <span class="text-3xl md:text-4xl font-black text-gray-800">${q.word}</span>
+                            <span class="text-2xl md:text-4xl font-black text-slate-800 tracking-tight">${q.word}</span>
                         </div>
-                        <button onclick="speakWord('${q.word}')" class="w-16 h-16 bg-blue-100 text-blue-500 rounded-full text-2xl flex items-center justify-center shrink-0 border-b-4 border-blue-200 active:border-b-0 active:translate-y-1">
+                        <button onclick="speakWord('${q.word}')" class="w-14 h-14 md:w-16 md:h-16 bg-indigo-100 text-indigo-500 rounded-[1rem] md:rounded-[1.2rem] text-2xl flex items-center justify-center shrink-0 border border-indigo-200 active:translate-y-1 transition-transform">
                             <i class="ph-fill ph-speaker-high"></i>
                         </button>
                     </div>
-                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full"></div>
+                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full"></div>
                 `;
                 generateOptions(q, 'options-grid');
             }
-        }
+        };
 
-        // Seçenekleri oluşturma yardımcısı
         function generateOptions(q, gridId) {
             let options = [q];
-            let pool = db[activeStage] || db['b1_1'];
+            let pool = dbContent[window.activeStage] || dbContent['b1_1'];
             while(options.length < 4) {
                 let w = pool[Math.floor(Math.random() * pool.length)];
                 if(!options.includes(w)) options.push(w);
@@ -985,23 +1260,22 @@
             const grid = document.getElementById(gridId);
             options.forEach(opt => {
                 let btn = document.createElement('button');
-                btn.className = "opt-btn py-4 px-4 w-full flex items-center justify-center text-center";
+                btn.className = "opt-btn py-3 md:py-4 px-4 w-full flex items-center justify-center text-center text-sm md:text-base";
                 btn.innerText = opt.tr;
                 btn.dataset.correct = (opt === q);
-                btn.onclick = () => { selectOption(btn); if(sessionType === 'listening') speakWord(opt.word); };
+                btn.onclick = () => { window.selectOption(btn); if(sessionType === 'listening') window.speakWord(opt.word); };
                 grid.appendChild(btn);
             });
         }
 
-        // ================= SEÇİM & KONTROL MANTIĞI =================
-        function selectOption(btn) {
+        window.selectOption = function(btn) {
             document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
             selectedOptionBtn = btn;
             document.getElementById('btn-check').disabled = false;
-        }
+        };
 
-        function selectMatch(btn, lang, id) {
+        window.selectMatch = function(btn, lang, id) {
             if(btn.disabled || btn.classList.contains('correct')) return;
             if(btn.classList.contains('selected')) { btn.classList.remove('selected'); matchSelections = []; return; }
 
@@ -1014,41 +1288,40 @@
                 if(first.lang !== second.lang && first.id === second.id) {
                     first.btn.classList.replace('selected', 'correct'); second.btn.classList.replace('selected', 'correct');
                     first.btn.disabled = true; second.btn.disabled = true;
-                    playCorrectSound();
+                    window.playCorrectSound();
                     
                     let content = document.getElementById('session-content');
                     content.dataset.pairsFound = parseInt(content.dataset.pairsFound) + 1;
                     
                     if(parseInt(content.dataset.pairsFound) === 4) {
-                        correctAnswersCount++; reactNisan(true); 
+                        correctAnswersCount++; window.reactNisan(true); 
                         setTimeout(() => showFeedback(true, "Harika Eşleştirme!", ""), 800);
                     } else {
-                        reactNisan(true); setTimeout(() => setAvatars(sessionType), 1000); 
+                        window.reactNisan(true); setTimeout(() => window.setAvatars(sessionType), 1000); 
                     }
                 } else {
                     first.btn.classList.replace('selected', 'wrong'); second.btn.classList.replace('selected', 'wrong');
-                    playWrongSound(); reactNisan(false); 
-                    hearts--; updateTopBar();
+                    window.playWrongSound(); window.reactNisan(false); 
+                    window.hearts--; window.updateTopBar(); window.saveProgress();
                     
-                    // Eşleştirmede de yanlış yaparsa, o soruyu listenin sonuna ekle (SPACED REPETITION)
-                    sessionQuestions.push(sessionQuestions[currentQIndex]);
+                    sessionQuestions.push(sessionQuestions[currentQIndex]); // Spaced Repetition
                     
                     setTimeout(() => {
                         first.btn.classList.remove('wrong'); second.btn.classList.remove('wrong');
-                        if(hearts <= 0) { alert("Canın bitti!"); quitSession(); }
-                        else { setAvatars(sessionType); } 
+                        if(window.hearts <= 0) { alert("Canın bitti!"); window.quitSession(); }
+                        else { window.setAvatars(sessionType); } 
                     }, 800);
                 }
                 matchSelections = [];
             }
-        }
+        };
 
-        function checkAnswer() {
+        window.checkAnswer = function() {
             let mode = sessionType;
             let q = sessionQuestions[currentQIndex];
 
             if(mode === 'flashcards') {
-                correctAnswersCount++; nextQuestion(); return;
+                correctAnswersCount++; window.nextQuestion(); return;
             }
 
             if(mode === 'writing' || mode === 'dictation') {
@@ -1064,14 +1337,13 @@
                 else if(userText === expectedWithArticle || userText === expectedWordOnly) isCorrectStr = true;
 
                 if(isCorrectStr) {
-                    correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                    correctAnswersCount++; window.playCorrectSound(); window.reactNisan(true);
                     showFeedback(true, "Harika!", "Doğru yazdın.");
                 } else {
-                    hearts--; updateTopBar(); playWrongSound(); reactNisan(false);
+                    window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
                     let corr = q.article === '-' ? q.word : `${q.article} ${q.word}`;
                     showFeedback(false, "Yanlış!", `Doğrusu: ${corr}`);
-                    // YANLIŞ YAPILDI -> DİZİNİN SONUNA EKLE (ÖĞRENENE KADAR BİTMEZ)
-                    sessionQuestions.push(q);
+                    sessionQuestions.push(q); // Spaced Repetition
                 }
                 return;
             }
@@ -1084,20 +1356,18 @@
 
             if(isCorrect) {
                 selectedOptionBtn.classList.replace('selected', 'correct');
-                correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                correctAnswersCount++; window.playCorrectSound(); window.reactNisan(true);
                 showFeedback(true, "Doğru!", "Harika gidiyorsun.");
             } else {
                 selectedOptionBtn.classList.replace('selected', 'wrong');
-                hearts--; updateTopBar(); playWrongSound(); reactNisan(false);
+                window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
                 
                 document.querySelectorAll('.opt-btn').forEach(b => { if(b.dataset.correct === "true") b.classList.add('correct'); });
-                let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : `Doğrusu: ${q.tr}`;
+                let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : (mode === 'grammar' ? `Doğrusu: ${q.answer}` : `Doğrusu: ${q.tr}`);
                 showFeedback(false, "Yanlış!", desc);
-                
-                // YANLIŞ YAPILDI -> DİZİNİN SONUNA EKLE (ÖĞRENENE KADAR BİTMEZ)
-                sessionQuestions.push(q);
+                sessionQuestions.push(q); // Spaced Repetition
             }
-        }
+        };
 
         function showFeedback(isCorrect, titleText, descText) {
             const sheet = document.getElementById('feedback-sheet');
@@ -1106,57 +1376,57 @@
             const icon = document.getElementById('feedback-icon');
             const nextBtn = document.getElementById('btn-next');
 
-            sheet.style.backgroundColor = isCorrect ? '#d7ffb8' : '#ffdfe0';
-            sheet.style.borderColor = isCorrect ? '#58cc02' : '#ea2b2b';
+            sheet.style.backgroundColor = isCorrect ? '#f0fdfa' : '#fff1f2';
+            sheet.style.borderColor = isCorrect ? '#14b8a6' : '#f43f5e';
             
-            icon.innerHTML = isCorrect ? '<i class="ph-bold ph-check text-[#58cc02]"></i>' : '<i class="ph-bold ph-x text-[#ea2b2b]"></i>';
+            icon.innerHTML = isCorrect ? '<i class="ph-bold ph-check text-teal-600"></i>' : '<i class="ph-bold ph-x text-rose-600"></i>';
+            icon.style.borderColor = isCorrect ? '#ccfbf1' : '#ffe4e6';
+
             title.innerText = titleText;
-            title.className = `text-2xl font-black mb-1 ${isCorrect ? 'text-[#58a700]' : 'text-[#ea2b2b]'}`;
+            title.className = `text-2xl font-black mb-1 ${isCorrect ? 'text-teal-700' : 'text-rose-700'}`;
             
             if(!isCorrect) {
-                desc.innerHTML = `${descText} <br><span class="text-xs mt-1 block opacity-70">Bu soru, öğrenene kadar tekrar karşına çıkacak.</span>`;
+                desc.innerHTML = `${descText} <br><span class="text-xs mt-1 block opacity-80 font-medium">Öğrenene kadar tekrar sorulacak.</span>`;
             } else {
-                desc.innerText = descText;
+                let extra = sessionType === 'grammar' ? `<br><span class="text-xs mt-1 block opacity-80 font-medium">${sessionQuestions[currentQIndex].tr}</span>` : '';
+                desc.innerHTML = descText + extra;
             }
-            desc.className = `font-bold opacity-80 ${isCorrect ? 'text-[#58a700]' : 'text-[#ea2b2b]'}`;
+            desc.className = `font-bold ${isCorrect ? 'text-teal-600' : 'text-rose-600'}`;
             
             nextBtn.innerText = isCorrect ? "Devam Et" : "Anladım";
-            nextBtn.className = `duo-btn w-full md:w-48 py-4 text-xl ${isCorrect ? 'btn-green' : 'btn-red'}`;
+            nextBtn.className = `app-btn w-full md:w-48 py-4 text-lg shadow-sm ${isCorrect ? 'btn-teal' : 'btn-rose'}`;
             
             sheet.classList.add('show');
         }
 
-        function nextQuestion() {
+        window.nextQuestion = function() {
             currentQIndex++;
-            updateProgressBar();
+            window.updateProgressBar();
             
-            if(hearts <= 0) { alert("Canın bitti!"); quitSession(); return; }
+            if(window.hearts <= 0) { alert("Canın bitti!"); window.quitSession(); return; }
 
-            // sessionQuestions.length dinamik olarak artabilir (yanlış yaptıkça)
             if(currentQIndex >= sessionQuestions.length) {
-                showFinishScreen();
+                window.showFinishScreen();
             } else {
-                loadQuestion();
+                window.loadQuestion();
             }
-        }
+        };
 
-        function updateProgressBar() {
-            // İlerleme çubuğunu toplam bitirilmesi gereken (başlangıçtaki veya o anki total) üzerinden hesapla
+        window.updateProgressBar = function() {
             const pct = (currentQIndex / sessionQuestions.length) * 100;
             document.getElementById('session-progress').style.width = `${pct}%`;
-        }
+        };
 
-        function showFinishScreen() {
+        window.showFinishScreen = function() {
             window.speechSynthesis.cancel();
             document.getElementById('feedback-sheet').classList.remove('show');
             document.getElementById('screen-session').classList.remove('active');
             
-            triggerStars();
-            setTimeout(playCorrectSound, 100); setTimeout(playCorrectSound, 400);
+            window.triggerStars();
+            setTimeout(window.playCorrectSound, 100); setTimeout(window.playCorrectSound, 400);
 
-            // Uzun maraton olduğu için XP daha cömert
             let xpGained = correctAnswersCount * 5; 
-            totalXP += xpGained;
+            window.totalXP += xpGained;
             
             activePathNodes[activeSessionNodeIdx].completed = true;
             
@@ -1164,33 +1434,34 @@
             const btnNextLvl = document.getElementById('btn-next-level');
             if(hasNextNode) { btnNextLvl.style.display = 'flex'; } else { btnNextLvl.style.display = 'none'; }
 
-            updatePathProgressUI();
-            updateTopBar();
+            window.updatePathProgressUI();
+            window.updateTopBar();
+            window.saveProgress(); // Cloud Sync
             
             document.getElementById('earned-xp').innerText = `+${xpGained}`;
-            document.getElementById('accuracy-display').innerText = `${totalQuestionsAtStart} / ${sessionQuestions.length}`; // Kaç tekrarda bitirdi
+            document.getElementById('accuracy-display').innerText = `${totalQuestionsAtStart} / ${sessionQuestions.length}`; 
             
             document.getElementById('screen-finish').classList.add('active');
-        }
+        };
 
-        function finishSession(isNextLevel) {
-            switchScreen('dashboard');
+        window.finishSession = function(isNextLevel) {
+            window.switchScreen('dashboard');
             document.getElementById('view-stage-selection').classList.add('hidden');
             document.getElementById('view-survey').classList.add('hidden');
             document.getElementById('view-learning-path').classList.remove('hidden');
-            updateDashboardProgress();
+            window.updateDashboardProgress();
 
             if (isNextLevel) {
                 currentPathNodeIndex = activePathNodes.findIndex(n => !n.completed);
                 if (currentPathNodeIndex !== -1) {
                     let nextNode = activePathNodes[currentPathNodeIndex];
-                    renderDynamicPath(); 
-                    setTimeout(() => { startSession(nextNode.type, nextNode.count, currentPathNodeIndex); }, 500); 
+                    window.renderDynamicPath(); 
+                    setTimeout(() => { window.startSession(nextNode.type, nextNode.count, currentPathNodeIndex); }, 500); 
                 }
             } else {
-                renderDynamicPath();
+                window.renderDynamicPath();
             }
-        }
+        };
 
     </script>
 </body>
