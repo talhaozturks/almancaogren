@@ -118,11 +118,11 @@
             cursor: pointer; transition: all 0.1s; display: inline-block; margin: 0.25rem;
         }
         .word-bank-btn:active { border-bottom-width: 2px; transform: translateY(2px); }
-        .word-bank-btn.used { background: #f1f5f9; color: transparent; border-color: #f1f5f9; pointer-events: none; }
+        .word-bank-btn.used { background: #e2e8f0; color: transparent; border-color: #e2e8f0; pointer-events: none; }
         
         .sentence-slot {
-            min-height: 3rem; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem;
-            border-bottom: 2px dashed #cbd5e1; margin-bottom: 1rem; align-items: center;
+            min-height: 3.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem;
+            border-bottom: 2px dashed #cbd5e1; margin-bottom: 1rem; align-items: center; justify-content: center;
         }
     </style>
 </head>
@@ -231,7 +231,7 @@
                         <div class="w-14 h-14 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-text-t text-2xl"></i></div>
                         <div class="flex-1">
                             <h3 class="font-bold text-slate-800 text-sm md:text-base">Ünite 4: B1 Gramer Kampı</h3>
-                            <p class="text-xs text-slate-500">Akkusativ, Dativ, Nebensätze, Perfekt</p>
+                            <p class="text-xs text-slate-500">Akkusativ, Dativ, Nebensätze, Perfekt, Präteritum</p>
                             <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
                                 <div id="prog-bar-unit4" class="bg-purple-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
@@ -242,7 +242,7 @@
                         <div class="w-14 h-14 bg-rose-50 text-rose-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-crown text-2xl"></i></div>
                         <div class="flex-1">
                             <h3 class="font-bold text-slate-800 text-sm md:text-base">Ünite 5: Arena B1 Final</h3>
-                            <p class="text-xs text-slate-500">Sınav Kelimeleri & Karma Tekrar</p>
+                            <p class="text-xs text-slate-500">Tüm Kurallar & Karma Tekrar</p>
                             <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
                                 <div id="prog-bar-unit5" class="bg-rose-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
@@ -379,9 +379,10 @@
 
     <!-- CORE UYGULAMA MANTIĞI & SCRİPT -->
     <script>
-        const LOCAL_STORAGE_KEY = 'b1kamp_data_final_v16'; 
+        const LOCAL_STORAGE_KEY = 'b1kamp_data_final_master'; 
 
-        const AppState = {
+        // Global State 
+        window.AppState = {
             totalXP: 0, 
             hearts: 10, 
             streak: 0,
@@ -400,6 +401,7 @@
             correctAnswersCount: 0,
             matchSelections: [],
             sentenceSelection: [],
+            currentExpectedSentence: "",
             sessionType: 'vocab',
             speechMatch: undefined,
             audioCtx: null
@@ -422,38 +424,38 @@
 
         function calculateStreak() {
             const today = new Date().toDateString();
-            if (AppState.lastLogin !== today) {
+            if (window.AppState.lastLogin !== today) {
                 const yesterday = new Date();
                 yesterday.setDate(yesterday.getDate() - 1);
                 
-                if (AppState.lastLogin === yesterday.toDateString()) {
-                    AppState.streak++;
-                } else if (AppState.lastLogin !== null) {
-                    AppState.streak = 1;
+                if (window.AppState.lastLogin === yesterday.toDateString()) {
+                    window.AppState.streak++;
+                } else if (window.AppState.lastLogin !== null) {
+                    window.AppState.streak = 1; 
                 } else {
-                    AppState.streak = 1;
+                    window.AppState.streak = 1; 
                 }
-                AppState.lastLogin = today;
+                window.AppState.lastLogin = today;
                 saveProgress();
             }
         }
 
         function calculateLevel() {
-            AppState.level = Math.floor(AppState.totalXP / 200) + 1;
+            window.AppState.level = Math.floor(window.AppState.totalXP / 200) + 1;
             const lvlEl = document.getElementById('header-level');
-            if(lvlEl) lvlEl.innerText = `Seviye ${AppState.level}`;
+            if(lvlEl) lvlEl.innerText = `Seviye ${window.AppState.level}`;
         }
 
         function unlockUnits() {
-            if (AppState.stageProgress['unit1'] >= 100 && !AppState.unlockedUnits.includes('unit2')) AppState.unlockedUnits.push('unit2');
-            if (AppState.stageProgress['unit2'] >= 100 && !AppState.unlockedUnits.includes('unit3')) AppState.unlockedUnits.push('unit3');
-            if (AppState.stageProgress['unit3'] >= 100 && !AppState.unlockedUnits.includes('unit4')) AppState.unlockedUnits.push('unit4');
-            if (AppState.stageProgress['unit4'] >= 100 && !AppState.unlockedUnits.includes('unit5')) AppState.unlockedUnits.push('unit5');
+            if (window.AppState.stageProgress['unit1'] >= 100 && !window.AppState.unlockedUnits.includes('unit2')) window.AppState.unlockedUnits.push('unit2');
+            if (window.AppState.stageProgress['unit2'] >= 100 && !window.AppState.unlockedUnits.includes('unit3')) window.AppState.unlockedUnits.push('unit3');
+            if (window.AppState.stageProgress['unit3'] >= 100 && !window.AppState.unlockedUnits.includes('unit4')) window.AppState.unlockedUnits.push('unit4');
+            if (window.AppState.stageProgress['unit4'] >= 100 && !window.AppState.unlockedUnits.includes('unit5')) window.AppState.unlockedUnits.push('unit5');
             
             ['unit2', 'unit3', 'unit4', 'unit5'].forEach(u => {
                 const btn = document.getElementById(`btn-${u}`);
                 if(btn) {
-                    if (AppState.unlockedUnits.includes(u)) {
+                    if (window.AppState.unlockedUnits.includes(u)) {
                         btn.classList.remove('node-locked');
                     } else {
                         btn.classList.add('node-locked');
@@ -467,9 +469,9 @@
             els.forEach(id => {
                 const el = document.getElementById(id);
                 if(el) {
-                    if(id.includes('xp')) el.innerText = AppState.totalXP;
-                    else if(id.includes('hearts')) el.innerText = AppState.hearts;
-                    else if(id.includes('streak')) el.innerText = AppState.streak;
+                    if(id.includes('xp')) el.innerText = window.AppState.totalXP;
+                    else if(id.includes('hearts')) el.innerText = window.AppState.hearts;
+                    else if(id.includes('streak')) el.innerText = window.AppState.streak;
                 }
             });
             calculateLevel();
@@ -481,7 +483,7 @@
                 const localData = localStorage.getItem(LOCAL_STORAGE_KEY); 
                 if (localData) {
                     const loadedData = JSON.parse(localData);
-                    Object.assign(AppState, loadedData);
+                    Object.assign(window.AppState, loadedData);
                 }
             } catch(e) {}
             calculateStreak();
@@ -489,31 +491,32 @@
         }
 
         function saveProgress() {
-            try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(AppState)); } catch(e) {}
+            try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(window.AppState)); } catch(e) {}
         }
 
         function resetProgress() {
             if(confirm("Tüm ilerlemeniz, XP'niz ve ünite kilitleriniz sıfırlanacak. Emin misiniz?")) {
-                AppState.totalXP = 0;
-                AppState.hearts = 10;
-                AppState.streak = 0;
-                AppState.level = 1;
-                AppState.unlockedUnits = ['unit1'];
-                AppState.stageProgress = { 'unit1': 0, 'unit2': 0, 'unit3': 0, 'unit4': 0, 'unit5': 0 };
+                window.AppState.totalXP = 0;
+                window.AppState.hearts = 10;
+                window.AppState.streak = 0;
+                window.AppState.level = 1;
+                window.AppState.unlockedUnits = ['unit1'];
+                window.AppState.stageProgress = { 'unit1': 0, 'unit2': 0, 'unit3': 0, 'unit4': 0, 'unit5': 0 };
                 saveProgress();
                 window.location.reload();
             }
         }
+        window.resetProgress = resetProgress;
 
         function updateDashboardProgress() {
             const keys = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5'];
             keys.forEach(k => {
                 let bar = document.getElementById(`prog-bar-${k}`);
-                if(bar) bar.style.width = `${AppState.stageProgress[k] || 0}%`;
+                if(bar) bar.style.width = `${window.AppState.stageProgress[k] || 0}%`;
             });
         }
 
-        function attemptLogin() {
+        window.attemptLogin = function() {
             const userEl = document.getElementById('login-user'); 
             const passEl = document.getElementById('login-pass'); 
             const errorEl = document.getElementById('login-error'); 
@@ -531,20 +534,23 @@
             } else { 
                 errorEl.classList.remove('hidden'); 
             }
-        }
+        };
 
         function completeLoginProcess() {
             loadProgress();
             const sideNav = document.getElementById('side-nav'); 
             const mainHeader = document.getElementById('main-header'); 
+            const loader = document.getElementById('loader'); 
+            const btnEl = document.getElementById('btn-login');
             
             if (sideNav) sideNav.style.display = ''; 
             if (mainHeader) mainHeader.style.display = 'flex';
-            initAudio(); 
+            if (typeof initAudio === 'function') initAudio(); 
             
             switchScreen('dashboard');
-            updateTopBar(); 
-            updateDashboardProgress();
+            
+            if (loader) { loader.style.opacity = '0'; setTimeout(() => { loader.style.display = 'none'; }, 400); }
+            if (btnEl) { btnEl.innerText = "Giriş Yap"; btnEl.disabled = false; }
         }
 
         function switchScreen(screenName) {
@@ -569,30 +575,33 @@
                 }
             }
         }
+        window.switchScreen = switchScreen;
 
-        function openStage(stageId) {
-            if(!AppState.unlockedUnits.includes(stageId)) return; // Kilitli
+        window.openStage = function(stageId) {
+            if(!window.AppState.unlockedUnits.includes(stageId)) return; // Locked
 
-            AppState.activeStage = stageId;
+            window.AppState.activeStage = stageId;
             const viewStageSel = document.getElementById('view-stage-selection');
             if(viewStageSel) viewStageSel.classList.add('hidden');
             
             buildPath(stageId);
-        }
+        };
 
         function goBackToStages() {
             const path = document.getElementById('view-learning-path');
             const stageSel = document.getElementById('view-stage-selection');
             if(path) path.classList.add('hidden');
             if(stageSel) stageSel.classList.remove('hidden');
-            AppState.activeStage = null;
+            window.AppState.activeStage = null;
         }
+        window.goBackToStages = goBackToStages;
 
         function buildPath(unitId) {
             const pathView = document.getElementById('view-learning-path');
             if(pathView) pathView.classList.remove('hidden');
 
             const title = document.getElementById('path-title');
+            
             let nodes = [];
             const colors = ['purple', 'amber', 'indigo', 'rose', 'teal'];
             
@@ -604,7 +613,7 @@
                 else if(unitId === 'unit5') title.innerText = "Ünite 5: Final Sınavı";
             }
 
-            const nodeTypes = ['flashcards', 'vocab', 'listening', 'matching', 'writing', 'dictation', 'speaking', 'sentence_ordering', 'translation', 'fill_blanks'];
+            const nodeTypes = ['flashcards', 'vocab', 'listening', 'matching', 'writing', 'dictation', 'speaking', 'sentence_ordering', 'translation', 'grammar_fill'];
             
             const icons = {
                 'flashcards': '<i class="ph-fill ph-book-open"></i>',
@@ -616,37 +625,42 @@
                 'speaking': '<i class="ph-fill ph-microphone"></i>',
                 'sentence_ordering': '<i class="ph-fill ph-list-numbers"></i>',
                 'translation': '<i class="ph-fill ph-translate"></i>',
-                'fill_blanks': '<i class="ph-fill ph-text-t"></i>'
+                'grammar_fill': '<i class="ph-fill ph-text-t"></i>'
             };
 
-            // Uzun Uzun Yol (50 aşama normal ünite, 100 aşama final için)
             let totalNodes = (unitId === 'unit5') ? 100 : 50; 
             for (let i = 0; i < totalNodes; i++) {
                 let type;
                 if(unitId === 'unit4') {
-                    type = (i % 2 === 0) ? 'fill_blanks' : 'sentence_ordering';
+                    // Grammar unit focuses heavily on grammar tasks
+                    type = (i % 2 === 0) ? 'grammar_fill' : 'sentence_ordering';
                 } else {
+                    // Other units mix all types, except grammar_fill
                     type = nodeTypes[i % nodeTypes.length];
-                    if (type === 'fill_blanks' || type === 'sentence_ordering') type = 'vocab'; 
+                    if (type === 'grammar_fill') type = 'translation'; 
                 }
                 
-                let count = 20 + Math.floor(Math.random() * 10); // Çok soru
+                let count = 15 + Math.floor(Math.random() * 15); // 15-30 questions per node!
+
                 nodes.push({
-                    type: type, count: count, label: `Ders ${i+1}`,
-                    color: colors[i % colors.length], icon: icons[type] || '<i class="ph-fill ph-star"></i>'
+                    type: type,
+                    count: count, 
+                    label: `Ders ${i+1}`,
+                    color: colors[i % colors.length],
+                    icon: icons[type] || '<i class="ph-fill ph-star"></i>'
                 });
             }
 
-            AppState.activePathNodes = nodes.map(n => ({...n, completed: false}));
+            window.AppState.activePathNodes = nodes.map(n => ({...n, completed: false}));
             
-            let currentPct = AppState.stageProgress[AppState.activeStage] || 0;
-            let completedCount = Math.floor((currentPct / 100) * AppState.activePathNodes.length);
+            let currentPct = window.AppState.stageProgress[window.AppState.activeStage] || 0;
+            let completedCount = Math.floor((currentPct / 100) * window.AppState.activePathNodes.length);
             for(let i=0; i<completedCount; i++) {
-                if(AppState.activePathNodes[i]) AppState.activePathNodes[i].completed = true;
+                if(window.AppState.activePathNodes[i]) window.AppState.activePathNodes[i].completed = true;
             }
             
-            AppState.currentPathNodeIndex = AppState.activePathNodes.findIndex(n => !n.completed);
-            if(AppState.currentPathNodeIndex === -1) AppState.currentPathNodeIndex = AppState.activePathNodes.length - 1; 
+            window.AppState.currentPathNodeIndex = window.AppState.activePathNodes.findIndex(n => !n.completed);
+            if(window.AppState.currentPathNodeIndex === -1) window.AppState.currentPathNodeIndex = window.AppState.activePathNodes.length - 1; 
 
             renderDynamicPath();
             updatePathProgressUI();
@@ -659,10 +673,10 @@
             let html = `<div class="absolute w-2 md:w-3 bg-slate-100 top-4 bottom-10 -z-10 rounded-full shadow-inner"></div>`;
             const positions = ['-translate-x-12 md:-translate-x-20', 'translate-x-0', 'translate-x-12 md:translate-x-20', 'translate-x-0'];
 
-            AppState.activePathNodes.forEach((node, idx) => {
+            window.AppState.activePathNodes.forEach((node, idx) => {
                 let posClass = positions[idx % 4];
                 let btnClassStr = `btn-${node.color}`;
-                let isBoss = (idx === AppState.activePathNodes.length - 1);
+                let isBoss = (idx === window.AppState.activePathNodes.length - 1);
                 let btnSize = isBoss ? 'w-20 h-20 md:w-24 md:h-24 text-3xl md:text-4xl' : 'w-16 h-16 md:w-20 md:h-20 text-2xl md:text-3xl';
                 let bounceClass = '';
                 let stateClass = '';
@@ -673,12 +687,12 @@
                     stateClass = 'node-completed shadow-md border-teal-200 p-0 overflow-hidden'; 
                     displayIcon = `<img src="assets/nisanmutlu.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/14b8a6/ffffff?text=OK'" class="w-full h-full object-cover">`; 
                     btnClassStr = 'bg-teal-50'; 
-                } else if (idx > AppState.currentPathNodeIndex) {
+                } else if (idx > window.AppState.currentPathNodeIndex) {
                     stateClass = 'node-locked'; 
                     clickAction = '';
                     displayIcon = '<i class="ph-bold ph-lock-key text-slate-300"></i>';
                     btnClassStr = 'bg-slate-100 border-slate-200 text-slate-400';
-                } else if (idx === AppState.currentPathNodeIndex) {
+                } else if (idx === window.AppState.currentPathNodeIndex) {
                     bounceClass = 'pulse-btn border-white border-[3px] shadow-lg'; 
                 }
 
@@ -699,60 +713,61 @@
         }
 
         function updatePathProgressUI() {
-            let pct = Math.floor((AppState.currentPathNodeIndex / AppState.activePathNodes.length) * 100);
-            if (AppState.activePathNodes.length > 0 && AppState.activePathNodes.every(n => n.completed)) pct = 100;
+            let pct = Math.floor((window.AppState.currentPathNodeIndex / window.AppState.activePathNodes.length) * 100);
+            if (window.AppState.activePathNodes.length > 0 && window.AppState.activePathNodes.every(n => n.completed)) pct = 100;
             
             const progBar = document.getElementById('path-main-progress');
             if(progBar) progBar.style.width = `${pct}%`;
             
-            if (AppState.activeStage) {
-                AppState.stageProgress[AppState.activeStage] = pct;
+            if (window.AppState.activeStage) {
+                window.AppState.stageProgress[window.AppState.activeStage] = pct;
                 saveProgress();
             }
         }
 
-        // ================= SES KONTROLLERİ =================
-        function setImgSrc(imgElement, src, fallbackText, color) {
+        // ================= SES & YARDIMCILAR =================
+        window.setImgSrc = function(imgElement, src, fallbackText, color) {
             if (!imgElement || imgElement.getAttribute('data-current-src') === src) return;
             imgElement.setAttribute('data-current-src', src);
             imgElement.onerror = function() { this.onerror = null; this.src = `https://placehold.co/100x100/${color}/ffffff?text=${fallbackText}`; };
             imgElement.src = src;
-        }
+        };
 
         function initAudio() {
-            if(!AppState.audioCtx) { const AudioContext = window.AudioContext || window.webkitAudioContext; AppState.audioCtx = new AudioContext(); }
-            if (AppState.audioCtx.state === 'suspended') { AppState.audioCtx.resume(); }
+            if(!window.AppState.audioCtx) { const AudioContext = window.AudioContext || window.webkitAudioContext; window.AppState.audioCtx = new AudioContext(); }
+            if (window.AppState.audioCtx.state === 'suspended') { window.AppState.audioCtx.resume(); }
         }
+        window.initAudio = initAudio;
 
-        function playCorrectSound() {
-            initAudio(); if(!AppState.audioCtx) return;
+        window.playCorrectSound = function() {
+            initAudio(); if(!window.AppState.audioCtx) return;
             try {
-                const osc = AppState.audioCtx.createOscillator(); const gain = AppState.audioCtx.createGain();
-                osc.connect(gain); gain.connect(AppState.audioCtx.destination); osc.type = 'sine';
-                osc.frequency.setValueAtTime(523.25, AppState.audioCtx.currentTime); osc.frequency.setValueAtTime(659.25, AppState.audioCtx.currentTime + 0.1); 
-                gain.gain.setValueAtTime(0.05, AppState.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, AppState.audioCtx.currentTime + 0.3);
-                osc.start(); osc.stop(AppState.audioCtx.currentTime + 0.3);
+                const osc = window.AppState.audioCtx.createOscillator(); const gain = window.AppState.audioCtx.createGain();
+                osc.connect(gain); gain.connect(window.AppState.audioCtx.destination); osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, window.AppState.audioCtx.currentTime); osc.frequency.setValueAtTime(659.25, window.AppState.audioCtx.currentTime + 0.1); 
+                gain.gain.setValueAtTime(0.05, window.AppState.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, window.AppState.audioCtx.currentTime + 0.3);
+                osc.start(); osc.stop(window.AppState.audioCtx.currentTime + 0.3);
             } catch(e){}
         }
 
-        function playWrongSound() {
-            initAudio(); if(!AppState.audioCtx) return;
+        window.playWrongSound = function() {
+            initAudio(); if(!window.AppState.audioCtx) return;
             try {
-                const osc = AppState.audioCtx.createOscillator(); const gain = AppState.audioCtx.createGain();
-                osc.connect(gain); gain.connect(AppState.audioCtx.destination); osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(300, AppState.audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(150, AppState.audioCtx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.05, AppState.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, AppState.audioCtx.currentTime + 0.3);
-                osc.start(); osc.stop(AppState.audioCtx.currentTime + 0.3);
+                const osc = window.AppState.audioCtx.createOscillator(); const gain = window.AppState.audioCtx.createGain();
+                osc.connect(gain); gain.connect(window.AppState.audioCtx.destination); osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(300, window.AppState.audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(150, window.AppState.audioCtx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.05, window.AppState.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, window.AppState.audioCtx.currentTime + 0.3);
+                osc.start(); osc.stop(window.AppState.audioCtx.currentTime + 0.3);
             } catch(e){}
         }
 
-        function speakWord(word) {
+        window.speakWord = function(word) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(word); utterance.lang = 'de-DE'; utterance.rate = 0.9; window.speechSynthesis.speak(utterance);
             }
         }
 
-        function triggerStars() {
+        window.triggerStars = function() {
             const container = document.getElementById('star-container'); if(!container) return; container.innerHTML = '';
             for(let i=0; i<30; i++) {
                 const star = document.createElement('i'); star.className = 'ph-fill ph-star star-particle';
@@ -762,70 +777,108 @@
             }
         }
 
-        // ================= VERİTABANI =================
+        // ================= VERİTABANI (Sıfırdan %100 Başarı İçin Dev Dosyalar) =================
         const dbContent = {
-            'unit1': [ 
-                { article: "der", word: "Abflug", tr: "kalkış", sentence: "Der Abflug ist um 10 Uhr." },
-                { article: "die", word: "Bordkarte", tr: "biniş kartı", sentence: "Zeigen Sie mir bitte Ihre Bordkarte." },
-                { article: "das", word: "Gepäck", tr: "bagaj", sentence: "Haben Sie viel Gepäck?" },
-                { article: "der", word: "Passagier", tr: "yolcu", sentence: "Die Passagiere steigen ein." },
-                { article: "das", word: "Doppelzimmer", tr: "iki kişilik oda", sentence: "Wir möchten ein Doppelzimmer buchen." },
-                { article: "-", word: "einchecken", tr: "giriş yapmak", sentence: "Wir müssen um 14 Uhr einchecken." },
-                { article: "-", word: "übernachten", tr: "gecelemek", sentence: "Wir übernachten im Hotel." },
-                { article: "der", word: "Zoll", tr: "gümrük", sentence: "Er muss durch den Zoll." },
-                { article: "der", word: "Campingplatz", tr: "kamp alanı", sentence: "Der Campingplatz ist sehr ruhig." },
-                { article: "die", word: "Dienstreise", tr: "iş seyahati", sentence: "Er ist auf einer Dienstreise." },
-                { article: "das", word: "Handgepäck", tr: "el bagajı", sentence: "Das Handgepäck darf nicht zu schwer sein." },
-                { article: "die", word: "Umgebung", tr: "çevre", sentence: "Die Umgebung des Hotels ist schön." },
-                { article: "der", word: "Urlaubstag", tr: "tatil günü", sentence: "Das war ein schöner Urlaubstag." }
+            'unit1': [ // Reise, Hotel, Alltag (B1.1)
+                { article: "der", word: "Abflug", tr: "kalkış", sentence: "Der Abflug ist um 10 Uhr.", sentenceTr: "Kalkış saat 10'da." },
+                { article: "die", word: "Bordkarte", tr: "biniş kartı", sentence: "Zeigen Sie mir bitte Ihre Bordkarte.", sentenceTr: "Lütfen bana biniş kartınızı gösterin." },
+                { article: "das", word: "Gepäck", tr: "bagaj", sentence: "Haben Sie viel Gepäck?", sentenceTr: "Çok bagajınız var mı?" },
+                { article: "der", word: "Passagier", tr: "yolcu", sentence: "Die Passagiere steigen ein.", sentenceTr: "Yolcular biniyor." },
+                { article: "das", word: "Doppelzimmer", tr: "iki kişilik oda", sentence: "Wir möchten ein Doppelzimmer buchen.", sentenceTr: "İki kişilik bir oda rezerve etmek istiyoruz." },
+                { article: "-", word: "einchecken", tr: "giriş yapmak", sentence: "Wir müssen um 14 Uhr einchecken.", sentenceTr: "Saat 14'te giriş yapmalıyız." },
+                { article: "-", word: "übernachten", tr: "gecelemek", sentence: "Wir übernachten im Hotel.", sentenceTr: "Otelde gecelemiyoruz." },
+                { article: "der", word: "Zoll", tr: "gümrük", sentence: "Er muss durch den Zoll.", sentenceTr: "O gümrükten geçmek zorunda." },
+                { article: "der", word: "Campingplatz", tr: "kamp alanı", sentence: "Der Campingplatz ist sehr ruhig.", sentenceTr: "Kamp alanı çok sakin." },
+                { article: "die", word: "Dienstreise", tr: "iş seyahati", sentence: "Er ist auf einer Dienstreise.", sentenceTr: "O bir iş seyahatinde." },
+                { article: "das", word: "Handgepäck", tr: "el bagajı", sentence: "Das Handgepäck darf nicht zu schwer sein.", sentenceTr: "El bagajı çok ağır olmamalı." },
+                { article: "die", word: "Umgebung", tr: "çevre", sentence: "Die Umgebung des Hotels ist schön.", sentenceTr: "Otelin çevresi güzel." },
+                { article: "der", word: "Urlaubstag", tr: "tatil günü", sentence: "Das war ein schöner Urlaubstag.", sentenceTr: "Bu güzel bir tatil günüydü." },
+                { article: "die", word: "Anzeigetafel", tr: "ilan panosu", sentence: "Schauen Sie auf die Anzeigetafel.", sentenceTr: "İlan panosuna bakın." },
+                { article: "der", word: "Ausgang", tr: "çıkış", sentence: "Wo ist der Ausgang?", sentenceTr: "Çıkış nerede?" },
+                { article: "die", word: "Passkontrolle", tr: "pasaport kontrolü", sentence: "Die Passkontrolle dauert lange.", sentenceTr: "Pasaport kontrolü uzun sürüyor." }
             ],
-            'unit2': [ 
-                { article: "der", word: "Klimawandel", tr: "iklim değişikliği", sentence: "Der Klimawandel ist ein Problem." },
-                { article: "der", word: "Umweltschutz", tr: "çevre koruma", sentence: "Umweltschutz ist sehr wichtig." },
-                { article: "das", word: "Plastik", tr: "plastik", sentence: "Wir müssen Plastik vermeiden." },
-                { article: "der", word: "Müll", tr: "çöp", sentence: "Werfen Sie den Müll in den Eimer." },
-                { article: "-", word: "recyceln", tr: "geri dönüştürmek", sentence: "Wir recyceln Altpapier." },
-                { article: "die", word: "Natur", tr: "doğa", sentence: "Ich liebe die Natur." },
-                { article: "das", word: "Erdbeben", tr: "deprem", sentence: "Gab es gestern ein Erdbeben?" },
-                { article: "die", word: "Erde", tr: "toprak/dünya", sentence: "Die Erde ist rund." },
-                { article: "das", word: "Klima", tr: "iklim", sentence: "Das Klima verändert sich." },
-                { article: "die", word: "Umweltverschmutzung", tr: "çevre kirliliği", sentence: "Umweltverschmutzung muss gestoppt werden." }
+            'unit2': [ // Umwelt, Natur, Katastrophen (B1.1)
+                { article: "der", word: "Klimawandel", tr: "iklim değişikliği", sentence: "Der Klimawandel ist ein Problem.", sentenceTr: "İklim değişikliği bir sorundur." },
+                { article: "der", word: "Umweltschutz", tr: "çevre koruma", sentence: "Umweltschutz ist sehr wichtig.", sentenceTr: "Çevre koruma çok önemlidir." },
+                { article: "das", word: "Plastik", tr: "plastik", sentence: "Wir müssen Plastik vermeiden.", sentenceTr: "Plastikten kaçınmalıyız." },
+                { article: "der", word: "Müll", tr: "çöp", sentence: "Werfen Sie den Müll in den Eimer.", sentenceTr: "Çöpü kovaya atın." },
+                { article: "-", word: "recyceln", tr: "geri dönüştürmek", sentence: "Wir recyceln Altpapier.", sentenceTr: "Atık kağıdı geri dönüştürüyoruz." },
+                { article: "die", word: "Natur", tr: "doğa", sentence: "Ich liebe die Natur.", sentenceTr: "Doğayı seviyorum." },
+                { article: "das", word: "Erdbeben", tr: "deprem", sentence: "Gab es gestern ein Erdbeben?", sentenceTr: "Dün deprem mi oldu?" },
+                { article: "die", word: "Erde", tr: "toprak/dünya", sentence: "Die Erde ist rund.", sentenceTr: "Dünya yuvarlaktır." },
+                { article: "das", word: "Klima", tr: "iklim", sentence: "Das Klima verändert sich.", sentenceTr: "İklim değişiyor." },
+                { article: "die", word: "Umweltverschmutzung", tr: "çevre kirliliği", sentence: "Umweltverschmutzung muss gestoppt werden.", sentenceTr: "Çevre kirliliği durdurulmalı." },
+                { article: "das", word: "Abwasser", tr: "atık su", sentence: "Das Abwasser ist giftig.", sentenceTr: "Atık su zehirlidir." },
+                { article: "das", word: "Unwetter", tr: "fırtına", sentence: "Es gibt heute ein Unwetter.", sentenceTr: "Bugün bir fırtına var." },
+                { article: "der", word: "Nebel", tr: "sis", sentence: "Der Nebel ist sehr dicht.", sentenceTr: "Sis çok yoğun." }
             ],
-            'unit3': [ 
-                { article: "die", word: "Bewerbung", tr: "başvuru", sentence: "Ich schreibe eine Bewerbung." },
-                { article: "das", word: "Gehalt", tr: "maaş", sentence: "Das Gehalt ist gut." },
-                { article: "die", word: "Erfahrung", tr: "tecrübe", sentence: "Ich habe viel Berufserfahrung." },
-                { article: "-", word: "kündigen", tr: "işten ayrılmak", sentence: "Er möchte kündigen." },
-                { article: "das", word: "Unternehmen", tr: "şirket", sentence: "Das Unternehmen ist groß." },
-                { article: "die", word: "Besprechung", tr: "toplantı", sentence: "Die Besprechung beginnt gleich." },
-                { article: "die", word: "Abteilung", tr: "departman", sentence: "In welcher Abteilung arbeiten Sie?" },
-                { article: "die", word: "Probezeit", tr: "deneme süresi", sentence: "Meine Probezeit dauert drei Monate." },
-                { article: "die", word: "Überstunde", tr: "fazla mesai", sentence: "Heute muss ich Überstunden machen." },
-                { article: "die", word: "Arbeitszeit", tr: "iş saati", sentence: "Wie sind Ihre Arbeitszeiten?" }
+            'unit3': [ // Arbeit, Beruf, Büro (B1.2)
+                { article: "die", word: "Bewerbung", tr: "başvuru", sentence: "Ich schreibe eine Bewerbung.", sentenceTr: "Bir başvuru yazıyorum." },
+                { article: "das", word: "Gehalt", tr: "maaş", sentence: "Das Gehalt ist gut.", sentenceTr: "Maaş iyi." },
+                { article: "die", word: "Erfahrung", tr: "tecrübe", sentence: "Ich habe viel Berufserfahrung.", sentenceTr: "Çok mesleki tecrübem var." },
+                { article: "-", word: "kündigen", tr: "işten ayrılmak", sentence: "Er möchte kündigen.", sentenceTr: "O işten ayrılmak istiyor." },
+                { article: "das", word: "Unternehmen", tr: "şirket", sentence: "Das Unternehmen ist groß.", sentenceTr: "Şirket büyüktür." },
+                { article: "die", word: "Besprechung", tr: "toplantı", sentence: "Die Besprechung beginnt gleich.", sentenceTr: "Toplantı hemen başlıyor." },
+                { article: "die", word: "Abteilung", tr: "departman", sentence: "In welcher Abteilung arbeiten Sie?", sentenceTr: "Hangi departmanda çalışıyorsunuz?" },
+                { article: "die", word: "Probezeit", tr: "deneme süresi", sentence: "Meine Probezeit dauert drei Monate.", sentenceTr: "Deneme sürem üç ay sürüyor." },
+                { article: "die", word: "Überstunde", tr: "fazla mesai", sentence: "Heute muss ich Überstunden machen.", sentenceTr: "Bugün fazla mesai yapmalıyım." },
+                { article: "die", word: "Arbeitszeit", tr: "iş saati", sentence: "Wie sind Ihre Arbeitszeiten?", sentenceTr: "Çalışma saatleriniz nasıldır?" },
+                { article: "die", word: "Anerkennung", tr: "takdir", sentence: "Er sucht Anerkennung.", sentenceTr: "O takdir arıyor." },
+                { article: "die", word: "Fähigkeit", tr: "beceri", sentence: "Er hat gute Fähigkeiten.", sentenceTr: "Onun iyi becerileri var." },
+                { article: "die", word: "Zusammenarbeit", tr: "işbirliği", sentence: "Die Zusammenarbeit ist wichtig.", sentenceTr: "İşbirliği önemlidir." }
             ],
-            'unit5': [ 
-                { article: "die", word: "Zukunft", tr: "gelecek", sentence: "Die Zukunft ist ungewiss." },
-                { article: "die", word: "Entscheidung", tr: "karar", sentence: "Das war eine gute Entscheidung." },
-                { article: "das", word: "Erlebnis", tr: "deneyim", sentence: "Das war ein tolles Erlebnis." },
-                { article: "die", word: "Wirtschaft", tr: "ekonomi", sentence: "Die Wirtschaft wächst." },
-                { article: "-", word: "erfolgreich", tr: "başarılı", sentence: "Er ist sehr erfolgreich." },
-                { article: "die", word: "Langeweile", tr: "can sıkıntısı", sentence: "Ich sterbe vor Langeweile." },
-                { article: "das", word: "Netzwerk", tr: "ağ/şebeke", sentence: "Das Netzwerk ist ausgefallen." },
-                { article: "der", word: "Schaden", tr: "hasar", sentence: "Der Schaden ist groß." },
-                { article: "das", word: "Ergebnis", tr: "sonuç", sentence: "Das Ergebnis ist positiv." }
+            'unit5': [ // Arena B1 Karma Kelimeler
+                { article: "die", word: "Zukunft", tr: "gelecek", sentence: "Die Zukunft ist ungewiss.", sentenceTr: "Gelecek belirsizdir." },
+                { article: "die", word: "Entscheidung", tr: "karar", sentence: "Das war eine gute Entscheidung.", sentenceTr: "Bu iyi bir karardı." },
+                { article: "das", word: "Erlebnis", tr: "deneyim", sentence: "Das war ein tolles Erlebnis.", sentenceTr: "Bu harika bir deneyimdi." },
+                { article: "die", word: "Wirtschaft", tr: "ekonomi", sentence: "Die Wirtschaft wächst.", sentenceTr: "Ekonomi büyüyor." },
+                { article: "-", word: "erfolgreich", tr: "başarılı", sentence: "Er ist sehr erfolgreich.", sentenceTr: "O çok başarılıdır." },
+                { article: "die", word: "Langeweile", tr: "can sıkıntısı", sentence: "Ich sterbe vor Langeweile.", sentenceTr: "Can sıkıntısından ölüyorum." },
+                { article: "das", word: "Netzwerk", tr: "ağ/şebeke", sentence: "Das Netzwerk ist ausgefallen.", sentenceTr: "Ağ çöktü." },
+                { article: "der", word: "Schaden", tr: "hasar", sentence: "Der Schaden ist groß.", sentenceTr: "Hasar büyüktür." },
+                { article: "das", word: "Ergebnis", tr: "sonuç", sentence: "Das Ergebnis ist positiv.", sentenceTr: "Sonuç pozitiftir." },
+                { article: "der", word: "Grund", tr: "neden/sebep", sentence: "Was ist der Grund?", sentenceTr: "Neden nedir?" },
+                { article: "-", word: "ständig", tr: "sürekli", sentence: "Er redet ständig.", sentenceTr: "O sürekli konuşuyor." },
+                { article: "-", word: "verpassen", tr: "kaçırmak", sentence: "Ich will den Zug nicht verpassen.", sentenceTr: "Treni kaçırmak istemiyorum." }
             ],
-            'grammar': [ 
-                { type: 'grammar', text: "Ich bleibe zu Hause, ___ es regnet.", options: ["weil", "obwohl", "dass", "wenn"], answer: "weil", tr: "Evde kalıyorum, çünkü yağmur yağıyor.", qType: "fill_blanks" },
-                { type: 'grammar', text: "___ es regnet, gehe ich spazieren.", options: ["Obwohl", "Weil", "Dass", "Wenn"], answer: "Obwohl", tr: "Yağmur yağmasına rağmen, yürüyüşe çıkıyorum.", qType: "fill_blanks" },
-                { type: 'grammar', text: "Ich denke, ___ du recht hast.", options: ["dass", "weil", "obwohl", "als"], answer: "dass", tr: "Bence haklısın.", qType: "fill_blanks" },
-                { type: 'grammar', text: "Das ist der Mann, ___ ich gestern gesehen habe.", options: ["den", "dem", "der", "des"], answer: "den", tr: "Bu dün gördüğüm adam.", qType: "fill_blanks" },
-                { type: 'grammar', text: "Das ist die Frau, ___ ich das Buch gegeben habe.", options: ["der", "die", "dem", "den"], answer: "der", tr: "Bu kitabı verdiğim kadın.", qType: "fill_blanks" },
-                { type: 'grammar', text: "Ich lege das Buch auf ___ Tisch.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Kitabı masanın üzerine koyuyorum.", qType: "fill_blanks" },
-                { type: 'grammar', text: "Das Bild hängt an ___ Wand.", options: ["der", "die", "den", "dem"], answer: "der", tr: "Resim duvarda asılı.", qType: "fill_blanks" },
-                { type: 'grammar', text: "Gestern ___ ich ins Kino gegangen.", options: ["bin", "habe", "wurde", "war"], answer: "bin", tr: "Dün sinemaya gittim.", qType: "fill_blanks" },
-                { type: 'grammar', text: "Ich ___ das Buch schon gelesen.", options: ["habe", "bin", "wurde", "hatte"], answer: "habe", tr: "Kitabı çoktan okudum.", qType: "fill_blanks" },
-                { type: 'grammar', text: "Wenn ich Zeit ___, würde ich dir helfen.", options: ["hätte", "wäre", "habe", "bin"], answer: "hätte", tr: "Zamanım olsaydı, sana yardım ederdim.", qType: "fill_blanks" },
-                { type: 'grammar', text: "Ich ___ gerne einen Kaffee.", options: ["hätte", "wäre", "habe", "bin"], answer: "hätte", tr: "Bir kahve alırdım.", qType: "fill_blanks" }
+            'grammar': [ // Grammar Camp (Unit 4 & Fill in Blanks)
+                // Nebensätze (weil, obwohl, dass, wenn)
+                { type: 'grammar', text: "Ich bleibe zu Hause, ___ es regnet.", options: ["weil", "obwohl", "dass", "wenn"], answer: "weil", tr: "Evde kalıyorum, çünkü yağmur yağıyor.", qType: "grammar_fill" },
+                { type: 'grammar', text: "___ es regnet, gehe ich spazieren.", options: ["Obwohl", "Weil", "Dass", "Wenn"], answer: "Obwohl", tr: "Yağmur yağmasına rağmen, yürüyüşe çıkıyorum.", qType: "grammar_fill" },
+                { type: 'grammar', text: "Ich denke, ___ du recht hast.", options: ["dass", "weil", "obwohl", "als"], answer: "dass", tr: "Bence haklısın.", qType: "grammar_fill" },
+                { type: 'grammar', text: "Sag mir Bescheid, ___ du ankommst.", options: ["wenn", "als", "dass", "weil"], answer: "wenn", tr: "Vardığında bana haber ver.", qType: "grammar_fill" },
+                
+                // Relativsätze (Akkusativ, Dativ)
+                { type: 'grammar', text: "Das ist der Mann, ___ ich gestern gesehen habe.", options: ["den", "dem", "der", "des"], answer: "den", tr: "Bu dün gördüğüm adam. (Akkusativ)", qType: "grammar_fill" },
+                { type: 'grammar', text: "Das ist die Frau, ___ ich das Buch gegeben habe.", options: ["der", "die", "dem", "den"], answer: "der", tr: "Bu kitabı verdiğim kadın. (Dativ)", qType: "grammar_fill" },
+                { type: 'grammar', text: "Hier ist das Kind, ___ der Hund gehört.", options: ["dem", "den", "das", "der"], answer: "dem", tr: "İşte köpeğin ait olduğu çocuk. (Dativ)", qType: "grammar_fill" },
+                
+                // Wechselpräpositionen
+                { type: 'grammar', text: "Ich lege das Buch auf ___ Tisch.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Kitabı masanın üzerine koyuyorum. (Akkusativ Yönelme)", qType: "grammar_fill" },
+                { type: 'grammar', text: "Das Bild hängt an ___ Wand.", options: ["der", "die", "den", "dem"], answer: "der", tr: "Resim duvarda asılı. (Dativ Konum)", qType: "grammar_fill" },
+                { type: 'grammar', text: "Er geht in ___ Kino.", options: ["das", "dem", "den", "die"], answer: "das", tr: "O sinemaya gidiyor. (Akkusativ Yönelme)", qType: "grammar_fill" },
+                
+                // Perfekt / Präteritum
+                { type: 'grammar', text: "Gestern ___ ich ins Kino gegangen.", options: ["bin", "habe", "wurde", "war"], answer: "bin", tr: "Dün sinemaya gittim.", qType: "grammar_fill" },
+                { type: 'grammar', text: "Ich ___ das Buch schon gelesen.", options: ["habe", "bin", "wurde", "hatte"], answer: "habe", tr: "Kitabı çoktan okudum.", qType: "grammar_fill" },
+                { type: 'grammar', text: "Früher ___ wir oft am Strand.", options: ["waren", "sind", "hatten", "wurden"], answer: "waren", tr: "Eskiden sık sık plajdaydık.", qType: "grammar_fill" },
+                
+                // Konjunktiv II
+                { type: 'grammar', text: "Wenn ich Zeit ___, würde ich dir helfen.", options: ["hätte", "wäre", "habe", "bin"], answer: "hätte", tr: "Zamanım olsaydı, sana yardım ederdim.", qType: "grammar_fill" },
+                { type: 'grammar', text: "Ich ___ gerne einen Kaffee.", options: ["hätte", "wäre", "habe", "bin"], answer: "hätte", tr: "Bir kahve alırdım.", qType: "grammar_fill" },
+                { type: 'grammar', text: "Wenn er doch nur hier ___!", options: ["wäre", "hätte", "ist", "war"], answer: "wäre", tr: "Keşke o da burada olsaydı!", qType: "grammar_fill" },
+
+                // Adjektivdeklination
+                { type: 'grammar', text: "Das ist ein ___ Auto.", options: ["schnelles", "schnelle", "schneller", "schnellen"], answer: "schnelles", tr: "Bu hızlı bir arabadır.", qType: "grammar_fill" },
+                { type: 'grammar', text: "Ich trinke eine ___ Tasse Tee.", options: ["heiße", "heißer", "heißes", "heißen"], answer: "heiße", tr: "Sıcak bir fincan çay içiyorum.", qType: "grammar_fill" },
+
+                // Trennbare Verben
+                { type: 'grammar', text: "Wann ___ der Zug in Berlin ___?", options: ["kommt / an", "ankommt / -", "kommt / auf", "an / kommt"], answer: "kommt / an", tr: "Tren Berlin'e ne zaman varıyor?", qType: "grammar_fill" },
+                { type: 'grammar', text: "Ich ___ mich auf das Wochenende ___.", options: ["ruhe / aus", "ausruhe / -", "ruhe / auf", "aus / ruhe"], answer: "ruhe / aus", tr: "Hafta sonu dinleniyorum.", qType: "grammar_fill" },
+                
+                // Modalverben
+                { type: 'grammar', text: "Ich ___ heute leider arbeiten.", options: ["muss", "müsst", "müssen", "musst"], answer: "muss", tr: "Maalesef bugün çalışmak zorundayım.", qType: "grammar_fill" },
+                { type: 'grammar', text: "___ ihr gut schwimmen?", options: ["Könnt", "Können", "Kannst", "Kann"], answer: "Könnt", tr: "Siz iyi yüzebilir misiniz?", qType: "grammar_fill" }
             ]
         };
 
@@ -861,17 +914,17 @@
             });
         }
 
-        // ================= OYUN MOTORU =================
+        // ================= OYUN MOTORU (GELİŞMİŞ) =================
         function startSession(type, count, nodeIdx) {
-            if(AppState.hearts <= 0) {
-                alert("Canın bitti! Devam etmen için sana ekstra can veriyorum."); AppState.hearts = 10; updateTopBar(); saveProgress();
+            if(window.AppState.hearts <= 0) {
+                alert("Canın bitti! Devam etmen için sana ekstra can veriyorum."); window.AppState.hearts = 10; updateTopBar(); saveProgress();
             }
-            AppState.sessionType = type;
-            AppState.activeSessionNodeIdx = nodeIdx;
-            AppState.sessionQuestions = generateQuestions(type, count); 
-            AppState.totalQuestionsAtStart = AppState.sessionQuestions.length; 
-            AppState.currentQIndex = 0;
-            AppState.correctAnswersCount = 0;
+            window.AppState.sessionType = type;
+            window.AppState.activeSessionNodeIdx = nodeIdx;
+            window.AppState.sessionQuestions = generateQuestions(type, count); 
+            window.AppState.totalQuestionsAtStart = window.AppState.sessionQuestions.length; 
+            window.AppState.currentQIndex = 0;
+            window.AppState.correctAnswersCount = 0;
             
             updateProgressBar();
             switchScreen('session');
@@ -886,16 +939,22 @@
             const stageSel = document.getElementById('view-stage-selection');
             if(viewPath) viewPath.classList.add('hidden');
             if(stageSel) stageSel.classList.remove('hidden');
-            AppState.activeStage = null;
+            window.AppState.activeStage = null;
         }
         window.quitSession = quitSession;
 
         function generateQuestions(type, amount) {
             let questions = [];
-            let activePoolData = dbContent[AppState.activeStage] || dbContent['unit1']; 
+            let activePoolData = dbContent[window.AppState.activeStage] || dbContent['unit1']; 
             
-            if(type === 'grammar' || type === 'sentence_ordering' || type === 'fill_blanks') {
+            if(type === 'grammar_fill' || type === 'sentence_ordering' || type === 'fill_blanks') {
                 activePoolData = dbContent['grammar'];
+            } else if (type === 'translation') {
+                // Translation needs full sentences
+                activePoolData = activePoolData.filter(item => item.sentenceTr && item.sentence);
+                if(activePoolData.length === 0) activePoolData = dbContent['unit1']; // Fallback
+            } else if(type === 'artikel') {
+                activePoolData = activePoolData.filter(item => item.article && item.article !== '-');
             }
 
             let pool = [...activePoolData];
@@ -933,6 +992,7 @@
                 else if(mode === 'matching') { talhaBubble.innerText = "Çiftleri doğru eşleştirebilecek misin?"; }
                 else if(mode === 'sentence_ordering') { talhaBubble.innerText = "Kelimeleri doğru sıraya diz!"; }
                 else if(mode === 'translation') { talhaBubble.innerText = "Bu cümlenin çevirisi nedir?"; }
+                else if(mode === 'speaking') { talhaBubble.innerText = "Kusursuz bir telaffuz bekliyorum!"; }
                 else { talhaBubble.innerText = "Bunun anlamı nedir hayatım?"; }
             }
 
@@ -965,9 +1025,9 @@
         }
 
         function loadQuestion() {
-            AppState.selectedOptionBtn = null;
-            AppState.matchSelections = [];
-            AppState.sentenceSelection = [];
+            window.AppState.selectedOptionBtn = null;
+            window.AppState.matchSelections = [];
+            window.AppState.sentenceSelection = [];
             
             const btnCheck = document.getElementById('btn-check');
             if(btnCheck) {
@@ -977,7 +1037,7 @@
             const feedSheet = document.getElementById('feedback-sheet');
             if(feedSheet) feedSheet.classList.remove('show');
             
-            let q = AppState.sessionQuestions[AppState.currentQIndex];
+            let q = window.AppState.sessionQuestions[window.AppState.currentQIndex];
             const content = document.getElementById('session-content');
             if(!content) return;
             content.innerHTML = ''; 
@@ -986,7 +1046,7 @@
             setAvatars(mode);
 
             // 1. FILL IN BLANKS (GRAMMAR)
-            if(mode === 'grammar' || mode === 'fill_blanks') {
+            if(mode === 'grammar_fill' || mode === 'fill_blanks') {
                 if(btnCheck) btnCheck.innerText = "Kontrol Et";
                 let textParts = q.text.split('___');
                 content.innerHTML = `
@@ -1039,22 +1099,22 @@
                     btn.onclick = () => toggleWord(btn, word, idx);
                     bank.appendChild(btn);
                 });
-                AppState.currentExpectedSentence = words.join(' ');
+                window.AppState.currentExpectedSentence = words.join(' ');
             }
 
             // 3. TRANSLATION (WRITE)
             else if(mode === 'translation') {
                 if(btnCheck) btnCheck.innerText = "Kontrol Et";
-                let sentenceToTranslate = q.sentence || (q.article === '-' ? q.word : `${q.article} ${q.word}`);
+                let sentenceToTranslate = q.sentenceTr || q.tr;
                 content.innerHTML = `
                     <div class="w-full flex items-center gap-4 mb-8 mt-4">
                         <div class="border border-slate-200 rounded-[2rem] p-6 text-center w-full relative bg-slate-50 shadow-inner">
-                            <span class="text-sm font-semibold uppercase tracking-widest text-slate-400 block mb-1">Türkçeye Çevir:</span>
+                            <span class="text-sm font-semibold uppercase tracking-widest text-slate-400 block mb-1">Almancaya Çevir:</span>
                             <span class="text-xl md:text-2xl font-black text-slate-800 tracking-tight">${sentenceToTranslate}</span>
                         </div>
                     </div>
                     <div class="w-full relative">
-                        <input type="text" id="write-input" placeholder="Anlamını buraya yaz" autocomplete="off" autocorrect="off" class="w-full border border-slate-300 rounded-2xl px-5 py-4 font-semibold text-slate-800 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 bg-white text-lg text-center shadow-sm transition-all">
+                        <input type="text" id="write-input" placeholder="Almancasını buraya yaz" autocomplete="off" autocorrect="off" class="w-full border border-slate-300 rounded-2xl px-5 py-4 font-semibold text-slate-800 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 bg-white text-lg text-center shadow-sm transition-all">
                     </div>
                 `;
                 setTimeout(() => { const el = document.getElementById('write-input'); if(el) el.focus(); }, 100);
@@ -1090,7 +1150,7 @@
                         <button onclick="speakWord('${q.word}')" class="mb-4 w-16 h-16 bg-indigo-50 text-indigo-500 rounded-full text-3xl mx-auto flex items-center justify-center speaker-btn border border-indigo-100 shadow-sm active:translate-y-1">
                             <i class="ph-fill ph-speaker-high"></i>
                         </button>
-                        <p class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-1">${q.article === '-' ? '' : q.article}</p>
+                        <p class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-1">${q.article === '-' || !q.article ? '' : q.article}</p>
                         <h2 class="text-3xl font-black text-slate-800 mb-4 tracking-tight">${q.word}</h2>
                         ${q.sentence ? `<p class="text-sm text-slate-500 mb-4 italic">"${q.sentence}"</p>` : ''}
                         <div class="border-t border-dashed border-slate-200 pt-4">
@@ -1106,14 +1166,14 @@
                 if(btnCheck) btnCheck.classList.add('hidden'); 
                 
                 let pairs = [q];
-                let pool = dbContent[AppState.activeStage] || dbContent['unit1'];
+                let pool = dbContent[window.AppState.activeStage] || dbContent['unit1'];
                 while(pairs.length < 4) {
                     let w = pool[Math.floor(Math.random() * pool.length)];
                     if(!pairs.includes(w) && w.type !== 'grammar') pairs.push(w);
                 }
                 let buttonsHTML = [];
                 pairs.forEach((p, idx) => {
-                    let dispWord = p.article === '-' ? p.word : `${p.article} ${p.word}`;
+                    let dispWord = (p.article && p.article !== '-') ? `${p.article} ${p.word}` : p.word;
                     buttonsHTML.push(`<button onclick="selectMatch(this, 'de', ${idx})" class="opt-btn py-3 px-2 w-full text-center text-sm font-semibold shadow-sm">${dispWord}</button>`);
                     buttonsHTML.push(`<button onclick="selectMatch(this, 'tr', ${idx})" class="opt-btn py-3 px-2 w-full text-center text-sm font-semibold shadow-sm">${p.tr}</button>`);
                 });
@@ -1136,7 +1196,7 @@
             }
             // 8. WRITING / DICTATION
             else if(mode === 'writing' || mode === 'dictation') {
-                if(btnCheck) btnCheck.innerText = "Kontrol Et";
+                if(btnCheck) { btnCheck.innerText = "Kontrol Et"; btnCheck.disabled = false; }
                 
                 let topContent = '';
                 if(mode === 'dictation') {
@@ -1156,7 +1216,7 @@
                 document.getElementById('write-input').addEventListener('input', () => { if(btnCheck) btnCheck.disabled = false; });
                 document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') checkAnswer(); });
             }
-            // 9. VOCAB / ARTIKEL
+            // 9. VOCAB / ARTIKEL (Default)
             else {
                 if(btnCheck) btnCheck.innerText = "Kontrol Et";
                 let dispArticle = q.article === '-' ? '' : `<span class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 block mb-1">${q.article}</span>`;
@@ -1183,7 +1243,7 @@
                 btn.classList.remove('used');
                 let inSlot = document.getElementById(`slot-word-${idx}`);
                 if(inSlot) slot.removeChild(inSlot);
-                AppState.sentenceSelection = AppState.sentenceSelection.filter(w => w.idx !== idx);
+                window.AppState.sentenceSelection = window.AppState.sentenceSelection.filter(w => w.idx !== idx);
             } else {
                 btn.classList.add('used');
                 let slotBtn = document.createElement('div');
@@ -1192,11 +1252,11 @@
                 slotBtn.id = `slot-word-${idx}`;
                 slotBtn.onclick = () => toggleWord(btn, word, idx);
                 slot.appendChild(slotBtn);
-                AppState.sentenceSelection.push({word, idx});
+                window.AppState.sentenceSelection.push({word, idx});
             }
             
             const btnCheck = document.getElementById('btn-check');
-            if(btnCheck) btnCheck.disabled = AppState.sentenceSelection.length === 0;
+            if(btnCheck) btnCheck.disabled = window.AppState.sentenceSelection.length === 0;
         }
         window.toggleWord = toggleWord;
 
@@ -1225,7 +1285,7 @@
 
             recognition.onresult = function(event) {
                 const speechResult = event.results[0][0].transcript.toLowerCase();
-                let q = AppState.sessionQuestions[AppState.currentQIndex];
+                let q = window.AppState.sessionQuestions[window.AppState.currentQIndex];
                 let expected = (q.sentence || q.word).toLowerCase();
                 if(resultText) resultText.innerText = `Duyulan: "${speechResult}"`;
 
@@ -1236,10 +1296,10 @@
                 let cleanExpected = expected.replace(/[^a-zäöüß]/g, '');
 
                 if (cleanSpeech.includes(cleanExpected) || cleanExpected.includes(cleanSpeech)) {
-                    AppState.speechMatch = true;
+                    window.AppState.speechMatch = true;
                     if(micBtn) micBtn.classList.replace('bg-rose-500', 'bg-teal-500');
                 } else {
-                    AppState.speechMatch = false;
+                    window.AppState.speechMatch = false;
                     if(micBtn) {
                         micBtn.classList.remove('bg-rose-500', 'text-white');
                         micBtn.classList.add('bg-teal-50', 'text-teal-500');
@@ -1260,7 +1320,7 @@
 
         function generateOptions(q, gridId) {
             let options = [q];
-            let pool = dbContent[AppState.activeStage] || dbContent['unit1'];
+            let pool = dbContent[window.AppState.activeStage] || dbContent['unit1'];
 
             while(options.length < 4) {
                 let w = pool[Math.floor(Math.random() * pool.length)];
@@ -1273,7 +1333,7 @@
                 btn.className = "opt-btn py-3 px-4 w-full flex items-center justify-center text-center text-sm md:text-base";
                 btn.innerText = opt.tr;
                 btn.dataset.correct = (opt === q);
-                btn.onclick = () => { selectOption(btn); if(AppState.sessionType === 'listening') speakWord(opt.word); };
+                btn.onclick = () => { selectOption(btn); if(window.AppState.sessionType === 'listening') speakWord(opt.word); };
                 if(grid) grid.appendChild(btn);
             });
         }
@@ -1282,7 +1342,7 @@
         function selectOption(btn) {
             document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
-            AppState.selectedOptionBtn = btn;
+            window.AppState.selectedOptionBtn = btn;
             const btnCheck = document.getElementById('btn-check');
             if(btnCheck) btnCheck.disabled = false;
         }
@@ -1290,13 +1350,13 @@
 
         function selectMatch(btn, lang, id) {
             if(btn.disabled || btn.classList.contains('correct')) return;
-            if(btn.classList.contains('selected')) { btn.classList.remove('selected'); AppState.matchSelections = []; return; }
+            if(btn.classList.contains('selected')) { btn.classList.remove('selected'); window.AppState.matchSelections = []; return; }
 
             btn.classList.add('selected');
-            AppState.matchSelections.push({btn, lang, id});
+            window.AppState.matchSelections.push({btn, lang, id});
 
-            if(AppState.matchSelections.length === 2) {
-                let first = AppState.matchSelections[0]; let second = AppState.matchSelections[1];
+            if(window.AppState.matchSelections.length === 2) {
+                let first = window.AppState.matchSelections[0]; let second = window.AppState.matchSelections[1];
 
                 if(first.lang !== second.lang && first.id === second.id) {
                     first.btn.classList.replace('selected', 'correct'); second.btn.classList.replace('selected', 'correct');
@@ -1307,86 +1367,87 @@
                     if(content) {
                         content.dataset.pairsFound = parseInt(content.dataset.pairsFound) + 1;
                         if(parseInt(content.dataset.pairsFound) === 4) {
-                            AppState.correctAnswersCount++; reactNisan(true); 
+                            window.AppState.correctAnswersCount++; reactNisan(true); 
                             setTimeout(() => showFeedback(true, "Harika Eşleştirme!", ""), 800);
                         } else {
-                            reactNisan(true); setTimeout(() => setAvatars(AppState.sessionType), 1000); 
+                            reactNisan(true); setTimeout(() => setAvatars(window.AppState.sessionType), 1000); 
                         }
                     }
                 } else {
                     first.btn.classList.replace('selected', 'wrong'); second.btn.classList.replace('selected', 'wrong');
                     playWrongSound(); reactNisan(false); 
-                    AppState.hearts--; updateTopBar(); saveProgress();
+                    window.AppState.hearts--; updateTopBar(); saveProgress();
                     
-                    AppState.sessionQuestions.push(AppState.sessionQuestions[AppState.currentQIndex]); 
+                    window.AppState.sessionQuestions.push(window.AppState.sessionQuestions[window.AppState.currentQIndex]); 
                     
                     setTimeout(() => {
                         first.btn.classList.remove('wrong'); second.btn.classList.remove('wrong');
-                        if(AppState.hearts <= 0) { alert("Canın bitti!"); quitSession(); }
-                        else { setAvatars(AppState.sessionType); } 
+                        if(window.AppState.hearts <= 0) { alert("Canın bitti!"); quitSession(); }
+                        else { setAvatars(window.AppState.sessionType); } 
                     }, 800);
                 }
-                AppState.matchSelections = [];
+                window.AppState.matchSelections = [];
             }
         }
         window.selectMatch = selectMatch;
 
         function checkAnswer() {
-            let mode = AppState.sessionQuestions[AppState.currentQIndex].qType;
-            let q = AppState.sessionQuestions[AppState.currentQIndex];
+            let mode = window.AppState.sessionQuestions[window.AppState.currentQIndex].qType;
+            let q = window.AppState.sessionQuestions[window.AppState.currentQIndex];
             const btnCheck = document.getElementById('btn-check');
 
             if(mode === 'flashcards') {
-                AppState.correctAnswersCount++; nextQuestion(); return;
+                window.AppState.correctAnswersCount++; nextQuestion(); return;
             }
 
             if(mode === 'speaking') {
                 if(btnCheck) btnCheck.disabled = true;
-                if(AppState.speechMatch === true) {
-                    AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                if(window.AppState.speechMatch === true) {
+                    window.AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
                     showFeedback(true, "Harika Telaffuz!", "Çok iyi söyledin.");
                 } else {
-                    if(AppState.speechMatch === undefined) { nextQuestion(); return; }
-                    AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
+                    if(window.AppState.speechMatch === undefined) { nextQuestion(); return; }
+                    window.AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
                     showFeedback(false, "Yanlış Telaffuz", `Okunması gereken: ${q.sentence || q.word}`);
-                    AppState.sessionQuestions.push(q);
+                    window.AppState.sessionQuestions.push(q);
                 }
-                AppState.speechMatch = undefined;
+                window.AppState.speechMatch = undefined;
                 return;
             }
 
             if(mode === 'sentence_ordering') {
-                let userSentence = AppState.sentenceSelection.map(s => s.word).join(' ');
+                let userSentence = window.AppState.sentenceSelection.map(s => s.word).join(' ').replace(/[.,!?]/g, '').trim().toLowerCase();
+                let expSentence = window.AppState.currentExpectedSentence.replace(/[.,!?]/g, '').trim().toLowerCase();
                 if(btnCheck) btnCheck.disabled = true;
                 
-                if(userSentence === AppState.currentExpectedSentence) {
-                    AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                if(userSentence === expSentence) {
+                    window.AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
                     showFeedback(true, "Mükemmel!", "Cümleyi doğru kurdun.");
                 } else {
-                    AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
-                    showFeedback(false, "Yanlış Sıralama", `Doğrusu: ${AppState.currentExpectedSentence}`);
-                    AppState.sessionQuestions.push(q); 
+                    window.AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
+                    showFeedback(false, "Yanlış Sıralama", `Doğrusu: ${window.AppState.currentExpectedSentence}`);
+                    window.AppState.sessionQuestions.push(q); 
                 }
                 return;
             }
 
             if(mode === 'translation') {
                 const inputEl = document.getElementById('write-input');
-                const userText = inputEl ? inputEl.value.toLowerCase().trim() : '';
-                const expected = q.tr.toLowerCase().trim();
+                const userText = inputEl ? inputEl.value.replace(/[.,!?]/g, '').toLowerCase().trim() : '';
+                const expected = (q.sentence || q.word).replace(/[.,!?]/g, '').toLowerCase().trim();
                 
                 if(btnCheck) btnCheck.disabled = true; 
                 if(inputEl) inputEl.disabled = true;
 
-                let isCorrectStr = expected.includes(userText) && userText.length > 2;
+                let isCorrectStr = expected === userText || expected.includes(userText) && userText.length > 3;
 
                 if(isCorrectStr) {
-                    AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                    window.AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
                     showFeedback(true, "Mükemmel Çeviri!", "Anlamı doğru bildin.");
                 } else {
-                    AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
-                    showFeedback(false, "Yanlış!", `Doğrusu: ${q.tr}`);
-                    AppState.sessionQuestions.push(q); 
+                    window.AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
+                    showFeedback(false, "Yanlış!", `Doğrusu: ${q.sentence || q.word}`);
+                    window.AppState.sessionQuestions.push(q); 
                 }
                 return;
             }
@@ -1403,35 +1464,35 @@
                 let isCorrectStr = (userText === expectedWithArticle || userText === expectedWordOnly);
 
                 if(isCorrectStr) {
-                    AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                    window.AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
                     showFeedback(true, "Mükemmel!", "Kusursuz yazdın.");
                 } else {
-                    AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
+                    window.AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
                     let corr = q.article === '-' ? q.word : `${q.article} ${q.word}`;
                     showFeedback(false, "Yanlış!", `Doğrusu: ${corr}`);
-                    AppState.sessionQuestions.push(q); 
+                    window.AppState.sessionQuestions.push(q); 
                 }
                 return;
             }
 
-            if(!AppState.selectedOptionBtn) return;
-            const isCorrect = AppState.selectedOptionBtn.dataset.correct === "true";
+            if(!window.AppState.selectedOptionBtn) return;
+            const isCorrect = window.AppState.selectedOptionBtn.dataset.correct === "true";
             
             document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
             if(btnCheck) btnCheck.disabled = true;
 
             if(isCorrect) {
-                AppState.selectedOptionBtn.classList.replace('selected', 'correct');
-                AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                window.AppState.selectedOptionBtn.classList.replace('selected', 'correct');
+                window.AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
                 showFeedback(true, "Doğru!", "Harika gidiyorsun.");
             } else {
-                AppState.selectedOptionBtn.classList.replace('selected', 'wrong');
-                AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
+                window.AppState.selectedOptionBtn.classList.replace('selected', 'wrong');
+                window.AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
                 
                 document.querySelectorAll('.opt-btn').forEach(b => { if(b.dataset.correct === "true") b.classList.add('correct'); });
                 let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : (mode.includes('grammar') || mode==='fill_blanks' ? `Doğrusu: ${q.answer}` : `Doğrusu: ${q.tr}`);
                 showFeedback(false, "Hatalı!", desc);
-                AppState.sessionQuestions.push(q); 
+                window.AppState.sessionQuestions.push(q); 
             }
         }
         window.checkAnswer = checkAnswer;
@@ -1457,8 +1518,8 @@
             if(!isCorrect) {
                 desc.innerHTML = `${descText} <br><span class="text-[10px] mt-1 block opacity-80 font-medium">Öğrenene kadar tekrar sorulacak.</span>`;
             } else {
-                let currentQ = AppState.sessionQuestions[AppState.currentQIndex];
-                let extra = (currentQ.qType === 'grammar' || currentQ.qType === 'fill_blanks') ? `<br><span class="text-[10px] mt-1 block opacity-80 font-medium">${currentQ.tr}</span>` : '';
+                let currentQ = window.AppState.sessionQuestions[window.AppState.currentQIndex];
+                let extra = (currentQ.qType === 'grammar_fill' || currentQ.qType === 'fill_blanks') ? `<br><span class="text-[10px] mt-1 block opacity-80 font-medium">${currentQ.tr}</span>` : '';
                 desc.innerHTML = descText + extra;
             }
             desc.className = `text-sm font-medium ${isCorrect ? 'text-teal-600' : 'text-rose-600'}`;
@@ -1471,12 +1532,12 @@
         window.showFeedback = showFeedback;
 
         function nextQuestion() {
-            AppState.currentQIndex++;
+            window.AppState.currentQIndex++;
             updateProgressBar();
             
-            if(AppState.hearts <= 0) { alert("Canın bitti!"); quitSession(); return; }
+            if(window.AppState.hearts <= 0) { alert("Canın bitti!"); quitSession(); return; }
 
-            if(AppState.currentQIndex >= AppState.sessionQuestions.length) {
+            if(window.AppState.currentQIndex >= window.AppState.sessionQuestions.length) {
                 showFinishScreen();
             } else {
                 loadQuestion();
@@ -1485,7 +1546,7 @@
         window.nextQuestion = nextQuestion;
 
         function updateProgressBar() {
-            const pct = (AppState.currentQIndex / AppState.sessionQuestions.length) * 100;
+            const pct = (window.AppState.currentQIndex / window.AppState.sessionQuestions.length) * 100;
             const progBar = document.getElementById('session-progress');
             if(progBar) progBar.style.width = `${pct}%`;
         }
@@ -1503,14 +1564,14 @@
             triggerStars();
             setTimeout(playCorrectSound, 100); setTimeout(playCorrectSound, 400);
 
-            let xpGained = AppState.correctAnswersCount * 5; 
-            AppState.totalXP += xpGained;
+            let xpGained = window.AppState.correctAnswersCount * 5; 
+            window.AppState.totalXP += xpGained;
             
-            if(AppState.activePathNodes[AppState.activeSessionNodeIdx]) {
-                AppState.activePathNodes[AppState.activeSessionNodeIdx].completed = true;
+            if(window.AppState.activePathNodes[window.AppState.activeSessionNodeIdx]) {
+                window.AppState.activePathNodes[window.AppState.activeSessionNodeIdx].completed = true;
             }
             
-            let hasNextNode = AppState.activePathNodes.findIndex(n => !n.completed) !== -1;
+            let hasNextNode = window.AppState.activePathNodes.findIndex(n => !n.completed) !== -1;
             const btnNextLvl = document.getElementById('btn-next-level');
             if(btnNextLvl) {
                 if(hasNextNode) { btnNextLvl.style.display = 'flex'; } else { btnNextLvl.style.display = 'none'; }
@@ -1523,7 +1584,7 @@
             const xpDisplay = document.getElementById('earned-xp');
             const accDisplay = document.getElementById('accuracy-display');
             if(xpDisplay) xpDisplay.innerText = `+${xpGained}`;
-            if(accDisplay) accDisplay.innerText = `${AppState.totalQuestionsAtStart} / ${AppState.sessionQuestions.length}`; 
+            if(accDisplay) accDisplay.innerText = `${window.AppState.totalQuestionsAtStart} / ${window.AppState.sessionQuestions.length}`; 
             
             if(finishScreen) finishScreen.classList.add('active');
         }
@@ -1542,11 +1603,11 @@
             updateDashboardProgress();
 
             if (isNextLevel) {
-                AppState.currentPathNodeIndex = AppState.activePathNodes.findIndex(n => !n.completed);
-                if (AppState.currentPathNodeIndex !== -1) {
-                    let nextNode = AppState.activePathNodes[AppState.currentPathNodeIndex];
+                window.AppState.currentPathNodeIndex = window.AppState.activePathNodes.findIndex(n => !n.completed);
+                if (window.AppState.currentPathNodeIndex !== -1) {
+                    let nextNode = window.AppState.activePathNodes[window.AppState.currentPathNodeIndex];
                     renderDynamicPath(); 
-                    setTimeout(() => { startSession(nextNode.type, nextNode.count, AppState.currentPathNodeIndex); }, 500); 
+                    setTimeout(() => { startSession(nextNode.type, nextNode.count, window.AppState.currentPathNodeIndex); }, 500); 
                 }
             } else {
                 renderDynamicPath();
