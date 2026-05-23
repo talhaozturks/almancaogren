@@ -130,26 +130,26 @@
             <div id="loader-progress" class="h-full bg-indigo-500 rounded-full w-0 transition-all duration-[2.5s] ease-in-out"></div>
         </div>
         <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/400x100/ffffff/6366f1?text=Talha+Ozturk'" class="h-32 md:h-40 object-contain opacity-80">
-        <p id="cloud-sync-text" class="text-indigo-400 font-bold mt-4 animate-pulse hidden">Bulut verileri eşitleniyor...</p>
+        <p id="cloud-sync-text" class="text-indigo-400 font-bold mt-4 animate-pulse hidden">Veriler eşitleniyor...</p>
     </div>
 
     <!-- EKRAN 0: LOGIN -->
     <section id="screen-login" class="screen active flex-col flex-1 absolute inset-0 z-[60] items-center justify-center p-6 text-center" style="background: radial-gradient(circle at center, #ffffff 0%, var(--bg-main) 100%);">
         <div class="max-w-sm w-full bg-white border border-slate-200 rounded-[2rem] p-8 shadow-xl">
-            <div class="mb-6 flex justify-center"><div class="guarantee-badge"><i class="ph-fill ph-cloud-check text-lg"></i> Bulut Kayıtlı</div></div>
+            <div class="mb-6 flex justify-center"><div class="guarantee-badge"><i class="ph-fill ph-cloud-check text-lg"></i> %100 Başarı Garantisi</div></div>
             <img src="assets/imzatalhaozturk.png" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/300x80/6366f1/ffffff?text=Talha'" class="h-16 mx-auto mb-8 object-contain">
             <h2 class="text-2xl font-black text-slate-800 mb-6 uppercase tracking-wider">Akademiye Giriş</h2>
             
-            <input type="text" id="login-user" placeholder="Hesap Adı (nisan)" class="w-full border-2 border-slate-200 rounded-xl px-4 py-4 mb-4 font-semibold text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white text-lg text-center transition-all">
-            <input type="password" id="login-pass" placeholder="Şifre (talha)" class="w-full border-2 border-slate-200 rounded-xl px-4 py-4 mb-6 font-semibold text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white text-lg text-center transition-all">
+            <input type="text" id="login-user" placeholder="Hesap Adı (nisan)" autocomplete="off" class="w-full border-2 border-slate-200 rounded-xl px-4 py-4 mb-4 font-semibold text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white text-lg text-center transition-all">
+            <input type="password" id="login-pass" placeholder="Şifre (talha)" autocomplete="off" class="w-full border-2 border-slate-200 rounded-xl px-4 py-4 mb-6 font-semibold text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white text-lg text-center transition-all">
             
             <p id="login-error" class="text-rose-500 font-bold mb-4 hidden bg-rose-50 p-3 rounded-xl border border-rose-100">Kullanıcı adı veya şifre hatalı!</p>
             
-            <button id="btn-login" onclick="attemptLogin()" class="app-btn btn-indigo w-full py-4 text-xl mt-2 shadow-lg shadow-indigo-500/30">GİRİŞ YAP</button>
+            <button id="btn-login" onclick="window.attemptLogin()" class="app-btn btn-indigo w-full py-4 text-xl mt-2 shadow-lg shadow-indigo-500/30">GİRİŞ YAP</button>
         </div>
     </section>
 
-    <!-- SİHİRBAZ (HEDEF BELİRLEME - YALNIZCA İLK GİRİŞTE VEYA PROFİLDEN) -->
+    <!-- SİHİRBAZ (HEDEF BELİRLEME) -->
     <section id="screen-survey" class="screen flex-col flex-1 absolute inset-0 bg-white z-[55] items-center p-6 overflow-y-auto pt-16">
         <div class="max-w-xl w-full">
             <div class="bg-gradient-to-r from-indigo-500 to-indigo-700 rounded-[2rem] p-8 text-white shadow-lg mb-8 relative overflow-hidden">
@@ -159,28 +159,28 @@
             </div>
 
             <div class="space-y-4">
-                <button onclick="setGoal('artikel')" class="survey-btn hover:border-rose-400 hover:shadow-md"><div class="w-14 h-14 bg-rose-100 text-rose-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-cards"></i></div><span>Artikeller (der/die/das) sürekli karışıyor!</span></button>
-                <button onclick="setGoal('vocab')" class="survey-btn hover:border-amber-400 hover:shadow-md"><div class="w-14 h-14 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-brain"></i></div><span>Kelimelerin anlamlarını çabuk unutuyorum.</span></button>
-                <button onclick="setGoal('listening')" class="survey-btn hover:border-blue-400 hover:shadow-md"><div class="w-14 h-14 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span>Duyduğumda kelimeyi çıkaramıyorum.</span></button>
-                <button onclick="setGoal('writing')" class="survey-btn hover:border-purple-400 hover:shadow-md"><div class="w-14 h-14 bg-purple-100 text-purple-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span>Yazarken harf veya artikel hatası yapıyorum.</span></button>
-                <button onclick="setGoal('grammar')" class="survey-btn hover:border-teal-400 hover:shadow-md"><div class="w-14 h-14 bg-teal-100 text-teal-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-text-t"></i></div><span>Gramerim zayıf, kurallara çalışmam lazım.</span></button>
-                <button onclick="setGoal('mixed')" class="survey-btn border-teal-500 bg-teal-50 hover:bg-teal-100 hover:shadow-lg transform transition-transform hover:-translate-y-1"><div class="w-14 h-14 bg-gradient-to-br from-teal-400 to-teal-600 text-white rounded-2xl flex items-center justify-center text-2xl shrink-0 shadow-md"><i class="ph-fill ph-flag-checkered"></i></div><span class="text-teal-800 font-black tracking-wide">0'DAN 100'E MEGA MARATON!</span></button>
+                <button onclick="window.setGoal('artikel')" class="survey-btn hover:border-rose-400 hover:shadow-md"><div class="w-14 h-14 bg-rose-100 text-rose-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-cards"></i></div><span>Artikeller (der/die/das) sürekli karışıyor!</span></button>
+                <button onclick="window.setGoal('vocab')" class="survey-btn hover:border-amber-400 hover:shadow-md"><div class="w-14 h-14 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-brain"></i></div><span>Kelimelerin anlamlarını çabuk unutuyorum.</span></button>
+                <button onclick="window.setGoal('listening')" class="survey-btn hover:border-blue-400 hover:shadow-md"><div class="w-14 h-14 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span>Duyduğumda kelimeyi çıkaramıyorum.</span></button>
+                <button onclick="window.setGoal('writing')" class="survey-btn hover:border-purple-400 hover:shadow-md"><div class="w-14 h-14 bg-purple-100 text-purple-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span>Yazarken harf veya artikel hatası yapıyorum.</span></button>
+                <button onclick="window.setGoal('grammar')" class="survey-btn hover:border-teal-400 hover:shadow-md"><div class="w-14 h-14 bg-teal-100 text-teal-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-text-t"></i></div><span>Gramerim zayıf, kurallara çalışmam lazım.</span></button>
+                <button onclick="window.setGoal('mixed')" class="survey-btn border-teal-500 bg-teal-50 hover:bg-teal-100 hover:shadow-lg transform transition-transform hover:-translate-y-1"><div class="w-14 h-14 bg-gradient-to-br from-teal-400 to-teal-600 text-white rounded-2xl flex items-center justify-center text-2xl shrink-0 shadow-md"><i class="ph-fill ph-flag-checkered"></i></div><span class="text-teal-800 font-black tracking-wide">0'DAN 100'E MEGA MARATON!</span></button>
             </div>
         </div>
     </section>
 
     <!-- NAVİGASYON -->
-    <nav id="side-nav" style="display: none;" class="order-2 md:order-1 w-full md:w-64 md:min-w-[16rem] border-t md:border-t-0 md:border-r border-slate-200 bg-white flex flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] md:shadow-none">
+    <nav id="side-nav" style="display: none;" class="order-2 md:order-1 w-full md:w-64 md:min-w-[16rem] border-t md:border-t-0 md:border-r border-slate-200 bg-white flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] md:shadow-none">
         <div class="hidden md:flex items-center justify-center gap-3 mb-12 mt-4 px-2">
             <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/300x100/ffffff/6366f1?text=Talha+Ozturk'" class="h-24 md:h-32 w-full object-contain">
         </div>
-        <button onclick="switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold">
+        <button onclick="window.switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold">
             <i class="ph ph-compass text-2xl md:text-3xl"></i><span class="text-[10px] md:text-base tracking-wide uppercase md:capitalize">Keşfet</span>
         </button>
-        <button onclick="switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold mt-0 md:mt-2">
+        <button onclick="window.switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold mt-0 md:mt-2">
             <i class="ph ph-chats-circle text-2xl md:text-3xl"></i><span class="text-[10px] md:text-base tracking-wide uppercase md:capitalize">Diyalog</span>
         </button>
-        <button onclick="switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold mt-0 md:mt-2">
+        <button onclick="window.switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold mt-0 md:mt-2">
             <i class="ph ph-user-circle text-2xl md:text-3xl"></i><span class="text-[10px] md:text-base tracking-wide uppercase md:capitalize">Profil</span>
         </button>
     </nav>
@@ -189,7 +189,7 @@
     <main class="order-1 md:order-2 flex-1 relative flex flex-col overflow-hidden">
         
         <!-- ÜST BAR -->
-        <header id="main-header" style="display: none;" class="w-full p-4 md:p-6 flex justify-between items-center max-w-5xl mx-auto border-b border-slate-200 bg-white/80 backdrop-blur-md z-10 sticky top-0">
+        <header id="main-header" style="display: none;" class="w-full p-4 md:p-6 justify-between items-center max-w-5xl mx-auto border-b border-slate-200 bg-white/80 backdrop-blur-md z-10 sticky top-0">
             <div class="flex items-center gap-3 font-bold text-slate-500 bg-slate-100 px-4 py-2 rounded-xl shadow-sm">
                 <i class="ph-fill ph-student text-indigo-500 hidden md:block text-xl"></i>
                 <span id="header-title" class="text-xs sm:text-sm md:text-base text-slate-700 whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px] md:max-w-[400px]">B1'e hazırlanıp o sınavı geçeceksin <3</span>
@@ -212,7 +212,7 @@
                         <i class="ph-fill ph-stack text-3xl text-indigo-300"></i>
                     </div>
                     
-                    <button onclick="openStage('b1_1')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-teal-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
+                    <button onclick="window.openStage('b1_1')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-teal-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
                         <div class="absolute top-4 right-4 guarantee-badge scale-75 transform origin-top-right"><i class="ph-fill ph-seal-check"></i> %100 Garanti</div>
                         <div class="w-20 h-20 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform"><i class="ph-fill ph-file-pdf text-4xl"></i></div>
                         <div class="flex-1 w-full text-center md:text-left">
@@ -225,7 +225,7 @@
                         </div>
                     </button>
 
-                    <button onclick="openStage('b1_2')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-amber-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
+                    <button onclick="window.openStage('b1_2')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-amber-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
                         <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform"><i class="ph-fill ph-file-pdf text-4xl"></i></div>
                         <div class="flex-1 w-full text-center md:text-left">
                             <h3 class="font-black text-xl text-slate-800 mb-1">B1.2 İleri Seviye Kelimeler</h3>
@@ -237,7 +237,7 @@
                         </div>
                     </button>
 
-                    <button onclick="openStage('arena')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-indigo-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
+                    <button onclick="window.openStage('arena')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-indigo-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
                         <div class="w-20 h-20 bg-indigo-50 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform overflow-hidden p-2">
                             <img src="assets/arenab1wortliste.PNG" alt="Arena B1" onerror="this.onerror=null; this.src='https://placehold.co/100x100/6366f1/ffffff?text=Arena'" class="w-full h-full object-contain">
                         </div>
@@ -251,8 +251,7 @@
                         </div>
                     </button>
 
-                    <!-- GRAMER MODÜLÜ -->
-                    <button onclick="openStage('gramer')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-purple-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
+                    <button onclick="window.openStage('gramer')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-purple-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
                         <div class="absolute top-4 right-4 guarantee-badge scale-75 transform origin-top-right bg-purple-500 border-none shadow-purple-500/30"><i class="ph-fill ph-sparkle"></i> Yeni</div>
                         <div class="w-20 h-20 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform"><i class="ph-fill ph-text-t text-4xl"></i></div>
                         <div class="flex-1 w-full text-center md:text-left">
@@ -269,7 +268,7 @@
                 <!-- DİNAMİK YOL (HARİTA) -->
                 <div id="view-learning-path" class="w-full hidden">
                     <div class="flex justify-between items-center mb-6">
-                        <button onclick="goBackToStages()" class="text-slate-500 font-bold hover:text-slate-700 flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> Modüllere Dön</button>
+                        <button onclick="window.goBackToStages()" class="text-slate-500 font-bold hover:text-slate-700 flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> Modüllere Dön</button>
                         <div class="guarantee-badge shadow-none border-none scale-90 origin-right text-[10px] bg-slate-100 text-slate-600"><i class="ph-bold ph-repeat text-indigo-500"></i> Hatalar Tekrarlanır</div>
                     </div>
                     
@@ -278,7 +277,6 @@
                         <p class="font-medium opacity-90 text-lg mt-1 relative z-10" id="path-subtitle">Maraton başlıyor!</p>
                     </div>
 
-                    <!-- Büyük İlerleme Çubuğu -->
                     <div class="w-full bg-slate-200 h-6 rounded-full mb-12 relative shadow-inner overflow-hidden border border-slate-300">
                         <div id="path-main-progress" class="bg-gradient-to-r from-amber-400 to-amber-500 h-full rounded-full transition-all duration-1000 w-0 relative">
                             <div class="absolute top-1.5 left-2 right-2 h-1.5 bg-white/30 rounded-full"></div>
@@ -332,7 +330,7 @@
                         </div>
                     </div>
 
-                    <button onclick="changeGoal()" class="app-btn btn-white w-full py-4 text-sm font-bold shadow-sm border-slate-200"><i class="ph-bold ph-target mr-2"></i> Hedefimi Değiştir</button>
+                    <button onclick="window.changeGoal()" class="app-btn btn-white w-full py-4 text-sm font-bold shadow-sm border-slate-200"><i class="ph-bold ph-target mr-2"></i> Hedefimi Değiştir</button>
                     <button onclick="window.location.reload()" class="app-btn btn-rose w-full py-4 text-sm font-bold shadow-sm mt-3"><i class="ph-bold ph-sign-out mr-2"></i> Çıkış Yap</button>
                 </div>
             </div>
@@ -340,14 +338,12 @@
 
         <!-- EKRAN 4: EĞİTİM / OYUN OTURUMU -->
         <section id="screen-session" class="screen flex-col flex-1 absolute inset-0 bg-white z-20">
-            <!-- ÜST BAR -->
             <div class="w-full max-w-4xl mx-auto p-4 md:p-6 flex items-center gap-6">
-                <button onclick="quitSession()" class="text-slate-400 hover:text-slate-600 transition-colors bg-slate-100 hover:bg-slate-200 p-2 rounded-full"><i class="ph-bold ph-x text-2xl"></i></button>
+                <button onclick="window.quitSession()" class="text-slate-400 hover:text-slate-600 transition-colors bg-slate-100 hover:bg-slate-200 p-2 rounded-full"><i class="ph-bold ph-x text-2xl"></i></button>
                 <div class="flex-1 progress-bar-bg"><div id="session-progress" class="progress-bar-fill"></div></div>
                 <div class="flex items-center gap-1.5 font-bold text-rose-500 bg-rose-50 px-3 py-1.5 rounded-xl border border-rose-100"><i class="ph-fill ph-heart text-xl"></i><span id="session-hearts">10</span></div>
             </div>
 
-            <!-- ANİMASYONLU KARAKTER DİYALOG ALANI -->
             <div class="w-full max-w-3xl mx-auto px-6 pt-2 pb-4 flex justify-between items-end">
                 <div class="flex flex-col items-start w-1/2 pr-2">
                     <div id="talha-bubble" class="chat-bubble bg-indigo-50 border border-indigo-100 text-indigo-800 rounded-2xl rounded-bl-none mb-3 inline-block">Hadi başlayalım!</div>
@@ -359,35 +355,30 @@
                 </div>
             </div>
 
-            <!-- SORU İÇERİĞİ -->
             <div class="flex-1 overflow-y-auto px-4 md:px-8 pt-2 pb-32 flex flex-col justify-start items-center max-w-3xl mx-auto w-full" id="session-content">
-                <!-- Soru İçeriği JS ile Gelecek -->
+                <!-- Soru İçeriği -->
             </div>
 
-            <!-- ALT KONTROL -->
             <div class="w-full p-4 md:p-6 bg-white/90 backdrop-blur-sm border-t border-slate-200 flex justify-center fixed bottom-0 z-30">
                 <div class="max-w-4xl w-full">
-                    <button id="btn-check" onclick="checkAnswer()" disabled class="app-btn btn-teal w-full py-4 text-xl shadow-lg shadow-teal-500/20">Kontrol Et</button>
+                    <button id="btn-check" onclick="window.checkAnswer()" disabled class="app-btn btn-teal w-full py-4 text-xl shadow-lg shadow-teal-500/20">Kontrol Et</button>
                 </div>
             </div>
 
-            <!-- GERİ BİLDİRİM (BOTTOM SHEET) -->
             <div id="feedback-sheet" class="bottom-sheet p-6 pt-8 pb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t-2 bg-white">
                 <div class="flex items-center gap-5">
                     <div id="feedback-icon" class="w-14 h-14 rounded-2xl flex items-center justify-center bg-white shadow-sm text-3xl shrink-0 border border-slate-100"></div>
                     <div><h2 id="feedback-title" class="text-2xl font-black mb-1 tracking-tight"></h2><p id="feedback-desc" class="font-medium text-slate-600"></p></div>
                 </div>
-                <button id="btn-next" onclick="nextQuestion()" class="app-btn w-full md:w-48 py-4 text-lg"></button>
+                <button id="btn-next" onclick="window.nextQuestion()" class="app-btn w-full md:w-48 py-4 text-lg"></button>
             </div>
         </section>
 
         <!-- EKRAN 5: DERS BİTİŞİ -->
         <section id="screen-finish" class="screen flex-col flex-1 absolute inset-0 bg-indigo-50 z-40 items-center justify-center p-6 text-center overflow-hidden">
-            
             <div class="w-24 h-24 bg-gradient-to-br from-amber-400 to-amber-600 rounded-3xl flex items-center justify-center text-white mb-6 shadow-xl shadow-amber-500/30 transform rotate-12 relative z-10">
                 <i class="ph-fill ph-trophy text-5xl transform -rotate-12"></i>
             </div>
-
             <h2 class="text-3xl md:text-4xl font-black text-indigo-900 mb-2 relative z-10 tracking-tight">Harika İş Çıkardın!</h2>
             <p class="text-indigo-600 font-medium mb-10 relative z-10">Zorlu antrenmanı başarıyla tamamladın.</p>
             
@@ -402,115 +393,229 @@
                 </div>
             </div>
             
-            <button onclick="finishSession(false)" class="app-btn btn-white w-full max-w-sm py-4 text-lg relative z-10 mb-4 font-bold shadow-sm">Haritaya Dön</button>
-            <button onclick="finishSession(true)" id="btn-next-level" class="app-btn btn-indigo w-full max-w-sm py-4 text-lg relative z-10 shadow-xl shadow-indigo-500/30 font-bold">Sonraki Bölüme Geç <i class="ph-bold ph-arrow-right ml-2"></i></button>
+            <button onclick="window.finishSession(false)" class="app-btn btn-white w-full max-w-sm py-4 text-lg relative z-10 mb-4 font-bold shadow-sm">Haritaya Dön</button>
+            <button onclick="window.finishSession(true)" id="btn-next-level" class="app-btn btn-indigo w-full max-w-sm py-4 text-lg relative z-10 shadow-xl shadow-indigo-500/30 font-bold">Sonraki Bölüme Geç <i class="ph-bold ph-arrow-right ml-2"></i></button>
             
             <div id="star-container" class="absolute inset-0 pointer-events-none"></div>
         </section>
     </main>
 
+    <!-- CORE UI & LOADER SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const progress = document.getElementById('loader-progress');
+            if (progress) progress.style.width = '100%';
+            
+            // Eğer Firebase tamamen çökerse diye acil durum kapatması
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                // Sadece login ekranındaysa kapat (Zaten attemptLogin'de de kapatıyoruz ama garanti olsun)
+                if (loader && document.getElementById('screen-login').classList.contains('active')) {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.display = 'none', 400);
+                }
+            }, 3000);
+        });
+    </script>
+
     <!-- FIREBASE & UYGULAMA LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        let auth, db, appId, currentUser = null;
+        let auth = null, db = null, appId = 'default', currentUser = null;
+        let firebaseReady = false;
 
-        // Global State (Firebase ile eşitlenecek)
+        const LOCAL_STORAGE_KEY = 'b1kamp_data_v2';
+
+        // Global State 
         window.totalXP = 0;
         window.hearts = 10;
         window.stageProgress = { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 };
         window.selectedGoal = null;
 
-        // Initialize Firebase
+        // SAFE FIREBASE INIT
         async function initFirebase() {
             try {
-                const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-                const app = initializeApp(firebaseConfig);
+                if (typeof window.__firebase_config === 'undefined' || !window.__firebase_config) {
+                    console.warn("Firebase config yok. LocalStorage kullanılacak.");
+                    return false;
+                }
+
+                let configObj;
+                try {
+                    configObj = typeof window.__firebase_config === 'string' ? JSON.parse(window.__firebase_config) : window.__firebase_config;
+                } catch(err) {
+                    console.warn("Firebase config parse hatası. LocalStorage kullanılacak.");
+                    return false;
+                }
+
+                if (!configObj || !configObj.apiKey) {
+                    console.warn("Geçersiz Firebase config. LocalStorage kullanılacak.");
+                    return false;
+                }
+
+                const app = initializeApp(configObj);
                 auth = getAuth(app);
                 db = getFirestore(app);
-                appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            } catch(e) { console.error("Firebase init err:", e); }
+                appId = typeof window.__app_id !== 'undefined' ? window.__app_id : 'b1kamp-default';
+                firebaseReady = true;
+                return true;
+            } catch(e) { 
+                console.error("Firebase başlatma hatası:", e); 
+                firebaseReady = false;
+                return false;
+            }
         }
 
-        // Firebase Progress Yükleme
+        // SAFE LOAD PROGRESS
         async function loadProgress() {
-            if(!currentUser) return;
-            try {
-                const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    window.totalXP = data.totalXP || 0;
-                    window.hearts = data.hearts || 10;
-                    window.stageProgress = data.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 };
-                    window.selectedGoal = data.selectedGoal || null;
-                }
-            } catch(e) { console.error("Load progress err:", e); }
+            let loadedData = null;
+
+            // 1. Firebase'den dene
+            if(firebaseReady && currentUser && db) {
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        loadedData = docSnap.data();
+                    }
+                } catch(e) { console.warn("Firebase veri çekme hatası:", e); }
+            }
+
+            // 2. Olmazsa veya Firebase yoksa LocalStorage'dan dene
+            if (!loadedData) {
+                try {
+                    const localData = localStorage.getItem(LOCAL_STORAGE_KEY);
+                    if (localData) loadedData = JSON.parse(localData);
+                } catch(e) { console.warn("LocalStorage veri çekme hatası:", e); }
+            }
+
+            // 3. Veriyi uygula
+            if (loadedData) {
+                window.totalXP = loadedData.totalXP !== undefined ? loadedData.totalXP : 0;
+                window.hearts = loadedData.hearts !== undefined ? loadedData.hearts : 10;
+                window.stageProgress = loadedData.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 };
+                window.selectedGoal = loadedData.selectedGoal || null;
+            }
         }
 
-        // Firebase Progress Kaydetme
+        // SAFE SAVE PROGRESS
         window.saveProgress = async function() {
-            if(!currentUser) return;
+            const dataToSave = {
+                totalXP: window.totalXP || 0,
+                hearts: window.hearts || 10,
+                stageProgress: window.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 },
+                selectedGoal: window.selectedGoal || null
+            };
+
+            // 1. Her zaman LocalStorage'a kaydet (Güvenlik ağı)
             try {
-                const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
-                await setDoc(docRef, {
-                    totalXP: window.totalXP,
-                    hearts: window.hearts,
-                    stageProgress: window.stageProgress,
-                    selectedGoal: window.selectedGoal
-                }, { merge: true });
-            } catch(e) { console.error("Save progress err:", e); }
-        };
+                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave));
+            } catch(e) { console.warn("LocalStorage kaydetme hatası:", e); }
 
-        // Giriş İşlemi
-        window.attemptLogin = async function() {
-            const user = document.getElementById('login-user').value.toLowerCase().trim();
-            const pass = document.getElementById('login-pass').value.toLowerCase().trim();
-            
-            if(user === 'nisan' && pass === 'talha') {
-                document.getElementById('login-error').classList.add('hidden');
-                document.getElementById('btn-login').innerText = "BULUTA BAĞLANILIYOR...";
-                document.getElementById('btn-login').disabled = true;
-
-                await initFirebase();
-                
-                // Auth
+            // 2. Firebase çalışıyorsa buluta eşitle
+            if(firebaseReady && currentUser && db) {
                 try {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } catch(e) { console.error("Auth err", e); }
-
-                onAuthStateChanged(auth, async (user) => {
-                    if(user) {
-                        currentUser = user;
-                        await loadProgress();
-                        
-                        document.getElementById('side-nav').style.display = '';
-                        document.getElementById('main-header').style.display = 'flex';
-                        initAudio(); 
-                        
-                        if(window.selectedGoal) {
-                            window.switchScreen('dashboard');
-                        } else {
-                            window.switchScreen('survey');
-                        }
-                        
-                        window.updateTopBar();
-                        window.updateDashboardProgress();
-                    }
-                });
-
-            } else {
-                document.getElementById('login-error').classList.remove('hidden');
+                    const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
+                    await setDoc(docRef, dataToSave, { merge: true });
+                } catch(e) { console.warn("Firebase kaydetme hatası:", e); }
             }
         };
 
-        // Hedef Belirleme (Survey)
+        // SAFE LOGIN
+        window.attemptLogin = async function() {
+            const userEl = document.getElementById('login-user');
+            const passEl = document.getElementById('login-pass');
+            const errorEl = document.getElementById('login-error');
+            const btnEl = document.getElementById('btn-login');
+
+            if (!userEl || !passEl || !errorEl || !btnEl) return;
+
+            const user = userEl.value.toLowerCase().trim();
+            const pass = passEl.value.toLowerCase().trim();
+            
+            if(user === 'nisan' && pass === 'talha') {
+                errorEl.classList.add('hidden');
+                btnEl.innerText = "SİSTEME BAĞLANILIYOR...";
+                btnEl.disabled = true;
+
+                // Firebase'i başlatmayı dene
+                await initFirebase();
+                
+                // Eğer Firebase hazırsa Auth işlemlerini yap
+                if (firebaseReady && auth) {
+                    try {
+                        let customToken = typeof window.__initial_auth_token !== 'undefined' ? window.__initial_auth_token : null;
+                        if (customToken) {
+                            await signInWithCustomToken(auth, customToken);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                        
+                        onAuthStateChanged(auth, async (userObj) => {
+                            if(userObj) {
+                                currentUser = userObj;
+                                await completeLoginProcess();
+                            } else {
+                                await completeLoginProcess();
+                            }
+                        });
+                    } catch(e) { 
+                        console.warn("Auth hatası, lokal olarak devam ediliyor:", e); 
+                        firebaseReady = false;
+                        await completeLoginProcess();
+                    }
+                } else {
+                    // Firebase yoksa lokal devam et
+                    await completeLoginProcess();
+                }
+            } else {
+                errorEl.classList.remove('hidden');
+            }
+        };
+
+        async function completeLoginProcess() {
+            await loadProgress();
+            
+            const sideNav = document.getElementById('side-nav');
+            const mainHeader = document.getElementById('main-header');
+            const loader = document.getElementById('loader');
+            const btnEl = document.getElementById('btn-login');
+
+            if (sideNav) sideNav.style.display = '';
+            if (mainHeader) mainHeader.style.display = 'flex';
+            
+            if (typeof window.initAudio === 'function') window.initAudio(); 
+            
+            if(window.selectedGoal) {
+                window.switchScreen('dashboard');
+            } else {
+                window.switchScreen('survey');
+            }
+            
+            window.updateTopBar();
+            window.updateDashboardProgress();
+
+            // Kapanmayan Loader'ı garantili şekilde kapat
+            if (loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 400);
+            }
+
+            if (btnEl) {
+                btnEl.innerText = "GİRİŞ YAP";
+                btnEl.disabled = false;
+            }
+        }
+
+        // ==========================================
+        // AŞAĞIDAKİ KISIM: İÇERİK, MANTIK VE VERİTABANI
+        // ==========================================
+
         window.setGoal = async function(goal) {
             window.selectedGoal = goal;
             await window.saveProgress();
@@ -521,7 +626,6 @@
             window.switchScreen('survey');
         };
 
-        // Görsel Yükleyici
         window.setImgSrc = function(imgElement, src, fallbackText, color) {
             if (imgElement.getAttribute('data-current-src') === src) return;
             imgElement.setAttribute('data-current-src', src);
@@ -532,26 +636,38 @@
             imgElement.src = src;
         };
 
-        // Ses Motoru
-        let audioCtx;
         window.initAudio = function() {
-            if(!audioCtx) { const AudioContext = window.AudioContext || window.webkitAudioContext; audioCtx = new AudioContext(); }
-            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+            if(!window.audioCtx) { 
+                const AudioContext = window.AudioContext || window.webkitAudioContext; 
+                window.audioCtx = new AudioContext(); 
+            }
+            if (window.audioCtx.state === 'suspended') { window.audioCtx.resume(); }
         }
+
         window.playCorrectSound = function() {
-            window.initAudio(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
-            osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'sine';
-            osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); 
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
-            osc.start(); osc.stop(audioCtx.currentTime + 0.3);
+            window.initAudio(); 
+            if(!window.audioCtx) return;
+            try {
+                const osc = window.audioCtx.createOscillator(); const gain = window.audioCtx.createGain();
+                osc.connect(gain); gain.connect(window.audioCtx.destination); osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, window.audioCtx.currentTime); osc.frequency.setValueAtTime(659.25, window.audioCtx.currentTime + 0.1); 
+                gain.gain.setValueAtTime(0.1, window.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, window.audioCtx.currentTime + 0.3);
+                osc.start(); osc.stop(window.audioCtx.currentTime + 0.3);
+            } catch(e){}
         }
+
         window.playWrongSound = function() {
-            window.initAudio(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
-            osc.connect(gain); gain.connect(audioCtx.destination); osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(300, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.3);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
-            osc.start(); osc.stop(audioCtx.currentTime + 0.3);
+            window.initAudio(); 
+            if(!window.audioCtx) return;
+            try {
+                const osc = window.audioCtx.createOscillator(); const gain = window.audioCtx.createGain();
+                osc.connect(gain); gain.connect(window.audioCtx.destination); osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(300, window.audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(150, window.audioCtx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.1, window.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, window.audioCtx.currentTime + 0.3);
+                osc.start(); osc.stop(window.audioCtx.currentTime + 0.3);
+            } catch(e){}
         }
+
         window.speakWord = function(word) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -562,7 +678,9 @@
         }
 
         window.triggerStars = function() {
-            const container = document.getElementById('star-container'); container.innerHTML = '';
+            const container = document.getElementById('star-container'); 
+            if(!container) return;
+            container.innerHTML = '';
             for(let i=0; i<40; i++) {
                 const star = document.createElement('i'); star.className = 'ph-fill ph-star star-particle';
                 star.style.left = Math.random() * 100 + '%'; star.style.bottom = '-50px'; star.style.animationDelay = (Math.random() * 0.5) + 's';
@@ -571,7 +689,6 @@
             }
         }
 
-        // DEV VERİTABANI
         const dbContent = {
             'b1_1': [
                 { article: "der", word: "Abfall", tr: "atık" }, { article: "der", word: "Abflug", tr: "kalkış" }, { article: "die", word: "Absage", tr: "iptal" },
@@ -668,7 +785,6 @@
                 { article: "das", word: "Profil", tr: "profil" }, { article: "der", word: "Kommentar", tr: "yorum" }, { article: "-", word: "abonnieren", tr: "abone olmak" },
                 { article: "-", word: "teilen", tr: "paylaşmak" }, { article: "-", word: "liken", tr: "beğenmek" }
             ],
-            // YENİ: GRAMER KÜTÜPHANESİ
             'gramer': [
                 { type: 'grammar', text: "Ich bleibe zu Hause, ___ es regnet.", options: ["weil", "obwohl", "dass", "wenn"], answer: "weil", tr: "Evde kalıyorum, çünkü yağmur yağıyor." },
                 { type: 'grammar', text: "___ es regnet, gehe ich spazieren.", options: ["Obwohl", "Weil", "Dass", "Wenn"], answer: "Obwohl", tr: "Yağmur yağmasına rağmen, yürüyüşe çıkıyorum." },
@@ -690,70 +806,17 @@
             ]
         };
 
-        // DİYALOGLAR (Genişletildi)
         const dialoguesData = [
-            {
-                title: "Havalimanında (Am Flughafen)", icon: "ph-airplane-tilt", color: "indigo",
-                a: "Entschuldigung, wissen Sie, wo die <span class='font-bold text-indigo-600'>Gepäckausgabe</span> ist?",
-                b: "Ja, natürlich. Gehen Sie am <span class='font-bold text-teal-600'>Schalter</span> vorbei."
-            },
-            {
-                title: "Çevre (Umweltschutz)", icon: "ph-tree-evergreen", color: "teal",
-                a: "Der <span class='font-bold text-indigo-600'>Klimawandel</span> ist ein großes Problem für die Erde.",
-                b: "Das stimmt. Wir müssen Müll trennen und Plastik vermeiden."
-            },
-            {
-                title: "Parti Planlama (Party planen)", icon: "ph-confetti", color: "amber",
-                a: "Wir sollten eine Überraschungsparty für Anna organisieren. Hast du Lust?",
-                b: "Klar! Ich kann mich um die <span class='font-bold text-teal-600'>Getränke</span> kümmern."
-            },
-            {
-                title: "Doktorda (Beim Arzt)", icon: "ph-first-aid", color: "rose",
-                a: "Guten Tag, Herr Doktor. Ich habe starke <span class='font-bold text-indigo-600'>Kopfschmerzen</span> und Fieber.",
-                b: "Ich verschreibe Ihnen ein <span class='font-bold text-teal-600'>Medikament</span>. Bleiben Sie im Bett."
-            },
-            {
-                title: "Şikayet (Reklamation)", icon: "ph-warning-circle", color: "purple",
-                a: "Entschuldigung, meine Suppe ist leider völlig kalt.",
-                b: "Oh, das tut mir sehr leid. Ich bringe Ihnen sofort eine neue."
-            }
+            { title: "Havalimanında (Am Flughafen)", icon: "ph-airplane-tilt", color: "indigo", a: "Entschuldigung, wissen Sie, wo die <span class='font-bold text-indigo-600'>Gepäckausgabe</span> ist?", b: "Ja, natürlich. Gehen Sie am <span class='font-bold text-teal-600'>Schalter</span> vorbei." },
+            { title: "Çevre (Umweltschutz)", icon: "ph-tree-evergreen", color: "teal", a: "Der <span class='font-bold text-indigo-600'>Klimawandel</span> ist ein großes Problem für die Erde.", b: "Das stimmt. Wir müssen Müll trennen und Plastik vermeiden." },
+            { title: "Parti Planlama (Party planen)", icon: "ph-confetti", color: "amber", a: "Wir sollten eine Überraschungsparty für Anna organisieren. Hast du Lust?", b: "Klar! Ich kann mich um die <span class='font-bold text-teal-600'>Getränke</span> kümmern." },
+            { title: "Doktorda (Beim Arzt)", icon: "ph-first-aid", color: "rose", a: "Guten Tag, Herr Doktor. Ich habe starke <span class='font-bold text-indigo-600'>Kopfschmerzen</span> und Fieber.", b: "Ich verschreibe Ihnen ein <span class='font-bold text-teal-600'>Medikament</span>. Bleiben Sie im Bett." },
+            { title: "Şikayet (Reklamation)", icon: "ph-warning-circle", color: "purple", a: "Entschuldigung, meine Suppe ist leider völlig kalt.", b: "Oh, das tut mir sehr leid. Ich bringe Ihnen sofort eine neue." }
         ];
 
-        let activePathNodes = [];
-        let currentPathNodeIndex = 0;
-        let activeSessionNodeIdx = 0; 
-        let totalQuestionsAtStart = 0; 
-        let sessionQuestions = [];
-        let currentQIndex = 0;
-        let selectedOptionBtn = null;
-        let correctAnswersCount = 0;
-        let matchSelections = []; 
-
-        // Ekran ve UI Değiştirme
-        window.switchScreen = function(screenName) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(`screen-${screenName}`).classList.add('active');
-            
-            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-            const navBtn = document.getElementById(`nav-${screenName}`);
-            if(navBtn) navBtn.classList.add('active');
-
-            const header = document.getElementById('main-header');
-            if(screenName === 'login' || screenName === 'session' || screenName === 'finish' || screenName === 'survey') {
-                header.style.display = 'none';
-            } else {
-                header.style.display = 'flex';
-                if(screenName === 'dashboard') {
-                    window.goBackToStages();
-                    window.updateDashboardProgress();
-                } else if(screenName === 'dialogues') {
-                    renderDialogues();
-                }
-            }
-        };
-
-        function renderDialogues() {
+        window.renderDialogues = function() {
             const container = document.getElementById('dialogues-container');
+            if(!container) return;
             container.innerHTML = '';
             dialoguesData.forEach(d => {
                 container.innerHTML += `
@@ -777,15 +840,36 @@
             });
         }
 
+        window.switchScreen = function(screenName) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            const screenEl = document.getElementById(`screen-${screenName}`);
+            if(screenEl) screenEl.classList.add('active');
+            
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            const navBtn = document.getElementById(`nav-${screenName}`);
+            if(navBtn) navBtn.classList.add('active');
+
+            const header = document.getElementById('main-header');
+            if(screenName === 'login' || screenName === 'session' || screenName === 'finish' || screenName === 'survey') {
+                if(header) header.style.display = 'none';
+            } else {
+                if(header) header.style.display = 'flex';
+                if(screenName === 'dashboard') {
+                    window.goBackToStages();
+                    window.updateDashboardProgress();
+                } else if(screenName === 'dialogues') {
+                    window.renderDialogues();
+                }
+            }
+        };
+
         window.openStage = function(stageId) {
             window.activeStage = stageId;
             document.getElementById('view-stage-selection').classList.add('hidden');
             
-            // Eğer gramer seçildiyse hedef bellidir (grammar), sihirbaza gerek yok
             if(stageId === 'gramer') {
                 window.buildPath('grammar');
             } else if(window.selectedGoal) {
-                // Önceden bir hedef seçmişse sihirbazı atla
                 window.buildPath(window.selectedGoal);
             } else {
                 window.switchScreen('survey');
@@ -793,12 +877,13 @@
         };
 
         window.goBackToStages = function() {
+            document.getElementById('view-survey').classList.add('hidden');
             document.getElementById('view-learning-path').classList.add('hidden');
             document.getElementById('view-stage-selection').classList.remove('hidden');
             window.activeStage = null;
         };
 
-        // ================= MEGA HARİTA OLUŞTURUCU =================
+        // MEGA HARİTA OLUŞTURUCU 
         window.buildPath = function(choice) {
             if(document.getElementById('screen-survey').classList.contains('active')) {
                 window.switchScreen('dashboard');
@@ -823,7 +908,6 @@
 
             let nodes = [];
             
-            // GRAMER MODU ÖZEL YOL
             if(choice === 'grammar' || window.activeStage === 'gramer') {
                 nodes = [
                     {type: 'grammar', count: 10, label: 'Bağlaçlar 1', color: 'purple', icon: '<i class="ph-fill ph-text-t"></i>'},
@@ -833,7 +917,7 @@
                     {type: 'grammar', count: 30, label: 'Relativsatz', color: 'teal', icon: '<i class="ph-fill ph-text-t"></i>'},
                     {type: 'grammar', count: 50, label: 'Mega Sınav', color: 'purple', icon: '<i class="ph-fill ph-crown"></i>'}
                 ];
-                window.activeStage = 'gramer'; // Zorla
+                window.activeStage = 'gramer'; 
             }
             else if(choice === 'artikel') {
                 nodes = [
@@ -888,16 +972,16 @@
                 ];
             }
 
-            activePathNodes = nodes.map(n => ({...n, completed: false}));
+            window.activePathNodes = nodes.map(n => ({...n, completed: false}));
             
             let currentPct = window.stageProgress[window.activeStage];
-            let completedCount = Math.floor((currentPct / 100) * activePathNodes.length);
+            let completedCount = Math.floor((currentPct / 100) * window.activePathNodes.length);
             for(let i=0; i<completedCount; i++) {
-                if(activePathNodes[i]) activePathNodes[i].completed = true;
+                if(window.activePathNodes[i]) window.activePathNodes[i].completed = true;
             }
             
-            currentPathNodeIndex = activePathNodes.findIndex(n => !n.completed);
-            if(currentPathNodeIndex === -1) currentPathNodeIndex = activePathNodes.length - 1; 
+            window.currentPathNodeIndex = window.activePathNodes.findIndex(n => !n.completed);
+            if(window.currentPathNodeIndex === -1) window.currentPathNodeIndex = window.activePathNodes.length - 1; 
 
             window.renderDynamicPath();
             window.updatePathProgressUI();
@@ -909,28 +993,26 @@
             
             const positions = ['-translate-x-12 md:-translate-x-16', 'translate-x-0', 'translate-x-12 md:translate-x-16', 'translate-x-0'];
 
-            activePathNodes.forEach((node, idx) => {
+            window.activePathNodes.forEach((node, idx) => {
                 let posClass = positions[idx % 4];
-                
                 let btnClassStr = `btn-${node.color}`;
-                
-                let isBoss = (idx === activePathNodes.length - 1);
+                let isBoss = (idx === window.activePathNodes.length - 1);
                 let btnSize = isBoss ? 'w-20 h-20 md:w-24 md:h-24 text-3xl md:text-4xl' : 'w-16 h-16 md:w-20 md:h-20 text-2xl md:text-3xl';
                 let bounceClass = '';
                 
                 let stateClass = '';
-                let clickAction = `startSession('${node.type}', ${node.count}, ${idx})`;
+                let clickAction = `window.startSession('${node.type}', ${node.count}, ${idx})`;
                 let displayIcon = node.icon;
                 
                 if (node.completed) {
                     stateClass = 'node-completed'; 
                     displayIcon = '<i class="ph-bold ph-check text-white"></i>'; 
-                } else if (idx > currentPathNodeIndex) {
+                } else if (idx > window.currentPathNodeIndex) {
                     stateClass = 'node-locked'; 
                     clickAction = '';
                     displayIcon = '<i class="ph-bold ph-lock-key text-slate-400"></i>';
                     btnClassStr = 'bg-slate-200 border-slate-300 text-slate-400';
-                } else if (idx === currentPathNodeIndex) {
+                } else if (idx === window.currentPathNodeIndex) {
                     bounceClass = 'animate-bounce border-white border-[4px] ring-4 ring-indigo-200 shadow-xl'; 
                 }
 
@@ -947,15 +1029,17 @@
                     </div>
                 `;
             });
-            container.innerHTML = html;
+            if(container) container.innerHTML = html;
         };
 
         window.updatePathProgressUI = function() {
-            let pct = Math.floor((currentPathNodeIndex / activePathNodes.length) * 100);
-            if (activePathNodes.every(n => n.completed)) pct = 100;
+            let pct = Math.floor((window.currentPathNodeIndex / window.activePathNodes.length) * 100);
+            if (window.activePathNodes.every(n => n.completed)) pct = 100;
             
-            document.getElementById('path-main-progress').style.width = `${pct}%`;
-            document.getElementById('path-main-pct').innerText = pct;
+            const progBar = document.getElementById('path-main-progress');
+            const progPct = document.getElementById('path-main-pct');
+            if(progBar) progBar.style.width = `${pct}%`;
+            if(progPct) progPct.innerText = pct;
             window.stageProgress[window.activeStage] = pct;
             window.saveProgress();
         };
@@ -971,61 +1055,28 @@
         };
 
         window.updateTopBar = function() {
-            document.getElementById('xp-counter').innerText = window.totalXP;
-            document.getElementById('profile-xp').innerText = window.totalXP;
-            document.getElementById('hearts-counter').innerText = window.hearts;
-            document.getElementById('session-hearts').innerText = window.hearts;
+            const el1 = document.getElementById('xp-counter');
+            const el2 = document.getElementById('profile-xp');
+            const el3 = document.getElementById('hearts-counter');
+            const el4 = document.getElementById('session-hearts');
+
+            if(el1) el1.innerText = window.totalXP;
+            if(el2) el2.innerText = window.totalXP;
+            if(el3) el3.innerText = window.totalXP; // Hearts elementine yanlışlıkla XP yazmışım aşağıda da düzelttim
+            if(el3) el3.innerText = window.hearts;
+            if(el4) el4.innerText = window.hearts;
         };
 
-        // ================= KARAKTER DİYALOG YÖNETİMİ =================
-        window.setAvatars = function(mode) {
-            const nisanImg = document.getElementById('nisan-avatar');
-            const nisanBubble = document.getElementById('nisan-bubble');
-            const talhaImg = document.getElementById('talha-avatar');
-            const talhaBubble = document.getElementById('talha-bubble');
+        // ================= OYUN MOTORU & STATE =================
+        let activeSessionNodeIdx = 0; 
+        let totalQuestionsAtStart = 0; 
+        let sessionQuestions = [];
+        let currentQIndex = 0;
+        let selectedOptionBtn = null;
+        let correctAnswersCount = 0;
+        let matchSelections = []; 
+        let sessionType = 'vocab';
 
-            window.setImgSrc(nisanImg, "assets/nisan.png", "Nisan", "f59e0b");
-            nisanImg.className = "w-14 h-14 md:w-20 md:h-20 rounded-full border-[3px] md:border-4 border-amber-200 object-cover bg-white shadow-md z-10";
-            
-            window.setImgSrc(talhaImg, "assets/talhaarkaplansiz.png", "Talha", "6366f1");
-            talhaImg.className = "w-14 h-14 md:w-20 md:h-20 rounded-full border-[3px] md:border-4 border-indigo-200 object-cover bg-white shadow-md z-10 anim-talk";
-            
-            setTimeout(() => { talhaImg.classList.remove('anim-talk'); }, 2000); 
-
-            if(mode === 'grammar') { talhaBubble.innerText = "Kuralları hatırlayalım!"; }
-            else if(mode === 'flashcards') { talhaBubble.innerText = "Dinle ve ezberle bebeğim!"; }
-            else if(mode === 'listening') { talhaBubble.innerText = "Ne duyduğunu anladın mı?"; }
-            else if(mode === 'writing') { talhaBubble.innerText = "Hadi, hatasız yaz bakalım!"; }
-            else if(mode === 'dictation') { talhaBubble.innerText = "Duyduğunu tam olarak yaz!"; }
-            else if(mode === 'matching') { talhaBubble.innerText = "Çiftleri doğru eşleştirebilecek misin?"; }
-            else if(mode === 'artikel') { talhaBubble.innerText = "Der mi, Die mi, Das mı?"; }
-            else { talhaBubble.innerText = "Bunun anlamı nedir hayatım?"; }
-
-            const nisanThoughts = ["Hımm, düşünüyoruum...", "Bunu biliyorum galiba!", "Odaklanmam lazım...", "Hallettim say!"];
-            nisanBubble.innerText = nisanThoughts[Math.floor(Math.random() * nisanThoughts.length)];
-        };
-
-        window.reactNisan = function(isCorrect) {
-            const nisanImg = document.getElementById('nisan-avatar');
-            const nisanBubble = document.getElementById('nisan-bubble');
-            
-            nisanImg.classList.remove('anim-happy', 'anim-sad');
-            void nisanImg.offsetWidth; 
-
-            if(isCorrect) {
-                window.setImgSrc(nisanImg, "assets/nisanmutlu.png", "Mutlu", "14b8a6");
-                nisanImg.classList.add('anim-happy');
-                const happyTexts = ["İşte bu kadar!", "Bildiim! 😎", "Çok kolaydı sevgilim!", "Bana mısın demem!"];
-                nisanBubble.innerText = happyTexts[Math.floor(Math.random() * happyTexts.length)];
-            } else {
-                window.setImgSrc(nisanImg, "assets/nisanuzuluyor.png", "Uzgun", "f43f5e");
-                nisanImg.classList.add('anim-sad');
-                const sadTexts = ["Tüh ya, nasıl kaçırdım...", "Off, yanlış oldu 😔", "Bir dahakine bileceğim!", "Aklım karıştı..."];
-                nisanBubble.innerText = sadTexts[Math.floor(Math.random() * sadTexts.length)];
-            }
-        };
-
-        // ================= OYUN/EĞİTİM MOTORU =================
         window.startSession = function(type, count, nodeIdx) {
             if(window.hearts <= 0) {
                 alert("Canın bitti! Devam etmen için sana ekstra can veriyorum."); 
@@ -1046,32 +1097,12 @@
         };
 
         window.quitSession = function() {
-            window.speechSynthesis.cancel();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
             window.switchScreen('dashboard');
             document.getElementById('view-stage-selection').classList.add('hidden');
             document.getElementById('view-survey').classList.add('hidden');
             document.getElementById('view-learning-path').classList.remove('hidden');
         };
-
-        function generateQuestions(type, amount) {
-            let questions = [];
-            let activePoolData = dbContent[window.activeStage] || dbContent['b1_1']; 
-            
-            if(type === 'grammar') {
-                activePoolData = dbContent['gramer'];
-            } else if(type === 'artikel' || type === 'writing') {
-                activePoolData = activePoolData.filter(item => item.article !== '-');
-            }
-
-            let pool = [...activePoolData];
-            
-            for(let i=0; i<amount; i++) {
-                if(pool.length === 0) pool = [...activePoolData]; 
-                let randIdx = Math.floor(Math.random() * pool.length);
-                questions.push(pool.splice(randIdx, 1)[0]);
-            }
-            return questions;
-        }
 
         window.loadQuestion = function() {
             selectedOptionBtn = null;
@@ -1114,14 +1145,13 @@
                     grid.appendChild(btn);
                 });
             }
-
             // --- 1. EZBER (FLASHCARDS) ---
             else if(mode === 'flashcards') {
                 document.getElementById('btn-check').innerText = "Sonraki";
                 document.getElementById('btn-check').disabled = false;
                 content.innerHTML = `
                     <div class="bg-white border border-slate-200 rounded-[2rem] p-8 w-full text-center shadow-md transform transition-transform hover:-translate-y-1 mt-4">
-                        <button onclick="speakWord('${q.word}')" class="mb-6 w-20 h-20 bg-indigo-50 text-indigo-500 rounded-full text-4xl mx-auto flex items-center justify-center speaker-btn border border-indigo-100 shadow-sm active:translate-y-1">
+                        <button onclick="window.speakWord('${q.word}')" class="mb-6 w-20 h-20 bg-indigo-50 text-indigo-500 rounded-full text-4xl mx-auto flex items-center justify-center speaker-btn border border-indigo-100 shadow-sm active:translate-y-1">
                             <i class="ph-fill ph-speaker-high"></i>
                         </button>
                         <p class="text-lg font-extrabold uppercase tracking-widest text-slate-400 mb-1">${q.article === '-' ? '' : q.article}</p>
@@ -1133,20 +1163,18 @@
                 `;
                 window.speakWord(q.word);
             }
-
             // --- 2. DINLEME (LISTENING) ---
             else if(mode === 'listening') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 content.innerHTML = `
-                    <button onclick="speakWord('${q.word}')" class="mt-4 mb-8 w-20 h-20 md:w-24 md:h-24 bg-indigo-500 text-white rounded-full text-4xl md:text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-indigo-500/40 active:translate-y-1">
+                    <button onclick="window.speakWord('${q.word}')" class="mt-4 mb-8 w-20 h-20 md:w-24 md:h-24 bg-indigo-500 text-white rounded-full text-4xl md:text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-indigo-500/40 active:translate-y-1">
                         <i class="ph-fill ph-speaker-high"></i>
                     </button>
                     <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full"></div>
                 `;
                 window.speakWord(q.word);
-                generateOptions(q, 'options-grid');
+                window.generateOptions(q, 'options-grid');
             }
-
             // --- 3. YAZMA (WRITING) ---
             else if(mode === 'writing') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
@@ -1161,16 +1189,15 @@
                         <input type="text" id="write-input" placeholder="Artikel ile birlikte (Örn: der Tisch)" autocomplete="off" autocorrect="off" class="w-full border-2 border-slate-200 border-b-4 rounded-[1.5rem] px-6 py-5 font-bold text-slate-800 outline-none focus:border-indigo-400 bg-white text-xl sm:text-2xl text-center shadow-sm transition-colors">
                     </div>
                 `;
-                setTimeout(() => document.getElementById('write-input').focus(), 100);
+                setTimeout(() => { const el = document.getElementById('write-input'); if(el) el.focus(); }, 100);
                 document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') window.checkAnswer(); });
             }
-
             // --- 4. DİNLE & YAZ (DICTATION) ---
             else if(mode === 'dictation') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 document.getElementById('btn-check').disabled = false; 
                 content.innerHTML = `
-                    <button onclick="speakWord('${q.word}')" class="mt-4 mb-8 w-20 h-20 md:w-24 md:h-24 bg-purple-500 text-white rounded-full text-4xl md:text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-purple-500/40 active:translate-y-1">
+                    <button onclick="window.speakWord('${q.word}')" class="mt-4 mb-8 w-20 h-20 md:w-24 md:h-24 bg-purple-500 text-white rounded-full text-4xl md:text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-purple-500/40 active:translate-y-1">
                         <i class="ph-fill ph-waveform"></i>
                     </button>
                     <div class="w-full relative">
@@ -1178,10 +1205,9 @@
                     </div>
                 `;
                 window.speakWord(q.word);
-                setTimeout(() => document.getElementById('write-input').focus(), 100);
+                setTimeout(() => { const el = document.getElementById('write-input'); if(el) el.focus(); }, 100);
                 document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') window.checkAnswer(); });
             }
-
             // --- 5. EŞLEŞTİRME (MATCHING) ---
             else if(mode === 'matching') {
                 document.getElementById('btn-check').classList.add('hidden'); 
@@ -1196,15 +1222,14 @@
                 let buttonsHTML = [];
                 pairs.forEach((p, idx) => {
                     let dispWord = p.article === '-' ? p.word : `${p.article} ${p.word}`;
-                    buttonsHTML.push(`<button onclick="selectMatch(this, 'de', ${idx})" class="opt-btn py-3 md:py-4 px-2 w-full text-center text-sm sm:text-base font-bold shadow-sm">${dispWord}</button>`);
-                    buttonsHTML.push(`<button onclick="selectMatch(this, 'tr', ${idx})" class="opt-btn py-3 md:py-4 px-2 w-full text-center text-sm sm:text-base font-bold shadow-sm">${p.tr}</button>`);
+                    buttonsHTML.push(`<button onclick="window.selectMatch(this, 'de', ${idx})" class="opt-btn py-3 md:py-4 px-2 w-full text-center text-sm sm:text-base font-bold shadow-sm">${dispWord}</button>`);
+                    buttonsHTML.push(`<button onclick="window.selectMatch(this, 'tr', ${idx})" class="opt-btn py-3 md:py-4 px-2 w-full text-center text-sm sm:text-base font-bold shadow-sm">${p.tr}</button>`);
                 });
                 
                 buttonsHTML.sort(() => Math.random() - 0.5);
                 content.innerHTML += `<div class="grid grid-cols-2 gap-3 md:gap-4 w-full mt-2" id="matching-grid">${buttonsHTML.join('')}</div>`;
                 content.dataset.pairsFound = 0;
             }
-
             // --- 6. ARTIKEL SEÇİMİ ---
             else if(mode === 'artikel') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
@@ -1228,7 +1253,6 @@
                     grid.appendChild(btn);
                 });
             }
-
             // --- 7. KLASİK VOCAB (OKUMA/ANLAM) ---
             else {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
@@ -1239,17 +1263,17 @@
                             ${dispArticle}
                             <span class="text-2xl md:text-4xl font-black text-slate-800 tracking-tight">${q.word}</span>
                         </div>
-                        <button onclick="speakWord('${q.word}')" class="w-14 h-14 md:w-16 md:h-16 bg-indigo-100 text-indigo-500 rounded-[1rem] md:rounded-[1.2rem] text-2xl flex items-center justify-center shrink-0 border border-indigo-200 active:translate-y-1 transition-transform">
+                        <button onclick="window.speakWord('${q.word}')" class="w-14 h-14 md:w-16 md:h-16 bg-indigo-100 text-indigo-500 rounded-[1rem] md:rounded-[1.2rem] text-2xl flex items-center justify-center shrink-0 border border-indigo-200 active:translate-y-1 transition-transform">
                             <i class="ph-fill ph-speaker-high"></i>
                         </button>
                     </div>
                     <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full"></div>
                 `;
-                generateOptions(q, 'options-grid');
+                window.generateOptions(q, 'options-grid');
             }
         };
 
-        function generateOptions(q, gridId) {
+        window.generateOptions = function(q, gridId) {
             let options = [q];
             let pool = dbContent[window.activeStage] || dbContent['b1_1'];
             while(options.length < 4) {
@@ -1266,7 +1290,7 @@
                 btn.onclick = () => { window.selectOption(btn); if(sessionType === 'listening') window.speakWord(opt.word); };
                 grid.appendChild(btn);
             });
-        }
+        };
 
         window.selectOption = function(btn) {
             document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
@@ -1295,7 +1319,7 @@
                     
                     if(parseInt(content.dataset.pairsFound) === 4) {
                         correctAnswersCount++; window.reactNisan(true); 
-                        setTimeout(() => showFeedback(true, "Harika Eşleştirme!", ""), 800);
+                        setTimeout(() => window.showFeedback(true, "Harika Eşleştirme!", ""), 800);
                     } else {
                         window.reactNisan(true); setTimeout(() => window.setAvatars(sessionType), 1000); 
                     }
@@ -1338,11 +1362,11 @@
 
                 if(isCorrectStr) {
                     correctAnswersCount++; window.playCorrectSound(); window.reactNisan(true);
-                    showFeedback(true, "Harika!", "Doğru yazdın.");
+                    window.showFeedback(true, "Harika!", "Doğru yazdın.");
                 } else {
                     window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
                     let corr = q.article === '-' ? q.word : `${q.article} ${q.word}`;
-                    showFeedback(false, "Yanlış!", `Doğrusu: ${corr}`);
+                    window.showFeedback(false, "Yanlış!", `Doğrusu: ${corr}`);
                     sessionQuestions.push(q); // Spaced Repetition
                 }
                 return;
@@ -1357,19 +1381,19 @@
             if(isCorrect) {
                 selectedOptionBtn.classList.replace('selected', 'correct');
                 correctAnswersCount++; window.playCorrectSound(); window.reactNisan(true);
-                showFeedback(true, "Doğru!", "Harika gidiyorsun.");
+                window.showFeedback(true, "Doğru!", "Harika gidiyorsun.");
             } else {
                 selectedOptionBtn.classList.replace('selected', 'wrong');
                 window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
                 
                 document.querySelectorAll('.opt-btn').forEach(b => { if(b.dataset.correct === "true") b.classList.add('correct'); });
                 let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : (mode === 'grammar' ? `Doğrusu: ${q.answer}` : `Doğrusu: ${q.tr}`);
-                showFeedback(false, "Yanlış!", desc);
+                window.showFeedback(false, "Yanlış!", desc);
                 sessionQuestions.push(q); // Spaced Repetition
             }
         };
 
-        function showFeedback(isCorrect, titleText, descText) {
+        window.showFeedback = function(isCorrect, titleText, descText) {
             const sheet = document.getElementById('feedback-sheet');
             const title = document.getElementById('feedback-title');
             const desc = document.getElementById('feedback-desc');
@@ -1397,7 +1421,7 @@
             nextBtn.className = `app-btn w-full md:w-48 py-4 text-lg shadow-sm ${isCorrect ? 'btn-teal' : 'btn-rose'}`;
             
             sheet.classList.add('show');
-        }
+        };
 
         window.nextQuestion = function() {
             currentQIndex++;
@@ -1418,7 +1442,7 @@
         };
 
         window.showFinishScreen = function() {
-            window.speechSynthesis.cancel();
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
             document.getElementById('feedback-sheet').classList.remove('show');
             document.getElementById('screen-session').classList.remove('active');
             
@@ -1436,7 +1460,7 @@
 
             window.updatePathProgressUI();
             window.updateTopBar();
-            window.saveProgress(); // Cloud Sync
+            window.saveProgress();
             
             document.getElementById('earned-xp').innerText = `+${xpGained}`;
             document.getElementById('accuracy-display').innerText = `${totalQuestionsAtStart} / ${sessionQuestions.length}`; 
@@ -1462,7 +1486,6 @@
                 window.renderDynamicPath();
             }
         };
-
     </script>
 </body>
 </html>
