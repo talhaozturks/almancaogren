@@ -8,7 +8,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Nunito (Duolingo'nun kullandığı fonta çok benzer) -->
+    <!-- Google Fonts: Nunito -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Phosphor Icons -->
@@ -19,7 +19,7 @@
             font-family: 'Nunito', sans-serif;
             background-color: #ffffff;
             color: #3c3c3c;
-            user-select: none; /* Metin seçimini kapat (uygulama hissi) */
+            user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -69,6 +69,9 @@
         .btn-red { background: #ff4b4b; border-color: #ea2b2b; color: white; }
         .btn-red:hover:not(:disabled) { background: #ff5e5e; }
 
+        .btn-orange { background: #ff9600; border-color: #e58700; color: white; }
+        .btn-orange:hover:not(:disabled) { background: #ffaa33; }
+
         .btn-white { background: #ffffff; border-color: #e5e5e5; color: #1cb0f6; }
         .btn-white:hover:not(:disabled) { background: #f7f7f7; }
 
@@ -104,7 +107,7 @@
             color: #ea2b2b;
         }
 
-        /* Geri Bildirim Alt Çekmecesi (Bottom Sheet) */
+        /* Geri Bildirim Alt Çekmecesi */
         .bottom-sheet {
             position: fixed;
             bottom: -100%;
@@ -130,7 +133,7 @@
             transition: opacity 0.4s ease-out;
         }
 
-        /* Menu İkonları */
+        /* Navigasyon İkonları */
         .nav-item {
             color: #afafaf;
             transition: all 0.2s;
@@ -159,7 +162,6 @@
             transition: width 0.4s ease-out;
             position: relative;
         }
-        /* Işık yansıması efekti */
         .progress-bar-fill::after {
             content: '';
             position: absolute;
@@ -173,11 +175,10 @@
 
     </style>
 </head>
-<body class="h-screen w-full flex flex-col md:flex-row overflow-hidden bg-white">
+<body class="h-screen w-full flex flex-col md:flex-row overflow-hidden bg-white relative">
 
     <!-- Sade ve Kişiselleştirilmiş Yükleme Ekranı -->
     <div id="loader">
-        
         <!-- Konuşma Balonu -->
         <div class="relative bg-white border-2 border-gray-200 text-gray-800 font-extrabold rounded-2xl px-6 py-3 mb-6 shadow-sm">
             <p class="text-center text-lg">"Für dich, Baby"<br><span class="text-gray-400 text-sm">-Talha</span></p>
@@ -193,16 +194,34 @@
             <div id="loader-progress" class="h-full bg-[#58cc02] rounded-full w-0 transition-all duration-[2.5s] ease-in-out"></div>
         </div>
         
-        <!-- İmza (%150 büyütüldü) -->
-        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.src='https://placehold.co/300x75/ffffff/58cc02?text=Talha+Ozturk'" class="h-16 md:h-20 object-contain opacity-80">
-        
+        <!-- İmza -->
+        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.src='https://placehold.co/400x100/ffffff/58cc02?text=Talha+Ozturk'" class="h-32 md:h-40 object-contain opacity-80">
     </div>
 
-    <!-- MOBIL ALT NAVİGASYON & DESKTOP SOL MENÜ -->
-    <nav class="order-2 md:order-1 w-full md:w-64 border-t-2 md:border-t-0 md:border-r-2 border-gray-200 bg-white flex flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0">
+    <!-- EKRAN 0: LOGIN (GİRİŞ EKRANI) -->
+    <section id="screen-login" class="screen active flex-col flex-1 absolute inset-0 bg-white z-[60] items-center justify-center p-6 text-center">
+        <div class="max-w-sm w-full bg-white border-2 border-gray-200 rounded-3xl p-8 shadow-sm">
+            <!-- İmza (Logo yerine) -->
+            <img src="assets/imzatalhaozturk.png" alt="Logo" onerror="this.src='https://placehold.co/300x80/58cc02/ffffff?text=Talha'" class="h-20 mx-auto mb-8 object-contain">
+            
+            <h2 class="text-2xl font-black text-gray-800 mb-6 uppercase tracking-wider">Kampa Giriş</h2>
+            
+            <input type="text" id="login-user" placeholder="Hesap Adı (nisan)" class="w-full border-2 border-gray-200 rounded-xl px-4 py-4 mb-4 font-bold text-gray-700 outline-none focus:border-[#1cb0f6] transition-colors bg-gray-50 focus:bg-white text-lg">
+            
+            <input type="password" id="login-pass" placeholder="Şifre (talha)" class="w-full border-2 border-gray-200 rounded-xl px-4 py-4 mb-6 font-bold text-gray-700 outline-none focus:border-[#1cb0f6] transition-colors bg-gray-50 focus:bg-white text-lg">
+            
+            <p id="login-error" class="text-red-500 font-bold mb-4 hidden bg-red-50 p-2 rounded-lg">Kullanıcı adı veya şifre hatalı!</p>
+            
+            <button onclick="attemptLogin()" class="duo-btn btn-green w-full py-4 text-xl mt-2">GİRİŞ YAP</button>
+        </div>
+    </section>
+
+    <!-- MOBİL ALT NAVİGASYON & DESKTOP SOL MENÜ (Giriş yapana kadar gizli) -->
+    <nav id="side-nav" style="display: none;" class="order-2 md:order-1 w-full md:w-64 md:min-w-[16rem] border-t-2 md:border-t-0 md:border-r-2 border-gray-200 bg-white flex flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0">
         
-        <div class="hidden md:flex items-center gap-3 mb-10 pl-2">
-            <h1 class="text-3xl font-black text-[#58cc02] tracking-tighter">b1-lingo</h1>
+        <div class="hidden md:flex items-center justify-center gap-3 mb-12 mt-4 px-2">
+            <!-- Sol üst büyük imza -->
+            <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.src='https://placehold.co/300x100/ffffff/58cc02?text=Talha+Ozturk'" class="h-16 md:h-24 w-full object-contain">
         </div>
 
         <button onclick="switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold">
@@ -210,12 +229,12 @@
             <span class="text-[10px] md:text-lg tracking-wide uppercase md:capitalize">Öğren</span>
         </button>
         
-        <button onclick="switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold">
+        <button onclick="switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold mt-0 md:mt-2">
             <i class="ph ph-chats text-2xl md:text-3xl"></i>
             <span class="text-[10px] md:text-lg tracking-wide uppercase md:capitalize">Diyalog</span>
         </button>
         
-        <button onclick="switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold">
+        <button onclick="switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-3 rounded-2xl md:border-2 border-transparent font-bold mt-0 md:mt-2">
             <i class="ph ph-user text-2xl md:text-3xl"></i>
             <span class="text-[10px] md:text-lg tracking-wide uppercase md:capitalize">Profil</span>
         </button>
@@ -224,67 +243,125 @@
     <!-- ANA İÇERİK ALANI -->
     <main class="order-1 md:order-2 flex-1 relative flex flex-col overflow-hidden bg-white">
         
-        <!-- Üst Bar (XP, Streak, Can) -->
-        <header id="main-header" class="w-full p-4 flex justify-between items-center max-w-4xl mx-auto border-b-2 border-gray-100">
-            <div class="flex items-center gap-2 font-bold text-gray-400">
-                <i class="ph ph-book-open text-2xl text-blue-400"></i>
-                <span>B1 Kampı</span>
+        <!-- Üst Bar (XP, Streak, Can) (Giriş yapana kadar gizli) -->
+        <header id="main-header" style="display: none;" class="w-full p-4 flex justify-between items-center max-w-5xl mx-auto border-b-2 border-gray-100 bg-white z-10">
+            <div class="flex items-center gap-2 font-bold text-gray-500">
+                <i class="ph ph-book-open text-2xl text-[#1cb0f6] hidden sm:block"></i>
+                <span id="header-title" class="text-sm sm:text-base md:text-lg text-[#3c3c3c]">B1'e hazırlanıp o sınavı geçeceksin <3</span>
             </div>
-            <div class="flex gap-4 md:gap-8 font-extrabold text-[1.1rem]">
+            <div class="flex gap-3 md:gap-6 font-extrabold text-[1rem] sm:text-[1.1rem]">
                 <div class="flex items-center gap-1 text-[#ff9600]">
-                    <i class="ph-fill ph-fire text-2xl"></i>
+                    <i class="ph-fill ph-fire text-xl sm:text-2xl"></i>
                     <span>1</span>
                 </div>
                 <div class="flex items-center gap-1 text-[#1cb0f6]">
-                    <i class="ph-fill ph-diamond text-2xl"></i>
+                    <i class="ph-fill ph-diamond text-xl sm:text-2xl"></i>
                     <span id="xp-counter">0</span>
                 </div>
                 <div class="flex items-center gap-1 text-[#ff4b4b]">
-                    <i class="ph-fill ph-heart text-2xl"></i>
+                    <i class="ph-fill ph-heart text-xl sm:text-2xl"></i>
                     <span id="hearts-counter">5</span>
                 </div>
             </div>
         </header>
 
-        <!-- EKRAN 1: DASHBOARD (ÖĞRENME YOLU) -->
-        <section id="screen-dashboard" class="screen active flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
+        <!-- EKRAN 1: DASHBOARD (AŞAMA SEÇİMİ VE ÖĞRENME YOLU) -->
+        <section id="screen-dashboard" class="screen flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
             
             <div class="max-w-xl w-full">
-                <!-- Ünite Başlığı -->
-                <div class="bg-[#58cc02] rounded-2xl p-4 text-white shadow-sm mb-10 border-b-4 border-[#58a700]">
-                    <h2 class="text-2xl font-black tracking-wide">Ünite 1</h2>
-                    <p class="font-bold opacity-90">Schritte B1 & Arena B1 Kelimeleri</p>
-                </div>
-
-                <!-- Öğrenme Yolu (Düğmeler) -->
-                <div class="flex flex-col items-center gap-8 relative pb-20">
-                    <!-- Bağlantı çizgisi (Arkada) -->
-                    <div class="absolute w-2 bg-[#e5e5e5] top-8 bottom-0 -z-10"></div>
-
-                    <!-- Görev 1: Kelime -->
-                    <div class="relative">
-                        <div class="absolute -top-4 -right-10 bg-white border-2 border-gray-200 text-gray-500 font-bold px-3 py-1 rounded-xl shadow-sm text-sm z-10 animate-bounce">
-                            Başla!
+                
+                <!-- GÖRÜNÜM 1: AŞAMA SEÇ (PDF LİSTESİ) -->
+                <div id="view-stage-selection" class="w-full">
+                    <div class="flex items-center justify-between mb-6 pb-2 border-b-2 border-gray-100">
+                        <h2 class="text-2xl font-black text-gray-800">Aşama Seç</h2>
+                        <i class="ph-fill ph-books text-3xl text-gray-300"></i>
+                    </div>
+                    
+                    <!-- Seçenek 1: Arena B1 -->
+                    <button onclick="openStage('arena')" class="w-full mb-6 border-2 border-gray-200 border-b-4 rounded-2xl p-6 flex flex-col items-center hover:bg-gray-50 active:translate-y-1 active:border-b-2 transition-all text-left relative overflow-hidden group">
+                        <img src="assets/arenab1wortliste.PNG" alt="Arena B1 Logo" onerror="this.src='https://placehold.co/300x120/1cb0f6/ffffff?text=Arena+B1+Logo'" class="h-24 md:h-28 object-contain mb-4 rounded-xl group-hover:scale-105 transition-transform">
+                        <h3 class="font-black text-xl w-full text-center text-[#1cb0f6] mb-3">ArenaB1-Wortliste.pdf</h3>
+                        <div class="w-full bg-gray-200 h-4 rounded-full">
+                            <div id="prog-bar-arena" class="bg-[#1cb0f6] h-full rounded-full transition-all duration-1000 w-0 relative">
+                                <div class="absolute top-1 left-2 right-2 h-1 bg-white/30 rounded-full"></div>
+                            </div>
                         </div>
-                        <button onclick="startSession('vocab')" class="w-20 h-20 rounded-full bg-[#58cc02] border-b-8 border-[#58a700] flex items-center justify-center text-white active:border-b-0 active:translate-y-2 transition-all">
-                            <i class="ph-fill ph-star text-4xl"></i>
-                        </button>
+                        <p class="text-sm font-bold text-gray-400 mt-2"><span id="prog-pct-arena">0</span>% Tamamlandı</p>
+                    </button>
+
+                    <!-- Seçenek 2: B1.1 -->
+                    <button onclick="openStage('b1_1')" class="w-full mb-6 border-2 border-gray-200 border-b-4 rounded-2xl p-6 flex flex-col items-center hover:bg-gray-50 active:translate-y-1 active:border-b-2 transition-all text-left relative overflow-hidden">
+                        <div class="w-16 h-16 bg-[#58cc02]/10 text-[#58cc02] rounded-full flex items-center justify-center mb-3">
+                            <i class="ph-fill ph-file-pdf text-3xl"></i>
+                        </div>
+                        <h3 class="font-black text-xl w-full text-center text-[#58cc02] mb-3">B1.1_Wortschatzliste_Tuerkisch.pdf</h3>
+                        <div class="w-full bg-gray-200 h-4 rounded-full">
+                            <div id="prog-bar-b1_1" class="bg-[#58cc02] h-full rounded-full transition-all duration-1000 w-0 relative">
+                                <div class="absolute top-1 left-2 right-2 h-1 bg-white/30 rounded-full"></div>
+                            </div>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400 mt-2"><span id="prog-pct-b1_1">0</span>% Tamamlandı</p>
+                    </button>
+
+                    <!-- Seçenek 3: B1.2 -->
+                    <button onclick="openStage('b1_2')" class="w-full mb-6 border-2 border-gray-200 border-b-4 rounded-2xl p-6 flex flex-col items-center hover:bg-gray-50 active:translate-y-1 active:border-b-2 transition-all text-left relative overflow-hidden">
+                        <div class="w-16 h-16 bg-[#ff9600]/10 text-[#ff9600] rounded-full flex items-center justify-center mb-3">
+                            <i class="ph-fill ph-file-pdf text-3xl"></i>
+                        </div>
+                        <h3 class="font-black text-xl w-full text-center text-[#ff9600] mb-3">B1.2_Wortschatzliste_Tuerkisch.pdf</h3>
+                        <div class="w-full bg-gray-200 h-4 rounded-full">
+                            <div id="prog-bar-b1_2" class="bg-[#ff9600] h-full rounded-full transition-all duration-1000 w-0 relative">
+                                <div class="absolute top-1 left-2 right-2 h-1 bg-white/30 rounded-full"></div>
+                            </div>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400 mt-2"><span id="prog-pct-b1_2">0</span>% Tamamlandı</p>
+                    </button>
+                </div>
+
+                <!-- GÖRÜNÜM 2: ÖĞRENME YOLU (Seçilen PDF'e Özel) -->
+                <div id="view-learning-path" class="w-full hidden">
+                    
+                    <button onclick="goBackToStages()" class="mb-6 text-gray-400 font-bold hover:text-gray-600 flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl">
+                        <i class="ph-bold ph-arrow-left"></i> Geri Dön
+                    </button>
+
+                    <!-- Ünite Başlığı (Dinamik Renk) -->
+                    <div id="path-header" class="rounded-2xl p-4 text-white shadow-sm mb-10 border-b-4">
+                        <h2 class="text-xl md:text-2xl font-black tracking-wide" id="path-title">B1.1 PDF</h2>
+                        <p class="font-bold opacity-90">Sadece bu dosyadan kelimeler</p>
                     </div>
 
-                    <!-- Görev 2: Artikel -->
-                    <div class="relative ml-20">
-                        <button onclick="startSession('artikel')" class="w-20 h-20 rounded-full bg-[#1cb0f6] border-b-8 border-[#1899d6] flex items-center justify-center text-white active:border-b-0 active:translate-y-2 transition-all">
-                            <span class="font-black text-2xl">ART</span>
-                        </button>
-                    </div>
+                    <!-- Öğrenme Yolu (Düğmeler) -->
+                    <div class="flex flex-col items-center gap-8 relative pb-20">
+                        <!-- Bağlantı çizgisi (Arkada) -->
+                        <div class="absolute w-2 bg-[#e5e5e5] top-8 bottom-0 -z-10"></div>
 
-                    <!-- Görev 3: Karma -->
-                    <div class="relative mr-20">
-                        <button onclick="startSession('mixed')" class="w-20 h-20 rounded-full bg-[#ce82ff] border-b-8 border-[#a552db] flex items-center justify-center text-white active:border-b-0 active:translate-y-2 transition-all">
-                            <i class="ph-fill ph-barbell text-4xl"></i>
-                        </button>
+                        <!-- Görev 1: Kelime -->
+                        <div class="relative">
+                            <div class="absolute -top-4 -right-10 bg-white border-2 border-gray-200 text-gray-500 font-bold px-3 py-1 rounded-xl shadow-sm text-sm z-10 animate-bounce">
+                                Başla!
+                            </div>
+                            <button onclick="startSession('vocab')" id="path-btn-1" class="w-20 h-20 rounded-full flex items-center justify-center text-white active:border-b-0 active:translate-y-2 border-b-8 transition-all">
+                                <i class="ph-fill ph-star text-4xl"></i>
+                            </button>
+                        </div>
+
+                        <!-- Görev 2: Artikel -->
+                        <div class="relative ml-20">
+                            <button onclick="startSession('artikel')" id="path-btn-2" class="w-20 h-20 rounded-full flex items-center justify-center text-white active:border-b-0 active:translate-y-2 border-b-8 transition-all">
+                                <span class="font-black text-2xl">ART</span>
+                            </button>
+                        </div>
+
+                        <!-- Görev 3: Karma -->
+                        <div class="relative mr-20">
+                            <button onclick="startSession('mixed')" id="path-btn-3" class="w-20 h-20 rounded-full flex items-center justify-center text-white active:border-b-0 active:translate-y-2 border-b-8 transition-all bg-[#ce82ff] border-[#a552db]">
+                                <i class="ph-fill ph-barbell text-4xl"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -343,7 +420,7 @@
                     <img src="assets/imzatalhaozturk.png" alt="Avatar" onerror="this.src='https://placehold.co/100/58cc02/ffffff?text=Sen'" class="w-full h-full object-cover">
                 </div>
                 <h2 class="text-2xl font-black text-gray-800">B1 Şampiyonu</h2>
-                <p class="text-gray-500 font-bold mb-8">Lektion 1-11 Öğrencisi</p>
+                <p class="text-gray-500 font-bold mb-8">PDF Kampı Öğrencisi</p>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div class="border-2 border-gray-200 rounded-2xl p-4 flex items-center gap-4">
@@ -412,7 +489,7 @@
                 </div>
             </div>
 
-            <!-- Geri Bildirim Çekmecesi (Bottom Sheet) -->
+            <!-- Geri Bildirim Çekmecesi -->
             <div id="feedback-sheet" class="bottom-sheet p-6 pt-8 pb-10 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t-2">
                 <div class="flex items-center gap-4">
                     <div id="feedback-icon" class="w-16 h-16 rounded-full flex items-center justify-center bg-white text-3xl font-black shrink-0"></div>
@@ -428,7 +505,7 @@
 
         <!-- EKRAN 5: DERS BİTİŞİ -->
         <section id="screen-finish" class="screen flex-col flex-1 absolute inset-0 bg-white z-40 items-center justify-center p-6 text-center">
-            <h2 class="text-4xl font-black text-[#ffc800] mb-4">Ders Tamamlandı!</h2>
+            <h2 class="text-4xl font-black text-[#ffc800] mb-4">Bölüm Tamamlandı!</h2>
             <div class="flex gap-4 mb-8">
                 <div class="bg-[#ffc800] text-white rounded-2xl border-b-4 border-[#e5b400] p-4 flex flex-col items-center w-32">
                     <span class="text-xs font-bold uppercase tracking-widest mb-1">Kazanılan XP</span>
@@ -437,11 +514,11 @@
                         <span id="earned-xp">+10</span>
                     </div>
                 </div>
-                <div class="bg-[#58cc02] text-white rounded-2xl border-b-4 border-[#58a700] p-4 flex flex-col items-center w-32">
-                    <span class="text-xs font-bold uppercase tracking-widest mb-1">Doğru Oranı</span>
+                <div class="bg-[#1cb0f6] text-white rounded-2xl border-b-4 border-[#1899d6] p-4 flex flex-col items-center w-32">
+                    <span class="text-xs font-bold uppercase tracking-widest mb-1">İlerleme</span>
                     <div class="flex items-center gap-1 font-black text-2xl">
-                        <i class="ph-fill ph-check-circle"></i>
-                        <span id="accuracy">100%</span>
+                        <i class="ph-fill ph-trend-up"></i>
+                        <span id="accuracy">+5%</span>
                     </div>
                 </div>
             </div>
@@ -451,76 +528,94 @@
     </main>
 
     <script>
-        // B1 Kelime Veritabanı (Schritte & Arena B1 özet)
-        const vocabData = [
-            // B1.1
-            { article: "der", word: "Abfall", tr: "atık" },
-            { article: "der", word: "Abflug", tr: "kalkış" },
-            { article: "die", word: "Absage", tr: "iptal" },
-            { article: "die", word: "Anzeigetafel", tr: "ilan panosu" },
-            { article: "der", word: "Ausgang", tr: "çıkış" },
-            { article: "der", word: "Behälter", tr: "kap / hazne" },
-            { article: "die", word: "Bordkarte", tr: "biniş kartı" },
-            { article: "der", word: "Campingplatz", tr: "kamp alanı" },
-            { article: "die", word: "Dienstreise", tr: "iş seyahati" },
-            { article: "das", word: "Doppelzimmer", tr: "iki kişilik oda" },
-            { article: "das", word: "Einzelzimmer", tr: "tek kişilik oda" },
-            { article: "der", word: "Fluggast", tr: "uçak yolcusu" },
-            { article: "die", word: "Fluggesellschaft", tr: "uçak şirketi" },
-            { article: "das", word: "Gepäck", tr: "bagaj" },
-            { article: "das", word: "Handgepäck", tr: "el bagajı" },
-            { article: "die", word: "Jugendherberge", tr: "öğrenci yurdu" },
-            { article: "die", word: "Passkontrolle", tr: "pasaport kontrolü" },
-            { article: "das", word: "Reisebüro", tr: "seyahat acentesi" },
-            { article: "der", word: "Zoll", tr: "gümrük" },
-            { article: "der", word: "Ärger", tr: "öfke / can sıkıntısı" },
-            { article: "die", word: "Ausnahme", tr: "istisna" },
-            { article: "die", word: "Beleidigung", tr: "hakaret" },
-            { article: "die", word: "Entscheidung", tr: "karar" },
-            { article: "die", word: "Freude", tr: "neşe / sevinç" },
-            { article: "der", word: "Konflikt", tr: "anlaşmazlık / çatışma" },
-            { article: "der", word: "Mietvertrag", tr: "kira sözleşmesi" },
-            { article: "der", word: "Schaden", tr: "hasar / zarar" },
-            { article: "das", word: "Urteil", tr: "hüküm / karar" },
-            { article: "das", word: "Verständnis", tr: "anlayış" },
-            
-            // B1.2
-            { article: "die", word: "Anerkennung", tr: "takdir / tanınma" },
-            { article: "die", word: "Fähigkeit", tr: "beceri / yetenek" },
-            { article: "das", word: "Heimweh", tr: "sıla hasreti" },
-            { article: "die", word: "Arbeitsstelle", tr: "çalışma yeri" },
-            { article: "die", word: "Berufserfahrung", tr: "mesleki tecrübe" },
-            { article: "das", word: "Gehalt", tr: "maaş" },
-            { article: "die", word: "Probezeit", tr: "deneme süresi" },
-            { article: "die", word: "Überstunde", tr: "fazla mesai" },
-            { article: "das", word: "Unternehmen", tr: "şirket" },
-            { article: "der", word: "Urlaubstag", tr: "tatil günü" },
-            { article: "die", word: "Allergie", tr: "alerji" },
-            { article: "die", word: "Bedingung", tr: "koşul / şart" },
-            { article: "die", word: "Ernährung", tr: "beslenme" },
-            { article: "das", word: "Fertiggericht", tr: "hazır yemek" },
-            { article: "der", word: "Geschmack", tr: "tat / zevk" },
-            { article: "die", word: "Autoversicherung", tr: "otomobil sigortası" },
-            { article: "der", word: "Unfall", tr: "kaza" },
-            
-            // Arena B1
-            { article: "das", word: "Netzwerk", tr: "ağ / şebeke" },
-            { article: "die", word: "Entscheidung", tr: "karar" },
-            { article: "das", word: "Gefühl", tr: "duygu" },
-            { article: "das", word: "Erlebnis", tr: "deneyim" },
-            { article: "die", word: "Langeweile", tr: "can sıkıntısı" },
-            { article: "der", word: "Klimawandel", tr: "iklim değişikliği" },
-            { article: "die", word: "Zukunft", tr: "gelecek" },
-            { article: "das", word: "Nahrungsmittel", tr: "besin / gıda" },
-            { article: "die", word: "Wirtschaft", tr: "ekonomi" },
-            { article: "der", word: "Umweltschutz", tr: "çevre koruma" },
-            { article: "das", word: "Plastik", tr: "plastik" }
-        ];
+        // Veritabanı PDF'lere Göre 3'e Bölündü
+        const db = {
+            'b1_1': [
+                { article: "der", word: "Abfall", tr: "atık" },
+                { article: "der", word: "Abflug", tr: "kalkış" },
+                { article: "die", word: "Absage", tr: "iptal" },
+                { article: "die", word: "Anzeigetafel", tr: "ilan panosu" },
+                { article: "der", word: "Ausgang", tr: "çıkış" },
+                { article: "der", word: "Behälter", tr: "kap / hazne" },
+                { article: "die", word: "Bordkarte", tr: "biniş kartı" },
+                { article: "der", word: "Campingplatz", tr: "kamp alanı" },
+                { article: "die", word: "Dienstreise", tr: "iş seyahati" },
+                { article: "das", word: "Doppelzimmer", tr: "iki kişilik oda" },
+                { article: "das", word: "Einzelzimmer", tr: "tek kişilik oda" },
+                { article: "der", word: "Fluggast", tr: "uçak yolcusu" },
+                { article: "die", word: "Fluggesellschaft", tr: "uçak şirketi" },
+                { article: "das", word: "Gepäck", tr: "bagaj" },
+                { article: "das", word: "Handgepäck", tr: "el bagajı" },
+                { article: "die", word: "Jugendherberge", tr: "öğrenci yurdu" },
+                { article: "die", word: "Passkontrolle", tr: "pasaport kontrolü" },
+                { article: "das", word: "Reisebüro", tr: "seyahat acentesi" },
+                { article: "der", word: "Zoll", tr: "gümrük" },
+                { article: "der", word: "Ärger", tr: "öfke / can sıkıntısı" },
+                { article: "die", word: "Ausnahme", tr: "istisna" },
+                { article: "die", word: "Beleidigung", tr: "hakaret" },
+                { article: "die", word: "Entscheidung", tr: "karar" },
+                { article: "die", word: "Freude", tr: "neşe / sevinç" },
+                { article: "der", word: "Konflikt", tr: "anlaşmazlık / çatışma" },
+                { article: "der", word: "Mietvertrag", tr: "kira sözleşmesi" },
+                { article: "der", word: "Schaden", tr: "hasar / zarar" },
+                { article: "das", word: "Urteil", tr: "hüküm / karar" },
+                { article: "das", word: "Verständnis", tr: "anlayış" }
+            ],
+            'b1_2': [
+                { article: "die", word: "Anerkennung", tr: "takdir / tanınma" },
+                { article: "die", word: "Fähigkeit", tr: "beceri / yetenek" },
+                { article: "das", word: "Heimweh", tr: "sıla hasreti" },
+                { article: "die", word: "Arbeitsstelle", tr: "çalışma yeri" },
+                { article: "die", word: "Berufserfahrung", tr: "mesleki tecrübe" },
+                { article: "das", word: "Gehalt", tr: "maaş" },
+                { article: "die", word: "Probezeit", tr: "deneme süresi" },
+                { article: "die", word: "Überstunde", tr: "fazla mesai" },
+                { article: "das", word: "Unternehmen", tr: "şirket" },
+                { article: "der", word: "Urlaubstag", tr: "tatil günü" },
+                { article: "die", word: "Allergie", tr: "alerji" },
+                { article: "die", word: "Bedingung", tr: "koşul / şart" },
+                { article: "die", word: "Ernährung", tr: "beslenme" },
+                { article: "das", word: "Fertiggericht", tr: "hazır yemek" },
+                { article: "der", word: "Geschmack", tr: "tat / zevk" },
+                { article: "die", word: "Autoversicherung", tr: "otomobil sigortası" },
+                { article: "der", word: "Unfall", tr: "kaza" },
+                { article: "die", word: "Scheibe", tr: "cam (pencere)" },
+                { article: "der", word: "Scheinwerfer", tr: "far" },
+                { article: "die", word: "Überschwemmung", tr: "su baskını" },
+                { article: "der", word: "Straßenverkehr", tr: "trafik" }
+            ],
+            'arena': [
+                { article: "das", word: "Netzwerk", tr: "ağ / şebeke" },
+                { article: "die", word: "Entscheidung", tr: "karar" },
+                { article: "das", word: "Gefühl", tr: "duygu" },
+                { article: "das", word: "Erlebnis", tr: "deneyim" },
+                { article: "die", word: "Langeweile", tr: "can sıkıntısı" },
+                { article: "der", word: "Klimawandel", tr: "iklim değişikliği" },
+                { article: "die", word: "Zukunft", tr: "gelecek" },
+                { article: "das", word: "Nahrungsmittel", tr: "besin / gıda" },
+                { article: "die", word: "Wirtschaft", tr: "ekonomi" },
+                { article: "der", word: "Umweltschutz", tr: "çevre koruma" },
+                { article: "das", word: "Plastik", tr: "plastik" },
+                { article: "der", word: "Account", tr: "hesap (sosyal medya)" },
+                { article: "die", word: "Plattform", tr: "platform" },
+                { article: "die", word: "Alltagsroutine", tr: "günlük rutin" },
+                { article: "das", word: "Zähneputzen", tr: "diş fırçalama" },
+                { article: "der", word: "Grund", tr: "sebep" },
+                { article: "die", word: "App", tr: "uygulama" }
+            ]
+        };
+
+        // Yüzdelik İlerleme (PDF'lere Özel)
+        let stageProgress = {
+            'b1_1': 0,
+            'b1_2': 0,
+            'arena': 0
+        };
 
         // Global State
         let totalXP = 0;
         let hearts = 5;
-        let currentScreen = 'dashboard';
+        let activeStage = null; 
         
         // Session State
         let sessionType = 'vocab'; 
@@ -529,7 +624,7 @@
         let selectedOptionBtn = null;
         let correctAnswersCount = 0;
 
-        // Uygulama Başlatma
+        // ================= BAŞLATMA VE LOGIN MANTIĞI =================
         document.addEventListener('DOMContentLoaded', () => {
             const loader = document.getElementById('loader');
             const progress = document.getElementById('loader-progress');
@@ -541,26 +636,115 @@
                 setTimeout(() => loader.style.display = 'none', 400);
             }, 3000);
             
-            updateTopBar();
+            // Yüklenme sonrası ilk ekran Login (Giriş) Ekranı
+            // 'active' sınıfı HTML'de screen-login üzerinde tanımlı zaten.
         });
+
+        function attemptLogin() {
+            const user = document.getElementById('login-user').value.toLowerCase().trim();
+            const pass = document.getElementById('login-pass').value.toLowerCase().trim();
+            const errorMsg = document.getElementById('login-error');
+
+            if(user === 'nisan' && pass === 'talha') {
+                // Giriş Başarılı
+                errorMsg.classList.add('hidden');
+                
+                // Navigasyon ve Başlığı görünür yap
+                document.getElementById('side-nav').style.display = '';
+                document.getElementById('main-header').style.display = 'flex';
+                
+                // Dashboard'a geçiş yap
+                switchScreen('dashboard');
+                updateTopBar();
+                updateDashboardProgress();
+            } else {
+                // Hatalı Giriş
+                errorMsg.classList.remove('hidden');
+            }
+        }
 
         // Ekran Değiştirme
         function switchScreen(screenName) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(`screen-${screenName}`).classList.add('active');
             
-            // Menü seçim efekti
             document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
             const navBtn = document.getElementById(`nav-${screenName}`);
             if(navBtn) navBtn.classList.add('active');
 
-            // Header gizleme/gösterme
             const header = document.getElementById('main-header');
-            if(screenName === 'session' || screenName === 'finish') {
+            const nav = document.getElementById('side-nav');
+            
+            // Ekranlara göre menü/üst bar gizleme kuralları
+            if(screenName === 'login') {
                 header.style.display = 'none';
-            } else {
-                header.style.display = 'flex';
+                nav.style.display = 'none';
             }
+            else if(screenName === 'session' || screenName === 'finish') {
+                header.style.display = 'none';
+                // Navigasyonu gizlemek istiyorsak: nav.style.display = 'none'; 
+                // Fakat full ekran section absolute olduğu için üstte kalıyor, sorun olmaz.
+            } 
+            else {
+                header.style.display = 'flex';
+                nav.style.display = ''; // CSS'teki flex ayarlarını alsın
+                
+                // Eğer Dashboard'a dönülüyorsa, "Aşama Seç" ana görünümüne dön
+                if(screenName === 'dashboard') {
+                    goBackToStages();
+                    updateDashboardProgress();
+                }
+            }
+        }
+
+        // ================= AŞAMA SEÇİMİ (PDF'LER) =================
+        function openStage(stageId) {
+            activeStage = stageId;
+            document.getElementById('view-stage-selection').classList.add('hidden');
+            document.getElementById('view-learning-path').classList.remove('hidden');
+
+            const header = document.getElementById('path-header');
+            const title = document.getElementById('path-title');
+            const btn1 = document.getElementById('path-btn-1');
+            const btn2 = document.getElementById('path-btn-2');
+
+            // Renk ve Başlık Ayarları
+            if(stageId === 'arena') {
+                header.className = "rounded-2xl p-4 text-white shadow-sm mb-10 border-b-4 bg-[#1cb0f6] border-[#1899d6]";
+                title.innerText = "ArenaB1-Wortliste.pdf";
+                
+                btn1.className = "w-20 h-20 rounded-full flex items-center justify-center text-white active:border-b-0 active:translate-y-2 border-b-8 transition-all bg-[#1cb0f6] border-[#1899d6]";
+                btn2.className = "w-20 h-20 rounded-full flex items-center justify-center text-white active:border-b-0 active:translate-y-2 border-b-8 transition-all bg-[#ff4b4b] border-[#ea2b2b]";
+            } 
+            else if(stageId === 'b1_1') {
+                header.className = "rounded-2xl p-4 text-white shadow-sm mb-10 border-b-4 bg-[#58cc02] border-[#58a700]";
+                title.innerText = "B1.1_Wortschatzliste_Tuerkisch.pdf";
+
+                btn1.className = "w-20 h-20 rounded-full flex items-center justify-center text-white active:border-b-0 active:translate-y-2 border-b-8 transition-all bg-[#58cc02] border-[#58a700]";
+                btn2.className = "w-20 h-20 rounded-full flex items-center justify-center text-white active:border-b-0 active:translate-y-2 border-b-8 transition-all bg-[#1cb0f6] border-[#1899d6]";
+            }
+            else if(stageId === 'b1_2') {
+                header.className = "rounded-2xl p-4 text-white shadow-sm mb-10 border-b-4 bg-[#ff9600] border-[#e58700]";
+                title.innerText = "B1.2_Wortschatzliste_Tuerkisch.pdf";
+
+                btn1.className = "w-20 h-20 rounded-full flex items-center justify-center text-white active:border-b-0 active:translate-y-2 border-b-8 transition-all bg-[#ff9600] border-[#e58700]";
+                btn2.className = "w-20 h-20 rounded-full flex items-center justify-center text-white active:border-b-0 active:translate-y-2 border-b-8 transition-all bg-[#1cb0f6] border-[#1899d6]";
+            }
+        }
+
+        function goBackToStages() {
+            document.getElementById('view-stage-selection').classList.remove('hidden');
+            document.getElementById('view-learning-path').classList.add('hidden');
+            activeStage = null;
+        }
+
+        function updateDashboardProgress() {
+            // Çubukları ve Yüzdeleri Güncelle
+            const keys = ['arena', 'b1_1', 'b1_2'];
+            keys.forEach(k => {
+                document.getElementById(`prog-bar-${k}`).style.width = `${stageProgress[k]}%`;
+                document.getElementById(`prog-pct-${k}`).innerText = stageProgress[k];
+            });
         }
 
         function updateTopBar() {
@@ -580,7 +764,7 @@
             }
 
             sessionType = type;
-            sessionQuestions = generateQuestions(10); // 10 soru üret
+            sessionQuestions = generateQuestions(10); // 10 soru üret (Sadece aktif PDF'ten)
             currentQIndex = 0;
             correctAnswersCount = 0;
             
@@ -591,14 +775,18 @@
 
         function quitSession() {
             switchScreen('dashboard');
+            // Learning path açık kalmalı, stage seçimi değil
+            document.getElementById('view-stage-selection').classList.add('hidden');
+            document.getElementById('view-learning-path').classList.remove('hidden');
         }
 
         function generateQuestions(amount) {
             let questions = [];
-            let pool = [...vocabData];
+            let activePoolData = db[activeStage]; // Sadece seçilen PDF
+            let pool = [...activePoolData];
             
             for(let i=0; i<amount; i++) {
-                if(pool.length === 0) pool = [...vocabData]; // Havuz biterse sıfırla
+                if(pool.length === 0) pool = [...activePoolData]; // Havuz biterse sıfırla
                 let randIdx = Math.floor(Math.random() * pool.length);
                 let wordObj = pool.splice(randIdx, 1)[0];
                 questions.push(wordObj);
@@ -614,7 +802,6 @@
             
             let q = sessionQuestions[currentQIndex];
             
-            // Mod seçimi
             let mode = sessionType;
             if(sessionType === 'mixed') {
                 mode = Math.random() > 0.5 ? 'vocab' : 'artikel';
@@ -631,18 +818,19 @@
                 titleEl.innerText = "Bunun anlamı nedir?";
                 
                 let artClass = '';
-                if(q.article === 'der') artClass = 'text-[#1cb0f6]'; // Duo Blue
-                if(q.article === 'die') artClass = 'text-[#ff4b4b]'; // Duo Red/Pink
-                if(q.article === 'das') artClass = 'text-[#58cc02]'; // Duo Green
+                if(q.article === 'der') artClass = 'text-[#1cb0f6]'; 
+                if(q.article === 'die') artClass = 'text-[#ff4b4b]'; 
+                if(q.article === 'das') artClass = 'text-[#58cc02]'; 
 
                 qArticle.innerText = q.article;
                 qArticle.className = `text-xl font-bold uppercase tracking-widest block mb-1 ${artClass}`;
                 qWord.innerText = q.word;
 
-                // Seçenekleri oluştur
+                // Seçenekleri sadece o anki PDF'in kelimelerinden oluştur (daha mantıklı test)
+                let activePoolData = db[activeStage];
                 let options = [q];
                 while(options.length < 4) {
-                    let w = vocabData[Math.floor(Math.random() * vocabData.length)];
+                    let w = activePoolData[Math.floor(Math.random() * activePoolData.length)];
                     if(!options.includes(w)) options.push(w);
                 }
                 options.sort(() => Math.random() - 0.5);
@@ -680,14 +868,9 @@
         }
 
         function selectOption(btn) {
-            // Önceki seçimi temizle
             document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
-            
-            // Yeni seçim
             btn.classList.add('selected');
             selectedOptionBtn = btn;
-            
-            // Kontrol Et butonunu aktif yap
             document.getElementById('btn-check').disabled = false;
         }
 
@@ -696,7 +879,6 @@
             
             const isCorrect = selectedOptionBtn.dataset.correct === "true";
             
-            // Butonları kilitle
             document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
             document.getElementById('btn-check').disabled = true;
 
@@ -707,13 +889,11 @@
             const nextBtn = document.getElementById('btn-next');
 
             if(isCorrect) {
-                // DOĞRU
                 selectedOptionBtn.classList.remove('selected');
                 selectedOptionBtn.classList.add('correct');
                 
                 sheet.style.backgroundColor = '#d7ffb8';
                 sheet.style.borderColor = '#58cc02';
-                
                 icon.innerHTML = '<i class="ph-bold ph-check text-[#58cc02]"></i>';
                 
                 title.innerText = "Harika!";
@@ -725,25 +905,19 @@
                 nextBtn.className = "duo-btn w-full md:w-48 py-4 text-xl btn-green";
                 
                 correctAnswersCount++;
-
             } else {
-                // YANLIŞ
                 selectedOptionBtn.classList.remove('selected');
                 selectedOptionBtn.classList.add('wrong');
                 
                 hearts--;
                 updateTopBar();
                 
-                // Doğruyu göster
                 document.querySelectorAll('.opt-btn').forEach(b => {
-                    if(b.dataset.correct === "true") {
-                        b.classList.add('correct');
-                    }
+                    if(b.dataset.correct === "true") b.classList.add('correct');
                 });
 
                 sheet.style.backgroundColor = '#ffdfe0';
                 sheet.style.borderColor = '#ea2b2b';
-                
                 icon.innerHTML = '<i class="ph-bold ph-x text-[#ea2b2b]"></i>';
                 
                 title.innerText = "Yanlış!";
@@ -765,14 +939,13 @@
             updateProgressBar();
             
             if(hearts <= 0) {
-                alert("Canın bitti! Ana ekrana dönülüyor.");
+                alert("Canın bitti! Öğrenme yoluna dönülüyor.");
                 hearts = 5;
                 quitSession();
                 return;
             }
 
             if(currentQIndex >= sessionQuestions.length) {
-                // Oturum bitti
                 showFinishScreen();
             } else {
                 loadQuestion();
@@ -788,18 +961,27 @@
             document.getElementById('feedback-sheet').classList.remove('show');
             document.getElementById('screen-session').classList.remove('active');
             
-            let xpGained = correctAnswersCount * 2; // Her doğruya 2 XP
+            let xpGained = correctAnswersCount * 2;
             totalXP += xpGained;
+            
+            // O PDF'in ilerleme yüzdesini artır (Her test için +%5 gibi basit bir oyun mantığı)
+            let stageProgPercent = Math.min(100, stageProgress[activeStage] + (correctAnswersCount * 1)); 
+            stageProgress[activeStage] = stageProgPercent;
+
             updateTopBar();
 
             document.getElementById('earned-xp').innerText = `+${xpGained}`;
-            document.getElementById('accuracy').innerText = `${Math.round((correctAnswersCount / sessionQuestions.length)*100)}%`;
+            document.getElementById('accuracy').innerText = `+${correctAnswersCount}%`;
             
             document.getElementById('screen-finish').classList.add('active');
         }
 
         function finishSession() {
             switchScreen('dashboard');
+            // Menüde 'learning-path' kısmında kalsın
+            document.getElementById('view-stage-selection').classList.add('hidden');
+            document.getElementById('view-learning-path').classList.remove('hidden');
+            updateDashboardProgress();
         }
 
     </script>
