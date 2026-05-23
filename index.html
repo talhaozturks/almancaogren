@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>B1 Almanca Akademisi</title>
+    <title>B1 Almanca Akademisi | %100 Başarı Garantisi</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -41,7 +41,7 @@
             transition: all 0.15s; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .app-btn:active:not(:disabled) { border-bottom-width: 1px; transform: translateY(2px); }
-        .app-btn:disabled { opacity: 0.5; cursor: not-allowed; border-bottom-width: 3px; transform: translateY(2px); filter: grayscale(0.8); }
+        .app-btn:disabled { aopacity: 0.5; cursor: not-allowed; border-bottom-width: 3px; transform: translateY(2px); filter: grayscale(0.8); }
 
         .btn-teal { background: var(--c-teal); border-color: var(--c-teal-dark); color: white; }
         .btn-teal:hover:not(:disabled) { background: #13a89e; }
@@ -140,6 +140,26 @@
         </div>
     </section>
 
+    <!-- SİHİRBAZ (HEDEF BELİRLEME) -->
+    <section id="screen-survey" class="screen flex-col flex-1 absolute inset-0 bg-white z-[55] items-center p-6 overflow-y-auto pt-16">
+        <div class="max-w-xl w-full">
+            <div class="bg-indigo-50 border border-indigo-100 rounded-3xl p-6 mb-8 relative overflow-hidden text-center">
+                <i class="ph-fill ph-compass text-5xl text-indigo-200 mb-2"></i>
+                <h2 class="text-2xl font-bold tracking-tight text-indigo-900 mb-1">Öğrenme Modeli Seç</h2>
+                <p class="font-medium text-indigo-600 text-sm">Hangi konuda daha fazla pratik yapmak istersin?</p>
+            </div>
+
+            <div class="space-y-3">
+                <button onclick="window.setGoal('mixed')" class="survey-btn border-indigo-200 hover:border-indigo-400 bg-indigo-50"><div class="w-12 h-12 bg-indigo-500 text-white rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm"><i class="ph-fill ph-map-pin"></i></div><span class="text-indigo-900 font-semibold text-sm">0-100 Mega Maraton (Önerilen)</span></button>
+                <button onclick="window.setGoal('artikel')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-cards"></i></div><span class="text-sm">Sadece Artikeller (der/die/das)</span></button>
+                <button onclick="window.setGoal('vocab')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-brain"></i></div><span class="text-sm">Saf Kelime Ezberi</span></button>
+                <button onclick="window.setGoal('listening')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span class="text-sm">Dinleme ve Konuşma</span></button>
+                <button onclick="window.setGoal('writing')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span class="text-sm">Yazım Kuralları</span></button>
+                <button onclick="window.setGoal('grammar')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-text-t"></i></div><span class="text-sm">Gramer Kuralları</span></button>
+            </div>
+        </div>
+    </section>
+
     <!-- NAVİGASYON -->
     <nav id="side-nav" style="display: none;" class="order-2 md:order-1 w-full md:w-24 lg:w-64 border-t md:border-t-0 md:border-r border-slate-200 bg-white flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] md:shadow-none">
         <div class="hidden md:flex items-center justify-center gap-3 mb-10 mt-2 px-2 lg:justify-start">
@@ -162,7 +182,7 @@
         <!-- ÜST BAR -->
         <header id="main-header" style="display: none;" class="w-full p-4 flex justify-between items-center max-w-5xl mx-auto border-b border-slate-100 bg-white/80 backdrop-blur-sm z-10 sticky top-0">
             <div class="flex items-center gap-2 font-medium text-slate-500">
-                <span id="header-title" class="text-xs sm:text-sm text-slate-600 tracking-wide">B1 Almanca Eğitimi</span>
+                <span id="header-title" class="text-xs sm:text-sm text-slate-600 tracking-wide font-bold uppercase tracking-widest text-indigo-500">B1 Akademisi</span>
             </div>
             <div class="flex gap-2 md:gap-4 font-bold text-xs sm:text-sm">
                 <div class="flex items-center gap-1.5 text-amber-500"><i class="ph-fill ph-fire text-lg"></i><span>1</span></div>
@@ -222,30 +242,13 @@
                     </button>
                 </div>
 
-                <!-- SİHİRBAZ (HEDEF BELİRLEME) -->
-                <div id="view-survey" class="w-full hidden">
-                    <button onclick="window.goBackToStages()" class="text-slate-500 font-medium hover:text-slate-700 flex items-center gap-2 mb-6 text-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> Geri Dön</button>
-                    
-                    <div class="bg-white border border-slate-200 rounded-3xl p-6 mb-8 text-center shadow-sm">
-                        <h2 class="text-xl font-bold tracking-tight text-slate-800 mb-1">Rotanı Belirle</h2>
-                        <p class="font-medium text-slate-500 text-sm">Hangi konuda daha fazla pratik yapmak istersin?</p>
-                    </div>
-
-                    <div class="space-y-3">
-                        <button onclick="window.setGoal('mixed')" class="survey-btn border-indigo-200 hover:border-indigo-400 bg-indigo-50"><div class="w-12 h-12 bg-indigo-500 text-white rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm"><i class="ph-fill ph-map-pin"></i></div><span class="text-indigo-900 font-semibold text-sm">Mega Maraton (Uzun Yol)</span></button>
-                        <button onclick="window.setGoal('artikel')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-cards"></i></div><span class="text-sm">Artikeller (der/die/das)</span></button>
-                        <button onclick="window.setGoal('vocab')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-brain"></i></div><span class="text-sm">Kelime Ezberi</span></button>
-                        <button onclick="window.setGoal('listening')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span class="text-sm">Dinleme ve Konuşma</span></button>
-                        <button onclick="window.setGoal('writing')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span class="text-sm">Yazım Kuralları</span></button>
-                    </div>
-                </div>
-
                 <!-- DİNAMİK YOL (HARİTA) -->
                 <div id="view-learning-path" class="w-full hidden">
                     <button onclick="window.goBackToStages()" class="text-slate-500 font-medium hover:text-slate-700 flex items-center gap-2 mb-6 text-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> Geri Dön</button>
                     
                     <div id="path-header" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm mb-8 text-center">
                         <h2 class="text-xl font-bold text-slate-800" id="path-title">Eğitim Yolu</h2>
+                        <p class="text-sm font-medium text-slate-500 mt-2">Hatalarını öğrenene kadar sistem sana tekrar soracak.</p>
                         <div class="w-full max-w-xs mx-auto bg-slate-100 h-2 rounded-full mt-4 overflow-hidden">
                             <div id="path-main-progress" class="bg-indigo-500 h-full rounded-full transition-all duration-1000 w-0"></div>
                         </div>
@@ -352,7 +355,7 @@
                     <div class="flex items-center gap-1 font-bold text-xl text-indigo-500"><span id="earned-xp">+10</span></div>
                 </div>
                 <div class="bg-slate-50 rounded-2xl p-4 flex flex-col items-center w-28 border border-slate-100">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase mb-1">Soru Sayısı</span>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase mb-1">Doğru Sayısı</span>
                     <div class="flex items-center gap-1 font-bold text-xl text-teal-500"><span id="accuracy-display">25</span></div>
                 </div>
             </div>
@@ -364,11 +367,10 @@
         </section>
     </main>
 
-    <!-- CORE UYGULAMA MANTIĞI & GÜVENLİ SCRİPT (MODÜLDEN BAĞIMSIZ) -->
+    <!-- CORE UYGULAMA MANTIĞI & GÜVENLİ SCRİPT -->
     <script>
-        const LOCAL_STORAGE_KEY = 'b1kamp_data_v4';
+        const LOCAL_STORAGE_KEY = 'b1kamp_data_v5';
 
-        // Global State 
         window.totalXP = 0; 
         window.hearts = 10; 
         window.stageProgress = { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 }; 
@@ -421,6 +423,7 @@
             const user = userEl.value.toLowerCase().trim(); 
             const pass = passEl.value.toLowerCase().trim();
             
+            // İstek Üzerine Güncellenen Hesap Bilgisi
             if(user === 'talha' && pass === 'talha') {
                 errorEl.classList.add('hidden'); 
                 btnEl.innerText = "Yükleniyor..."; 
@@ -457,8 +460,6 @@
             if (loader) { loader.style.opacity = '0'; setTimeout(() => { loader.style.display = 'none'; }, 400); }
             if (btnEl) { btnEl.innerText = "Giriş Yap"; btnEl.disabled = false; }
         };
-
-        // --- UYGULAMA VE OYUN FONKSİYONLARI ---
 
         window.setGoal = async function(goal) { window.selectedGoal = goal; window.saveProgress(); window.switchScreen('dashboard'); };
         
@@ -515,6 +516,8 @@
             }
         }
 
+        // ================= MEGA B1 VERİTABANI =================
+        // Tüm B1 PDF'lerinden çok büyük kapsamlı kelime ve gramer çekimi
         const dbContent = {
             'b1_1': [
                 { article: "der", word: "Abfall", tr: "atık" }, { article: "der", word: "Abflug", tr: "kalkış" }, { article: "die", word: "Absage", tr: "iptal" },
@@ -529,7 +532,11 @@
                 { article: "der", word: "Schaden", tr: "hasar" }, { article: "das", word: "Urteil", tr: "hüküm" }, { article: "das", word: "Verständnis", tr: "anlayış" },
                 { article: "das", word: "Erdbeben", tr: "deprem" }, { article: "die", word: "Erde", tr: "toprak" }, { article: "das", word: "Klima", tr: "iklim" },
                 { article: "das", word: "Plastik", tr: "plastik" }, { article: "die", word: "Umweltverschmutzung", tr: "çevre kirliliği" }, { article: "die", word: "Ware", tr: "mal/eşya" },
-                { article: "die", word: "Diskussion", tr: "tartışma" }, { article: "die", word: "Gewohnheit", tr: "alışkanlık" }, { article: "die", word: "Langeweile", tr: "sıkıntı" }
+                { article: "die", word: "Diskussion", tr: "tartışma" }, { article: "die", word: "Gewohnheit", tr: "alışkanlık" }, { article: "die", word: "Langeweile", tr: "sıkıntı" },
+                { article: "der", word: "Zoll", tr: "gümrük" }, { article: "die", word: "Mauer", tr: "duvar" }, { article: "der", word: "Krieg", tr: "savaş" },
+                { article: "die", word: "Regierung", tr: "hükümet" }, { article: "das", word: "Visum", tr: "vize" }, { article: "die", word: "Wahl", tr: "seçim" },
+                { article: "-", word: "wählen", tr: "seçmek" }, { article: "-", word: "erleben", tr: "yaşamak (tecrübe)" }, { article: "-", word: "recyceln", tr: "geri dönüştürmek" },
+                { article: "der", word: "Staat", tr: "devlet" }, { article: "die", word: "Demokratie", tr: "demokrasi" }, { article: "der", word: "Flüchtling", tr: "mülteci" }
             ],
             'b1_2': [
                 { article: "die", word: "Anerkennung", tr: "takdir" }, { article: "die", word: "Fähigkeit", tr: "beceri" }, { article: "das", word: "Heimweh", tr: "sıla hasreti" },
@@ -542,7 +549,10 @@
                 { article: "die", word: "Abteilung", tr: "departman" }, { article: "die", word: "Arbeitszeit", tr: "iş saati" }, { article: "die", word: "Herausforderung", tr: "meydan okuma" },
                 { article: "die", word: "Qualifikation", tr: "nitelik" }, { article: "die", word: "Zusammenarbeit", tr: "işbirliği" }, { article: "der", word: "Verbrauch", tr: "tüketim" },
                 { article: "die", word: "Bevölkerung", tr: "nüfus" }, { article: "das", word: "Eiweiß", tr: "protein" }, { article: "das", word: "Getreide", tr: "tahıl" },
-                { article: "das", word: "Kennzeichen", tr: "plaka" }, { article: "der", word: "Reifen", tr: "lastik" }, { article: "die", word: "Vorfahrt", tr: "geçiş üstünlüğü" }
+                { article: "das", word: "Kennzeichen", tr: "plaka" }, { article: "der", word: "Reifen", tr: "lastik" }, { article: "die", word: "Vorfahrt", tr: "geçiş üstünlüğü" },
+                { article: "-", word: "amtlich", tr: "resmi" }, { article: "-", word: "anerkennen", tr: "tanımak/onaylamak" }, { article: "-", word: "beherrschen", tr: "hakim olmak" },
+                { article: "-", word: "finanziell", tr: "mali/finansal" }, { article: "-", word: "langfristig", tr: "uzun vadeli" }, { article: "-", word: "vegan", tr: "vegan" },
+                { article: "das", word: "Medikament", tr: "ilaç" }, { article: "die", word: "Apotheke", tr: "eczane" }, { article: "das", word: "Rezept", tr: "reçete" }
             ],
             'arena': [
                 { article: "das", word: "Netzwerk", tr: "ağ / şebeke" }, { article: "die", word: "Entscheidung", tr: "karar" }, { article: "das", word: "Gefühl", tr: "duygu" },
@@ -554,7 +564,9 @@
                 { article: "der", word: "Warentransport", tr: "mal taşımacılığı" }, { article: "das", word: "Frachtschiff", tr: "yük gemisi" }, { article: "die", word: "Lieferung", tr: "teslimat" },
                 { article: "der", word: "Haushalt", tr: "hane halkı" }, { article: "die", word: "Bewegung", tr: "hareket" }, { article: "die", word: "Nachbarschaft", tr: "mahalle" },
                 { article: "das", word: "Stadion", tr: "stadyum" }, { article: "die", word: "Bewerbung", tr: "başvuru" }, { article: "der", word: "Vorschlag", tr: "öneri" },
-                { article: "das", word: "Verbot", tr: "yasak" }, { article: "die", word: "Mahlzeit", tr: "öğün" }, { article: "das", word: "Gymnasium", tr: "lise" }
+                { article: "das", word: "Verbot", tr: "yasak" }, { article: "die", word: "Mahlzeit", tr: "öğün" }, { article: "das", word: "Gymnasium", tr: "lise" },
+                { article: "-", word: "löschen", tr: "silmek" }, { article: "-", word: "digital", tr: "dijital" }, { article: "-", word: "kreativ", tr: "yaratıcı" },
+                { article: "-", word: "transportieren", tr: "taşımak" }, { article: "-", word: "realistisch", tr: "gerçekçi" }, { article: "-", word: "konsumieren", tr: "tüketmek" }
             ],
             'gramer': [
                 { type: 'grammar', text: "Ich bleibe zu Hause, ___ es regnet.", options: ["weil", "obwohl", "dass", "wenn"], answer: "weil", tr: "Evde kalıyorum, çünkü yağmur yağıyor." },
@@ -562,14 +574,18 @@
                 { type: 'grammar', text: "Ich denke, ___ du recht hast.", options: ["dass", "weil", "obwohl", "als"], answer: "dass", tr: "Bence haklısın." },
                 { type: 'grammar', text: "Das ist der Mann, ___ ich gestern gesehen habe.", options: ["den", "dem", "der", "des"], answer: "den", tr: "Bu dün gördüğüm adam. (Akkusativ)" },
                 { type: 'grammar', text: "Das ist die Frau, ___ ich das Buch gegeben habe.", options: ["der", "die", "dem", "den"], answer: "der", tr: "Bu kitabı verdiğim kadın. (Dativ)" },
-                { type: 'grammar', text: "Ich lege das Buch auf ___ Tisch.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Kitabı masanın üzerine koyuyorum. (Akk. Yönelme)" }
+                { type: 'grammar', text: "Ich lege das Buch auf ___ Tisch.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Kitabı masanın üzerine koyuyorum. (Akk. Yönelme)" },
+                { type: 'grammar', text: "Wir fahren in ___ Urlaub.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Tatile gidiyoruz. (in den Urlaub)" },
+                { type: 'grammar', text: "Das Bild hängt an ___ Wand.", options: ["der", "die", "den", "dem"], answer: "der", tr: "Resim duvarda asılı. (an der Wand)" }
             ]
         };
 
         const dialoguesData = [
             { title: "Havalimanında", icon: "ph-airplane-tilt", color: "indigo", a: "Entschuldigung, wo ist die <span class='font-bold text-indigo-600'>Gepäckausgabe</span>?", b: "Gehen Sie am <span class='font-bold text-teal-600'>Schalter</span> vorbei." },
             { title: "Çevre (Umweltschutz)", icon: "ph-tree-evergreen", color: "teal", a: "Der <span class='font-bold text-indigo-600'>Klimawandel</span> ist ein großes Problem.", b: "Das stimmt. Wir müssen Plastik vermeiden." },
-            { title: "Parti Planlama", icon: "ph-confetti", color: "amber", a: "Wir sollten eine Party organisieren. Hast du Lust?", b: "Klar! Ich kümmere mich um die <span class='font-bold text-teal-600'>Getränke</span>." }
+            { title: "Parti Planlama", icon: "ph-confetti", color: "amber", a: "Wir sollten eine Party organisieren. Hast du Lust?", b: "Klar! Ich kümmere mich um die <span class='font-bold text-teal-600'>Getränke</span>." },
+            { title: "Doktorda", icon: "ph-first-aid", color: "rose", a: "Ich habe starke <span class='font-bold text-indigo-600'>Kopfschmerzen</span>.", b: "Ich verschreibe Ihnen ein Medikament." },
+            { title: "İş Görüşmesi", icon: "ph-briefcase", color: "purple", a: "Haben Sie bereits <span class='font-bold text-indigo-600'>Berufserfahrung</span>?", b: "Ja, ich habe drei Jahre in einer Bank gearbeitet." }
         ];
 
         window.renderDialogues = function() {
@@ -578,7 +594,7 @@
             container.innerHTML = '';
             dialoguesData.forEach(d => {
                 container.innerHTML += `
-                    <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:border-indigo-200 transition-colors">
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:border-indigo-200 transition-colors shadow-sm mb-4">
                         <div class="flex items-center gap-3 mb-4 border-b border-slate-50 pb-3">
                             <div class="w-8 h-8 bg-${d.color}-50 text-${d.color}-500 rounded-lg flex items-center justify-center"><i class="ph-fill ${d.icon}"></i></div>
                             <h3 class="font-bold text-slate-700 text-sm">${d.title}</h3>
@@ -634,7 +650,7 @@
             window.activeStage = null;
         };
 
-        // ================= UZUN HARİTA OLUŞTURUCU (0-100) =================
+        // ================= MEGA HARİTA OLUŞTURUCU (0-100 UZUN SÜRELİ) =================
         window.activePathNodes = [];
         window.currentPathNodeIndex = 0;
         
@@ -655,7 +671,7 @@
 
             let nodes = [];
             
-            // Generate up to 100 nodes for "Mega Maraton" effect (or 50 for regular)
+            // Generate up to 100 nodes for "Mega Maraton"
             let totalNodes = choice === 'mixed' ? 100 : 50;
             const nodeTypes = ['flashcards', 'vocab', 'listening', 'artikel', 'matching', 'writing', 'dictation', 'speaking'];
             const icons = {
@@ -667,27 +683,30 @@
                 'writing': '<i class="ph-fill ph-pencil-simple"></i>',
                 'dictation': '<i class="ph-fill ph-waveform"></i>',
                 'speaking': '<i class="ph-fill ph-microphone"></i>',
-                'video': '<i class="ph-fill ph-video-camera"></i>'
+                'video': '<i class="ph-fill ph-video-camera"></i>',
+                'grammar': '<i class="ph-fill ph-text-t"></i>'
             };
             const colors = ['purple', 'amber', 'indigo', 'rose', 'teal'];
 
             for (let i = 0; i < totalNodes; i++) {
                 let type;
-                if (i % 10 === 9) type = 'video';
+                if (i > 0 && i % 10 === 0) type = 'video';
                 else if (choice === 'mixed') type = nodeTypes[i % nodeTypes.length];
                 else {
-                    // Try to stick to the choice but add some variety
                     if (choice === 'grammar') type = 'grammar';
-                    else if (choice === 'artikel' && i % 3 === 0) type = 'vocab';
-                    else if (choice === 'vocab' && i % 4 === 0) type = 'matching';
-                    else if (choice === 'listening' && i % 2 === 0) type = 'speaking';
+                    else if (choice === 'artikel' && i % 4 === 0) type = 'vocab';
+                    else if (choice === 'vocab' && i % 5 === 0) type = 'matching';
+                    else if (choice === 'listening' && i % 3 === 0) type = 'speaking';
                     else if (choice === 'writing' && i % 3 === 0) type = 'dictation';
                     else type = choice;
                 }
 
+                // Increase question count heavily (30-50 per session) to ensure extreme learning/repetition
+                let count = type === 'video' ? 1 : (30 + Math.floor(Math.random() * 20));
+
                 nodes.push({
                     type: type,
-                    count: 20 + Math.floor(Math.random() * 10), // 20-30 questions per node!
+                    count: count, 
                     label: `Aşama ${i+1}`,
                     color: colors[i % colors.length],
                     icon: icons[type] || '<i class="ph-fill ph-star"></i>'
@@ -842,7 +861,7 @@
             let mode = sessionType;
             window.setAvatars(mode);
 
-            // YouTube video rotasyonu (Her videoda farklı link için)
+            // YouTube video rotasyonu (B1 seviyesi DW veya EasyGerman tarzı)
             const videoLinks = [
                 "https://www.youtube.com/embed/sYjbGU6MAQY",
                 "https://www.youtube.com/embed/4lcUBkI3B1Q",
@@ -850,7 +869,6 @@
             ];
             let randomVideo = videoLinks[Math.floor(Math.random() * videoLinks.length)];
 
-            // --- 0. VIDEO (YENİ MOD) ---
             if(mode === 'video') {
                 document.getElementById('session-avatars').style.display = 'none'; 
                 document.getElementById('btn-check').innerText = "İzledim & Anladım";
@@ -864,7 +882,6 @@
                     </div>
                 `;
             }
-            // --- 0.1 SPEAKING (YENİ MOD) ---
             else if(mode === 'speaking') {
                 document.getElementById('btn-check').innerText = "Geç (Mikrofon Yoksa)";
                 document.getElementById('btn-check').disabled = false; 
@@ -883,7 +900,6 @@
                     </div>
                 `;
             }
-            // --- 1. GRAMER ---
             else if(mode === 'grammar') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 let textParts = q.text.split('___');
@@ -908,7 +924,6 @@
                     grid.appendChild(btn);
                 });
             }
-            // --- 2. EZBER (FLASHCARDS) ---
             else if(mode === 'flashcards') {
                 document.getElementById('btn-check').innerText = "Sonraki";
                 document.getElementById('btn-check').disabled = false;
@@ -926,7 +941,6 @@
                 `;
                 window.speakWord(q.word);
             }
-            // --- 3. DINLEME (LISTENING) ---
             else if(mode === 'listening') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 content.innerHTML = `
@@ -938,7 +952,6 @@
                 window.speakWord(q.word);
                 window.generateOptions(q, 'options-grid');
             }
-            // --- 4. YAZMA (WRITING) ---
             else if(mode === 'writing' || mode === 'dictation') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 document.getElementById('btn-check').disabled = false; 
@@ -960,7 +973,6 @@
                 setTimeout(() => { const el = document.getElementById('write-input'); if(el) el.focus(); }, 100);
                 document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') window.checkAnswer(); });
             }
-            // --- 5. EŞLEŞTİRME (MATCHING) ---
             else if(mode === 'matching') {
                 document.getElementById('btn-check').classList.add('hidden'); 
                 
@@ -980,44 +992,44 @@
                 content.innerHTML += `<div class="grid grid-cols-2 gap-3 w-full mt-2" id="matching-grid">${buttonsHTML.join('')}</div>`;
                 content.dataset.pairsFound = 0;
             }
-            // --- 6. KLASİK VOCAB / ARTIKEL ---
+            else if(mode === 'artikel') {
+                document.getElementById('btn-check').innerText = "Kontrol Et";
+                content.innerHTML = `
+                    <div class="w-full flex flex-col items-center mb-8 mt-4 bg-white border border-slate-100 rounded-[2rem] p-6 shadow-sm">
+                        <span class="text-xl font-bold uppercase tracking-widest text-slate-300 block mb-1">___</span>
+                        <span class="text-3xl md:text-5xl font-black text-slate-800 text-center tracking-tight">${q.word}</span>
+                        <span class="text-sm md:text-base font-bold text-indigo-500 mt-4 bg-indigo-50 border border-indigo-100 px-4 py-1.5 rounded-full">${q.tr}</span>
+                    </div>
+                    <div id="options-grid" class="grid grid-cols-3 gap-3 md:gap-4 w-full"></div>
+                `;
+                
+                const artikels = ['der', 'die', 'das'];
+                const grid = document.getElementById('options-grid');
+                artikels.forEach(art => {
+                    let btn = document.createElement('button');
+                    btn.className = "opt-btn py-6 md:py-8 px-2 w-full text-xl sm:text-2xl font-black uppercase tracking-wider text-center";
+                    btn.innerText = art;
+                    btn.dataset.correct = (art === q.article);
+                    btn.onclick = () => window.selectOption(btn);
+                    grid.appendChild(btn);
+                });
+            }
             else {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
-                let isArtikel = mode === 'artikel';
-                
-                if(isArtikel) {
-                    content.innerHTML = `
-                        <div class="w-full flex flex-col items-center mb-6 mt-2 bg-white border border-slate-100 rounded-3xl p-5 shadow-sm">
-                            <span class="text-sm font-bold uppercase tracking-widest text-slate-300 block mb-1">___</span>
-                            <span class="text-3xl font-black text-slate-800 text-center tracking-tight">${q.word}</span>
-                            <span class="text-xs font-bold text-indigo-500 mt-3 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">${q.tr}</span>
+                let dispArticle = q.article === '-' ? '' : `<span class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 block mb-1">${q.article}</span>`;
+                content.innerHTML = `
+                    <div class="w-full flex items-center gap-3 mb-6 mt-2">
+                        <div class="border border-slate-200 rounded-3xl p-5 text-center w-full relative bg-slate-50 shadow-inner">
+                            ${dispArticle}
+                            <span class="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">${q.word}</span>
                         </div>
-                        <div id="options-grid" class="grid grid-cols-3 gap-3 w-full"></div>
-                    `;
-                    const artikels = ['der', 'die', 'das'];
-                    const grid = document.getElementById('options-grid');
-                    artikels.forEach(art => {
-                        let btn = document.createElement('button');
-                        btn.className = "opt-btn py-5 px-2 w-full text-xl font-bold uppercase tracking-wider text-center";
-                        btn.innerText = art; btn.dataset.correct = (art === q.article);
-                        btn.onclick = () => window.selectOption(btn); grid.appendChild(btn);
-                    });
-                } else {
-                    let dispArticle = q.article === '-' ? '' : `<span class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 block mb-1">${q.article}</span>`;
-                    content.innerHTML = `
-                        <div class="w-full flex items-center gap-3 mb-6 mt-2">
-                            <div class="border border-slate-200 rounded-3xl p-5 text-center w-full relative bg-slate-50 shadow-inner">
-                                ${dispArticle}
-                                <span class="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">${q.word}</span>
-                            </div>
-                            <button onclick="window.speakWord('${q.word}')" class="w-14 h-14 bg-indigo-100 text-indigo-500 rounded-2xl text-2xl flex items-center justify-center shrink-0 border border-indigo-200 active:translate-y-1 transition-transform">
-                                <i class="ph-fill ph-speaker-high"></i>
-                            </button>
-                        </div>
-                        <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full"></div>
-                    `;
-                    window.generateOptions(q, 'options-grid');
-                }
+                        <button onclick="window.speakWord('${q.word}')" class="w-14 h-14 bg-indigo-100 text-indigo-500 rounded-2xl text-2xl flex items-center justify-center shrink-0 border border-indigo-200 active:translate-y-1 transition-transform">
+                            <i class="ph-fill ph-speaker-high"></i>
+                        </button>
+                    </div>
+                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full"></div>
+                `;
+                window.generateOptions(q, 'options-grid');
             }
         };
 
@@ -1122,7 +1134,7 @@
                     window.playWrongSound(); window.reactNisan(false); 
                     window.hearts--; window.updateTopBar(); window.saveProgress();
                     
-                    sessionQuestions.push(sessionQuestions[currentQIndex]); 
+                    sessionQuestions.push(sessionQuestions[currentQIndex]); // Hatayı listenin sonuna at, öğrenene kadar bitmesin.
                     
                     setTimeout(() => {
                         first.btn.classList.remove('wrong'); second.btn.classList.remove('wrong');
@@ -1180,7 +1192,7 @@
                     window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
                     let corr = q.article === '-' ? q.word : `${q.article} ${q.word}`;
                     window.showFeedback(false, "Yanlış!", `Doğrusu: ${corr}`);
-                    sessionQuestions.push(q); 
+                    sessionQuestions.push(q); // Hatayı listenin sonuna at, öğrenene kadar bitmesin.
                 }
                 return;
             }
@@ -1202,7 +1214,7 @@
                 document.querySelectorAll('.opt-btn').forEach(b => { if(b.dataset.correct === "true") b.classList.add('correct'); });
                 let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : (mode === 'grammar' ? `Doğrusu: ${q.answer}` : `Doğrusu: ${q.tr}`);
                 window.showFeedback(false, "Hatalı!", desc);
-                sessionQuestions.push(q); 
+                sessionQuestions.push(q); // Hatayı listenin sonuna at, öğrenene kadar bitmesin.
             }
         };
 
@@ -1302,76 +1314,5 @@
 
     </script>
 
-    <!-- GÜVENLİ FIREBASE MODÜLÜ -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        let auth = null, db = null, appId = 'default', currentUser = null;
-
-        window.firebaseLoginHook = async function() {
-            try {
-                // Not: Güvenlik için token kontrolü veya anonim giriş yapılıyor.
-                const firebaseConfig = typeof window.__firebase_config !== 'undefined' ? JSON.parse(window.__firebase_config) : null;
-                
-                if (!firebaseConfig) throw new Error("Firebase config bulunamadı.");
-
-                const app = initializeApp(firebaseConfig);
-                auth = getAuth(app); 
-                db = getFirestore(app);
-                appId = typeof window.__app_id !== 'undefined' ? window.__app_id : 'b1kamp-default';
-                
-                let customToken = typeof window.__initial_auth_token !== 'undefined' ? window.__initial_auth_token : null;
-                if (customToken) { 
-                    await signInWithCustomToken(auth, customToken); 
-                } else { 
-                    await signInAnonymously(auth); 
-                }
-
-                return new Promise((resolve) => {
-                    onAuthStateChanged(auth, async (userObj) => {
-                        if(userObj) {
-                            currentUser = userObj;
-                            // Buluttan veriyi çek
-                            const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
-                            const docSnap = await getDoc(docRef);
-                            if (docSnap.exists()) {
-                                const data = docSnap.data();
-                                window.totalXP = data.totalXP !== undefined ? data.totalXP : window.totalXP;
-                                window.hearts = data.hearts !== undefined ? data.hearts : window.hearts;
-                                window.stageProgress = data.stageProgress || window.stageProgress;
-                                window.selectedGoal = data.selectedGoal || window.selectedGoal;
-                            }
-                            
-                            // Save metodunu Override et (Buluta kaydetsin)
-                            const originalSave = window.saveProgress;
-                            window.saveProgress = async function() {
-                                originalSave(); // Önce locale yaz
-                                try {
-                                    const updateRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
-                                    await setDoc(updateRef, {
-                                        totalXP: window.totalXP,
-                                        hearts: window.hearts,
-                                        stageProgress: window.stageProgress,
-                                        selectedGoal: window.selectedGoal
-                                    }, { merge: true });
-                                } catch(e){}
-                            };
-                            
-                            const syncText = document.getElementById('cloud-sync-text');
-                            if(syncText) {
-                                syncText.innerText = "Bulut senkronizasyonu aktif!";
-                                syncText.classList.replace('text-indigo-400', 'text-teal-500');
-                            }
-                        }
-                        resolve();
-                    });
-                });
-            } catch(e) {
-                console.warn("Firebase Bulut Sistemi başlatılamadı, Lokal modda çalışılıyor.", e);
-            }
-        };
-    </script>
 </body>
 </html>
