@@ -140,26 +140,6 @@
         </div>
     </section>
 
-    <!-- SİHİRBAZ (HEDEF BELİRLEME) -->
-    <section id="screen-survey" class="screen flex-col flex-1 absolute inset-0 bg-white z-[55] items-center p-6 overflow-y-auto pt-16">
-        <div class="max-w-xl w-full">
-            <div class="bg-indigo-50 border border-indigo-100 rounded-3xl p-6 mb-8 relative overflow-hidden text-center">
-                <i class="ph-fill ph-compass text-5xl text-indigo-200 mb-2"></i>
-                <h2 class="text-2xl font-bold tracking-tight text-indigo-900 mb-1">Rotanı Belirle</h2>
-                <p class="font-medium text-indigo-600 text-sm">Hangi konuda daha fazla pratik yapmak istersin?</p>
-            </div>
-
-            <div class="space-y-3">
-                <button onclick="window.setGoal('mixed')" class="survey-btn border-indigo-200 hover:border-indigo-400 bg-indigo-50"><div class="w-12 h-12 bg-indigo-500 text-white rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm"><i class="ph-fill ph-map-pin"></i></div><span class="text-indigo-900 font-semibold text-sm">Dengeli Karışım (Önerilen)</span></button>
-                <button onclick="window.setGoal('artikel')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-cards"></i></div><span class="text-sm">Artikeller (der/die/das)</span></button>
-                <button onclick="window.setGoal('vocab')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-brain"></i></div><span class="text-sm">Kelime Ezberi</span></button>
-                <button onclick="window.setGoal('listening')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span class="text-sm">Dinleme ve Konuşma</span></button>
-                <button onclick="window.setGoal('writing')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span class="text-sm">Yazım Kuralları</span></button>
-                <button onclick="window.setGoal('grammar')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-text-t"></i></div><span class="text-sm">Gramer Kuralları</span></button>
-            </div>
-        </div>
-    </section>
-
     <!-- NAVİGASYON -->
     <nav id="side-nav" style="display: none;" class="order-2 md:order-1 w-full md:w-24 lg:w-64 border-t md:border-t-0 md:border-r border-slate-200 bg-white flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] md:shadow-none">
         <div class="hidden md:flex items-center justify-center gap-3 mb-10 mt-2 px-2 lg:justify-start">
@@ -240,6 +220,24 @@
                             </div>
                         </div>
                     </button>
+                </div>
+
+                <!-- SİHİRBAZ (HEDEF BELİRLEME) -->
+                <div id="view-survey" class="w-full hidden">
+                    <button onclick="window.goBackToStages()" class="text-slate-500 font-medium hover:text-slate-700 flex items-center gap-2 mb-6 text-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> Geri Dön</button>
+                    
+                    <div class="bg-white border border-slate-200 rounded-3xl p-6 mb-8 text-center shadow-sm">
+                        <h2 class="text-xl font-bold tracking-tight text-slate-800 mb-1">Rotanı Belirle</h2>
+                        <p class="font-medium text-slate-500 text-sm">Hangi konuda daha fazla pratik yapmak istersin?</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <button onclick="window.setGoal('mixed')" class="survey-btn border-indigo-200 hover:border-indigo-400 bg-indigo-50"><div class="w-12 h-12 bg-indigo-500 text-white rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm"><i class="ph-fill ph-map-pin"></i></div><span class="text-indigo-900 font-semibold text-sm">Mega Maraton (Uzun Yol)</span></button>
+                        <button onclick="window.setGoal('artikel')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-cards"></i></div><span class="text-sm">Artikeller (der/die/das)</span></button>
+                        <button onclick="window.setGoal('vocab')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-brain"></i></div><span class="text-sm">Kelime Ezberi</span></button>
+                        <button onclick="window.setGoal('listening')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span class="text-sm">Dinleme ve Konuşma</span></button>
+                        <button onclick="window.setGoal('writing')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span class="text-sm">Yazım Kuralları</span></button>
+                    </div>
                 </div>
 
                 <!-- DİNAMİK YOL (HARİTA) -->
@@ -354,7 +352,7 @@
                     <div class="flex items-center gap-1 font-bold text-xl text-indigo-500"><span id="earned-xp">+10</span></div>
                 </div>
                 <div class="bg-slate-50 rounded-2xl p-4 flex flex-col items-center w-28 border border-slate-100">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase mb-1">Doğru Sayısı</span>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase mb-1">Soru Sayısı</span>
                     <div class="flex items-center gap-1 font-bold text-xl text-teal-500"><span id="accuracy-display">25</span></div>
                 </div>
             </div>
@@ -368,20 +366,19 @@
 
     <!-- CORE UYGULAMA MANTIĞI & GÜVENLİ SCRİPT (MODÜLDEN BAĞIMSIZ) -->
     <script>
-        const LOCAL_STORAGE_KEY = 'b1kamp_data_v3';
+        const LOCAL_STORAGE_KEY = 'b1kamp_data_v4';
 
-        // Global State (Her durumda çalışacak şekilde tanımlanır)
+        // Global State 
         window.totalXP = 0; 
         window.hearts = 10; 
         window.stageProgress = { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 }; 
         window.selectedGoal = null;
 
-        // Loader Kontrolü - Sayfa yüklendiğinde her koşulda çalışır
+        // Loader Kontrolü
         window.addEventListener('load', () => {
             const progress = document.getElementById('loader-progress');
             if (progress) progress.style.width = '100%';
             
-            // Firebase başarısız olsa dahi ekran 2.5 saniye sonra mutlak olarak açılır
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 if (loader) {
@@ -411,9 +408,7 @@
                 stageProgress: window.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 }, 
                 selectedGoal: window.selectedGoal || null 
             };
-            try { 
-                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave)); 
-            } catch(e) {}
+            try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave)); } catch(e) {}
         };
 
         window.attemptLogin = async function() {
@@ -426,21 +421,15 @@
             const user = userEl.value.toLowerCase().trim(); 
             const pass = passEl.value.toLowerCase().trim();
             
-            if(user === 'nisan' && pass === 'talha') {
+            if(user === 'talha' && pass === 'talha') {
                 errorEl.classList.add('hidden'); 
                 btnEl.innerText = "Yükleniyor..."; 
                 btnEl.disabled = true;
 
-                // Eğer Firebase modülü başarılı yüklenmişse onun fonksiyonunu çağır (Bulut eşitlemesi için)
                 if (typeof window.firebaseLoginHook === 'function') {
-                    try {
-                        await window.firebaseLoginHook();
-                    } catch(e) {
-                        console.warn("Firebase bağlantısı başarısız, lokal verilerle devam ediliyor.");
-                    }
+                    try { await window.firebaseLoginHook(); } catch(e) {}
                 }
                 
-                // Her halükarda oyunu başlat
                 window.completeLoginProcess();
             } else { 
                 errorEl.classList.remove('hidden'); 
@@ -459,29 +448,26 @@
             
             if (typeof window.initAudio === 'function') window.initAudio(); 
             
-            if(window.selectedGoal) { 
-                window.switchScreen('dashboard'); 
-            } else { 
-                window.switchScreen('survey'); 
-            }
+            if(window.selectedGoal) { window.switchScreen('dashboard'); } 
+            else { window.switchScreen('survey'); }
             
             window.updateTopBar(); 
             window.updateDashboardProgress();
             
-            if (loader) { 
-                loader.style.opacity = '0'; 
-                setTimeout(() => { loader.style.display = 'none'; }, 400); 
-            }
-            if (btnEl) { 
-                btnEl.innerText = "Giriş Yap"; 
-                btnEl.disabled = false; 
-            }
+            if (loader) { loader.style.opacity = '0'; setTimeout(() => { loader.style.display = 'none'; }, 400); }
+            if (btnEl) { btnEl.innerText = "Giriş Yap"; btnEl.disabled = false; }
         };
 
         // --- UYGULAMA VE OYUN FONKSİYONLARI ---
 
         window.setGoal = async function(goal) { window.selectedGoal = goal; window.saveProgress(); window.switchScreen('dashboard'); };
-        window.changeGoal = function() { window.switchScreen('survey'); };
+        
+        window.changeGoal = function() { 
+            window.switchScreen('dashboard');
+            document.getElementById('view-stage-selection').classList.add('hidden');
+            document.getElementById('view-learning-path').classList.add('hidden');
+            document.getElementById('view-survey').classList.remove('hidden');
+        };
 
         window.setImgSrc = function(imgElement, src, fallbackText, color) {
             if (!imgElement || imgElement.getAttribute('data-current-src') === src) return;
@@ -622,7 +608,7 @@
             if(navBtn) navBtn.classList.add('active');
 
             const header = document.getElementById('main-header');
-            if(screenName === 'login' || screenName === 'session' || screenName === 'finish' || screenName === 'survey') {
+            if(screenName === 'login' || screenName === 'session' || screenName === 'finish') {
                 if(header) header.style.display = 'none';
             } else {
                 if(header) header.style.display = 'flex';
@@ -648,13 +634,14 @@
             window.activeStage = null;
         };
 
-        // ================= MEGA HARİTA OLUŞTURUCU =================
+        // ================= UZUN HARİTA OLUŞTURUCU (0-100) =================
         window.activePathNodes = [];
         window.currentPathNodeIndex = 0;
         
         window.buildPath = function(choice) {
             if(document.getElementById('screen-survey').classList.contains('active')) { window.switchScreen('dashboard'); }
             document.getElementById('view-stage-selection').classList.add('hidden');
+            document.getElementById('view-survey').classList.add('hidden');
             document.getElementById('view-learning-path').classList.remove('hidden');
 
             const title = document.getElementById('path-title');
@@ -668,31 +655,43 @@
 
             let nodes = [];
             
-            if(choice === 'grammar' || window.activeStage === 'gramer') {
-                nodes = [
-                    {type: 'grammar', count: 5, label: 'Bağlaçlar', color: 'indigo', icon: '<i class="ph-fill ph-text-t"></i>'},
-                    {type: 'grammar', count: 10, label: 'İsmin Halleri', color: 'teal', icon: '<i class="ph-fill ph-text-t"></i>'},
-                    {type: 'video', count: 1, label: 'Gramer Video', color: 'rose', icon: '<i class="ph-fill ph-video-camera"></i>'},
-                    {type: 'grammar', count: 15, label: 'Test', color: 'indigo', icon: '<i class="ph-fill ph-check-square-offset"></i>'}
-                ];
-                window.activeStage = 'gramer'; 
-            }
-            else if(choice === 'listening') {
-                nodes = [
-                    {type: 'video', count: 1, label: 'Almanca Video', color: 'rose', icon: '<i class="ph-fill ph-video-camera"></i>'},
-                    {type: 'listening', count: 10, label: 'Dinleme', color: 'indigo', icon: '<i class="ph-fill ph-headphones"></i>'},
-                    {type: 'speaking', count: 10, label: 'Konuşma Pratiği', color: 'teal', icon: '<i class="ph-fill ph-microphone"></i>'},
-                    {type: 'dictation', count: 10, label: 'Dikte', color: 'amber', icon: '<i class="ph-fill ph-waveform"></i>'}
-                ];
-            } else {
-                nodes = [
-                    {type: 'flashcards', count: 10, label: 'Kelimeler', color: 'indigo', icon: '<i class="ph-fill ph-book-open"></i>'},
-                    {type: 'speaking', count: 10, label: 'Telaffuz', color: 'teal', icon: '<i class="ph-fill ph-microphone"></i>'},
-                    {type: 'matching', count: 5, label: 'Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'video', count: 1, label: 'Kısa Video', color: 'rose', icon: '<i class="ph-fill ph-video-camera"></i>'},
-                    {type: 'writing', count: 10, label: 'Yazma', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
-                    {type: 'vocab', count: 20, label: 'Bölüm Sonu', color: 'indigo', icon: '<i class="ph-fill ph-flag-checkered"></i>'}
-                ];
+            // Generate up to 100 nodes for "Mega Maraton" effect (or 50 for regular)
+            let totalNodes = choice === 'mixed' ? 100 : 50;
+            const nodeTypes = ['flashcards', 'vocab', 'listening', 'artikel', 'matching', 'writing', 'dictation', 'speaking'];
+            const icons = {
+                'flashcards': '<i class="ph-fill ph-book-open"></i>',
+                'vocab': '<i class="ph-fill ph-star"></i>',
+                'listening': '<i class="ph-fill ph-headphones"></i>',
+                'artikel': '<span class="font-black text-xl">ART</span>',
+                'matching': '<i class="ph-fill ph-puzzle-piece"></i>',
+                'writing': '<i class="ph-fill ph-pencil-simple"></i>',
+                'dictation': '<i class="ph-fill ph-waveform"></i>',
+                'speaking': '<i class="ph-fill ph-microphone"></i>',
+                'video': '<i class="ph-fill ph-video-camera"></i>'
+            };
+            const colors = ['purple', 'amber', 'indigo', 'rose', 'teal'];
+
+            for (let i = 0; i < totalNodes; i++) {
+                let type;
+                if (i % 10 === 9) type = 'video';
+                else if (choice === 'mixed') type = nodeTypes[i % nodeTypes.length];
+                else {
+                    // Try to stick to the choice but add some variety
+                    if (choice === 'grammar') type = 'grammar';
+                    else if (choice === 'artikel' && i % 3 === 0) type = 'vocab';
+                    else if (choice === 'vocab' && i % 4 === 0) type = 'matching';
+                    else if (choice === 'listening' && i % 2 === 0) type = 'speaking';
+                    else if (choice === 'writing' && i % 3 === 0) type = 'dictation';
+                    else type = choice;
+                }
+
+                nodes.push({
+                    type: type,
+                    count: 20 + Math.floor(Math.random() * 10), // 20-30 questions per node!
+                    label: `Aşama ${i+1}`,
+                    color: colors[i % colors.length],
+                    icon: icons[type] || '<i class="ph-fill ph-star"></i>'
+                });
             }
 
             window.activePathNodes = nodes.map(n => ({...n, completed: false}));
@@ -843,6 +842,14 @@
             let mode = sessionType;
             window.setAvatars(mode);
 
+            // YouTube video rotasyonu (Her videoda farklı link için)
+            const videoLinks = [
+                "https://www.youtube.com/embed/sYjbGU6MAQY",
+                "https://www.youtube.com/embed/4lcUBkI3B1Q",
+                "https://www.youtube.com/embed/5aT7BwZqAak"
+            ];
+            let randomVideo = videoLinks[Math.floor(Math.random() * videoLinks.length)];
+
             // --- 0. VIDEO (YENİ MOD) ---
             if(mode === 'video') {
                 document.getElementById('session-avatars').style.display = 'none'; 
@@ -853,7 +860,7 @@
                     <h2 class="text-xl font-bold text-slate-800 mb-4 text-center mt-4">Almanca Dinleme Pratiği</h2>
                     <p class="text-sm text-slate-500 mb-6 text-center">Aşağıdaki kısa eğitim videosunu izle. Konuşmaları anlamaya çalış.</p>
                     <div class="video-container w-full max-w-lg mx-auto">
-                        <iframe src="https://www.youtube.com/embed/sYjbGU6MAQY" title="German Learning Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe src="${randomVideo}" title="German Learning Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 `;
             }
@@ -1306,7 +1313,6 @@
         window.firebaseLoginHook = async function() {
             try {
                 // Not: Güvenlik için token kontrolü veya anonim giriş yapılıyor.
-                // Firebase modülü dışarıya aktarılıyor, eğer sorun çıkarsa Catch'e düşer ve lokal devam eder.
                 const firebaseConfig = typeof window.__firebase_config !== 'undefined' ? JSON.parse(window.__firebase_config) : null;
                 
                 if (!firebaseConfig) throw new Error("Firebase config bulunamadı.");
