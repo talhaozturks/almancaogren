@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>B1 Almanca Akademisi | %100 Başarı Garantisi</title>
+    <title>B1 Almanca Akademisi | Mega Kamp</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -41,7 +41,7 @@
             transition: all 0.15s; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .app-btn:active:not(:disabled) { border-bottom-width: 1px; transform: translateY(2px); }
-        .app-btn:disabled { aopacity: 0.5; cursor: not-allowed; border-bottom-width: 3px; transform: translateY(2px); filter: grayscale(0.8); }
+        .app-btn:disabled { opacity: 0.5; cursor: not-allowed; border-bottom-width: 3px; transform: translateY(2px); filter: grayscale(0.8); }
 
         .btn-teal { background: var(--c-teal); border-color: var(--c-teal-dark); color: white; }
         .btn-teal:hover:not(:disabled) { background: #13a89e; }
@@ -62,14 +62,6 @@
         .opt-btn.selected { border-color: var(--c-indigo); background: #eef2ff; color: var(--c-indigo-dark); }
         .opt-btn.correct { border-color: var(--c-teal); background: #f0fdfa; color: var(--c-teal-dark); }
         .opt-btn.wrong { border-color: var(--c-rose); background: #fff1f2; color: var(--c-rose-dark); }
-
-        .survey-btn {
-            display: flex; align-items: center; gap: 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-bottom-width: 3px; border-radius: 16px;
-            color: #475569; font-weight: 600; font-size: 1rem; transition: all 0.15s; cursor: pointer;
-            padding: 1rem; margin-bottom: 1rem; width: 100%; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.01);
-        }
-        .survey-btn:active { border-bottom-width: 1px; transform: translateY(2px); }
-        .survey-btn:hover { background-color: #f8fafc; border-color: #cbd5e1; }
 
         .bottom-sheet { position: fixed; bottom: -100%; left: 0; right: 0; transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 50; box-shadow: 0 -10px 25px rgba(0,0,0,0.03); border-top-left-radius: 24px; border-top-right-radius: 24px; }
         .bottom-sheet.show { bottom: 0; }
@@ -103,25 +95,20 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.03); max-width: 80%; line-height: 1.4;
         }
 
-        .video-container {
-            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
     </style>
 </head>
 <body class="h-screen w-full flex flex-col md:flex-row overflow-hidden relative">
 
     <!-- YÜKLEME EKRANI -->
     <div id="loader">
-        <div class="chat-bubble bg-white border border-slate-200 text-slate-700 rounded-3xl rounded-br-none mb-6">
+        <div class="chat-bubble bg-white border border-slate-200 text-slate-700 rounded-3xl rounded-br-none mb-6 shadow-sm">
             <p class="text-center text-lg font-bold">"Für dich, Baby"<br><span class="text-slate-400 text-sm font-medium">-Talha</span></p>
         </div>
         <img src="assets/talhaarkaplansiz.png" alt="Talha" onerror="this.onerror=null; this.src='https://placehold.co/150x150/6366f1/ffffff?text=Talha'" class="h-32 md:h-40 object-contain mb-8 drop-shadow-lg">
         <div class="w-64 h-2 bg-slate-200 rounded-full overflow-hidden mb-8 shadow-inner">
             <div id="loader-progress" class="h-full bg-indigo-500 rounded-full w-0 transition-all duration-[2.5s] ease-in-out"></div>
         </div>
-        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/400x100/ffffff/6366f1?text=Talha+Ozturk'" class="h-32 md:h-40 object-contain opacity-80">
+        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/400x100/ffffff/6366f1?text=Talha+Ozturk'" class="h-24 md:h-32 object-contain opacity-80">
         <p id="cloud-sync-text" class="text-indigo-400 font-medium text-sm mt-4 animate-pulse hidden">Bağlantı kuruluyor...</p>
     </div>
 
@@ -137,26 +124,6 @@
             <p id="login-error" class="text-rose-500 font-medium text-sm mb-4 hidden bg-rose-50 p-2 rounded-lg border border-rose-100">Kullanıcı adı veya şifre hatalı.</p>
             
             <button id="btn-login" onclick="window.attemptLogin()" class="app-btn btn-indigo w-full py-3.5 text-lg mt-2 shadow-md shadow-indigo-500/20">Giriş Yap</button>
-        </div>
-    </section>
-
-    <!-- SİHİRBAZ (HEDEF BELİRLEME) -->
-    <section id="screen-survey" class="screen flex-col flex-1 absolute inset-0 bg-white z-[55] items-center p-6 overflow-y-auto pt-16">
-        <div class="max-w-xl w-full">
-            <div class="bg-indigo-50 border border-indigo-100 rounded-3xl p-6 mb-8 relative overflow-hidden text-center">
-                <i class="ph-fill ph-compass text-5xl text-indigo-200 mb-2"></i>
-                <h2 class="text-2xl font-bold tracking-tight text-indigo-900 mb-1">Öğrenme Modeli Seç</h2>
-                <p class="font-medium text-indigo-600 text-sm">Hangi konuda daha fazla pratik yapmak istersin?</p>
-            </div>
-
-            <div class="space-y-3">
-                <button onclick="window.setGoal('mixed')" class="survey-btn border-indigo-200 hover:border-indigo-400 bg-indigo-50"><div class="w-12 h-12 bg-indigo-500 text-white rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm"><i class="ph-fill ph-map-pin"></i></div><span class="text-indigo-900 font-semibold text-sm">0-100 Mega Maraton (Önerilen)</span></button>
-                <button onclick="window.setGoal('artikel')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-cards"></i></div><span class="text-sm">Sadece Artikeller (der/die/das)</span></button>
-                <button onclick="window.setGoal('vocab')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-brain"></i></div><span class="text-sm">Saf Kelime Ezberi</span></button>
-                <button onclick="window.setGoal('listening')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span class="text-sm">Dinleme ve Konuşma</span></button>
-                <button onclick="window.setGoal('writing')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span class="text-sm">Yazım Kuralları</span></button>
-                <button onclick="window.setGoal('grammar')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-text-t"></i></div><span class="text-sm">Gramer Kuralları</span></button>
-            </div>
         </div>
     </section>
 
@@ -197,12 +164,13 @@
                 
                 <!-- PDF SEÇİMİ -->
                 <div id="view-stage-selection" class="w-full relative">
-                    <h2 class="text-xl font-bold text-slate-800 mb-6">Eğitim Materyalleri</h2>
+                    <h2 class="text-xl font-bold text-slate-800 mb-6">PDF Materyalleri (Mega Kamp)</h2>
                     
                     <button onclick="window.openStage('b1_1')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-indigo-300 transition-colors text-left group">
                         <div class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-file-pdf text-2xl"></i></div>
                         <div class="flex-1">
                             <h3 class="font-bold text-slate-800 text-sm md:text-base">B1.1 Kelime Listesi</h3>
+                            <p class="text-xs text-slate-500">Tüm kelimeler. Sıfırdan %100'e uzun yol.</p>
                             <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
                                 <div id="prog-bar-b1_1" class="bg-indigo-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
@@ -213,6 +181,7 @@
                         <div class="w-14 h-14 bg-teal-50 text-teal-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-file-pdf text-2xl"></i></div>
                         <div class="flex-1">
                             <h3 class="font-bold text-slate-800 text-sm md:text-base">B1.2 İleri Seviye Kelimeler</h3>
+                            <p class="text-xs text-slate-500">Tam liste. Kilitli maraton sistemi.</p>
                             <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
                                 <div id="prog-bar-b1_2" class="bg-teal-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
@@ -225,18 +194,9 @@
                         </div>
                         <div class="flex-1">
                             <h3 class="font-bold text-slate-800 text-sm md:text-base">Arena B1 Tam Liste</h3>
+                            <p class="text-xs text-slate-500">Arena özel eğitim yolu.</p>
                             <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
                                 <div id="prog-bar-arena" class="bg-amber-400 h-full rounded-full transition-all duration-1000 w-0"></div>
-                            </div>
-                        </div>
-                    </button>
-
-                    <button onclick="window.openStage('gramer')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-purple-300 transition-colors text-left">
-                        <div class="w-14 h-14 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-text-t text-2xl"></i></div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-slate-800 text-sm md:text-base">Gramer Kuralları</h3>
-                            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
-                                <div id="prog-bar-gramer" class="bg-purple-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
                         </div>
                     </button>
@@ -244,12 +204,12 @@
 
                 <!-- DİNAMİK YOL (HARİTA) -->
                 <div id="view-learning-path" class="w-full hidden">
-                    <button onclick="window.goBackToStages()" class="text-slate-500 font-medium hover:text-slate-700 flex items-center gap-2 mb-6 text-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> Geri Dön</button>
+                    <button onclick="window.goBackToStages()" class="text-slate-500 font-medium hover:text-slate-700 flex items-center gap-2 mb-6 text-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> PDF Seçimine Dön</button>
                     
-                    <div id="path-header" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm mb-8 text-center">
-                        <h2 class="text-xl font-bold text-slate-800" id="path-title">Eğitim Yolu</h2>
-                        <p class="text-sm font-medium text-slate-500 mt-2">Hatalarını öğrenene kadar sistem sana tekrar soracak.</p>
-                        <div class="w-full max-w-xs mx-auto bg-slate-100 h-2 rounded-full mt-4 overflow-hidden">
+                    <div id="path-header" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm mb-8 text-center relative overflow-hidden">
+                        <h2 class="text-xl font-bold text-slate-800 relative z-10" id="path-title">Eğitim Yolu</h2>
+                        <p class="text-sm font-medium text-slate-500 mt-2 relative z-10">Bölümleri sırayla tamamla. Hata yaparsan sistem tekrar sorar!</p>
+                        <div class="w-full max-w-xs mx-auto bg-slate-100 h-2 rounded-full mt-4 overflow-hidden relative z-10">
                             <div id="path-main-progress" class="bg-indigo-500 h-full rounded-full transition-all duration-1000 w-0"></div>
                         </div>
                     </div>
@@ -294,7 +254,6 @@
                         </div>
                     </div>
 
-                    <button onclick="window.changeGoal()" class="app-btn btn-white w-full py-3.5 text-sm font-semibold mb-3 border-slate-200"><i class="ph-bold ph-target mr-2"></i> Hedefimi Değiştir</button>
                     <button onclick="window.location.reload()" class="app-btn btn-white w-full py-3.5 text-sm font-semibold border-slate-200 text-rose-500 hover:bg-rose-50"><i class="ph-bold ph-sign-out mr-2"></i> Çıkış Yap</button>
                 </div>
             </div>
@@ -369,14 +328,12 @@
 
     <!-- CORE UYGULAMA MANTIĞI & GÜVENLİ SCRİPT -->
     <script>
-        const LOCAL_STORAGE_KEY = 'b1kamp_data_v5';
+        const LOCAL_STORAGE_KEY = 'b1kamp_data_v7_mega'; 
 
         window.totalXP = 0; 
         window.hearts = 10; 
-        window.stageProgress = { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 }; 
-        window.selectedGoal = null;
-
-        // Loader Kontrolü
+        window.stageProgress = { 'b1_1': 0, 'b1_2': 0, 'arena': 0 }; 
+        
         window.addEventListener('load', () => {
             const progress = document.getElementById('loader-progress');
             if (progress) progress.style.width = '100%';
@@ -397,8 +354,7 @@
                     const loadedData = JSON.parse(localData);
                     window.totalXP = loadedData.totalXP !== undefined ? loadedData.totalXP : 0;
                     window.hearts = loadedData.hearts !== undefined ? loadedData.hearts : 10;
-                    window.stageProgress = loadedData.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 };
-                    window.selectedGoal = loadedData.selectedGoal || null;
+                    window.stageProgress = loadedData.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0 };
                 }
             } catch(e) { console.warn("Local storage parse hatasi"); }
         };
@@ -407,8 +363,7 @@
             const dataToSave = { 
                 totalXP: window.totalXP || 0, 
                 hearts: window.hearts || 10, 
-                stageProgress: window.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 }, 
-                selectedGoal: window.selectedGoal || null 
+                stageProgress: window.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0 }
             };
             try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave)); } catch(e) {}
         };
@@ -423,7 +378,7 @@
             const user = userEl.value.toLowerCase().trim(); 
             const pass = passEl.value.toLowerCase().trim();
             
-            // İstek Üzerine Güncellenen Hesap Bilgisi
+            // Login Check
             if(user === 'talha' && pass === 'talha') {
                 errorEl.classList.add('hidden'); 
                 btnEl.innerText = "Yükleniyor..."; 
@@ -451,23 +406,12 @@
             
             if (typeof window.initAudio === 'function') window.initAudio(); 
             
-            if(window.selectedGoal) { window.switchScreen('dashboard'); } 
-            else { window.switchScreen('survey'); }
-            
+            window.switchScreen('dashboard');
             window.updateTopBar(); 
             window.updateDashboardProgress();
             
             if (loader) { loader.style.opacity = '0'; setTimeout(() => { loader.style.display = 'none'; }, 400); }
             if (btnEl) { btnEl.innerText = "Giriş Yap"; btnEl.disabled = false; }
-        };
-
-        window.setGoal = async function(goal) { window.selectedGoal = goal; window.saveProgress(); window.switchScreen('dashboard'); };
-        
-        window.changeGoal = function() { 
-            window.switchScreen('dashboard');
-            document.getElementById('view-stage-selection').classList.add('hidden');
-            document.getElementById('view-learning-path').classList.add('hidden');
-            document.getElementById('view-survey').classList.remove('hidden');
         };
 
         window.setImgSrc = function(imgElement, src, fallbackText, color) {
@@ -516,27 +460,55 @@
             }
         }
 
-        // ================= MEGA B1 VERİTABANI =================
-        // Tüm B1 PDF'lerinden çok büyük kapsamlı kelime ve gramer çekimi
+        // ================= MEGA B1 VERİTABANI (Yüzlerce Kelime) =================
         const dbContent = {
             'b1_1': [
                 { article: "der", word: "Abfall", tr: "atık" }, { article: "der", word: "Abflug", tr: "kalkış" }, { article: "die", word: "Absage", tr: "iptal" },
                 { article: "-", word: "aktiv", tr: "faal" }, { article: "der", word: "Alkohol", tr: "alkol" }, { article: "-", word: "angenehm", tr: "rahat" },
-                { article: "die", word: "Anzeigetafel", tr: "ilan panosu" }, { article: "der", word: "Aufruf", tr: "çağrı" }, { article: "der", word: "Ausgang", tr: "çıkış" },
-                { article: "die", word: "Ausstattung", tr: "ekipman" }, { article: "der", word: "Behälter", tr: "kap" }, { article: "-", word: "betreten", tr: "girmek" },
-                { article: "die", word: "Bordkarte", tr: "biniş kartı" }, { article: "der", word: "Campingplatz", tr: "kamp alanı" }, { article: "der", word: "Container", tr: "konteyner" },
-                { article: "die", word: "Dienstreise", tr: "iş seyahati" }, { article: "das", word: "Doppelbett", tr: "iki kişilik yatak" }, { article: "das", word: "Einzelzimmer", tr: "tek kişilik oda" },
-                { article: "der", word: "Flug", tr: "uçuş" }, { article: "das", word: "Gepäck", tr: "bagaj" }, { article: "das", word: "Handgepäck", tr: "el bagajı" },
-                { article: "der", word: "Ärger", tr: "öfke" }, { article: "die", word: "Ausnahme", tr: "istisna" }, { article: "die", word: "Beleidigung", tr: "hakaret" },
+                { article: "-", word: "annulliert", tr: "iptal edilmiş" }, { article: "die", word: "Anzeigetafel", tr: "ilan panosu" }, { article: "der", word: "Aufruf", tr: "çağrı" },
+                { article: "der", word: "Ausgang", tr: "çıkış" }, { article: "die", word: "Ausstattung", tr: "ekipman" }, { article: "der", word: "Behälter", tr: "kap" },
+                { article: "-", word: "betreten", tr: "girmek" }, { article: "der", word: "Bewohner", tr: "sakin" }, { article: "die", word: "Bordkarte", tr: "biniş kartı" },
+                { article: "der", word: "Camper", tr: "kampçı" }, { article: "der", word: "Campingplatz", tr: "kamp alanı" }, { article: "der", word: "Check-in-Schalter", tr: "check-in kontuarı" },
+                { article: "der", word: "Container", tr: "konteyner" }, { article: "die", word: "Dienstreise", tr: "iş seyahati" }, { article: "das", word: "Doppelbett", tr: "iki kişilik yatak" },
+                { article: "das", word: "Doppelzimmer", tr: "iki kişilik oda" }, { article: "-", word: "einchecken", tr: "giriş yapmak" }, { article: "die", word: "Einsteigezeit", tr: "biniş saati" },
+                { article: "das", word: "Einzelzimmer", tr: "tek kişilik oda" }, { article: "-", word: "erleben", tr: "deneyimlemek" }, { article: "der", word: "Flug", tr: "uçuş" },
+                { article: "der", word: "Flugbegleiter", tr: "uçuş görevlisi" }, { article: "der", word: "Fluggast", tr: "uçak yolcusu" }, { article: "die", word: "Fluggesellschaft", tr: "uçak şirketi" },
+                { article: "-", word: "führen", tr: "yönetmek" }, { article: "-", word: "füttern", tr: "beslemek" }, { article: "das", word: "Gate", tr: "kapı" },
+                { article: "das", word: "Gepäck", tr: "bagaj" }, { article: "die", word: "Gepäckausgabe", tr: "bagaj teslimi" }, { article: "das", word: "Handgepäck", tr: "el bagajı" },
+                { article: "-", word: "historisch", tr: "tarihi" }, { article: "das", word: "Hostel", tr: "yurt" }, { article: "-", word: "hygienisch", tr: "hijyenik" },
+                { article: "die", word: "Jugendherberge", tr: "öğrenci yurdu" }, { article: "der", word: "Katalog", tr: "katalog" }, { article: "-", word: "klettern", tr: "tırmanmak" },
+                { article: "-", word: "komfortabel", tr: "konforlu" }, { article: "die", word: "Lage", tr: "konum" }, { article: "das", word: "Lagerfeuer", tr: "kamp ateşi" },
+                { article: "-", word: "landen", tr: "konmak" }, { article: "der", word: "Lärm", tr: "gürültü" }, { article: "-", word: "lebhaft", tr: "canlı" },
+                { article: "die", word: "Leine", tr: "tasma" }, { article: "der", word: "Leuchtturm", tr: "fener kulesi" }, { article: "der", word: "Meerblick", tr: "deniz manzarası" },
+                { article: "der", word: "Nebel", tr: "sis" }, { article: "-", word: "neblig", tr: "puslu" }, { article: "das", word: "Paradies", tr: "cennet" },
+                { article: "der", word: "Passagier", tr: "yolcu" }, { article: "die", word: "Passkontrolle", tr: "pasaport kontrolü" }, { article: "der", word: "Pool", tr: "havuz" },
+                { article: "-", word: "rechtzeitig", tr: "zamanında" }, { article: "das", word: "Reisebüro", tr: "seyahat acentesi" }, { article: "der", word: "Reiseplan", tr: "yolculuk planı" },
+                { article: "-", word: "reiten", tr: "at binmek" }, { article: "die", word: "Ruhezeit", tr: "dinlenme zamanı" }, { article: "-", word: "sauber", tr: "temiz" },
+                { article: "die", word: "Sauberkeit", tr: "temizlik" }, { article: "der", word: "Schalter", tr: "şalter" }, { article: "die", word: "Schlange", tr: "kuyruk" },
+                { article: "der", word: "Sonnenschirm", tr: "şemsiye" }, { article: "die", word: "Sonnenterrasse", tr: "güneşlenme verandası" }, { article: "der", word: "Sonnenuntergang", tr: "güneş batışı" },
+                { article: "der", word: "Stern", tr: "yıldız" }, { article: "-", word: "stören", tr: "rahatsız etmek" }, { article: "das", word: "Streichholz", tr: "kibrit" },
+                { article: "-", word: "streiken", tr: "grev yapmak" }, { article: "die", word: "Taschenlampe", tr: "el feneri" }, { article: "das", word: "Taschenmesser", tr: "çakı" },
+                { article: "-", word: "traumhaft", tr: "rüya gibi" }, { article: "-", word: "übernachten", tr: "gecelemek" }, { article: "die", word: "Übernachtung", tr: "geceleme" },
+                { article: "die", word: "Umgebung", tr: "çevre" }, { article: "-", word: "verreisen", tr: "uzaklaşmak" }, { article: "-", word: "verschieben", tr: "ertelemek" },
+                { article: "der", word: "Wohnwagen", tr: "karavan" }, { article: "das", word: "Zelt", tr: "çadır" }, { article: "der", word: "Zoll", tr: "gümrük" },
+                { article: "der", word: "Ärger", tr: "öfke" }, { article: "die", word: "Ausnahme", tr: "istisna" }, { article: "-", word: "beleidigen", tr: "hakaret etmek" },
+                { article: "die", word: "Beleidigung", tr: "hakaret" }, { article: "-", word: "beschweren", tr: "yakınmak" }, { article: "der", word: "Blumentopf", tr: "saksı" },
                 { article: "die", word: "Entscheidung", tr: "karar" }, { article: "die", word: "Freude", tr: "neşe" }, { article: "der", word: "Konflikt", tr: "anlaşmazlık" },
-                { article: "der", word: "Schaden", tr: "hasar" }, { article: "das", word: "Urteil", tr: "hüküm" }, { article: "das", word: "Verständnis", tr: "anlayış" },
-                { article: "das", word: "Erdbeben", tr: "deprem" }, { article: "die", word: "Erde", tr: "toprak" }, { article: "das", word: "Klima", tr: "iklim" },
-                { article: "das", word: "Plastik", tr: "plastik" }, { article: "die", word: "Umweltverschmutzung", tr: "çevre kirliliği" }, { article: "die", word: "Ware", tr: "mal/eşya" },
+                { article: "die", word: "Kündigung", tr: "ihbar" }, { article: "der", word: "Mietvertrag", tr: "kira sözleşmesi" }, { article: "der", word: "Schaden", tr: "hasar" },
+                { article: "das", word: "Urteil", tr: "hüküm" }, { article: "das", word: "Verständnis", tr: "anlayış" }, { article: "der", word: "Verstoß", tr: "ihlal" },
+                { article: "das", word: "Abgas", tr: "egzoz gazı" }, { article: "das", word: "Abwasser", tr: "atık su" }, { article: "das", word: "Altpapier", tr: "atık kağıt" },
+                { article: "die", word: "Belastung", tr: "yük" }, { article: "der", word: "Beutel", tr: "kese" }, { article: "das", word: "Erdbeben", tr: "deprem" },
+                { article: "die", word: "Erde", tr: "toprak" }, { article: "die", word: "Erderwärmung", tr: "küresel ısınma" },
+                { article: "das", word: "Klima", tr: "iklim" }, { article: "der", word: "Klimawandel", tr: "iklim değişikliği" }, { article: "das", word: "Plastik", tr: "plastik" },
+                { article: "-", word: "recyceln", tr: "geri dönüştürmek" }, { article: "die", word: "Umweltverschmutzung", tr: "çevre kirliliği" }, { article: "das", word: "Unwetter", tr: "fırtına" },
+                { article: "der", word: "Verbraucher", tr: "tüketici" }, { article: "der", word: "Versand", tr: "sevkiyat" }, { article: "die", word: "Ware", tr: "mal/eşya" },
                 { article: "die", word: "Diskussion", tr: "tartışma" }, { article: "die", word: "Gewohnheit", tr: "alışkanlık" }, { article: "die", word: "Langeweile", tr: "sıkıntı" },
-                { article: "der", word: "Zoll", tr: "gümrük" }, { article: "die", word: "Mauer", tr: "duvar" }, { article: "der", word: "Krieg", tr: "savaş" },
-                { article: "die", word: "Regierung", tr: "hükümet" }, { article: "das", word: "Visum", tr: "vize" }, { article: "die", word: "Wahl", tr: "seçim" },
-                { article: "-", word: "wählen", tr: "seçmek" }, { article: "-", word: "erleben", tr: "yaşamak (tecrübe)" }, { article: "-", word: "recyceln", tr: "geri dönüştürmek" },
-                { article: "der", word: "Staat", tr: "devlet" }, { article: "die", word: "Demokratie", tr: "demokrasi" }, { article: "der", word: "Flüchtling", tr: "mülteci" }
+                { article: "die", word: "Mehrheit", tr: "çoğunluk" }, { article: "die", word: "Minderheit", tr: "azınlık" }, { article: "das", word: "Rätsel", tr: "bilmece" },
+                { article: "die", word: "Amtssprache", tr: "resmi dil" }, { article: "die", word: "Arbeitslosigkeit", tr: "işsizlik" }, { article: "das", word: "Asyl", tr: "sığınma" },
+                { article: "die", word: "Demokratie", tr: "demokrasi" }, { article: "der", word: "Flüchtling", tr: "mülteci" }, { article: "die", word: "Grenze", tr: "sınır" },
+                { article: "die", word: "Heimat", tr: "vatan" }, { article: "der", word: "Krieg", tr: "savaş" }, { article: "die", word: "Mauer", tr: "duvar" },
+                { article: "die", word: "Regierung", tr: "hükümet" }, { article: "der", word: "Staat", tr: "devlet" }, { article: "das", word: "Visum", tr: "vize" },
+                { article: "die", word: "Wahl", tr: "seçim" }, { article: "-", word: "wählen", tr: "seçmek" }
             ],
             'b1_2': [
                 { article: "die", word: "Anerkennung", tr: "takdir" }, { article: "die", word: "Fähigkeit", tr: "beceri" }, { article: "das", word: "Heimweh", tr: "sıla hasreti" },
@@ -552,7 +524,13 @@
                 { article: "das", word: "Kennzeichen", tr: "plaka" }, { article: "der", word: "Reifen", tr: "lastik" }, { article: "die", word: "Vorfahrt", tr: "geçiş üstünlüğü" },
                 { article: "-", word: "amtlich", tr: "resmi" }, { article: "-", word: "anerkennen", tr: "tanımak/onaylamak" }, { article: "-", word: "beherrschen", tr: "hakim olmak" },
                 { article: "-", word: "finanziell", tr: "mali/finansal" }, { article: "-", word: "langfristig", tr: "uzun vadeli" }, { article: "-", word: "vegan", tr: "vegan" },
-                { article: "das", word: "Medikament", tr: "ilaç" }, { article: "die", word: "Apotheke", tr: "eczane" }, { article: "das", word: "Rezept", tr: "reçete" }
+                { article: "das", word: "Medikament", tr: "ilaç" }, { article: "die", word: "Apotheke", tr: "eczane" }, { article: "das", word: "Rezept", tr: "reçete" },
+                { article: "die", word: "Versicherung", tr: "sigorta" }, { article: "der", word: "Beitrag", tr: "katkı/prim" }, { article: "die", word: "Verletzung", tr: "yaralanma" },
+                { article: "der", word: "Notarzt", tr: "acil doktoru" }, { article: "die", word: "Operation", tr: "ameliyat" }, { article: "das", word: "Symptom", tr: "belirti" },
+                { article: "das", word: "Virus", tr: "virüs" }, { article: "die", word: "Infektion", tr: "enfeksiyon" }, { article: "die", word: "Therapie", tr: "terapi" },
+                { article: "die", word: "Forschung", tr: "araştırma" }, { article: "die", word: "Wissenschaft", tr: "bilim" }, { article: "das", word: "Experiment", tr: "deney" },
+                { article: "der", word: "Beweis", tr: "kanıt" }, { article: "die", word: "Methode", tr: "yöntem" }, { article: "das", word: "Ergebnis", tr: "sonuç" },
+                { article: "die", word: "Analyse", tr: "analiz" }
             ],
             'arena': [
                 { article: "das", word: "Netzwerk", tr: "ağ / şebeke" }, { article: "die", word: "Entscheidung", tr: "karar" }, { article: "das", word: "Gefühl", tr: "duygu" },
@@ -566,17 +544,23 @@
                 { article: "das", word: "Stadion", tr: "stadyum" }, { article: "die", word: "Bewerbung", tr: "başvuru" }, { article: "der", word: "Vorschlag", tr: "öneri" },
                 { article: "das", word: "Verbot", tr: "yasak" }, { article: "die", word: "Mahlzeit", tr: "öğün" }, { article: "das", word: "Gymnasium", tr: "lise" },
                 { article: "-", word: "löschen", tr: "silmek" }, { article: "-", word: "digital", tr: "dijital" }, { article: "-", word: "kreativ", tr: "yaratıcı" },
-                { article: "-", word: "transportieren", tr: "taşımak" }, { article: "-", word: "realistisch", tr: "gerçekçi" }, { article: "-", word: "konsumieren", tr: "tüketmek" }
-            ],
-            'gramer': [
-                { type: 'grammar', text: "Ich bleibe zu Hause, ___ es regnet.", options: ["weil", "obwohl", "dass", "wenn"], answer: "weil", tr: "Evde kalıyorum, çünkü yağmur yağıyor." },
-                { type: 'grammar', text: "___ es regnet, gehe ich spazieren.", options: ["Obwohl", "Weil", "Dass", "Wenn"], answer: "Obwohl", tr: "Yağmur yağmasına rağmen, yürüyüşe çıkıyorum." },
-                { type: 'grammar', text: "Ich denke, ___ du recht hast.", options: ["dass", "weil", "obwohl", "als"], answer: "dass", tr: "Bence haklısın." },
-                { type: 'grammar', text: "Das ist der Mann, ___ ich gestern gesehen habe.", options: ["den", "dem", "der", "des"], answer: "den", tr: "Bu dün gördüğüm adam. (Akkusativ)" },
-                { type: 'grammar', text: "Das ist die Frau, ___ ich das Buch gegeben habe.", options: ["der", "die", "dem", "den"], answer: "der", tr: "Bu kitabı verdiğim kadın. (Dativ)" },
-                { type: 'grammar', text: "Ich lege das Buch auf ___ Tisch.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Kitabı masanın üzerine koyuyorum. (Akk. Yönelme)" },
-                { type: 'grammar', text: "Wir fahren in ___ Urlaub.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Tatile gidiyoruz. (in den Urlaub)" },
-                { type: 'grammar', text: "Das Bild hängt an ___ Wand.", options: ["der", "die", "den", "dem"], answer: "der", tr: "Resim duvarda asılı. (an der Wand)" }
+                { article: "-", word: "transportieren", tr: "taşımak" }, { article: "-", word: "realistisch", tr: "gerçekçi" }, { article: "-", word: "konsumieren", tr: "tüketmek" },
+                { article: "die", word: "Vorschrift", tr: "kural/yönetmelik" }, { article: "die", word: "Entscheidungsfreiheit", tr: "karar özgürlüğü" }, { article: "die", word: "Studie", tr: "araştırma/çalışma" },
+                { article: "die", word: "Hausordnung", tr: "ev/bina kuralları" }, { article: "der", word: "Respekt", tr: "saygı" }, { article: "das", word: "Tuch", tr: "bez/havlu" },
+                { article: "der", word: "Reisebericht", tr: "seyahat raporu" }, { article: "die", word: "Entspannung", tr: "rahatlama" }, { article: "das", word: "Boot", tr: "tekne" },
+                { article: "der", word: "Hafen", tr: "liman" }, { article: "die", word: "Folge", tr: "sonuç/netice" }, { article: "der", word: "Konsum", tr: "tüketim" },
+                { article: "die", word: "Tradition", tr: "gelenek" }, { article: "das", word: "Werk", tr: "eser/yapıt" }, { article: "das", word: "Publikum", tr: "seyirci/kitle" },
+                { article: "die", word: "Liebesgeschichte", tr: "aşk hikayesi" }, { article: "die", word: "Werbung", tr: "reklam" }, { article: "die", word: "Leistung", tr: "performans" },
+                { article: "das", word: "Risiko", tr: "risk" }, { article: "-", word: "abhängig", tr: "bağımlı" },
+                { article: "der", word: "Eindruck", tr: "izlenim" }, { article: "die", word: "Lektion", tr: "ders" }, { article: "das", word: "Gedicht", tr: "şiir" },
+                { article: "die", word: "Gesellschaft", tr: "toplum" }, { article: "die", word: "Kultur", tr: "kültür" }, { article: "die", word: "Kunst", tr: "sanat" },
+                { article: "das", word: "Theater", tr: "tiyatro" }, { article: "die", word: "Ausstellung", tr: "sergi" }, { article: "das", word: "Konzert", tr: "konser" },
+                { article: "der", word: "Autor", tr: "yazar" }, { article: "der", word: "Regisseur", tr: "yönetmen" }, { article: "der", word: "Schauspieler", tr: "aktör" },
+                { article: "die", word: "Bühne", tr: "sahne" }, { article: "die", word: "Leinwand", tr: "tuval/perde" }, { article: "der", word: "Zuschauer", tr: "seyirci" },
+                { article: "die", word: "Kritik", tr: "eleştiri" }, { article: "der", word: "Erfolg", tr: "başarı" }, { article: "der", word: "Misserfolg", tr: "başarısızlık" },
+                { article: "die", word: "Medien", tr: "medya" }, { article: "das", word: "Internet", tr: "internet" }, { article: "die", word: "Suchmaschine", tr: "arama motoru" },
+                { article: "das", word: "Profil", tr: "profil" }, { article: "der", word: "Kommentar", tr: "yorum" }, { article: "-", word: "abonnieren", tr: "abone olmak" },
+                { article: "-", word: "teilen", tr: "paylaşmak" }, { article: "-", word: "liken", tr: "beğenmek" }
             ]
         };
 
@@ -640,39 +624,30 @@
         window.openStage = function(stageId) {
             window.activeStage = stageId;
             document.getElementById('view-stage-selection').classList.add('hidden');
-            if(stageId === 'gramer') { window.buildPath('grammar'); } else if(window.selectedGoal) { window.buildPath(window.selectedGoal); } else { window.switchScreen('survey'); }
+            window.buildPath(); 
         };
 
         window.goBackToStages = function() {
-            document.getElementById('view-survey').classList.add('hidden');
             document.getElementById('view-learning-path').classList.add('hidden');
             document.getElementById('view-stage-selection').classList.remove('hidden');
             window.activeStage = null;
         };
 
-        // ================= MEGA HARİTA OLUŞTURUCU (0-100 UZUN SÜRELİ) =================
+        // ================= MEGA HARİTA OLUŞTURUCU (0-100 UZUN SÜRELİ & MARATON) =================
         window.activePathNodes = [];
         window.currentPathNodeIndex = 0;
         
-        window.buildPath = function(choice) {
-            if(document.getElementById('screen-survey').classList.contains('active')) { window.switchScreen('dashboard'); }
+        window.buildPath = function() {
             document.getElementById('view-stage-selection').classList.add('hidden');
-            document.getElementById('view-survey').classList.add('hidden');
             document.getElementById('view-learning-path').classList.remove('hidden');
 
             const title = document.getElementById('path-title');
-            
-            if(choice === 'grammar') { title.innerText = "Gramer Eğitim Yolu"; window.activeStage = 'gramer'; }
-            else if(choice === 'artikel') { title.innerText = "Artikel Eğitim Yolu"; }
-            else if(choice === 'vocab') { title.innerText = "Kelime Eğitim Yolu"; }
-            else if(choice === 'listening') { title.innerText = "Dinleme ve Konuşma Yolu"; }
-            else if(choice === 'writing') { title.innerText = "Yazım Eğitim Yolu"; }
-            else { title.innerText = "Karışık Eğitim Yolu"; }
+            title.innerText = "Mega Eğitim Yolu"; 
 
             let nodes = [];
             
-            // Generate up to 100 nodes for "Mega Maraton"
-            let totalNodes = choice === 'mixed' ? 100 : 50;
+            // Mega Maraton İsteği İçin Aşama Sayısı 50 olarak ayarlandı
+            let totalNodes = 50;
             const nodeTypes = ['flashcards', 'vocab', 'listening', 'artikel', 'matching', 'writing', 'dictation', 'speaking'];
             const icons = {
                 'flashcards': '<i class="ph-fill ph-book-open"></i>',
@@ -682,32 +657,20 @@
                 'matching': '<i class="ph-fill ph-puzzle-piece"></i>',
                 'writing': '<i class="ph-fill ph-pencil-simple"></i>',
                 'dictation': '<i class="ph-fill ph-waveform"></i>',
-                'speaking': '<i class="ph-fill ph-microphone"></i>',
-                'video': '<i class="ph-fill ph-video-camera"></i>',
-                'grammar': '<i class="ph-fill ph-text-t"></i>'
+                'speaking': '<i class="ph-fill ph-microphone"></i>'
             };
             const colors = ['purple', 'amber', 'indigo', 'rose', 'teal'];
 
             for (let i = 0; i < totalNodes; i++) {
-                let type;
-                if (i > 0 && i % 10 === 0) type = 'video';
-                else if (choice === 'mixed') type = nodeTypes[i % nodeTypes.length];
-                else {
-                    if (choice === 'grammar') type = 'grammar';
-                    else if (choice === 'artikel' && i % 4 === 0) type = 'vocab';
-                    else if (choice === 'vocab' && i % 5 === 0) type = 'matching';
-                    else if (choice === 'listening' && i % 3 === 0) type = 'speaking';
-                    else if (choice === 'writing' && i % 3 === 0) type = 'dictation';
-                    else type = choice;
-                }
-
-                // Increase question count heavily (30-50 per session) to ensure extreme learning/repetition
-                let count = type === 'video' ? 1 : (30 + Math.floor(Math.random() * 20));
+                let type = nodeTypes[i % nodeTypes.length];
+                
+                // Soru sayıları oldukça artırıldı (Tam sınav pratiği için her aşama 20-35 soru)
+                let count = 20 + Math.floor(Math.random() * 15);
 
                 nodes.push({
                     type: type,
                     count: count, 
-                    label: `Aşama ${i+1}`,
+                    label: `Bölüm ${i+1}`,
                     color: colors[i % colors.length],
                     icon: icons[type] || '<i class="ph-fill ph-star"></i>'
                 });
@@ -785,7 +748,7 @@
         };
 
         window.updateDashboardProgress = function() {
-            const keys = ['arena', 'b1_1', 'b1_2', 'gramer'];
+            const keys = ['arena', 'b1_1', 'b1_2'];
             keys.forEach(k => {
                 let bar = document.getElementById(`prog-bar-${k}`);
                 if(bar) bar.style.width = `${window.stageProgress[k]}%`;
@@ -822,18 +785,14 @@
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
             window.switchScreen('dashboard');
             document.getElementById('view-stage-selection').classList.add('hidden');
-            document.getElementById('view-survey').classList.add('hidden');
             document.getElementById('view-learning-path').classList.remove('hidden');
         };
 
         function generateQuestions(type, amount) {
             let questions = [];
-            if(type === 'video') { return [{type: 'video'}]; }
             
             let activePoolData = dbContent[window.activeStage] || dbContent['b1_1']; 
-            if(type === 'grammar') {
-                activePoolData = dbContent['gramer'];
-            } else if(type === 'artikel' || type === 'writing') {
+            if(type === 'artikel' || type === 'writing') {
                 activePoolData = activePoolData.filter(item => item.article !== '-');
             }
 
@@ -861,28 +820,8 @@
             let mode = sessionType;
             window.setAvatars(mode);
 
-            // YouTube video rotasyonu (B1 seviyesi DW veya EasyGerman tarzı)
-            const videoLinks = [
-                "https://www.youtube.com/embed/sYjbGU6MAQY",
-                "https://www.youtube.com/embed/4lcUBkI3B1Q",
-                "https://www.youtube.com/embed/5aT7BwZqAak"
-            ];
-            let randomVideo = videoLinks[Math.floor(Math.random() * videoLinks.length)];
-
-            if(mode === 'video') {
-                document.getElementById('session-avatars').style.display = 'none'; 
-                document.getElementById('btn-check').innerText = "İzledim & Anladım";
-                document.getElementById('btn-check').disabled = false;
-                
-                content.innerHTML = `
-                    <h2 class="text-xl font-bold text-slate-800 mb-4 text-center mt-4">Almanca Dinleme Pratiği</h2>
-                    <p class="text-sm text-slate-500 mb-6 text-center">Aşağıdaki kısa eğitim videosunu izle. Konuşmaları anlamaya çalış.</p>
-                    <div class="video-container w-full max-w-lg mx-auto">
-                        <iframe src="${randomVideo}" title="German Learning Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                `;
-            }
-            else if(mode === 'speaking') {
+            // --- 0.1 SPEAKING ---
+            if(mode === 'speaking') {
                 document.getElementById('btn-check').innerText = "Geç (Mikrofon Yoksa)";
                 document.getElementById('btn-check').disabled = false; 
                 content.innerHTML = `
@@ -900,30 +839,7 @@
                     </div>
                 `;
             }
-            else if(mode === 'grammar') {
-                document.getElementById('btn-check').innerText = "Kontrol Et";
-                let textParts = q.text.split('___');
-                content.innerHTML = `
-                    <div class="w-full flex items-center gap-4 mb-6 mt-2">
-                        <div class="border border-slate-200 rounded-3xl p-5 text-center w-full relative bg-white shadow-sm">
-                            <span class="text-lg md:text-xl font-bold text-slate-700 leading-relaxed">
-                                ${textParts[0]}<span class="text-indigo-500 underline decoration-2 underline-offset-4 mx-1">_____</span>${textParts[1]}
-                            </span>
-                        </div>
-                    </div>
-                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full"></div>
-                `;
-                const grid = document.getElementById('options-grid');
-                let opts = [...q.options].sort(() => Math.random() - 0.5);
-                opts.forEach(opt => {
-                    let btn = document.createElement('button');
-                    btn.className = "opt-btn py-3 px-4 w-full flex items-center justify-center text-center text-sm";
-                    btn.innerText = opt;
-                    btn.dataset.correct = (opt === q.answer);
-                    btn.onclick = () => window.selectOption(btn);
-                    grid.appendChild(btn);
-                });
-            }
+            // --- 2. EZBER (FLASHCARDS) ---
             else if(mode === 'flashcards') {
                 document.getElementById('btn-check').innerText = "Sonraki";
                 document.getElementById('btn-check').disabled = false;
@@ -941,6 +857,7 @@
                 `;
                 window.speakWord(q.word);
             }
+            // --- 3. DINLEME (LISTENING) ---
             else if(mode === 'listening') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 content.innerHTML = `
@@ -952,6 +869,7 @@
                 window.speakWord(q.word);
                 window.generateOptions(q, 'options-grid');
             }
+            // --- 4. YAZMA (WRITING) ---
             else if(mode === 'writing' || mode === 'dictation') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 document.getElementById('btn-check').disabled = false; 
@@ -973,6 +891,7 @@
                 setTimeout(() => { const el = document.getElementById('write-input'); if(el) el.focus(); }, 100);
                 document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') window.checkAnswer(); });
             }
+            // --- 5. EŞLEŞTİRME (MATCHING) ---
             else if(mode === 'matching') {
                 document.getElementById('btn-check').classList.add('hidden'); 
                 
@@ -992,6 +911,7 @@
                 content.innerHTML += `<div class="grid grid-cols-2 gap-3 w-full mt-2" id="matching-grid">${buttonsHTML.join('')}</div>`;
                 content.dataset.pairsFound = 0;
             }
+            // --- 6. ARTIKEL SEÇİMİ ---
             else if(mode === 'artikel') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 content.innerHTML = `
@@ -1014,6 +934,7 @@
                     grid.appendChild(btn);
                 });
             }
+            // --- 7. KLASİK VOCAB (OKUMA/ANLAM) ---
             else {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 let dispArticle = q.article === '-' ? '' : `<span class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 block mb-1">${q.article}</span>`;
@@ -1134,7 +1055,7 @@
                     window.playWrongSound(); window.reactNisan(false); 
                     window.hearts--; window.updateTopBar(); window.saveProgress();
                     
-                    sessionQuestions.push(sessionQuestions[currentQIndex]); // Hatayı listenin sonuna at, öğrenene kadar bitmesin.
+                    sessionQuestions.push(sessionQuestions[currentQIndex]); 
                     
                     setTimeout(() => {
                         first.btn.classList.remove('wrong'); second.btn.classList.remove('wrong');
@@ -1149,10 +1070,6 @@
         window.checkAnswer = function() {
             let mode = sessionType;
             let q = sessionQuestions[currentQIndex];
-
-            if(mode === 'video') {
-                correctAnswersCount++; window.nextQuestion(); return;
-            }
 
             if(mode === 'flashcards') {
                 correctAnswersCount++; window.nextQuestion(); return;
@@ -1192,7 +1109,7 @@
                     window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
                     let corr = q.article === '-' ? q.word : `${q.article} ${q.word}`;
                     window.showFeedback(false, "Yanlış!", `Doğrusu: ${corr}`);
-                    sessionQuestions.push(q); // Hatayı listenin sonuna at, öğrenene kadar bitmesin.
+                    sessionQuestions.push(q); 
                 }
                 return;
             }
@@ -1212,9 +1129,9 @@
                 window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
                 
                 document.querySelectorAll('.opt-btn').forEach(b => { if(b.dataset.correct === "true") b.classList.add('correct'); });
-                let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : (mode === 'grammar' ? `Doğrusu: ${q.answer}` : `Doğrusu: ${q.tr}`);
+                let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : `Doğrusu: ${q.tr}`;
                 window.showFeedback(false, "Hatalı!", desc);
-                sessionQuestions.push(q); // Hatayı listenin sonuna at, öğrenene kadar bitmesin.
+                sessionQuestions.push(q); 
             }
         };
 
@@ -1237,8 +1154,7 @@
             if(!isCorrect) {
                 desc.innerHTML = `${descText} <br><span class="text-[10px] mt-1 block opacity-80 font-medium">Öğrenene kadar tekrar sorulacak.</span>`;
             } else {
-                let extra = sessionType === 'grammar' ? `<br><span class="text-[10px] mt-1 block opacity-80 font-medium">${sessionQuestions[currentQIndex].tr}</span>` : '';
-                desc.innerHTML = descText + extra;
+                desc.innerText = descText;
             }
             desc.className = `text-sm font-medium ${isCorrect ? 'text-teal-600' : 'text-rose-600'}`;
             
@@ -1296,7 +1212,6 @@
         window.finishSession = function(isNextLevel) {
             window.switchScreen('dashboard');
             document.getElementById('view-stage-selection').classList.add('hidden');
-            document.getElementById('view-survey').classList.add('hidden');
             document.getElementById('view-learning-path').classList.remove('hidden');
             window.updateDashboardProgress();
 
