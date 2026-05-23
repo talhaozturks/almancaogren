@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>B1 Almanca | %100 Başarı Kampı</title>
+    <title>B1 Almanca Akademisi</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -27,7 +27,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-main);
-            color: #1e293b;
+            color: #334155;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
@@ -36,45 +36,42 @@
         .screen.active { display: flex; opacity: 1; }
 
         .app-btn {
-            border-radius: 18px; border: 2px solid transparent; border-bottom-width: 4px;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-            transition: all 0.1s; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            border-radius: 16px; border: 1px solid transparent; border-bottom-width: 3px;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+            transition: all 0.15s; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
-        .app-btn:active:not(:disabled) { border-bottom-width: 2px; transform: translateY(2px); }
-        .app-btn:disabled { opacity: 0.6; cursor: not-allowed; border-bottom-width: 2px; transform: translateY(2px); filter: grayscale(0.8); }
+        .app-btn:active:not(:disabled) { border-bottom-width: 1px; transform: translateY(2px); }
+        .app-btn:disabled { opacity: 0.5; cursor: not-allowed; border-bottom-width: 3px; transform: translateY(2px); filter: grayscale(0.8); }
 
         .btn-teal { background: var(--c-teal); border-color: var(--c-teal-dark); color: white; }
-        .btn-teal:hover:not(:disabled) { filter: brightness(1.1); }
+        .btn-teal:hover:not(:disabled) { background: #13a89e; }
         .btn-indigo { background: var(--c-indigo); border-color: var(--c-indigo-dark); color: white; }
-        .btn-indigo:hover:not(:disabled) { filter: brightness(1.1); }
+        .btn-indigo:hover:not(:disabled) { background: #5a5ce6; }
         .btn-rose { background: var(--c-rose); border-color: var(--c-rose-dark); color: white; }
-        .btn-rose:hover:not(:disabled) { filter: brightness(1.1); }
         .btn-amber { background: var(--c-amber); border-color: var(--c-amber-dark); color: white; }
-        .btn-amber:hover:not(:disabled) { filter: brightness(1.1); }
         .btn-purple { background: var(--c-purple); border-color: var(--c-purple-dark); color: white; }
-        .btn-purple:hover:not(:disabled) { filter: brightness(1.1); }
-        .btn-white { background: #ffffff; border-color: #cbd5e1; color: var(--c-indigo); }
+        .btn-white { background: #ffffff; border-color: #e2e8f0; color: var(--c-indigo); }
         .btn-white:hover:not(:disabled) { background: #f1f5f9; }
 
         .opt-btn {
-            background: #ffffff; border: 2px solid #e2e8f0; border-bottom-width: 4px; border-radius: 16px;
-            color: #334155; font-weight: 600; font-size: 1.125rem; transition: all 0.15s; cursor: pointer;
-            text-align: left; padding: 1rem 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            background: #ffffff; border: 1px solid #e2e8f0; border-bottom-width: 3px; border-radius: 14px;
+            color: #475569; font-weight: 600; font-size: 1.05rem; transition: all 0.15s; cursor: pointer;
+            text-align: left; padding: 1rem 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
-        .opt-btn:active:not(:disabled) { border-bottom-width: 2px; transform: translateY(2px); box-shadow: none; }
-        .opt-btn.selected { border-color: var(--c-indigo); background: #e0e7ff; color: var(--c-indigo-dark); }
-        .opt-btn.correct { border-color: var(--c-teal); background: #ccfbf1; color: var(--c-teal-dark); }
-        .opt-btn.wrong { border-color: var(--c-rose); background: #ffe4e6; color: var(--c-rose-dark); }
+        .opt-btn:active:not(:disabled) { border-bottom-width: 1px; transform: translateY(2px); box-shadow: none; }
+        .opt-btn.selected { border-color: var(--c-indigo); background: #eef2ff; color: var(--c-indigo-dark); }
+        .opt-btn.correct { border-color: var(--c-teal); background: #f0fdfa; color: var(--c-teal-dark); }
+        .opt-btn.wrong { border-color: var(--c-rose); background: #fff1f2; color: var(--c-rose-dark); }
 
         .survey-btn {
-            display: flex; align-items: center; gap: 1rem; background: #ffffff; border: 2px solid #e2e8f0; border-bottom-width: 4px; border-radius: 18px;
-            color: #334155; font-weight: 700; font-size: 1.05rem; transition: all 0.1s; cursor: pointer;
-            padding: 1.2rem; margin-bottom: 1rem; width: 100%; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            display: flex; align-items: center; gap: 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-bottom-width: 3px; border-radius: 16px;
+            color: #475569; font-weight: 600; font-size: 1rem; transition: all 0.15s; cursor: pointer;
+            padding: 1rem; margin-bottom: 1rem; width: 100%; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.01);
         }
-        .survey-btn:active { border-bottom-width: 2px; transform: translateY(2px); }
+        .survey-btn:active { border-bottom-width: 1px; transform: translateY(2px); }
         .survey-btn:hover { background-color: #f8fafc; border-color: #cbd5e1; }
 
-        .bottom-sheet { position: fixed; bottom: -100%; left: 0; right: 0; transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 50; box-shadow: 0 -10px 25px rgba(0,0,0,0.05); border-top-left-radius: 24px; border-top-right-radius: 24px; }
+        .bottom-sheet { position: fixed; bottom: -100%; left: 0; right: 0; transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 50; box-shadow: 0 -10px 25px rgba(0,0,0,0.03); border-top-left-radius: 24px; border-top-right-radius: 24px; }
         .bottom-sheet.show { bottom: 0; }
 
         #loader { position: fixed; inset: 0; background-color: var(--bg-main); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.4s ease-out; }
@@ -83,38 +80,33 @@
         .nav-item.active { color: var(--c-indigo); background-color: #e0e7ff; border-color: #a5b4fc; }
         .nav-item:hover:not(.active) { background-color: #f1f5f9; }
 
-        .progress-bar-bg { background-color: #e2e8f0; border-radius: 99px; overflow: hidden; height: 14px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+        .progress-bar-bg { background-color: #e2e8f0; border-radius: 99px; overflow: hidden; height: 10px; }
         .progress-bar-fill { background-color: var(--c-teal); height: 100%; border-radius: 99px; width: 0%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
-        .progress-bar-fill::after { content: ''; position: absolute; top: 3px; left: 8px; right: 8px; height: 3px; background-color: rgba(255,255,255,0.4); border-radius: 99px; }
 
-        .star-particle { position: absolute; width: 24px; height: 24px; font-size: 24px; color: var(--c-amber); pointer-events: none; animation: floatUp 1.5s ease-out forwards; z-index: 100; }
+        .star-particle { position: absolute; width: 20px; height: 20px; font-size: 20px; color: var(--c-amber); pointer-events: none; animation: floatUp 1.5s ease-out forwards; z-index: 100; }
         @keyframes floatUp { 0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 1; } 100% { transform: translateY(-150px) scale(1.5) rotate(180deg); opacity: 0; } }
 
-        .speaker-btn { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); } 50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); } }
+        .pulse-btn { animation: pulse-ring 2s infinite; }
+        @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(99, 102, 241, 0); } 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); } }
         
-        .node-locked { filter: grayscale(1); opacity: 0.6; pointer-events: none; }
-        .node-completed { background-color: var(--c-amber) !important; border-color: var(--c-amber-dark) !important; color: white !important; }
-
-        @keyframes talk-bounce { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-4px) scale(1.02); } }
+        .node-locked { filter: grayscale(1); opacity: 0.5; pointer-events: none; }
+        
+        @keyframes talk-bounce { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-3px) scale(1.02); } }
         .anim-talk { animation: talk-bounce 0.8s infinite ease-in-out; }
-        @keyframes sad-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px) rotate(-3deg); } 75% { transform: translateX(4px) rotate(3deg); } }
+        @keyframes sad-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-3px) rotate(-2deg); } 75% { transform: translateX(3px) rotate(2deg); } }
         .anim-sad { animation: sad-shake 0.5s ease-in-out; }
-        @keyframes happy-jump { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-8px) scale(1.05); } }
+        @keyframes happy-jump { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px) scale(1.03); } }
         .anim-happy { animation: happy-jump 0.6s ease-out; }
 
-        .guarantee-badge {
-            background: linear-gradient(135deg, var(--c-amber) 0%, #f97316 100%);
-            color: white; padding: 0.4rem 1rem; border-radius: 99px;
-            font-weight: 800; font-size: 0.75rem; text-transform: uppercase;
-            letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.3rem;
-            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); border: 2px solid #fff;
+        .chat-bubble {
+            position: relative; padding: 0.6rem 1rem; font-weight: 500; font-size: 0.8rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03); max-width: 80%; line-height: 1.4;
         }
 
-        .chat-bubble {
-            position: relative; padding: 0.75rem 1.25rem; font-weight: 600; font-size: 0.85rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05); max-width: 80%;
+        .video-container {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
     </style>
 </head>
@@ -130,58 +122,57 @@
             <div id="loader-progress" class="h-full bg-indigo-500 rounded-full w-0 transition-all duration-[2.5s] ease-in-out"></div>
         </div>
         <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/400x100/ffffff/6366f1?text=Talha+Ozturk'" class="h-32 md:h-40 object-contain opacity-80">
-        <p id="cloud-sync-text" class="text-indigo-400 font-bold mt-4 animate-pulse hidden">Veriler eşitleniyor...</p>
+        <p id="cloud-sync-text" class="text-indigo-400 font-medium text-sm mt-4 animate-pulse hidden">Bağlantı kuruluyor...</p>
     </div>
 
     <!-- EKRAN 0: LOGIN -->
     <section id="screen-login" class="screen active flex-col flex-1 absolute inset-0 z-[60] items-center justify-center p-6 text-center" style="background: radial-gradient(circle at center, #ffffff 0%, var(--bg-main) 100%);">
-        <div class="max-w-sm w-full bg-white border border-slate-200 rounded-[2rem] p-8 shadow-xl">
-            <div class="mb-6 flex justify-center"><div class="guarantee-badge"><i class="ph-fill ph-cloud-check text-lg"></i> %100 Başarı Garantisi</div></div>
-            <img src="assets/imzatalhaozturk.png" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/300x80/6366f1/ffffff?text=Talha'" class="h-16 mx-auto mb-8 object-contain">
-            <h2 class="text-2xl font-black text-slate-800 mb-6 uppercase tracking-wider">Akademiye Giriş</h2>
+        <div class="max-w-sm w-full bg-white border border-slate-100 rounded-3xl p-8 shadow-lg">
+            <img src="assets/imzatalhaozturk.png" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/300x80/6366f1/ffffff?text=Akademi'" class="h-12 mx-auto mb-8 object-contain">
+            <h2 class="text-xl font-bold text-slate-700 mb-6 tracking-wide">Öğrenci Girişi</h2>
             
-            <input type="text" id="login-user" placeholder="Hesap Adı (nisan)" autocomplete="off" class="w-full border-2 border-slate-200 rounded-xl px-4 py-4 mb-4 font-semibold text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white text-lg text-center transition-all">
-            <input type="password" id="login-pass" placeholder="Şifre (talha)" autocomplete="off" class="w-full border-2 border-slate-200 rounded-xl px-4 py-4 mb-6 font-semibold text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white text-lg text-center transition-all">
+            <input type="text" id="login-user" placeholder="Hesap Adı" autocomplete="off" class="w-full border border-slate-200 rounded-xl px-4 py-3 mb-4 font-medium text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white transition-all text-center">
+            <input type="password" id="login-pass" placeholder="Şifre" autocomplete="off" class="w-full border border-slate-200 rounded-xl px-4 py-3 mb-6 font-medium text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white transition-all text-center">
             
-            <p id="login-error" class="text-rose-500 font-bold mb-4 hidden bg-rose-50 p-3 rounded-xl border border-rose-100">Kullanıcı adı veya şifre hatalı!</p>
+            <p id="login-error" class="text-rose-500 font-medium text-sm mb-4 hidden bg-rose-50 p-2 rounded-lg border border-rose-100">Kullanıcı adı veya şifre hatalı.</p>
             
-            <button id="btn-login" onclick="window.attemptLogin()" class="app-btn btn-indigo w-full py-4 text-xl mt-2 shadow-lg shadow-indigo-500/30">GİRİŞ YAP</button>
+            <button id="btn-login" onclick="window.attemptLogin()" class="app-btn btn-indigo w-full py-3.5 text-lg mt-2 shadow-md shadow-indigo-500/20">Giriş Yap</button>
         </div>
     </section>
 
     <!-- SİHİRBAZ (HEDEF BELİRLEME) -->
     <section id="screen-survey" class="screen flex-col flex-1 absolute inset-0 bg-white z-[55] items-center p-6 overflow-y-auto pt-16">
         <div class="max-w-xl w-full">
-            <div class="bg-gradient-to-r from-indigo-500 to-indigo-700 rounded-[2rem] p-8 text-white shadow-lg mb-8 relative overflow-hidden">
-                <div class="absolute -right-4 -bottom-4 opacity-20"><i class="ph-fill ph-target text-9xl"></i></div>
-                <h2 class="text-2xl md:text-3xl font-black tracking-wide mb-2 relative z-10">Hedefini Belirle</h2>
-                <p class="font-medium text-indigo-100 text-lg relative z-10">0'dan 100'e uzanan bu yolda sistemin seni nasıl çalıştırmasını istersin?</p>
+            <div class="bg-indigo-50 border border-indigo-100 rounded-3xl p-6 mb-8 relative overflow-hidden text-center">
+                <i class="ph-fill ph-compass text-5xl text-indigo-200 mb-2"></i>
+                <h2 class="text-2xl font-bold tracking-tight text-indigo-900 mb-1">Rotanı Belirle</h2>
+                <p class="font-medium text-indigo-600 text-sm">Hangi konuda daha fazla pratik yapmak istersin?</p>
             </div>
 
-            <div class="space-y-4">
-                <button onclick="window.setGoal('artikel')" class="survey-btn hover:border-rose-400 hover:shadow-md"><div class="w-14 h-14 bg-rose-100 text-rose-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-cards"></i></div><span>Artikeller (der/die/das) sürekli karışıyor!</span></button>
-                <button onclick="window.setGoal('vocab')" class="survey-btn hover:border-amber-400 hover:shadow-md"><div class="w-14 h-14 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-brain"></i></div><span>Kelimelerin anlamlarını çabuk unutuyorum.</span></button>
-                <button onclick="window.setGoal('listening')" class="survey-btn hover:border-blue-400 hover:shadow-md"><div class="w-14 h-14 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span>Duyduğumda kelimeyi çıkaramıyorum.</span></button>
-                <button onclick="window.setGoal('writing')" class="survey-btn hover:border-purple-400 hover:shadow-md"><div class="w-14 h-14 bg-purple-100 text-purple-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span>Yazarken harf veya artikel hatası yapıyorum.</span></button>
-                <button onclick="window.setGoal('grammar')" class="survey-btn hover:border-teal-400 hover:shadow-md"><div class="w-14 h-14 bg-teal-100 text-teal-500 rounded-2xl flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-text-t"></i></div><span>Gramerim zayıf, kurallara çalışmam lazım.</span></button>
-                <button onclick="window.setGoal('mixed')" class="survey-btn border-teal-500 bg-teal-50 hover:bg-teal-100 hover:shadow-lg transform transition-transform hover:-translate-y-1"><div class="w-14 h-14 bg-gradient-to-br from-teal-400 to-teal-600 text-white rounded-2xl flex items-center justify-center text-2xl shrink-0 shadow-md"><i class="ph-fill ph-flag-checkered"></i></div><span class="text-teal-800 font-black tracking-wide">0'DAN 100'E MEGA MARATON!</span></button>
+            <div class="space-y-3">
+                <button onclick="window.setGoal('mixed')" class="survey-btn border-indigo-200 hover:border-indigo-400 bg-indigo-50"><div class="w-12 h-12 bg-indigo-500 text-white rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm"><i class="ph-fill ph-map-pin"></i></div><span class="text-indigo-900 font-semibold text-sm">Dengeli Karışım (Önerilen)</span></button>
+                <button onclick="window.setGoal('artikel')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-cards"></i></div><span class="text-sm">Artikeller (der/die/das)</span></button>
+                <button onclick="window.setGoal('vocab')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-brain"></i></div><span class="text-sm">Kelime Ezberi</span></button>
+                <button onclick="window.setGoal('listening')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-headphones"></i></div><span class="text-sm">Dinleme ve Konuşma</span></button>
+                <button onclick="window.setGoal('writing')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-pencil-simple"></i></div><span class="text-sm">Yazım Kuralları</span></button>
+                <button onclick="window.setGoal('grammar')" class="survey-btn hover:border-slate-300"><div class="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-text-t"></i></div><span class="text-sm">Gramer Kuralları</span></button>
             </div>
         </div>
     </section>
 
     <!-- NAVİGASYON -->
-    <nav id="side-nav" style="display: none;" class="order-2 md:order-1 w-full md:w-64 md:min-w-[16rem] border-t md:border-t-0 md:border-r border-slate-200 bg-white flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] md:shadow-none">
-        <div class="hidden md:flex items-center justify-center gap-3 mb-12 mt-4 px-2">
-            <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/300x100/ffffff/6366f1?text=Talha+Ozturk'" class="h-24 md:h-32 w-full object-contain">
+    <nav id="side-nav" style="display: none;" class="order-2 md:order-1 w-full md:w-24 lg:w-64 border-t md:border-t-0 md:border-r border-slate-200 bg-white flex-row md:flex-col justify-around md:justify-start p-2 md:p-6 z-10 shrink-0 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] md:shadow-none">
+        <div class="hidden md:flex items-center justify-center gap-3 mb-10 mt-2 px-2 lg:justify-start">
+            <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/300x100/ffffff/6366f1?text=Akademi'" class="h-12 w-full object-contain">
         </div>
-        <button onclick="window.switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold">
-            <i class="ph ph-compass text-2xl md:text-3xl"></i><span class="text-[10px] md:text-base tracking-wide uppercase md:capitalize">Keşfet</span>
+        <button onclick="window.switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col lg:flex-row items-center gap-1 lg:gap-4 p-2 lg:p-3 rounded-xl font-semibold">
+            <i class="ph ph-books text-2xl md:text-3xl"></i><span class="text-[10px] lg:text-sm tracking-wide mt-1 lg:mt-0">Dersler</span>
         </button>
-        <button onclick="window.switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold mt-0 md:mt-2">
-            <i class="ph ph-chats-circle text-2xl md:text-3xl"></i><span class="text-[10px] md:text-base tracking-wide uppercase md:capitalize">Diyalog</span>
+        <button onclick="window.switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col lg:flex-row items-center gap-1 lg:gap-4 p-2 lg:p-3 rounded-xl font-semibold mt-0 md:mt-2">
+            <i class="ph ph-chats-circle text-2xl md:text-3xl"></i><span class="text-[10px] lg:text-sm tracking-wide mt-1 lg:mt-0">Diyalog</span>
         </button>
-        <button onclick="window.switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col md:flex-row items-center gap-1 md:gap-4 p-2 md:p-4 rounded-2xl font-bold mt-0 md:mt-2">
-            <i class="ph ph-user-circle text-2xl md:text-3xl"></i><span class="text-[10px] md:text-base tracking-wide uppercase md:capitalize">Profil</span>
+        <button onclick="window.switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col lg:flex-row items-center gap-1 lg:gap-4 p-2 lg:p-3 rounded-xl font-semibold mt-0 md:mt-2">
+            <i class="ph ph-user-circle text-2xl md:text-3xl"></i><span class="text-[10px] lg:text-sm tracking-wide mt-1 lg:mt-0">Profil</span>
         </button>
     </nav>
 
@@ -189,15 +180,14 @@
     <main class="order-1 md:order-2 flex-1 relative flex flex-col overflow-hidden">
         
         <!-- ÜST BAR -->
-        <header id="main-header" style="display: none;" class="w-full p-4 md:p-6 justify-between items-center max-w-5xl mx-auto border-b border-slate-200 bg-white/80 backdrop-blur-md z-10 sticky top-0">
-            <div class="flex items-center gap-3 font-bold text-slate-500 bg-slate-100 px-4 py-2 rounded-xl shadow-sm">
-                <i class="ph-fill ph-student text-indigo-500 hidden md:block text-xl"></i>
-                <span id="header-title" class="text-xs sm:text-sm md:text-base text-slate-700 whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px] md:max-w-[400px]">B1'e hazırlanıp o sınavı geçeceksin <3</span>
+        <header id="main-header" style="display: none;" class="w-full p-4 flex justify-between items-center max-w-5xl mx-auto border-b border-slate-100 bg-white/80 backdrop-blur-sm z-10 sticky top-0">
+            <div class="flex items-center gap-2 font-medium text-slate-500">
+                <span id="header-title" class="text-xs sm:text-sm text-slate-600 tracking-wide">B1 Almanca Eğitimi</span>
             </div>
-            <div class="flex gap-2 md:gap-4 font-extrabold text-sm sm:text-base">
-                <div class="flex items-center gap-1.5 text-amber-500 bg-amber-50 px-3 py-1.5 rounded-xl border border-amber-100"><i class="ph-fill ph-fire text-lg sm:text-xl"></i><span>1</span></div>
-                <div class="flex items-center gap-1.5 text-indigo-500 bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-100"><i class="ph-fill ph-lightning text-lg sm:text-xl"></i><span id="xp-counter">0</span></div>
-                <div class="flex items-center gap-1.5 text-rose-500 bg-rose-50 px-3 py-1.5 rounded-xl border border-rose-100"><i class="ph-fill ph-heart text-lg sm:text-xl"></i><span id="hearts-counter">10</span></div>
+            <div class="flex gap-2 md:gap-4 font-bold text-xs sm:text-sm">
+                <div class="flex items-center gap-1.5 text-amber-500"><i class="ph-fill ph-fire text-lg"></i><span>1</span></div>
+                <div class="flex items-center gap-1.5 text-indigo-500"><i class="ph-fill ph-lightning text-lg"></i><span id="xp-counter">0</span></div>
+                <div class="flex items-center gap-1.5 text-rose-500"><i class="ph-fill ph-heart text-lg"></i><span id="hearts-counter">10</span></div>
             </div>
         </header>
 
@@ -207,81 +197,60 @@
                 
                 <!-- PDF SEÇİMİ -->
                 <div id="view-stage-selection" class="w-full relative">
-                    <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-200">
-                        <h2 class="text-2xl font-black text-slate-800">Eğitim Modülleri</h2>
-                        <i class="ph-fill ph-stack text-3xl text-indigo-300"></i>
-                    </div>
+                    <h2 class="text-xl font-bold text-slate-800 mb-6">Eğitim Materyalleri</h2>
                     
-                    <button onclick="window.openStage('b1_1')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-teal-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
-                        <div class="absolute top-4 right-4 guarantee-badge scale-75 transform origin-top-right"><i class="ph-fill ph-seal-check"></i> %100 Garanti</div>
-                        <div class="w-20 h-20 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform"><i class="ph-fill ph-file-pdf text-4xl"></i></div>
-                        <div class="flex-1 w-full text-center md:text-left">
-                            <h3 class="font-black text-xl text-slate-800 mb-1">B1.1 Sözlük & Maraton</h3>
-                            <p class="text-sm font-medium text-slate-500 mb-4">Temel kelimeler, uzun ezber ve tekrar maratonu.</p>
-                            <div class="w-full bg-slate-100 h-3 rounded-full relative overflow-hidden">
-                                <div id="prog-bar-b1_1" class="bg-teal-500 h-full rounded-full transition-all duration-1000 w-0"></div>
+                    <button onclick="window.openStage('b1_1')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-indigo-300 transition-colors text-left group">
+                        <div class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-file-pdf text-2xl"></i></div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-slate-800 text-sm md:text-base">B1.1 Kelime Listesi</h3>
+                            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                                <div id="prog-bar-b1_1" class="bg-indigo-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
-                            <p class="text-xs font-bold text-slate-400 mt-2 text-right"><span id="pct-b1_1">0</span>% Tamamlandı</p>
                         </div>
                     </button>
 
-                    <button onclick="window.openStage('b1_2')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-amber-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
-                        <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform"><i class="ph-fill ph-file-pdf text-4xl"></i></div>
-                        <div class="flex-1 w-full text-center md:text-left">
-                            <h3 class="font-black text-xl text-slate-800 mb-1">B1.2 İleri Seviye Kelimeler</h3>
-                            <p class="text-sm font-medium text-slate-500 mb-4">Sınav metinlerinde sık çıkan zorlu kelime grupları.</p>
-                            <div class="w-full bg-slate-100 h-3 rounded-full relative overflow-hidden">
-                                <div id="prog-bar-b1_2" class="bg-amber-500 h-full rounded-full transition-all duration-1000 w-0"></div>
+                    <button onclick="window.openStage('b1_2')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-teal-300 transition-colors text-left">
+                        <div class="w-14 h-14 bg-teal-50 text-teal-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-file-pdf text-2xl"></i></div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-slate-800 text-sm md:text-base">B1.2 İleri Seviye Kelimeler</h3>
+                            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                                <div id="prog-bar-b1_2" class="bg-teal-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
-                            <p class="text-xs font-bold text-slate-400 mt-2 text-right"><span id="pct-b1_2">0</span>% Tamamlandı</p>
                         </div>
                     </button>
 
-                    <button onclick="window.openStage('arena')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-indigo-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
-                        <div class="w-20 h-20 bg-indigo-50 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform overflow-hidden p-2">
-                            <img src="assets/arenab1wortliste.PNG" alt="Arena B1" onerror="this.onerror=null; this.src='https://placehold.co/100x100/6366f1/ffffff?text=Arena'" class="w-full h-full object-contain">
+                    <button onclick="window.openStage('arena')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-amber-300 transition-colors text-left">
+                        <div class="w-14 h-14 bg-amber-50 rounded-xl flex items-center justify-center shrink-0 p-2 overflow-hidden">
+                            <img src="assets/arenab1wortliste.PNG" alt="Arena" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f59e0b/ffffff?text=Arena'" class="w-full h-full object-contain">
                         </div>
-                        <div class="flex-1 w-full text-center md:text-left">
-                            <h3 class="font-black text-xl text-slate-800 mb-1">Arena B1 Tam Liste</h3>
-                            <p class="text-sm font-medium text-slate-500 mb-4">Özel Arena serisi sınav hazırlık kelimeleri.</p>
-                            <div class="w-full bg-slate-100 h-3 rounded-full relative overflow-hidden">
-                                <div id="prog-bar-arena" class="bg-indigo-500 h-full rounded-full transition-all duration-1000 w-0"></div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-slate-800 text-sm md:text-base">Arena B1 Tam Liste</h3>
+                            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                                <div id="prog-bar-arena" class="bg-amber-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
-                            <p class="text-xs font-bold text-slate-400 mt-2 text-right"><span id="pct-arena">0</span>% Tamamlandı</p>
                         </div>
                     </button>
 
-                    <button onclick="window.openStage('gramer')" class="w-full mb-6 border-2 border-slate-200 border-b-4 bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start gap-6 hover:border-purple-400 hover:shadow-lg transition-all text-left relative overflow-hidden group">
-                        <div class="absolute top-4 right-4 guarantee-badge scale-75 transform origin-top-right bg-purple-500 border-none shadow-purple-500/30"><i class="ph-fill ph-sparkle"></i> Yeni</div>
-                        <div class="w-20 h-20 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform"><i class="ph-fill ph-text-t text-4xl"></i></div>
-                        <div class="flex-1 w-full text-center md:text-left">
-                            <h3 class="font-black text-xl text-slate-800 mb-1">Gramer Kampı</h3>
-                            <p class="text-sm font-medium text-slate-500 mb-4">Akkusativ, Dativ, Bağlaçlar ve zorlu kurallar.</p>
-                            <div class="w-full bg-slate-100 h-3 rounded-full relative overflow-hidden">
-                                <div id="prog-bar-gramer" class="bg-purple-500 h-full rounded-full transition-all duration-1000 w-0"></div>
+                    <button onclick="window.openStage('gramer')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-purple-300 transition-colors text-left">
+                        <div class="w-14 h-14 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-text-t text-2xl"></i></div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-slate-800 text-sm md:text-base">Gramer Kuralları</h3>
+                            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                                <div id="prog-bar-gramer" class="bg-purple-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
-                            <p class="text-xs font-bold text-slate-400 mt-2 text-right"><span id="pct-gramer">0</span>% Tamamlandı</p>
                         </div>
                     </button>
                 </div>
 
                 <!-- DİNAMİK YOL (HARİTA) -->
                 <div id="view-learning-path" class="w-full hidden">
-                    <div class="flex justify-between items-center mb-6">
-                        <button onclick="window.goBackToStages()" class="text-slate-500 font-bold hover:text-slate-700 flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> Modüllere Dön</button>
-                        <div class="guarantee-badge shadow-none border-none scale-90 origin-right text-[10px] bg-slate-100 text-slate-600"><i class="ph-bold ph-repeat text-indigo-500"></i> Hatalar Tekrarlanır</div>
-                    </div>
+                    <button onclick="window.goBackToStages()" class="text-slate-500 font-medium hover:text-slate-700 flex items-center gap-2 mb-6 text-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> Geri Dön</button>
                     
-                    <div id="path-header" class="rounded-[2rem] p-8 text-white shadow-lg mb-8 relative overflow-hidden">
-                        <h2 class="text-2xl md:text-3xl font-black tracking-wide relative z-10" id="path-title">Sana Özel Yol</h2>
-                        <p class="font-medium opacity-90 text-lg mt-1 relative z-10" id="path-subtitle">Maraton başlıyor!</p>
-                    </div>
-
-                    <div class="w-full bg-slate-200 h-6 rounded-full mb-12 relative shadow-inner overflow-hidden border border-slate-300">
-                        <div id="path-main-progress" class="bg-gradient-to-r from-amber-400 to-amber-500 h-full rounded-full transition-all duration-1000 w-0 relative">
-                            <div class="absolute top-1.5 left-2 right-2 h-1.5 bg-white/30 rounded-full"></div>
+                    <div id="path-header" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm mb-8 text-center">
+                        <h2 class="text-xl font-bold text-slate-800" id="path-title">Eğitim Yolu</h2>
+                        <div class="w-full max-w-xs mx-auto bg-slate-100 h-2 rounded-full mt-4 overflow-hidden">
+                            <div id="path-main-progress" class="bg-indigo-500 h-full rounded-full transition-all duration-1000 w-0"></div>
                         </div>
-                        <span class="absolute inset-0 flex items-center justify-center text-[11px] font-black text-slate-700 z-10 tracking-widest uppercase shadow-white">% <span id="path-main-pct">0</span> Tamamlandı</span>
                     </div>
 
                     <div id="path-nodes-container" class="flex flex-col items-center gap-6 relative pb-20 w-full">
@@ -293,398 +262,269 @@
         </section>
 
         <!-- EKRAN 2: DİYALOGLAR -->
-        <section id="screen-dialogues" class="screen flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
+        <section id="screen-dialogues" class="screen flex-col flex-1 overflow-y-auto items-center p-4 md:p-8 pb-24">
             <div class="max-w-2xl w-full">
-                <div class="bg-gradient-to-r from-indigo-500 to-purple-500 rounded-[2rem] p-8 text-white shadow-lg mb-8 relative overflow-hidden">
-                    <i class="ph-fill ph-chats-circle absolute -right-4 -bottom-4 text-8xl opacity-20"></i>
-                    <h2 class="text-2xl font-black tracking-wide relative z-10">Diyalog Kütüphanesi</h2>
-                    <p class="font-medium opacity-90 relative z-10">Sprechen Teil 2 için partner pratikleri</p>
-                </div>
-                
-                <div class="space-y-6" id="dialogues-container">
+                <h2 class="text-xl font-bold text-slate-800 mb-6">Pratik Diyaloglar</h2>
+                <div class="space-y-4" id="dialogues-container">
                     <!-- JS ile eklenecek -->
                 </div>
             </div>
         </section>
 
         <!-- EKRAN 3: PROFİL -->
-        <section id="screen-profile" class="screen flex-col flex-1 overflow-y-auto items-center p-6 pb-24">
-            <div class="max-w-md w-full text-center mt-8">
-                <div class="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm relative pt-16">
-                    <div class="w-28 h-28 rounded-full bg-white mx-auto absolute -top-14 left-1/2 transform -translate-x-1/2 border-4 border-white shadow-lg overflow-hidden">
+        <section id="screen-profile" class="screen flex-col flex-1 overflow-y-auto items-center p-4 md:p-8 pb-24">
+            <div class="max-w-sm w-full text-center mt-8">
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm relative pt-16">
+                    <div class="w-24 h-24 rounded-full bg-white mx-auto absolute -top-12 left-1/2 transform -translate-x-1/2 border-[3px] border-white shadow-md overflow-hidden">
                         <img src="assets/nisan.png" alt="Avatar" onerror="this.onerror=null; this.src='https://placehold.co/100x100/6366f1/ffffff?text=Nisan'" class="w-full h-full object-cover">
                     </div>
-                    <h2 class="text-2xl font-black text-slate-800">Geleceğin B1 Uzmanı</h2>
-                    <p class="text-slate-500 font-medium mb-8">Akademi Öğrencisi</p>
+                    <h2 class="text-xl font-bold text-slate-800">Öğrenci Profili</h2>
 
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col items-center gap-2">
-                            <i class="ph-fill ph-fire text-4xl text-amber-500"></i>
-                            <p class="text-3xl font-black text-slate-800">1</p>
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Gün Serisi</p>
+                    <div class="grid grid-cols-2 gap-4 mt-6 mb-6">
+                        <div class="bg-slate-50 rounded-2xl p-4 flex flex-col items-center gap-1 border border-slate-100">
+                            <i class="ph-fill ph-fire text-2xl text-amber-500"></i>
+                            <p class="text-xl font-bold text-slate-700">1</p>
+                            <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Seri</p>
                         </div>
-                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col items-center gap-2">
-                            <i class="ph-fill ph-lightning text-4xl text-indigo-500"></i>
-                            <p class="text-3xl font-black text-slate-800" id="profile-xp">0</p>
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Toplam XP</p>
+                        <div class="bg-slate-50 rounded-2xl p-4 flex flex-col items-center gap-1 border border-slate-100">
+                            <i class="ph-fill ph-lightning text-2xl text-indigo-500"></i>
+                            <p class="text-xl font-bold text-slate-700" id="profile-xp">0</p>
+                            <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">XP</p>
                         </div>
                     </div>
 
-                    <button onclick="window.changeGoal()" class="app-btn btn-white w-full py-4 text-sm font-bold shadow-sm border-slate-200"><i class="ph-bold ph-target mr-2"></i> Hedefimi Değiştir</button>
-                    <button onclick="window.location.reload()" class="app-btn btn-rose w-full py-4 text-sm font-bold shadow-sm mt-3"><i class="ph-bold ph-sign-out mr-2"></i> Çıkış Yap</button>
+                    <button onclick="window.changeGoal()" class="app-btn btn-white w-full py-3.5 text-sm font-semibold mb-3 border-slate-200"><i class="ph-bold ph-target mr-2"></i> Hedefimi Değiştir</button>
+                    <button onclick="window.location.reload()" class="app-btn btn-white w-full py-3.5 text-sm font-semibold border-slate-200 text-rose-500 hover:bg-rose-50"><i class="ph-bold ph-sign-out mr-2"></i> Çıkış Yap</button>
                 </div>
             </div>
         </section>
 
         <!-- EKRAN 4: EĞİTİM / OYUN OTURUMU -->
         <section id="screen-session" class="screen flex-col flex-1 absolute inset-0 bg-white z-20">
-            <div class="w-full max-w-4xl mx-auto p-4 md:p-6 flex items-center gap-6">
-                <button onclick="window.quitSession()" class="text-slate-400 hover:text-slate-600 transition-colors bg-slate-100 hover:bg-slate-200 p-2 rounded-full"><i class="ph-bold ph-x text-2xl"></i></button>
+            <div class="w-full max-w-3xl mx-auto p-4 flex items-center gap-4 border-b border-slate-100">
+                <button onclick="window.quitSession()" class="text-slate-400 hover:text-slate-600 transition-colors p-1"><i class="ph-bold ph-x text-2xl"></i></button>
                 <div class="flex-1 progress-bar-bg"><div id="session-progress" class="progress-bar-fill"></div></div>
-                <div class="flex items-center gap-1.5 font-bold text-rose-500 bg-rose-50 px-3 py-1.5 rounded-xl border border-rose-100"><i class="ph-fill ph-heart text-xl"></i><span id="session-hearts">10</span></div>
+                <div class="flex items-center gap-1 font-bold text-rose-500 text-sm"><i class="ph-fill ph-heart text-lg"></i><span id="session-hearts">10</span></div>
             </div>
 
-            <div class="w-full max-w-3xl mx-auto px-6 pt-2 pb-4 flex justify-between items-end">
+            <!-- DİYALOG ALANI -->
+            <div class="w-full max-w-2xl mx-auto px-4 pt-4 pb-2 flex justify-between items-end" id="session-avatars">
                 <div class="flex flex-col items-start w-1/2 pr-2">
-                    <div id="talha-bubble" class="chat-bubble bg-indigo-50 border border-indigo-100 text-indigo-800 rounded-2xl rounded-bl-none mb-3 inline-block">Hadi başlayalım!</div>
-                    <img src="assets/talhaarkaplansiz.png" data-current-src="assets/talhaarkaplansiz.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/6366f1/ffffff?text=Talha'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-indigo-100 object-cover bg-white shadow-md z-10 anim-talk" id="talha-avatar">
+                    <div id="talha-bubble" class="chat-bubble bg-indigo-50 text-indigo-700 rounded-2xl rounded-bl-none mb-2 inline-block">Hadi başlayalım!</div>
+                    <img src="assets/talhaarkaplansiz.png" data-current-src="assets/talhaarkaplansiz.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/6366f1/ffffff?text=Talha'" class="w-12 h-12 rounded-full border-2 border-indigo-100 object-cover bg-white anim-talk" id="talha-avatar">
                 </div>
                 <div class="flex flex-col items-end w-1/2 pl-2">
-                    <div id="nisan-bubble" class="chat-bubble bg-amber-50 border border-amber-100 text-amber-800 rounded-2xl rounded-br-none mb-3 inline-block">Hazırım!</div>
-                    <img src="assets/nisan.png" data-current-src="assets/nisan.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f59e0b/ffffff?text=Nisan'" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-amber-100 object-cover bg-white shadow-md z-10" id="nisan-avatar">
+                    <div id="nisan-bubble" class="chat-bubble bg-slate-50 text-slate-600 rounded-2xl rounded-br-none mb-2 inline-block">Hazırım!</div>
+                    <img src="assets/nisan.png" data-current-src="assets/nisan.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f59e0b/ffffff?text=Nisan'" class="w-12 h-12 rounded-full border-2 border-slate-200 object-cover bg-white" id="nisan-avatar">
                 </div>
             </div>
 
-            <div class="flex-1 overflow-y-auto px-4 md:px-8 pt-2 pb-32 flex flex-col justify-start items-center max-w-3xl mx-auto w-full" id="session-content">
-                <!-- Soru İçeriği -->
+            <!-- İÇERİK -->
+            <div class="flex-1 overflow-y-auto px-4 md:px-8 pb-32 flex flex-col justify-start items-center max-w-2xl mx-auto w-full" id="session-content">
             </div>
 
-            <div class="w-full p-4 md:p-6 bg-white/90 backdrop-blur-sm border-t border-slate-200 flex justify-center fixed bottom-0 z-30">
-                <div class="max-w-4xl w-full">
-                    <button id="btn-check" onclick="window.checkAnswer()" disabled class="app-btn btn-teal w-full py-4 text-xl shadow-lg shadow-teal-500/20">Kontrol Et</button>
+            <!-- ALT KONTROL -->
+            <div class="w-full p-4 border-t border-slate-200 bg-white flex justify-center fixed bottom-0 z-30">
+                <div class="max-w-2xl w-full">
+                    <button id="btn-check" onclick="window.checkAnswer()" disabled class="app-btn btn-indigo w-full py-3.5 text-lg shadow-sm">Kontrol Et</button>
                 </div>
             </div>
 
-            <div id="feedback-sheet" class="bottom-sheet p-6 pt-8 pb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t-2 bg-white">
-                <div class="flex items-center gap-5">
-                    <div id="feedback-icon" class="w-14 h-14 rounded-2xl flex items-center justify-center bg-white shadow-sm text-3xl shrink-0 border border-slate-100"></div>
-                    <div><h2 id="feedback-title" class="text-2xl font-black mb-1 tracking-tight"></h2><p id="feedback-desc" class="font-medium text-slate-600"></p></div>
+            <!-- GERİ BİLDİRİM (BOTTOM SHEET) -->
+            <div id="feedback-sheet" class="bottom-sheet p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-t bg-white pb-8">
+                <div class="flex items-center gap-4">
+                    <div id="feedback-icon" class="w-12 h-12 rounded-full flex items-center justify-center text-2xl shrink-0 border border-slate-100 bg-white"></div>
+                    <div><h2 id="feedback-title" class="text-xl font-bold mb-0.5 tracking-tight"></h2><p id="feedback-desc" class="text-sm font-medium text-slate-600"></p></div>
                 </div>
-                <button id="btn-next" onclick="window.nextQuestion()" class="app-btn w-full md:w-48 py-4 text-lg"></button>
+                <button id="btn-next" onclick="window.nextQuestion()" class="app-btn w-full md:w-40 py-3 text-base"></button>
             </div>
         </section>
 
         <!-- EKRAN 5: DERS BİTİŞİ -->
-        <section id="screen-finish" class="screen flex-col flex-1 absolute inset-0 bg-indigo-50 z-40 items-center justify-center p-6 text-center overflow-hidden">
-            <div class="w-24 h-24 bg-gradient-to-br from-amber-400 to-amber-600 rounded-3xl flex items-center justify-center text-white mb-6 shadow-xl shadow-amber-500/30 transform rotate-12 relative z-10">
-                <i class="ph-fill ph-trophy text-5xl transform -rotate-12"></i>
+        <section id="screen-finish" class="screen flex-col flex-1 absolute inset-0 bg-white z-40 items-center justify-center p-6 text-center overflow-hidden">
+            <div class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center text-teal-500 mb-4 relative z-10">
+                <i class="ph-fill ph-check-circle text-5xl"></i>
             </div>
-            <h2 class="text-3xl md:text-4xl font-black text-indigo-900 mb-2 relative z-10 tracking-tight">Harika İş Çıkardın!</h2>
-            <p class="text-indigo-600 font-medium mb-10 relative z-10">Zorlu antrenmanı başarıyla tamamladın.</p>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2 relative z-10">Bölüm Tamamlandı!</h2>
+            <p class="text-slate-500 text-sm mb-8 relative z-10">Harika bir iş çıkardın.</p>
             
-            <div class="flex gap-4 mb-10 relative z-10">
-                <div class="bg-white rounded-3xl border border-indigo-100 p-5 flex flex-col items-center w-36 shadow-sm">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Kazanılan XP</span>
-                    <div class="flex items-center gap-1.5 font-black text-3xl text-indigo-500"><i class="ph-fill ph-lightning"></i><span id="earned-xp">+10</span></div>
+            <div class="flex gap-4 mb-8 relative z-10">
+                <div class="bg-slate-50 rounded-2xl p-4 flex flex-col items-center w-28 border border-slate-100">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase mb-1">Kazanılan XP</span>
+                    <div class="flex items-center gap-1 font-bold text-xl text-indigo-500"><span id="earned-xp">+10</span></div>
                 </div>
-                <div class="bg-white rounded-3xl border border-indigo-100 p-5 flex flex-col items-center w-36 shadow-sm">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Çözülen Soru</span>
-                    <div class="flex items-center gap-1.5 font-black text-3xl text-teal-500"><i class="ph-fill ph-target"></i><span id="accuracy-display">25</span></div>
+                <div class="bg-slate-50 rounded-2xl p-4 flex flex-col items-center w-28 border border-slate-100">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase mb-1">Doğru Sayısı</span>
+                    <div class="flex items-center gap-1 font-bold text-xl text-teal-500"><span id="accuracy-display">25</span></div>
                 </div>
             </div>
             
-            <button onclick="window.finishSession(false)" class="app-btn btn-white w-full max-w-sm py-4 text-lg relative z-10 mb-4 font-bold shadow-sm">Haritaya Dön</button>
-            <button onclick="window.finishSession(true)" id="btn-next-level" class="app-btn btn-indigo w-full max-w-sm py-4 text-lg relative z-10 shadow-xl shadow-indigo-500/30 font-bold">Sonraki Bölüme Geç <i class="ph-bold ph-arrow-right ml-2"></i></button>
+            <button onclick="window.finishSession(true)" id="btn-next-level" class="app-btn btn-indigo w-full max-w-sm py-3.5 text-base relative z-10 mb-3 shadow-sm">Sonraki Bölüm</button>
+            <button onclick="window.finishSession(false)" class="app-btn btn-white w-full max-w-sm py-3.5 text-base relative z-10 border-slate-200">Kapat</button>
             
             <div id="star-container" class="absolute inset-0 pointer-events-none"></div>
         </section>
     </main>
 
-    <!-- CORE UI & LOADER SCRIPT -->
+    <!-- CORE UYGULAMA MANTIĞI & GÜVENLİ SCRİPT (MODÜLDEN BAĞIMSIZ) -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        const LOCAL_STORAGE_KEY = 'b1kamp_data_v3';
+
+        // Global State (Her durumda çalışacak şekilde tanımlanır)
+        window.totalXP = 0; 
+        window.hearts = 10; 
+        window.stageProgress = { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 }; 
+        window.selectedGoal = null;
+
+        // Loader Kontrolü - Sayfa yüklendiğinde her koşulda çalışır
+        window.addEventListener('load', () => {
             const progress = document.getElementById('loader-progress');
             if (progress) progress.style.width = '100%';
             
-            // Eğer Firebase tamamen çökerse diye acil durum kapatması
+            // Firebase başarısız olsa dahi ekran 2.5 saniye sonra mutlak olarak açılır
             setTimeout(() => {
                 const loader = document.getElementById('loader');
-                // Sadece login ekranındaysa kapat (Zaten attemptLogin'de de kapatıyoruz ama garanti olsun)
-                if (loader && document.getElementById('screen-login').classList.contains('active')) {
+                if (loader) {
                     loader.style.opacity = '0';
-                    setTimeout(() => loader.style.display = 'none', 400);
+                    setTimeout(() => { loader.style.display = 'none'; }, 500);
                 }
-            }, 3000);
+            }, 2500);
         });
-    </script>
 
-    <!-- FIREBASE & UYGULAMA LOGIC -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        let auth = null, db = null, appId = 'default', currentUser = null;
-        let firebaseReady = false;
-
-        const LOCAL_STORAGE_KEY = 'b1kamp_data_v2';
-
-        // Global State 
-        window.totalXP = 0;
-        window.hearts = 10;
-        window.stageProgress = { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 };
-        window.selectedGoal = null;
-
-        // SAFE FIREBASE INIT
-        async function initFirebase() {
-            try {
-                if (typeof window.__firebase_config === 'undefined' || !window.__firebase_config) {
-                    console.warn("Firebase config yok. LocalStorage kullanılacak.");
-                    return false;
+        window.loadProgress = function() {
+            try { 
+                const localData = localStorage.getItem(LOCAL_STORAGE_KEY); 
+                if (localData) {
+                    const loadedData = JSON.parse(localData);
+                    window.totalXP = loadedData.totalXP !== undefined ? loadedData.totalXP : 0;
+                    window.hearts = loadedData.hearts !== undefined ? loadedData.hearts : 10;
+                    window.stageProgress = loadedData.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 };
+                    window.selectedGoal = loadedData.selectedGoal || null;
                 }
-
-                let configObj;
-                try {
-                    configObj = typeof window.__firebase_config === 'string' ? JSON.parse(window.__firebase_config) : window.__firebase_config;
-                } catch(err) {
-                    console.warn("Firebase config parse hatası. LocalStorage kullanılacak.");
-                    return false;
-                }
-
-                if (!configObj || !configObj.apiKey) {
-                    console.warn("Geçersiz Firebase config. LocalStorage kullanılacak.");
-                    return false;
-                }
-
-                const app = initializeApp(configObj);
-                auth = getAuth(app);
-                db = getFirestore(app);
-                appId = typeof window.__app_id !== 'undefined' ? window.__app_id : 'b1kamp-default';
-                firebaseReady = true;
-                return true;
-            } catch(e) { 
-                console.error("Firebase başlatma hatası:", e); 
-                firebaseReady = false;
-                return false;
-            }
-        }
-
-        // SAFE LOAD PROGRESS
-        async function loadProgress() {
-            let loadedData = null;
-
-            // 1. Firebase'den dene
-            if(firebaseReady && currentUser && db) {
-                try {
-                    const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
-                    const docSnap = await getDoc(docRef);
-                    if (docSnap.exists()) {
-                        loadedData = docSnap.data();
-                    }
-                } catch(e) { console.warn("Firebase veri çekme hatası:", e); }
-            }
-
-            // 2. Olmazsa veya Firebase yoksa LocalStorage'dan dene
-            if (!loadedData) {
-                try {
-                    const localData = localStorage.getItem(LOCAL_STORAGE_KEY);
-                    if (localData) loadedData = JSON.parse(localData);
-                } catch(e) { console.warn("LocalStorage veri çekme hatası:", e); }
-            }
-
-            // 3. Veriyi uygula
-            if (loadedData) {
-                window.totalXP = loadedData.totalXP !== undefined ? loadedData.totalXP : 0;
-                window.hearts = loadedData.hearts !== undefined ? loadedData.hearts : 10;
-                window.stageProgress = loadedData.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 };
-                window.selectedGoal = loadedData.selectedGoal || null;
-            }
-        }
-
-        // SAFE SAVE PROGRESS
-        window.saveProgress = async function() {
-            const dataToSave = {
-                totalXP: window.totalXP || 0,
-                hearts: window.hearts || 10,
-                stageProgress: window.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 },
-                selectedGoal: window.selectedGoal || null
-            };
-
-            // 1. Her zaman LocalStorage'a kaydet (Güvenlik ağı)
-            try {
-                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave));
-            } catch(e) { console.warn("LocalStorage kaydetme hatası:", e); }
-
-            // 2. Firebase çalışıyorsa buluta eşitle
-            if(firebaseReady && currentUser && db) {
-                try {
-                    const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
-                    await setDoc(docRef, dataToSave, { merge: true });
-                } catch(e) { console.warn("Firebase kaydetme hatası:", e); }
-            }
+            } catch(e) { console.warn("Local storage parse hatasi"); }
         };
 
-        // SAFE LOGIN
+        window.saveProgress = function() {
+            const dataToSave = { 
+                totalXP: window.totalXP || 0, 
+                hearts: window.hearts || 10, 
+                stageProgress: window.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0, 'gramer': 0 }, 
+                selectedGoal: window.selectedGoal || null 
+            };
+            try { 
+                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave)); 
+            } catch(e) {}
+        };
+
         window.attemptLogin = async function() {
-            const userEl = document.getElementById('login-user');
-            const passEl = document.getElementById('login-pass');
-            const errorEl = document.getElementById('login-error');
+            const userEl = document.getElementById('login-user'); 
+            const passEl = document.getElementById('login-pass'); 
+            const errorEl = document.getElementById('login-error'); 
             const btnEl = document.getElementById('btn-login');
-
+            
             if (!userEl || !passEl || !errorEl || !btnEl) return;
-
-            const user = userEl.value.toLowerCase().trim();
+            const user = userEl.value.toLowerCase().trim(); 
             const pass = passEl.value.toLowerCase().trim();
             
             if(user === 'nisan' && pass === 'talha') {
-                errorEl.classList.add('hidden');
-                btnEl.innerText = "SİSTEME BAĞLANILIYOR...";
+                errorEl.classList.add('hidden'); 
+                btnEl.innerText = "Yükleniyor..."; 
                 btnEl.disabled = true;
 
-                // Firebase'i başlatmayı dene
-                await initFirebase();
-                
-                // Eğer Firebase hazırsa Auth işlemlerini yap
-                if (firebaseReady && auth) {
+                // Eğer Firebase modülü başarılı yüklenmişse onun fonksiyonunu çağır (Bulut eşitlemesi için)
+                if (typeof window.firebaseLoginHook === 'function') {
                     try {
-                        let customToken = typeof window.__initial_auth_token !== 'undefined' ? window.__initial_auth_token : null;
-                        if (customToken) {
-                            await signInWithCustomToken(auth, customToken);
-                        } else {
-                            await signInAnonymously(auth);
-                        }
-                        
-                        onAuthStateChanged(auth, async (userObj) => {
-                            if(userObj) {
-                                currentUser = userObj;
-                                await completeLoginProcess();
-                            } else {
-                                await completeLoginProcess();
-                            }
-                        });
-                    } catch(e) { 
-                        console.warn("Auth hatası, lokal olarak devam ediliyor:", e); 
-                        firebaseReady = false;
-                        await completeLoginProcess();
+                        await window.firebaseLoginHook();
+                    } catch(e) {
+                        console.warn("Firebase bağlantısı başarısız, lokal verilerle devam ediliyor.");
                     }
-                } else {
-                    // Firebase yoksa lokal devam et
-                    await completeLoginProcess();
                 }
-            } else {
-                errorEl.classList.remove('hidden');
+                
+                // Her halükarda oyunu başlat
+                window.completeLoginProcess();
+            } else { 
+                errorEl.classList.remove('hidden'); 
             }
         };
 
-        async function completeLoginProcess() {
-            await loadProgress();
-            
-            const sideNav = document.getElementById('side-nav');
-            const mainHeader = document.getElementById('main-header');
-            const loader = document.getElementById('loader');
+        window.completeLoginProcess = function() {
+            window.loadProgress();
+            const sideNav = document.getElementById('side-nav'); 
+            const mainHeader = document.getElementById('main-header'); 
+            const loader = document.getElementById('loader'); 
             const btnEl = document.getElementById('btn-login');
-
-            if (sideNav) sideNav.style.display = '';
+            
+            if (sideNav) sideNav.style.display = ''; 
             if (mainHeader) mainHeader.style.display = 'flex';
             
             if (typeof window.initAudio === 'function') window.initAudio(); 
             
-            if(window.selectedGoal) {
-                window.switchScreen('dashboard');
-            } else {
-                window.switchScreen('survey');
+            if(window.selectedGoal) { 
+                window.switchScreen('dashboard'); 
+            } else { 
+                window.switchScreen('survey'); 
             }
             
-            window.updateTopBar();
+            window.updateTopBar(); 
             window.updateDashboardProgress();
-
-            // Kapanmayan Loader'ı garantili şekilde kapat
-            if (loader) {
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 400);
+            
+            if (loader) { 
+                loader.style.opacity = '0'; 
+                setTimeout(() => { loader.style.display = 'none'; }, 400); 
             }
-
-            if (btnEl) {
-                btnEl.innerText = "GİRİŞ YAP";
-                btnEl.disabled = false;
+            if (btnEl) { 
+                btnEl.innerText = "Giriş Yap"; 
+                btnEl.disabled = false; 
             }
-        }
-
-        // ==========================================
-        // AŞAĞIDAKİ KISIM: İÇERİK, MANTIK VE VERİTABANI
-        // ==========================================
-
-        window.setGoal = async function(goal) {
-            window.selectedGoal = goal;
-            await window.saveProgress();
-            window.switchScreen('dashboard');
         };
 
-        window.changeGoal = function() {
-            window.switchScreen('survey');
-        };
+        // --- UYGULAMA VE OYUN FONKSİYONLARI ---
+
+        window.setGoal = async function(goal) { window.selectedGoal = goal; window.saveProgress(); window.switchScreen('dashboard'); };
+        window.changeGoal = function() { window.switchScreen('survey'); };
 
         window.setImgSrc = function(imgElement, src, fallbackText, color) {
-            if (imgElement.getAttribute('data-current-src') === src) return;
+            if (!imgElement || imgElement.getAttribute('data-current-src') === src) return;
             imgElement.setAttribute('data-current-src', src);
-            imgElement.onerror = function() {
-                this.onerror = null;
-                this.src = `https://placehold.co/100x100/${color}/ffffff?text=${fallbackText}`;
-            };
+            imgElement.onerror = function() { this.onerror = null; this.src = `https://placehold.co/100x100/${color}/ffffff?text=${fallbackText}`; };
             imgElement.src = src;
         };
 
         window.initAudio = function() {
-            if(!window.audioCtx) { 
-                const AudioContext = window.AudioContext || window.webkitAudioContext; 
-                window.audioCtx = new AudioContext(); 
-            }
+            if(!window.audioCtx) { const AudioContext = window.AudioContext || window.webkitAudioContext; window.audioCtx = new AudioContext(); }
             if (window.audioCtx.state === 'suspended') { window.audioCtx.resume(); }
         }
-
         window.playCorrectSound = function() {
-            window.initAudio(); 
-            if(!window.audioCtx) return;
+            window.initAudio(); if(!window.audioCtx) return;
             try {
                 const osc = window.audioCtx.createOscillator(); const gain = window.audioCtx.createGain();
                 osc.connect(gain); gain.connect(window.audioCtx.destination); osc.type = 'sine';
                 osc.frequency.setValueAtTime(523.25, window.audioCtx.currentTime); osc.frequency.setValueAtTime(659.25, window.audioCtx.currentTime + 0.1); 
-                gain.gain.setValueAtTime(0.1, window.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, window.audioCtx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.05, window.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, window.audioCtx.currentTime + 0.3);
                 osc.start(); osc.stop(window.audioCtx.currentTime + 0.3);
             } catch(e){}
         }
-
         window.playWrongSound = function() {
-            window.initAudio(); 
-            if(!window.audioCtx) return;
+            window.initAudio(); if(!window.audioCtx) return;
             try {
                 const osc = window.audioCtx.createOscillator(); const gain = window.audioCtx.createGain();
                 osc.connect(gain); gain.connect(window.audioCtx.destination); osc.type = 'sawtooth';
                 osc.frequency.setValueAtTime(300, window.audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(150, window.audioCtx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.1, window.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, window.audioCtx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.05, window.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, window.audioCtx.currentTime + 0.3);
                 osc.start(); osc.stop(window.audioCtx.currentTime + 0.3);
             } catch(e){}
         }
-
         window.speakWord = function(word) {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(word);
-                utterance.lang = 'de-DE'; utterance.rate = 0.9;
-                window.speechSynthesis.speak(utterance);
+                window.speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(word); utterance.lang = 'de-DE'; utterance.rate = 0.9; window.speechSynthesis.speak(utterance);
             }
         }
-
         window.triggerStars = function() {
-            const container = document.getElementById('star-container'); 
-            if(!container) return;
-            container.innerHTML = '';
-            for(let i=0; i<40; i++) {
+            const container = document.getElementById('star-container'); if(!container) return; container.innerHTML = '';
+            for(let i=0; i<30; i++) {
                 const star = document.createElement('i'); star.className = 'ph-fill ph-star star-particle';
                 star.style.left = Math.random() * 100 + '%'; star.style.bottom = '-50px'; star.style.animationDelay = (Math.random() * 0.5) + 's';
-                const colors = ['#f59e0b', '#14b8a6', '#6366f1', '#a855f7']; star.style.color = colors[Math.floor(Math.random() * colors.length)];
+                const colors = ['#f59e0b', '#14b8a6', '#6366f1']; star.style.color = colors[Math.floor(Math.random() * colors.length)];
                 container.appendChild(star);
             }
         }
@@ -693,97 +533,42 @@
             'b1_1': [
                 { article: "der", word: "Abfall", tr: "atık" }, { article: "der", word: "Abflug", tr: "kalkış" }, { article: "die", word: "Absage", tr: "iptal" },
                 { article: "-", word: "aktiv", tr: "faal" }, { article: "der", word: "Alkohol", tr: "alkol" }, { article: "-", word: "angenehm", tr: "rahat" },
-                { article: "-", word: "annulliert", tr: "iptal edilmiş" }, { article: "die", word: "Anzeigetafel", tr: "ilan panosu" }, { article: "der", word: "Aufruf", tr: "çağrı" },
-                { article: "der", word: "Ausgang", tr: "çıkış" }, { article: "die", word: "Ausstattung", tr: "ekipman" }, { article: "der", word: "Behälter", tr: "kap" },
-                { article: "-", word: "betreten", tr: "girmek" }, { article: "der", word: "Bewohner", tr: "sakin" }, { article: "die", word: "Bordkarte", tr: "biniş kartı" },
-                { article: "der", word: "Campingplatz", tr: "kamp alanı" }, { article: "der", word: "Check-in-Schalter", tr: "check-in kontuarı" }, { article: "der", word: "Container", tr: "konteyner" },
-                { article: "die", word: "Dienstreise", tr: "iş seyahati" }, { article: "das", word: "Doppelbett", tr: "iki kişilik yatak" }, { article: "-", word: "einchecken", tr: "giriş yapmak" },
-                { article: "die", word: "Einsteigezeit", tr: "biniş saati" }, { article: "das", word: "Einzelzimmer", tr: "tek kişilik oda" }, { article: "-", word: "erleben", tr: "deneyimlemek" },
-                { article: "der", word: "Flug", tr: "uçuş" }, { article: "der", word: "Fluggast", tr: "uçak yolcusu" }, { article: "die", word: "Fluggesellschaft", tr: "uçak şirketi" },
-                { article: "-", word: "füttern", tr: "beslemek" }, { article: "das", word: "Gate", tr: "kapı" }, { article: "das", word: "Gepäck", tr: "bagaj" },
-                { article: "das", word: "Handgepäck", tr: "el bagajı" }, { article: "die", word: "Jugendherberge", tr: "öğrenci yurdu" }, { article: "der", word: "Lärm", tr: "gürültü" },
-                { article: "die", word: "Passkontrolle", tr: "pasaport kontrolü" }, { article: "das", word: "Reisebüro", tr: "seyahat acentesi" }, { article: "der", word: "Zoll", tr: "gümrük" },
+                { article: "die", word: "Anzeigetafel", tr: "ilan panosu" }, { article: "der", word: "Aufruf", tr: "çağrı" }, { article: "der", word: "Ausgang", tr: "çıkış" },
+                { article: "die", word: "Ausstattung", tr: "ekipman" }, { article: "der", word: "Behälter", tr: "kap" }, { article: "-", word: "betreten", tr: "girmek" },
+                { article: "die", word: "Bordkarte", tr: "biniş kartı" }, { article: "der", word: "Campingplatz", tr: "kamp alanı" }, { article: "der", word: "Container", tr: "konteyner" },
+                { article: "die", word: "Dienstreise", tr: "iş seyahati" }, { article: "das", word: "Doppelbett", tr: "iki kişilik yatak" }, { article: "das", word: "Einzelzimmer", tr: "tek kişilik oda" },
+                { article: "der", word: "Flug", tr: "uçuş" }, { article: "das", word: "Gepäck", tr: "bagaj" }, { article: "das", word: "Handgepäck", tr: "el bagajı" },
                 { article: "der", word: "Ärger", tr: "öfke" }, { article: "die", word: "Ausnahme", tr: "istisna" }, { article: "die", word: "Beleidigung", tr: "hakaret" },
                 { article: "die", word: "Entscheidung", tr: "karar" }, { article: "die", word: "Freude", tr: "neşe" }, { article: "der", word: "Konflikt", tr: "anlaşmazlık" },
-                { article: "der", word: "Mietvertrag", tr: "kira sözleşmesi" }, { article: "der", word: "Schaden", tr: "hasar" }, { article: "das", word: "Urteil", tr: "hüküm" },
-                { article: "das", word: "Verständnis", tr: "anlayış" }, { article: "das", word: "Abgas", tr: "egzoz gazı" }, { article: "das", word: "Abwasser", tr: "atık su" },
-                { article: "das", word: "Erdbeben", tr: "deprem" }, { article: "die", word: "Erde", tr: "toprak" }, { article: "die", word: "Erderwärmung", tr: "küresel ısınma" },
-                { article: "das", word: "Klima", tr: "iklim" }, { article: "der", word: "Klimawandel", tr: "iklim değişikliği" }, { article: "das", word: "Plastik", tr: "plastik" },
-                { article: "-", word: "recyceln", tr: "geri dönüştürmek" }, { article: "die", word: "Umweltverschmutzung", tr: "çevre kirliliği" }, { article: "das", word: "Unwetter", tr: "fırtına" },
-                { article: "der", word: "Verbraucher", tr: "tüketici" }, { article: "der", word: "Versand", tr: "sevkiyat" }, { article: "die", word: "Ware", tr: "mal/eşya" },
-                { article: "die", word: "Diskussion", tr: "tartışma" }, { article: "die", word: "Gewohnheit", tr: "alışkanlık" }, { article: "die", word: "Langeweile", tr: "sıkıntı" },
-                { article: "die", word: "Mehrheit", tr: "çoğunluk" }, { article: "die", word: "Minderheit", tr: "azınlık" }, { article: "das", word: "Rätsel", tr: "bilmece" },
-                { article: "die", word: "Amtssprache", tr: "resmi dil" }, { article: "die", word: "Arbeitslosigkeit", tr: "işsizlik" }, { article: "das", word: "Asyl", tr: "sığınma" },
-                { article: "die", word: "Demokratie", tr: "demokrasi" }, { article: "der", word: "Flüchtling", tr: "mülteci" }, { article: "die", word: "Grenze", tr: "sınır" },
-                { article: "die", word: "Heimat", tr: "vatan" }, { article: "der", word: "Krieg", tr: "savaş" }, { article: "die", word: "Mauer", tr: "duvar" },
-                { article: "die", word: "Regierung", tr: "hükümet" }, { article: "der", word: "Staat", tr: "devlet" }, { article: "das", word: "Visum", tr: "vize" },
-                { article: "die", word: "Wahl", tr: "seçim" }, { article: "-", word: "wählen", tr: "seçmek" }, { article: "-", word: "zustimmen", tr: "katılmak (fikre)" },
-                { article: "die", word: "Bewerbung", tr: "başvuru" }, { article: "der", word: "Lebenslauf", tr: "özgeçmiş" }, { article: "das", word: "Vorstellungsgespräch", tr: "iş görüşmesi" },
-                { article: "der", word: "Feierabend", tr: "paydos" }, { article: "die", word: "Gewerkschaft", tr: "sendika" }, { article: "die", word: "Steuer", tr: "vergi" },
-                { article: "das", word: "Einkommen", tr: "gelir" }, { article: "-", word: "kündigen", tr: "işten ayrılmak/çıkarmak" }, { article: "-", word: "einstellen", tr: "işe almak" },
-                { article: "die", word: "Wirtschaft", tr: "ekonomi" }, { article: "der", word: "Markt", tr: "piyasa" }, { article: "der", word: "Konsument", tr: "tüketici" },
-                { article: "der", word: "Hersteller", tr: "üretici" }, { article: "die", word: "Globalisierung", tr: "küreselleşme" }, { article: "der", word: "Export", tr: "ihracat" },
-                { article: "der", word: "Import", tr: "ithalat" }, { article: "die", word: "Qualität", tr: "kalite" }, { article: "der", word: "Rabatt", tr: "indirim" },
-                { article: "das", word: "Angebot", tr: "teklif/arz" }, { article: "die", word: "Nachfrage", tr: "talep" }
+                { article: "der", word: "Schaden", tr: "hasar" }, { article: "das", word: "Urteil", tr: "hüküm" }, { article: "das", word: "Verständnis", tr: "anlayış" },
+                { article: "das", word: "Erdbeben", tr: "deprem" }, { article: "die", word: "Erde", tr: "toprak" }, { article: "das", word: "Klima", tr: "iklim" },
+                { article: "das", word: "Plastik", tr: "plastik" }, { article: "die", word: "Umweltverschmutzung", tr: "çevre kirliliği" }, { article: "die", word: "Ware", tr: "mal/eşya" },
+                { article: "die", word: "Diskussion", tr: "tartışma" }, { article: "die", word: "Gewohnheit", tr: "alışkanlık" }, { article: "die", word: "Langeweile", tr: "sıkıntı" }
             ],
             'b1_2': [
                 { article: "die", word: "Anerkennung", tr: "takdir" }, { article: "die", word: "Fähigkeit", tr: "beceri" }, { article: "das", word: "Heimweh", tr: "sıla hasreti" },
                 { article: "die", word: "Arbeitsstelle", tr: "çalışma yeri" }, { article: "die", word: "Berufserfahrung", tr: "mesleki tecrübe" }, { article: "das", word: "Gehalt", tr: "maaş" },
                 { article: "die", word: "Probezeit", tr: "deneme süresi" }, { article: "die", word: "Überstunde", tr: "fazla mesai" }, { article: "das", word: "Unternehmen", tr: "şirket" },
-                { article: "der", word: "Urlaubstag", tr: "tatil günü" }, { article: "die", word: "Allergie", tr: "alerji" }, { article: "die", word: "Bedingung", tr: "koşul" },
-                { article: "die", word: "Ernährung", tr: "beslenme" }, { article: "das", word: "Fertiggericht", tr: "hazır yemek" }, { article: "der", word: "Geschmack", tr: "tat/zevk" },
-                { article: "die", word: "Autoversicherung", tr: "otomobil sigortası" }, { article: "der", word: "Unfall", tr: "kaza" }, { article: "die", word: "Scheibe", tr: "cam" },
-                { article: "der", word: "Scheinwerfer", tr: "far" }, { article: "die", word: "Überschwemmung", tr: "su baskını" }, { article: "der", word: "Straßenverkehr", tr: "trafik" },
-                { article: "-", word: "amtlich", tr: "resmi" }, { article: "-", word: "anerkennen", tr: "takdir etmek" }, { article: "-", word: "beglaubigen", tr: "tasdik etmek" },
+                { article: "die", word: "Allergie", tr: "alerji" }, { article: "die", word: "Bedingung", tr: "koşul" }, { article: "die", word: "Ernährung", tr: "beslenme" },
+                { article: "der", word: "Unfall", tr: "kaza" }, { article: "die", word: "Scheibe", tr: "cam" }, { article: "die", word: "Überschwemmung", tr: "su baskını" },
                 { article: "die", word: "Beglaubigung", tr: "tasdik" }, { article: "die", word: "Enttäuschung", tr: "düş kırıklığı" }, { article: "die", word: "Fantasie", tr: "fantezi" },
-                { article: "das", word: "Führungszeugnis", tr: "adli sicil kaydı" }, { article: "der", word: "Gedanke", tr: "düşünce" }, { article: "die", word: "Geduld", tr: "sabır" },
-                { article: "die", word: "Kopie", tr: "kopya" }, { article: "die", word: "Mentalität", tr: "zihniyet" }, { article: "die", word: "Übersetzung", tr: "tercüme" },
-                { article: "die", word: "Abteilung", tr: "departman" }, { article: "die", word: "Arbeitszeit", tr: "iş saati" }, { article: "die", word: "Festanstellung", tr: "daimi istihdam" },
-                { article: "die", word: "Herausforderung", tr: "meydan okuma" }, { article: "der", word: "Konferenzraum", tr: "konferans salonu" }, { article: "die", word: "Qualifikation", tr: "nitelik" },
-                { article: "die", word: "Stellenanzeige", tr: "iş ilanı" }, { article: "die", word: "Zusammenarbeit", tr: "işbirliği" }, { article: "-", word: "beherrschen", tr: "hakim olmak" },
-                { article: "-", word: "finanziell", tr: "mali" }, { article: "der", word: "Büroalltag", tr: "büro rutini" }, { article: "-", word: "langfristig", tr: "uzun vadeli" },
-                { article: "der", word: "Verbrauch", tr: "tüketim" }, { article: "die", word: "Wärme", tr: "ısı" }, { article: "-", word: "abnehmen", tr: "kaldırmak/zayıflamak" },
+                { article: "das", word: "Führungszeugnis", tr: "adli sicil kaydı" }, { article: "die", word: "Geduld", tr: "sabır" }, { article: "die", word: "Kopie", tr: "kopya" },
+                { article: "die", word: "Abteilung", tr: "departman" }, { article: "die", word: "Arbeitszeit", tr: "iş saati" }, { article: "die", word: "Herausforderung", tr: "meydan okuma" },
+                { article: "die", word: "Qualifikation", tr: "nitelik" }, { article: "die", word: "Zusammenarbeit", tr: "işbirliği" }, { article: "der", word: "Verbrauch", tr: "tüketim" },
                 { article: "die", word: "Bevölkerung", tr: "nüfus" }, { article: "das", word: "Eiweiß", tr: "protein" }, { article: "das", word: "Getreide", tr: "tahıl" },
-                { article: "-", word: "vegan", tr: "vegan" }, { article: "der", word: "Diebstahl", tr: "hırsızlık" }, { article: "der", word: "Motor", tr: "motor" },
-                { article: "das", word: "Kennzeichen", tr: "plaka" }, { article: "der", word: "Reifen", tr: "lastik" }, { article: "die", word: "Vorfahrt", tr: "geçiş üstünlüğü" },
-                { article: "das", word: "Medikament", tr: "ilaç" }, { article: "die", word: "Apotheke", tr: "eczane" }, { article: "das", word: "Rezept", tr: "reçete" },
-                { article: "die", word: "Versicherung", tr: "sigorta" }, { article: "der", word: "Beitrag", tr: "katkı/prim" }, { article: "die", word: "Verletzung", tr: "yaralanma" },
-                { article: "der", word: "Notarzt", tr: "acil doktoru" }, { article: "die", word: "Operation", tr: "ameliyat" }, { article: "das", word: "Symptom", tr: "belirti" },
-                { article: "das", word: "Virus", tr: "virüs" }, { article: "die", word: "Infektion", tr: "enfeksiyon" }, { article: "die", word: "Therapie", tr: "terapi" },
-                { article: "die", word: "Forschung", tr: "araştırma" }, { article: "die", word: "Wissenschaft", tr: "bilim" }, { article: "das", word: "Experiment", tr: "deney" },
-                { article: "der", word: "Beweis", tr: "kanıt" }, { article: "die", word: "Methode", tr: "yöntem" }, { article: "das", word: "Ergebnis", tr: "sonuç" },
-                { article: "die", word: "Analyse", tr: "analiz" }
+                { article: "das", word: "Kennzeichen", tr: "plaka" }, { article: "der", word: "Reifen", tr: "lastik" }, { article: "die", word: "Vorfahrt", tr: "geçiş üstünlüğü" }
             ],
             'arena': [
-                { article: "-", word: "löschen", tr: "silmek" }, { article: "das", word: "Netzwerk", tr: "ağ / şebeke" }, { article: "die", word: "Entscheidung", tr: "karar" },
-                { article: "das", word: "Gefühl", tr: "duygu" }, { article: "das", word: "Erlebnis", tr: "deneyim" }, { article: "die", word: "Langeweile", tr: "can sıkıntısı" },
-                { article: "der", word: "Klimawandel", tr: "iklim değişikliği" }, { article: "die", word: "Zukunft", tr: "gelecek" }, { article: "das", word: "Nahrungsmittel", tr: "besin / gıda" },
-                { article: "die", word: "Wirtschaft", tr: "ekonomi" }, { article: "der", word: "Umweltschutz", tr: "çevre koruma" }, { article: "das", word: "Plastik", tr: "plastik" },
-                { article: "der", word: "Account", tr: "hesap (sosyal medya)" }, { article: "die", word: "Plattform", tr: "platform" }, { article: "die", word: "Alltagsroutine", tr: "günlük rutin" },
+                { article: "das", word: "Netzwerk", tr: "ağ / şebeke" }, { article: "die", word: "Entscheidung", tr: "karar" }, { article: "das", word: "Gefühl", tr: "duygu" },
+                { article: "das", word: "Erlebnis", tr: "deneyim" }, { article: "die", word: "Langeweile", tr: "can sıkıntısı" }, { article: "der", word: "Klimawandel", tr: "iklim değişikliği" },
+                { article: "die", word: "Zukunft", tr: "gelecek" }, { article: "das", word: "Nahrungsmittel", tr: "besin / gıda" }, { article: "die", word: "Wirtschaft", tr: "ekonomi" },
+                { article: "der", word: "Umweltschutz", tr: "çevre koruma" }, { article: "das", word: "Plastik", tr: "plastik" }, { article: "die", word: "Plattform", tr: "platform" },
                 { article: "das", word: "Zähneputzen", tr: "diş fırçalama" }, { article: "der", word: "Grund", tr: "sebep" }, { article: "die", word: "App", tr: "uygulama" },
-                { article: "das", word: "Smartphone", tr: "akıllı telefon" }, { article: "das", word: "Ergebnis", tr: "sonuç" }, { article: "-", word: "digital", tr: "dijital" },
-                { article: "-", word: "kreativ", tr: "yaratıcı" }, { article: "die", word: "Alternative", tr: "alternatif" }, { article: "der", word: "Warentransport", tr: "mal taşımacılığı" },
-                { article: "das", word: "Frachtschiff", tr: "yük gemisi" }, { article: "-", word: "transportieren", tr: "taşımak" }, { article: "die", word: "Lieferung", tr: "teslimat" },
-                { article: "der", word: "Haushalt", tr: "hane halkı" }, { article: "die", word: "Bewegung", tr: "hareket" }, { article: "-", "word": "realistisch", tr: "gerçekçi" },
-                { article: "die", word: "Nachbarschaft", tr: "mahalle" }, { article: "das", word: "Stadion", tr: "stadyum" }, { article: "die", word: "Bewerbung", tr: "başvuru" },
-                { article: "der", word: "Journalismus", tr: "gazetecilik" }, { article: "die", word: "Entwicklung", tr: "gelişim" }, { article: "der", word: "Vorschlag", tr: "öneri" },
-                { article: "das", word: "Verbot", tr: "yasak" }, { article: "die", word: "Mahlzeit", tr: "öğün" }, { article: "das", word: "Gymnasium", tr: "lise" },
-                { article: "die", word: "Vorschrift", tr: "kural/yönetmelik" }, { article: "die", word: "Entscheidungsfreiheit", tr: "karar özgürlüğü" }, { article: "die", word: "Studie", tr: "araştırma/çalışma" },
-                { article: "die", word: "Hausordnung", tr: "ev/bina kuralları" }, { article: "der", word: "Respekt", tr: "saygı" }, { article: "das", word: "Tuch", tr: "bez/havlu" },
-                { article: "der", word: "Reisebericht", tr: "seyahat raporu" }, { article: "die", word: "Entspannung", tr: "rahatlama" }, { article: "das", word: "Boot", tr: "tekne" },
-                { article: "der", word: "Hafen", tr: "liman" }, { article: "die", word: "Folge", tr: "sonuç/netice" }, { article: "der", word: "Konsum", tr: "tüketim" },
-                { article: "die", word: "Tradition", tr: "gelenek" }, { article: "das", word: "Werk", tr: "eser/yapıt" }, { article: "das", word: "Publikum", tr: "seyirci/kitle" },
-                { article: "die", word: "Liebesgeschichte", tr: "aşk hikayesi" }, { article: "die", word: "Werbung", tr: "reklam" }, { article: "die", word: "Leistung", tr: "performans" },
-                { article: "das", word: "Risiko", tr: "risk" }, { article: "-", word: "konsumieren", tr: "tüketmek" }, { article: "-", word: "abhängig", tr: "bağımlı" },
-                { article: "der", word: "Eindruck", tr: "izlenim" }, { article: "die", word: "Lektion", tr: "ders" }, { article: "das", word: "Gedicht", tr: "şiir" },
-                { article: "die", word: "Gesellschaft", tr: "toplum" }, { article: "die", word: "Kultur", tr: "kültür" }, { article: "die", word: "Kunst", tr: "sanat" },
-                { article: "das", word: "Theater", tr: "tiyatro" }, { article: "die", word: "Ausstellung", tr: "sergi" }, { article: "das", word: "Konzert", tr: "konser" },
-                { article: "der", word: "Autor", tr: "yazar" }, { article: "der", word: "Regisseur", tr: "yönetmen" }, { article: "der", word: "Schauspieler", tr: "aktör" },
-                { article: "die", word: "Bühne", tr: "sahne" }, { article: "die", word: "Leinwand", tr: "tuval/perde" }, { article: "der", word: "Zuschauer", tr: "seyirci" },
-                { article: "die", word: "Kritik", tr: "eleştiri" }, { article: "der", word: "Erfolg", tr: "başarı" }, { article: "der", word: "Misserfolg", tr: "başarısızlık" },
-                { article: "die", word: "Medien", tr: "medya" }, { article: "das", word: "Internet", tr: "internet" }, { article: "die", word: "Suchmaschine", tr: "arama motoru" },
-                { article: "das", word: "Profil", tr: "profil" }, { article: "der", word: "Kommentar", tr: "yorum" }, { article: "-", word: "abonnieren", tr: "abone olmak" },
-                { article: "-", word: "teilen", tr: "paylaşmak" }, { article: "-", word: "liken", tr: "beğenmek" }
+                { article: "das", word: "Smartphone", tr: "akıllı telefon" }, { article: "das", word: "Ergebnis", tr: "sonuç" }, { article: "die", word: "Alternative", tr: "alternatif" },
+                { article: "der", word: "Warentransport", tr: "mal taşımacılığı" }, { article: "das", word: "Frachtschiff", tr: "yük gemisi" }, { article: "die", word: "Lieferung", tr: "teslimat" },
+                { article: "der", word: "Haushalt", tr: "hane halkı" }, { article: "die", word: "Bewegung", tr: "hareket" }, { article: "die", word: "Nachbarschaft", tr: "mahalle" },
+                { article: "das", word: "Stadion", tr: "stadyum" }, { article: "die", word: "Bewerbung", tr: "başvuru" }, { article: "der", word: "Vorschlag", tr: "öneri" },
+                { article: "das", word: "Verbot", tr: "yasak" }, { article: "die", word: "Mahlzeit", tr: "öğün" }, { article: "das", word: "Gymnasium", tr: "lise" }
             ],
             'gramer': [
                 { type: 'grammar', text: "Ich bleibe zu Hause, ___ es regnet.", options: ["weil", "obwohl", "dass", "wenn"], answer: "weil", tr: "Evde kalıyorum, çünkü yağmur yağıyor." },
@@ -791,27 +576,14 @@
                 { type: 'grammar', text: "Ich denke, ___ du recht hast.", options: ["dass", "weil", "obwohl", "als"], answer: "dass", tr: "Bence haklısın." },
                 { type: 'grammar', text: "Das ist der Mann, ___ ich gestern gesehen habe.", options: ["den", "dem", "der", "des"], answer: "den", tr: "Bu dün gördüğüm adam. (Akkusativ)" },
                 { type: 'grammar', text: "Das ist die Frau, ___ ich das Buch gegeben habe.", options: ["der", "die", "dem", "den"], answer: "der", tr: "Bu kitabı verdiğim kadın. (Dativ)" },
-                { type: 'grammar', text: "Ich lege das Buch auf ___ Tisch.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Kitabı masanın üzerine koyuyorum. (Akk. Yönelme)" },
-                { type: 'grammar', text: "Das Buch liegt auf ___ Tisch.", options: ["dem", "den", "der", "das"], answer: "dem", tr: "Kitap masanın üzerinde duruyor. (Dativ Konum)" },
-                { type: 'grammar', text: "Wir fahren ___ die Türkei.", options: ["in", "nach", "zu", "auf"], answer: "in", tr: "Türkiye'ye gidiyoruz. (in die)" },
-                { type: 'grammar', text: "Ich fahre ___ Berlin.", options: ["nach", "in", "zu", "auf"], answer: "nach", tr: "Berlin'e gidiyorum." },
-                { type: 'grammar', text: "Wenn ich reich ___, würde ich ein Haus kaufen.", options: ["wäre", "hätte", "bin", "habe"], answer: "wäre", tr: "Eğer zengin olsaydım, bir ev alırdım. (Konjunktiv II)" },
-                { type: 'grammar', text: "Ich ___ gerne ein Auto.", options: ["hätte", "wäre", "habe", "bin"], answer: "hätte", tr: "Bir arabam olsun isterdim. (Konjunktiv II)" },
-                { type: 'grammar', text: "Das Auto wird von ___ Mechaniker repariert.", options: ["dem", "den", "der", "das"], answer: "dem", tr: "Araba tamirci tarafından tamir ediliyor. (Passiv + von Dativ)" },
-                { type: 'grammar', text: "Er geht ___ Arzt.", options: ["zum", "zur", "nach", "in"], answer: "zum", tr: "Doktora gidiyor." },
-                { type: 'grammar', text: "Sie kommt ___ Apotheke.", options: ["aus der", "aus dem", "von der", "von dem"], answer: "aus der", tr: "Eczaneden geliyor." },
-                { type: 'grammar', text: "Wir interessieren uns ___ Musik.", options: ["für", "an", "über", "auf"], answer: "für", tr: "Müzikle ilgileniyoruz." },
-                { type: 'grammar', text: "Ich freue mich ___ das Geschenk.", options: ["über", "auf", "für", "an"], answer: "über", tr: "Hediye için seviniyorum. (Geçmiş/Şu an)" },
-                { type: 'grammar', text: "Ich freue mich ___ den Urlaub nächste Woche.", options: ["auf", "über", "für", "an"], answer: "auf", tr: "Haftaya tatil için seviniyorum/sabırsızlanıyorum. (Gelecek)" }
+                { type: 'grammar', text: "Ich lege das Buch auf ___ Tisch.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Kitabı masanın üzerine koyuyorum. (Akk. Yönelme)" }
             ]
         };
 
         const dialoguesData = [
-            { title: "Havalimanında (Am Flughafen)", icon: "ph-airplane-tilt", color: "indigo", a: "Entschuldigung, wissen Sie, wo die <span class='font-bold text-indigo-600'>Gepäckausgabe</span> ist?", b: "Ja, natürlich. Gehen Sie am <span class='font-bold text-teal-600'>Schalter</span> vorbei." },
-            { title: "Çevre (Umweltschutz)", icon: "ph-tree-evergreen", color: "teal", a: "Der <span class='font-bold text-indigo-600'>Klimawandel</span> ist ein großes Problem für die Erde.", b: "Das stimmt. Wir müssen Müll trennen und Plastik vermeiden." },
-            { title: "Parti Planlama (Party planen)", icon: "ph-confetti", color: "amber", a: "Wir sollten eine Überraschungsparty für Anna organisieren. Hast du Lust?", b: "Klar! Ich kann mich um die <span class='font-bold text-teal-600'>Getränke</span> kümmern." },
-            { title: "Doktorda (Beim Arzt)", icon: "ph-first-aid", color: "rose", a: "Guten Tag, Herr Doktor. Ich habe starke <span class='font-bold text-indigo-600'>Kopfschmerzen</span> und Fieber.", b: "Ich verschreibe Ihnen ein <span class='font-bold text-teal-600'>Medikament</span>. Bleiben Sie im Bett." },
-            { title: "Şikayet (Reklamation)", icon: "ph-warning-circle", color: "purple", a: "Entschuldigung, meine Suppe ist leider völlig kalt.", b: "Oh, das tut mir sehr leid. Ich bringe Ihnen sofort eine neue." }
+            { title: "Havalimanında", icon: "ph-airplane-tilt", color: "indigo", a: "Entschuldigung, wo ist die <span class='font-bold text-indigo-600'>Gepäckausgabe</span>?", b: "Gehen Sie am <span class='font-bold text-teal-600'>Schalter</span> vorbei." },
+            { title: "Çevre (Umweltschutz)", icon: "ph-tree-evergreen", color: "teal", a: "Der <span class='font-bold text-indigo-600'>Klimawandel</span> ist ein großes Problem.", b: "Das stimmt. Wir müssen Plastik vermeiden." },
+            { title: "Parti Planlama", icon: "ph-confetti", color: "amber", a: "Wir sollten eine Party organisieren. Hast du Lust?", b: "Klar! Ich kümmere mich um die <span class='font-bold text-teal-600'>Getränke</span>." }
         ];
 
         window.renderDialogues = function() {
@@ -820,19 +592,19 @@
             container.innerHTML = '';
             dialoguesData.forEach(d => {
                 container.innerHTML += `
-                    <div class="bg-white border border-slate-200 rounded-[2rem] p-6 md:p-8 hover:shadow-lg transition-shadow">
-                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
-                            <div class="w-10 h-10 bg-${d.color}-100 text-${d.color}-500 rounded-xl flex items-center justify-center"><i class="ph-fill ${d.icon} text-xl"></i></div>
-                            <h3 class="font-black text-lg text-slate-800">${d.title}</h3>
+                    <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:border-indigo-200 transition-colors">
+                        <div class="flex items-center gap-3 mb-4 border-b border-slate-50 pb-3">
+                            <div class="w-8 h-8 bg-${d.color}-50 text-${d.color}-500 rounded-lg flex items-center justify-center"><i class="ph-fill ${d.icon}"></i></div>
+                            <h3 class="font-bold text-slate-700 text-sm">${d.title}</h3>
                         </div>
-                        <div class="space-y-4">
-                            <div class="flex gap-4">
-                                <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center font-bold text-indigo-600 shrink-0">A</div>
-                                <div class="bg-slate-50 p-4 rounded-2xl rounded-tl-none border border-slate-100 w-full text-slate-700"><p class="text-sm font-medium">${d.a}</p></div>
+                        <div class="space-y-3">
+                            <div class="flex gap-3">
+                                <div class="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center font-bold text-indigo-500 text-xs shrink-0">A</div>
+                                <div class="bg-slate-50 p-3 rounded-xl rounded-tl-none border border-slate-100 w-full"><p class="text-xs font-medium text-slate-600">${d.a}</p></div>
                             </div>
-                            <div class="flex gap-4 flex-row-reverse">
-                                <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center font-bold text-teal-600 shrink-0">B</div>
-                                <div class="bg-white p-4 rounded-2xl rounded-tr-none border border-slate-200 w-full text-slate-700 shadow-sm"><p class="text-sm font-medium">${d.b}</p></div>
+                            <div class="flex gap-3 flex-row-reverse">
+                                <div class="w-8 h-8 rounded-full bg-teal-50 flex items-center justify-center font-bold text-teal-500 text-xs shrink-0">B</div>
+                                <div class="bg-white p-3 rounded-xl rounded-tr-none border border-slate-100 w-full"><p class="text-xs font-medium text-slate-600">${d.b}</p></div>
                             </div>
                         </div>
                     </div>
@@ -866,14 +638,7 @@
         window.openStage = function(stageId) {
             window.activeStage = stageId;
             document.getElementById('view-stage-selection').classList.add('hidden');
-            
-            if(stageId === 'gramer') {
-                window.buildPath('grammar');
-            } else if(window.selectedGoal) {
-                window.buildPath(window.selectedGoal);
-            } else {
-                window.switchScreen('survey');
-            }
+            if(stageId === 'gramer') { window.buildPath('grammar'); } else if(window.selectedGoal) { window.buildPath(window.selectedGoal); } else { window.switchScreen('survey'); }
         };
 
         window.goBackToStages = function() {
@@ -883,98 +648,56 @@
             window.activeStage = null;
         };
 
-        // MEGA HARİTA OLUŞTURUCU 
+        // ================= MEGA HARİTA OLUŞTURUCU =================
+        window.activePathNodes = [];
+        window.currentPathNodeIndex = 0;
+        
         window.buildPath = function(choice) {
-            if(document.getElementById('screen-survey').classList.contains('active')) {
-                window.switchScreen('dashboard');
-            }
-            
+            if(document.getElementById('screen-survey').classList.contains('active')) { window.switchScreen('dashboard'); }
             document.getElementById('view-stage-selection').classList.add('hidden');
             document.getElementById('view-learning-path').classList.remove('hidden');
 
-            const header = document.getElementById('path-header');
             const title = document.getElementById('path-title');
-            const subtitle = document.getElementById('path-subtitle');
             
-            let themeClass = '';
-            if(choice === 'grammar') { themeClass = 'bg-gradient-to-r from-purple-600 to-purple-800 border-purple-900'; title.innerText = "Gramer Kampı"; subtitle.innerText = "B1 sınavı için en kritik kurallar."; }
-            else if(choice === 'artikel') { themeClass = 'bg-gradient-to-r from-rose-500 to-rose-600 border-rose-700'; title.innerText = "Artikel Ustası"; subtitle.innerText = "Sadece isimleri içeren dev artikel kampı."; }
-            else if(choice === 'vocab') { themeClass = 'bg-gradient-to-r from-amber-500 to-amber-600 border-amber-700'; title.innerText = "Kelime Avcısı"; subtitle.innerText = "Ezber ve eşleştirme ağırlıklı maraton."; }
-            else if(choice === 'listening') { themeClass = 'bg-gradient-to-r from-indigo-500 to-indigo-600 border-indigo-700'; title.innerText = "Keskin Kulaklar"; subtitle.innerText = "Duyduğunu anlama üzerine kurulu uzun yol."; }
-            else if(choice === 'writing') { themeClass = 'bg-gradient-to-r from-purple-500 to-purple-600 border-purple-700'; title.innerText = "Kusursuz Yazarlık"; subtitle.innerText = "Hatasız yazım için klavye sınavları."; }
-            else { themeClass = 'bg-gradient-to-r from-teal-500 to-teal-600 border-teal-700'; title.innerText = "Mega Maraton (0-100)"; subtitle.innerText = "Tüm modları kapsayan en uzun ve dengeli yol."; }
-
-            header.className = `rounded-[2rem] p-8 text-white shadow-lg mb-8 border-b-4 relative overflow-hidden ${themeClass}`;
+            if(choice === 'grammar') { title.innerText = "Gramer Eğitim Yolu"; window.activeStage = 'gramer'; }
+            else if(choice === 'artikel') { title.innerText = "Artikel Eğitim Yolu"; }
+            else if(choice === 'vocab') { title.innerText = "Kelime Eğitim Yolu"; }
+            else if(choice === 'listening') { title.innerText = "Dinleme ve Konuşma Yolu"; }
+            else if(choice === 'writing') { title.innerText = "Yazım Eğitim Yolu"; }
+            else { title.innerText = "Karışık Eğitim Yolu"; }
 
             let nodes = [];
             
             if(choice === 'grammar' || window.activeStage === 'gramer') {
                 nodes = [
-                    {type: 'grammar', count: 10, label: 'Bağlaçlar 1', color: 'purple', icon: '<i class="ph-fill ph-text-t"></i>'},
-                    {type: 'grammar', count: 15, label: 'Bağlaçlar 2', color: 'indigo', icon: '<i class="ph-fill ph-text-t"></i>'},
-                    {type: 'grammar', count: 20, label: 'İsmin Halleri', color: 'rose', icon: '<i class="ph-fill ph-text-t"></i>'},
-                    {type: 'grammar', count: 25, label: 'Akk. / Dativ', color: 'amber', icon: '<i class="ph-fill ph-text-t"></i>'},
-                    {type: 'grammar', count: 30, label: 'Relativsatz', color: 'teal', icon: '<i class="ph-fill ph-text-t"></i>'},
-                    {type: 'grammar', count: 50, label: 'Mega Sınav', color: 'purple', icon: '<i class="ph-fill ph-crown"></i>'}
+                    {type: 'grammar', count: 5, label: 'Bağlaçlar', color: 'indigo', icon: '<i class="ph-fill ph-text-t"></i>'},
+                    {type: 'grammar', count: 10, label: 'İsmin Halleri', color: 'teal', icon: '<i class="ph-fill ph-text-t"></i>'},
+                    {type: 'video', count: 1, label: 'Gramer Video', color: 'rose', icon: '<i class="ph-fill ph-video-camera"></i>'},
+                    {type: 'grammar', count: 15, label: 'Test', color: 'indigo', icon: '<i class="ph-fill ph-check-square-offset"></i>'}
                 ];
                 window.activeStage = 'gramer'; 
             }
-            else if(choice === 'artikel') {
+            else if(choice === 'listening') {
                 nodes = [
-                    {type: 'artikel', count: 30, label: 'Isınma 1', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
-                    {type: 'artikel', count: 50, label: 'Isınma 2', color: 'amber', icon: '<span class="font-black text-xl">ART</span>'},
-                    {type: 'writing', count: 40, label: 'Yazarak Öğren', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
-                    {type: 'artikel', count: 75, label: 'Orta Seviye', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
-                    {type: 'vocab', count: 30, label: 'Kelime Molası', color: 'teal', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'artikel', count: 100, label: 'Zorlu Aşama', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
-                    {type: 'matching', count: 15, label: 'Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'artikel', count: 150, label: 'Dev Sınav', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'}
-                ];
-            } else if (choice === 'vocab') {
-                nodes = [
-                    {type: 'flashcards', count: 40, label: 'Kelime Kartları', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
-                    {type: 'matching', count: 15, label: 'Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'vocab', count: 60, label: 'Okuma Testi 1', color: 'amber', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'dictation', count: 40, label: 'Dinle & Yaz', color: 'indigo', icon: '<i class="ph-fill ph-waveform"></i>'},
-                    {type: 'vocab', count: 80, label: 'Okuma Testi 2', color: 'amber', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'matching', count: 20, label: 'Zor Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'flashcards', count: 50, label: 'Tekrar', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
-                    {type: 'vocab', count: 150, label: 'Mega Anlam Sınavı', color: 'amber', icon: '<i class="ph-fill ph-star"></i>'}
-                ];
-            } else if (choice === 'mixed') {
-                nodes = [
-                    {type: 'flashcards', count: 30, label: 'Başlangıç', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
-                    {type: 'vocab', count: 40, label: 'Temel Anlam', color: 'amber', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'artikel', count: 40, label: 'Artikel Testi', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
-                    {type: 'listening', count: 50, label: 'Dinleme', color: 'indigo', icon: '<i class="ph-fill ph-headphones"></i>'},
-                    {type: 'matching', count: 10, label: 'Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'writing', count: 40, label: 'Yazma Sınavı', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
-                    {type: 'dictation', count: 30, label: 'Dinle & Yaz', color: 'indigo', icon: '<i class="ph-fill ph-waveform"></i>'},
-                    {type: 'vocab', count: 60, label: 'Orta Test', color: 'teal', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: 'artikel', count: 60, label: 'Hafıza Testi', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
-                    {type: 'listening', count: 60, label: 'İleri Dinleme', color: 'indigo', icon: '<i class="ph-fill ph-headphones"></i>'},
-                    {type: 'matching', count: 15, label: 'Zor Eşleştir', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'flashcards', count: 40, label: 'Son Tekrar', color: 'purple', icon: '<i class="ph-fill ph-book-open"></i>'},
-                    {type: 'writing', count: 50, label: 'İleri Yazma', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
-                    {type: 'dictation', count: 50, label: 'Zor Dikte', color: 'indigo', icon: '<i class="ph-fill ph-waveform"></i>'},
-                    {type: 'vocab', count: 200, label: 'Mega B1 Boss', color: 'amber', icon: '<i class="ph-fill ph-crown"></i>'}
+                    {type: 'video', count: 1, label: 'Almanca Video', color: 'rose', icon: '<i class="ph-fill ph-video-camera"></i>'},
+                    {type: 'listening', count: 10, label: 'Dinleme', color: 'indigo', icon: '<i class="ph-fill ph-headphones"></i>'},
+                    {type: 'speaking', count: 10, label: 'Konuşma Pratiği', color: 'teal', icon: '<i class="ph-fill ph-microphone"></i>'},
+                    {type: 'dictation', count: 10, label: 'Dikte', color: 'amber', icon: '<i class="ph-fill ph-waveform"></i>'}
                 ];
             } else {
                 nodes = [
-                    {type: choice, count: 40, label: 'Isınma', color: 'indigo', icon: '<i class="ph-fill ph-rocket"></i>'},
-                    {type: 'matching', count: 10, label: 'Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
-                    {type: 'dictation', count: 30, label: 'Dinle & Yaz', color: 'purple', icon: '<i class="ph-fill ph-waveform"></i>'},
-                    {type: choice, count: 60, label: 'Gelişme', color: 'indigo', icon: '<i class="ph-fill ph-rocket"></i>'},
-                    {type: 'vocab', count: 40, label: 'Kelime Testi', color: 'amber', icon: '<i class="ph-fill ph-star"></i>'},
-                    {type: choice, count: 80, label: 'Zorlu Bölüm', color: 'indigo', icon: '<i class="ph-fill ph-rocket"></i>'},
-                    {type: 'artikel', count: 50, label: 'Artikel', color: 'rose', icon: '<span class="font-black text-xl">ART</span>'},
-                    {type: choice, count: 150, label: 'Final Sınavı', color: 'teal', icon: '<i class="ph-fill ph-flag-checkered"></i>'}
+                    {type: 'flashcards', count: 10, label: 'Kelimeler', color: 'indigo', icon: '<i class="ph-fill ph-book-open"></i>'},
+                    {type: 'speaking', count: 10, label: 'Telaffuz', color: 'teal', icon: '<i class="ph-fill ph-microphone"></i>'},
+                    {type: 'matching', count: 5, label: 'Eşleştirme', color: 'amber', icon: '<i class="ph-fill ph-puzzle-piece"></i>'},
+                    {type: 'video', count: 1, label: 'Kısa Video', color: 'rose', icon: '<i class="ph-fill ph-video-camera"></i>'},
+                    {type: 'writing', count: 10, label: 'Yazma', color: 'purple', icon: '<i class="ph-fill ph-pencil-simple"></i>'},
+                    {type: 'vocab', count: 20, label: 'Bölüm Sonu', color: 'indigo', icon: '<i class="ph-fill ph-flag-checkered"></i>'}
                 ];
             }
 
             window.activePathNodes = nodes.map(n => ({...n, completed: false}));
             
-            let currentPct = window.stageProgress[window.activeStage];
+            let currentPct = window.stageProgress[window.activeStage] || 0;
             let completedCount = Math.floor((currentPct / 100) * window.activePathNodes.length);
             for(let i=0; i<completedCount; i++) {
                 if(window.activePathNodes[i]) window.activePathNodes[i].completed = true;
@@ -989,9 +712,9 @@
 
         window.renderDynamicPath = function() {
             const container = document.getElementById('path-nodes-container');
-            let html = `<div class="absolute w-4 bg-slate-200 top-10 bottom-10 -z-10 rounded-full shadow-inner"></div>`;
+            let html = `<div class="absolute w-2 md:w-3 bg-slate-100 top-4 bottom-10 -z-10 rounded-full shadow-inner"></div>`;
             
-            const positions = ['-translate-x-12 md:-translate-x-16', 'translate-x-0', 'translate-x-12 md:translate-x-16', 'translate-x-0'];
+            const positions = ['-translate-x-12 md:-translate-x-20', 'translate-x-0', 'translate-x-12 md:translate-x-20', 'translate-x-0'];
 
             window.activePathNodes.forEach((node, idx) => {
                 let posClass = positions[idx % 4];
@@ -1005,24 +728,25 @@
                 let displayIcon = node.icon;
                 
                 if (node.completed) {
-                    stateClass = 'node-completed'; 
-                    displayIcon = '<i class="ph-bold ph-check text-white"></i>'; 
+                    stateClass = 'node-completed shadow-md border-teal-200 p-0 overflow-hidden'; 
+                    displayIcon = `<img src="assets/nisanmutlu.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/14b8a6/ffffff?text=OK'" class="w-full h-full object-cover">`; 
+                    btnClassStr = 'bg-teal-50'; 
                 } else if (idx > window.currentPathNodeIndex) {
                     stateClass = 'node-locked'; 
                     clickAction = '';
-                    displayIcon = '<i class="ph-bold ph-lock-key text-slate-400"></i>';
-                    btnClassStr = 'bg-slate-200 border-slate-300 text-slate-400';
+                    displayIcon = '<i class="ph-bold ph-lock-key text-slate-300"></i>';
+                    btnClassStr = 'bg-slate-100 border-slate-200 text-slate-400';
                 } else if (idx === window.currentPathNodeIndex) {
-                    bounceClass = 'animate-bounce border-white border-[4px] ring-4 ring-indigo-200 shadow-xl'; 
+                    bounceClass = 'pulse-btn border-white border-[3px] shadow-lg'; 
                 }
 
                 html += `
-                    <div class="relative w-full flex justify-center mb-8">
-                        <div class="flex flex-col items-center transform ${posClass} transition-transform hover:scale-105">
-                            <div class="bg-white border border-slate-200 text-slate-700 font-bold px-4 md:px-5 py-2 rounded-[1rem] shadow-sm text-[11px] md:text-sm mb-3 text-center z-10 w-28 md:w-32">
-                                ${node.label}<br><span class="text-[10px] md:text-xs text-indigo-400 font-extrabold uppercase">${node.count} Soru</span>
+                    <div class="relative w-full flex justify-center mb-6">
+                        <div class="flex flex-col items-center transform ${posClass} transition-transform hover:-translate-y-1">
+                            <div class="bg-white border border-slate-200 text-slate-600 font-semibold px-4 py-1.5 rounded-xl shadow-sm text-[10px] md:text-xs mb-2 text-center z-10">
+                                ${node.label}
                             </div>
-                            <button onclick="${clickAction}" class="app-btn ${btnSize} rounded-[1.2rem] md:rounded-[1.5rem] shadow-md ${bounceClass} ${stateClass} ${btnClassStr}">
+                            <button onclick="${clickAction}" class="app-btn ${btnSize} rounded-[1.2rem] md:rounded-[1.5rem] shadow-sm ${bounceClass} ${stateClass} ${btnClassStr}">
                                 ${displayIcon}
                             </button>
                         </div>
@@ -1037,9 +761,7 @@
             if (window.activePathNodes.every(n => n.completed)) pct = 100;
             
             const progBar = document.getElementById('path-main-progress');
-            const progPct = document.getElementById('path-main-pct');
             if(progBar) progBar.style.width = `${pct}%`;
-            if(progPct) progPct.innerText = pct;
             window.stageProgress[window.activeStage] = pct;
             window.saveProgress();
         };
@@ -1049,22 +771,7 @@
             keys.forEach(k => {
                 let bar = document.getElementById(`prog-bar-${k}`);
                 if(bar) bar.style.width = `${window.stageProgress[k]}%`;
-                let pctTxt = document.getElementById(`pct-${k}`);
-                if(pctTxt) pctTxt.innerText = window.stageProgress[k];
             });
-        };
-
-        window.updateTopBar = function() {
-            const el1 = document.getElementById('xp-counter');
-            const el2 = document.getElementById('profile-xp');
-            const el3 = document.getElementById('hearts-counter');
-            const el4 = document.getElementById('session-hearts');
-
-            if(el1) el1.innerText = window.totalXP;
-            if(el2) el2.innerText = window.totalXP;
-            if(el3) el3.innerText = window.totalXP; // Hearts elementine yanlışlıkla XP yazmışım aşağıda da düzelttim
-            if(el3) el3.innerText = window.hearts;
-            if(el4) el4.innerText = window.hearts;
         };
 
         // ================= OYUN MOTORU & STATE =================
@@ -1079,10 +786,7 @@
 
         window.startSession = function(type, count, nodeIdx) {
             if(window.hearts <= 0) {
-                alert("Canın bitti! Devam etmen için sana ekstra can veriyorum."); 
-                window.hearts = 10; 
-                window.updateTopBar();
-                window.saveProgress();
+                alert("Canın bitti! Devam etmen için sana ekstra can veriyorum."); window.hearts = 10; window.updateTopBar(); window.saveProgress();
             }
             sessionType = type;
             activeSessionNodeIdx = nodeIdx;
@@ -1104,13 +808,34 @@
             document.getElementById('view-learning-path').classList.remove('hidden');
         };
 
+        function generateQuestions(type, amount) {
+            let questions = [];
+            if(type === 'video') { return [{type: 'video'}]; }
+            
+            let activePoolData = dbContent[window.activeStage] || dbContent['b1_1']; 
+            if(type === 'grammar') {
+                activePoolData = dbContent['gramer'];
+            } else if(type === 'artikel' || type === 'writing') {
+                activePoolData = activePoolData.filter(item => item.article !== '-');
+            }
+
+            let pool = [...activePoolData];
+            for(let i=0; i<amount; i++) {
+                if(pool.length === 0) pool = [...activePoolData]; 
+                let randIdx = Math.floor(Math.random() * pool.length);
+                questions.push(pool.splice(randIdx, 1)[0]);
+            }
+            return questions;
+        }
+
         window.loadQuestion = function() {
             selectedOptionBtn = null;
             matchSelections = [];
             document.getElementById('btn-check').disabled = true;
             document.getElementById('btn-check').classList.remove('hidden');
             document.getElementById('feedback-sheet').classList.remove('show');
-            
+            document.getElementById('session-avatars').style.display = 'flex'; 
+
             let q = sessionQuestions[currentQIndex];
             const content = document.getElementById('session-content');
             content.innerHTML = ''; 
@@ -1118,93 +843,113 @@
             let mode = sessionType;
             window.setAvatars(mode);
 
-            // --- 0. GRAMER ---
-            if(mode === 'grammar') {
-                document.getElementById('btn-check').innerText = "Kontrol Et";
-                let textParts = q.text.split('___');
+            // --- 0. VIDEO (YENİ MOD) ---
+            if(mode === 'video') {
+                document.getElementById('session-avatars').style.display = 'none'; 
+                document.getElementById('btn-check').innerText = "İzledim & Anladım";
+                document.getElementById('btn-check').disabled = false;
                 
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold text-slate-800 mb-4 text-center mt-4">Almanca Dinleme Pratiği</h2>
+                    <p class="text-sm text-slate-500 mb-6 text-center">Aşağıdaki kısa eğitim videosunu izle. Konuşmaları anlamaya çalış.</p>
+                    <div class="video-container w-full max-w-lg mx-auto">
+                        <iframe src="https://www.youtube.com/embed/sYjbGU6MAQY" title="German Learning Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                `;
+            }
+            // --- 0.1 SPEAKING (YENİ MOD) ---
+            else if(mode === 'speaking') {
+                document.getElementById('btn-check').innerText = "Geç (Mikrofon Yoksa)";
+                document.getElementById('btn-check').disabled = false; 
                 content.innerHTML = `
                     <div class="w-full flex items-center gap-4 mb-8 mt-4">
                         <div class="border border-slate-200 rounded-[2rem] p-6 text-center w-full relative bg-slate-50 shadow-inner">
-                            <span class="text-2xl md:text-3xl font-black text-slate-800 tracking-tight leading-relaxed">
-                                ${textParts[0]}<span class="text-indigo-500 underline decoration-4 underline-offset-4">_____</span>${textParts[1]}
+                            <span class="text-sm font-semibold uppercase tracking-widest text-slate-400 block mb-1">Bunu Sesli Oku:</span>
+                            <span class="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">${q.word}</span>
+                        </div>
+                    </div>
+                    <div class="w-full text-center">
+                        <button id="mic-btn" onclick="window.startListening()" class="w-20 h-20 bg-teal-50 text-teal-500 rounded-full text-4xl mx-auto flex items-center justify-center border border-teal-200 shadow-sm active:translate-y-1 transition-colors">
+                            <i class="ph-fill ph-microphone"></i>
+                        </button>
+                        <p id="speech-result" class="text-sm font-medium text-slate-500 mt-4 h-6">Mikrofona dokun ve konuş...</p>
+                    </div>
+                `;
+            }
+            // --- 1. GRAMER ---
+            else if(mode === 'grammar') {
+                document.getElementById('btn-check').innerText = "Kontrol Et";
+                let textParts = q.text.split('___');
+                content.innerHTML = `
+                    <div class="w-full flex items-center gap-4 mb-6 mt-2">
+                        <div class="border border-slate-200 rounded-3xl p-5 text-center w-full relative bg-white shadow-sm">
+                            <span class="text-lg md:text-xl font-bold text-slate-700 leading-relaxed">
+                                ${textParts[0]}<span class="text-indigo-500 underline decoration-2 underline-offset-4 mx-1">_____</span>${textParts[1]}
                             </span>
                         </div>
                     </div>
-                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full"></div>
+                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full"></div>
                 `;
-                
                 const grid = document.getElementById('options-grid');
                 let opts = [...q.options].sort(() => Math.random() - 0.5);
                 opts.forEach(opt => {
                     let btn = document.createElement('button');
-                    btn.className = "opt-btn py-4 px-4 w-full flex items-center justify-center text-center text-sm md:text-base";
+                    btn.className = "opt-btn py-3 px-4 w-full flex items-center justify-center text-center text-sm";
                     btn.innerText = opt;
                     btn.dataset.correct = (opt === q.answer);
                     btn.onclick = () => window.selectOption(btn);
                     grid.appendChild(btn);
                 });
             }
-            // --- 1. EZBER (FLASHCARDS) ---
+            // --- 2. EZBER (FLASHCARDS) ---
             else if(mode === 'flashcards') {
                 document.getElementById('btn-check').innerText = "Sonraki";
                 document.getElementById('btn-check').disabled = false;
                 content.innerHTML = `
-                    <div class="bg-white border border-slate-200 rounded-[2rem] p-8 w-full text-center shadow-md transform transition-transform hover:-translate-y-1 mt-4">
-                        <button onclick="window.speakWord('${q.word}')" class="mb-6 w-20 h-20 bg-indigo-50 text-indigo-500 rounded-full text-4xl mx-auto flex items-center justify-center speaker-btn border border-indigo-100 shadow-sm active:translate-y-1">
+                    <div class="bg-white border border-slate-200 rounded-3xl p-6 w-full text-center shadow-sm mt-2">
+                        <button onclick="window.speakWord('${q.word}')" class="mb-4 w-16 h-16 bg-indigo-50 text-indigo-500 rounded-full text-3xl mx-auto flex items-center justify-center speaker-btn border border-indigo-100 shadow-sm active:translate-y-1">
                             <i class="ph-fill ph-speaker-high"></i>
                         </button>
-                        <p class="text-lg font-extrabold uppercase tracking-widest text-slate-400 mb-1">${q.article === '-' ? '' : q.article}</p>
-                        <h2 class="text-4xl md:text-5xl font-black text-slate-800 mb-8 tracking-tight">${q.word}</h2>
-                        <div class="border-t-2 border-dashed border-slate-100 pt-6">
-                            <p class="text-2xl font-bold text-teal-600">${q.tr}</p>
+                        <p class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-1">${q.article === '-' ? '' : q.article}</p>
+                        <h2 class="text-3xl font-black text-slate-800 mb-6 tracking-tight">${q.word}</h2>
+                        <div class="border-t border-dashed border-slate-200 pt-4">
+                            <p class="text-xl font-bold text-teal-600">${q.tr}</p>
                         </div>
                     </div>
                 `;
                 window.speakWord(q.word);
             }
-            // --- 2. DINLEME (LISTENING) ---
+            // --- 3. DINLEME (LISTENING) ---
             else if(mode === 'listening') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 content.innerHTML = `
-                    <button onclick="window.speakWord('${q.word}')" class="mt-4 mb-8 w-20 h-20 md:w-24 md:h-24 bg-indigo-500 text-white rounded-full text-4xl md:text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-indigo-500/40 active:translate-y-1">
+                    <button onclick="window.speakWord('${q.word}')" class="mt-4 mb-6 w-20 h-20 bg-indigo-500 text-white rounded-full text-4xl mx-auto flex items-center justify-center speaker-btn shadow-md shadow-indigo-500/30 active:translate-y-1">
                         <i class="ph-fill ph-speaker-high"></i>
                     </button>
-                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full"></div>
+                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full"></div>
                 `;
                 window.speakWord(q.word);
                 window.generateOptions(q, 'options-grid');
             }
-            // --- 3. YAZMA (WRITING) ---
-            else if(mode === 'writing') {
+            // --- 4. YAZMA (WRITING) ---
+            else if(mode === 'writing' || mode === 'dictation') {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
                 document.getElementById('btn-check').disabled = false; 
+                
+                let topContent = '';
+                if(mode === 'dictation') {
+                    topContent = `<button onclick="window.speakWord('${q.word}')" class="mb-6 w-16 h-16 bg-purple-500 text-white rounded-full text-3xl mx-auto flex items-center justify-center speaker-btn shadow-md shadow-purple-500/30 active:translate-y-1"><i class="ph-fill ph-waveform"></i></button>`;
+                    window.speakWord(q.word);
+                } else {
+                    topContent = `<div class="border border-slate-200 rounded-3xl p-5 text-center w-full relative bg-slate-50 shadow-inner mb-6"><span class="text-xl font-bold text-slate-800">${q.tr}</span></div>`;
+                }
+
                 content.innerHTML = `
-                    <div class="w-full flex items-center gap-4 mb-8 mt-4">
-                        <div class="border border-slate-200 rounded-[2rem] p-6 text-center w-full relative bg-slate-50 shadow-inner">
-                            <span class="text-2xl sm:text-3xl font-black text-slate-800">${q.tr}</span>
-                        </div>
-                    </div>
-                    <div class="w-full relative">
-                        <input type="text" id="write-input" placeholder="Artikel ile birlikte (Örn: der Tisch)" autocomplete="off" autocorrect="off" class="w-full border-2 border-slate-200 border-b-4 rounded-[1.5rem] px-6 py-5 font-bold text-slate-800 outline-none focus:border-indigo-400 bg-white text-xl sm:text-2xl text-center shadow-sm transition-colors">
+                    <div class="w-full flex flex-col items-center mt-2">
+                        ${topContent}
+                        <input type="text" id="write-input" placeholder="${mode === 'dictation' ? 'Duyduğunu yaz' : 'Almancasını yaz (örn: der Tisch)'}" autocomplete="off" autocorrect="off" class="w-full border border-slate-300 rounded-2xl px-5 py-4 font-semibold text-slate-800 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 bg-white text-lg text-center shadow-sm transition-all">
                     </div>
                 `;
-                setTimeout(() => { const el = document.getElementById('write-input'); if(el) el.focus(); }, 100);
-                document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') window.checkAnswer(); });
-            }
-            // --- 4. DİNLE & YAZ (DICTATION) ---
-            else if(mode === 'dictation') {
-                document.getElementById('btn-check').innerText = "Kontrol Et";
-                document.getElementById('btn-check').disabled = false; 
-                content.innerHTML = `
-                    <button onclick="window.speakWord('${q.word}')" class="mt-4 mb-8 w-20 h-20 md:w-24 md:h-24 bg-purple-500 text-white rounded-full text-4xl md:text-5xl mx-auto flex items-center justify-center speaker-btn shadow-lg shadow-purple-500/40 active:translate-y-1">
-                        <i class="ph-fill ph-waveform"></i>
-                    </button>
-                    <div class="w-full relative">
-                        <input type="text" id="write-input" placeholder="Duyduğun kelimeyi yaz" autocomplete="off" autocorrect="off" class="w-full border-2 border-slate-200 border-b-4 rounded-[1.5rem] px-6 py-5 font-bold text-slate-800 outline-none focus:border-indigo-400 bg-white text-xl sm:text-2xl text-center shadow-sm transition-colors">
-                    </div>
-                `;
-                window.speakWord(q.word);
                 setTimeout(() => { const el = document.getElementById('write-input'); if(el) el.focus(); }, 100);
                 document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') window.checkAnswer(); });
             }
@@ -1218,59 +963,101 @@
                     let w = pool[Math.floor(Math.random() * pool.length)];
                     if(!pairs.includes(w)) pairs.push(w);
                 }
-                
                 let buttonsHTML = [];
                 pairs.forEach((p, idx) => {
                     let dispWord = p.article === '-' ? p.word : `${p.article} ${p.word}`;
-                    buttonsHTML.push(`<button onclick="window.selectMatch(this, 'de', ${idx})" class="opt-btn py-3 md:py-4 px-2 w-full text-center text-sm sm:text-base font-bold shadow-sm">${dispWord}</button>`);
-                    buttonsHTML.push(`<button onclick="window.selectMatch(this, 'tr', ${idx})" class="opt-btn py-3 md:py-4 px-2 w-full text-center text-sm sm:text-base font-bold shadow-sm">${p.tr}</button>`);
+                    buttonsHTML.push(`<button onclick="window.selectMatch(this, 'de', ${idx})" class="opt-btn py-3 px-2 w-full text-center text-sm font-semibold shadow-sm">${dispWord}</button>`);
+                    buttonsHTML.push(`<button onclick="window.selectMatch(this, 'tr', ${idx})" class="opt-btn py-3 px-2 w-full text-center text-sm font-semibold shadow-sm">${p.tr}</button>`);
                 });
-                
                 buttonsHTML.sort(() => Math.random() - 0.5);
-                content.innerHTML += `<div class="grid grid-cols-2 gap-3 md:gap-4 w-full mt-2" id="matching-grid">${buttonsHTML.join('')}</div>`;
+                content.innerHTML += `<div class="grid grid-cols-2 gap-3 w-full mt-2" id="matching-grid">${buttonsHTML.join('')}</div>`;
                 content.dataset.pairsFound = 0;
             }
-            // --- 6. ARTIKEL SEÇİMİ ---
-            else if(mode === 'artikel') {
-                document.getElementById('btn-check').innerText = "Kontrol Et";
-                content.innerHTML = `
-                    <div class="w-full flex flex-col items-center mb-8 mt-4 bg-white border border-slate-100 rounded-[2rem] p-6 shadow-sm">
-                        <span class="text-xl font-bold uppercase tracking-widest text-slate-300 block mb-1">___</span>
-                        <span class="text-3xl md:text-5xl font-black text-slate-800 text-center tracking-tight">${q.word}</span>
-                        <span class="text-sm md:text-base font-bold text-indigo-500 mt-4 bg-indigo-50 border border-indigo-100 px-4 py-1.5 rounded-full">${q.tr}</span>
-                    </div>
-                    <div id="options-grid" class="grid grid-cols-3 gap-3 md:gap-4 w-full"></div>
-                `;
-                
-                const artikels = ['der', 'die', 'das'];
-                const grid = document.getElementById('options-grid');
-                artikels.forEach(art => {
-                    let btn = document.createElement('button');
-                    btn.className = "opt-btn py-6 md:py-8 px-2 w-full text-xl sm:text-2xl font-black uppercase tracking-wider text-center";
-                    btn.innerText = art;
-                    btn.dataset.correct = (art === q.article);
-                    btn.onclick = () => window.selectOption(btn);
-                    grid.appendChild(btn);
-                });
-            }
-            // --- 7. KLASİK VOCAB (OKUMA/ANLAM) ---
+            // --- 6. KLASİK VOCAB / ARTIKEL ---
             else {
                 document.getElementById('btn-check').innerText = "Kontrol Et";
-                let dispArticle = q.article === '-' ? '' : `<span class="text-sm md:text-base font-bold uppercase tracking-[0.2em] text-slate-400 block mb-1">${q.article}</span>`;
-                content.innerHTML = `
-                    <div class="w-full flex items-center gap-4 mb-8 mt-4">
-                        <div class="border border-slate-200 rounded-[2rem] p-6 text-center w-full relative bg-slate-50 shadow-inner">
-                            ${dispArticle}
-                            <span class="text-2xl md:text-4xl font-black text-slate-800 tracking-tight">${q.word}</span>
+                let isArtikel = mode === 'artikel';
+                
+                if(isArtikel) {
+                    content.innerHTML = `
+                        <div class="w-full flex flex-col items-center mb-6 mt-2 bg-white border border-slate-100 rounded-3xl p-5 shadow-sm">
+                            <span class="text-sm font-bold uppercase tracking-widest text-slate-300 block mb-1">___</span>
+                            <span class="text-3xl font-black text-slate-800 text-center tracking-tight">${q.word}</span>
+                            <span class="text-xs font-bold text-indigo-500 mt-3 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">${q.tr}</span>
                         </div>
-                        <button onclick="window.speakWord('${q.word}')" class="w-14 h-14 md:w-16 md:h-16 bg-indigo-100 text-indigo-500 rounded-[1rem] md:rounded-[1.2rem] text-2xl flex items-center justify-center shrink-0 border border-indigo-200 active:translate-y-1 transition-transform">
-                            <i class="ph-fill ph-speaker-high"></i>
-                        </button>
-                    </div>
-                    <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full"></div>
-                `;
-                window.generateOptions(q, 'options-grid');
+                        <div id="options-grid" class="grid grid-cols-3 gap-3 w-full"></div>
+                    `;
+                    const artikels = ['der', 'die', 'das'];
+                    const grid = document.getElementById('options-grid');
+                    artikels.forEach(art => {
+                        let btn = document.createElement('button');
+                        btn.className = "opt-btn py-5 px-2 w-full text-xl font-bold uppercase tracking-wider text-center";
+                        btn.innerText = art; btn.dataset.correct = (art === q.article);
+                        btn.onclick = () => window.selectOption(btn); grid.appendChild(btn);
+                    });
+                } else {
+                    let dispArticle = q.article === '-' ? '' : `<span class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 block mb-1">${q.article}</span>`;
+                    content.innerHTML = `
+                        <div class="w-full flex items-center gap-3 mb-6 mt-2">
+                            <div class="border border-slate-200 rounded-3xl p-5 text-center w-full relative bg-slate-50 shadow-inner">
+                                ${dispArticle}
+                                <span class="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">${q.word}</span>
+                            </div>
+                            <button onclick="window.speakWord('${q.word}')" class="w-14 h-14 bg-indigo-100 text-indigo-500 rounded-2xl text-2xl flex items-center justify-center shrink-0 border border-indigo-200 active:translate-y-1 transition-transform">
+                                <i class="ph-fill ph-speaker-high"></i>
+                            </button>
+                        </div>
+                        <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full"></div>
+                    `;
+                    window.generateOptions(q, 'options-grid');
+                }
             }
+        };
+
+        window.startListening = function() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Tarayıcınız mikrofon desteklemiyor. Lütfen atla butonunu kullanın.");
+                return;
+            }
+            
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'de-DE';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            const micBtn = document.getElementById('mic-btn');
+            const resultText = document.getElementById('speech-result');
+            
+            micBtn.classList.add('animate-pulse', 'bg-rose-500', 'text-white');
+            micBtn.classList.remove('bg-teal-50', 'text-teal-500');
+            resultText.innerText = "Dinleniyor...";
+
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript.toLowerCase();
+                const expected = sessionQuestions[currentQIndex].word.toLowerCase();
+                resultText.innerText = `Duyulan: "${speechResult}"`;
+
+                if (speechResult.includes(expected) || expected.includes(speechResult) || expected.replace(/[^a-zäöüß]/g, '') === speechResult.replace(/[^a-zäöüß]/g, '')) {
+                    document.getElementById('btn-check').disabled = false;
+                    window.speechMatch = true;
+                    micBtn.classList.replace('bg-rose-500', 'bg-teal-500');
+                } else {
+                    document.getElementById('btn-check').disabled = false;
+                    window.speechMatch = false;
+                    micBtn.classList.remove('bg-rose-500', 'text-white');
+                    micBtn.classList.add('bg-teal-50', 'text-teal-500');
+                }
+                micBtn.classList.remove('animate-pulse');
+            };
+
+            recognition.onerror = function(event) {
+                micBtn.classList.remove('animate-pulse', 'bg-rose-500', 'text-white');
+                micBtn.classList.add('bg-teal-50', 'text-teal-500');
+                resultText.innerText = "Ses anlaşılamadı, tekrar dokun.";
+            };
         };
 
         window.generateOptions = function(q, gridId) {
@@ -1284,7 +1071,7 @@
             const grid = document.getElementById(gridId);
             options.forEach(opt => {
                 let btn = document.createElement('button');
-                btn.className = "opt-btn py-3 md:py-4 px-4 w-full flex items-center justify-center text-center text-sm md:text-base";
+                btn.className = "opt-btn py-3 px-4 w-full flex items-center justify-center text-center text-sm md:text-base";
                 btn.innerText = opt.tr;
                 btn.dataset.correct = (opt === q);
                 btn.onclick = () => { window.selectOption(btn); if(sessionType === 'listening') window.speakWord(opt.word); };
@@ -1328,7 +1115,7 @@
                     window.playWrongSound(); window.reactNisan(false); 
                     window.hearts--; window.updateTopBar(); window.saveProgress();
                     
-                    sessionQuestions.push(sessionQuestions[currentQIndex]); // Spaced Repetition
+                    sessionQuestions.push(sessionQuestions[currentQIndex]); 
                     
                     setTimeout(() => {
                         first.btn.classList.remove('wrong'); second.btn.classList.remove('wrong');
@@ -1344,8 +1131,27 @@
             let mode = sessionType;
             let q = sessionQuestions[currentQIndex];
 
+            if(mode === 'video') {
+                correctAnswersCount++; window.nextQuestion(); return;
+            }
+
             if(mode === 'flashcards') {
                 correctAnswersCount++; window.nextQuestion(); return;
+            }
+
+            if(mode === 'speaking') {
+                document.getElementById('btn-check').disabled = true;
+                if(window.speechMatch === true) {
+                    correctAnswersCount++; window.playCorrectSound(); window.reactNisan(true);
+                    window.showFeedback(true, "Harika Telaffuz!", "Çok iyi söyledin.");
+                } else {
+                    if(window.speechMatch === undefined) { window.nextQuestion(); return; }
+                    window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
+                    window.showFeedback(false, "Yanlış Telaffuz", `Okunması gereken: ${q.word}`);
+                    sessionQuestions.push(q);
+                }
+                window.speechMatch = undefined;
+                return;
             }
 
             if(mode === 'writing' || mode === 'dictation') {
@@ -1362,12 +1168,12 @@
 
                 if(isCorrectStr) {
                     correctAnswersCount++; window.playCorrectSound(); window.reactNisan(true);
-                    window.showFeedback(true, "Harika!", "Doğru yazdın.");
+                    window.showFeedback(true, "Mükemmel!", "Kusursuz yazdın.");
                 } else {
                     window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
                     let corr = q.article === '-' ? q.word : `${q.article} ${q.word}`;
                     window.showFeedback(false, "Yanlış!", `Doğrusu: ${corr}`);
-                    sessionQuestions.push(q); // Spaced Repetition
+                    sessionQuestions.push(q); 
                 }
                 return;
             }
@@ -1388,8 +1194,8 @@
                 
                 document.querySelectorAll('.opt-btn').forEach(b => { if(b.dataset.correct === "true") b.classList.add('correct'); });
                 let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : (mode === 'grammar' ? `Doğrusu: ${q.answer}` : `Doğrusu: ${q.tr}`);
-                window.showFeedback(false, "Yanlış!", desc);
-                sessionQuestions.push(q); // Spaced Repetition
+                window.showFeedback(false, "Hatalı!", desc);
+                sessionQuestions.push(q); 
             }
         };
 
@@ -1407,18 +1213,18 @@
             icon.style.borderColor = isCorrect ? '#ccfbf1' : '#ffe4e6';
 
             title.innerText = titleText;
-            title.className = `text-2xl font-black mb-1 ${isCorrect ? 'text-teal-700' : 'text-rose-700'}`;
+            title.className = `text-xl font-bold mb-0.5 tracking-tight ${isCorrect ? 'text-teal-700' : 'text-rose-700'}`;
             
             if(!isCorrect) {
-                desc.innerHTML = `${descText} <br><span class="text-xs mt-1 block opacity-80 font-medium">Öğrenene kadar tekrar sorulacak.</span>`;
+                desc.innerHTML = `${descText} <br><span class="text-[10px] mt-1 block opacity-80 font-medium">Öğrenene kadar tekrar sorulacak.</span>`;
             } else {
-                let extra = sessionType === 'grammar' ? `<br><span class="text-xs mt-1 block opacity-80 font-medium">${sessionQuestions[currentQIndex].tr}</span>` : '';
+                let extra = sessionType === 'grammar' ? `<br><span class="text-[10px] mt-1 block opacity-80 font-medium">${sessionQuestions[currentQIndex].tr}</span>` : '';
                 desc.innerHTML = descText + extra;
             }
-            desc.className = `font-bold ${isCorrect ? 'text-teal-600' : 'text-rose-600'}`;
+            desc.className = `text-sm font-medium ${isCorrect ? 'text-teal-600' : 'text-rose-600'}`;
             
             nextBtn.innerText = isCorrect ? "Devam Et" : "Anladım";
-            nextBtn.className = `app-btn w-full md:w-48 py-4 text-lg shadow-sm ${isCorrect ? 'btn-teal' : 'btn-rose'}`;
+            nextBtn.className = `app-btn w-full md:w-40 py-3 text-base shadow-sm ${isCorrect ? 'btn-teal' : 'btn-rose'}`;
             
             sheet.classList.add('show');
         };
@@ -1452,9 +1258,9 @@
             let xpGained = correctAnswersCount * 5; 
             window.totalXP += xpGained;
             
-            activePathNodes[activeSessionNodeIdx].completed = true;
+            window.activePathNodes[window.activeSessionNodeIdx].completed = true;
             
-            let hasNextNode = activePathNodes.findIndex(n => !n.completed) !== -1;
+            let hasNextNode = window.activePathNodes.findIndex(n => !n.completed) !== -1;
             const btnNextLvl = document.getElementById('btn-next-level');
             if(hasNextNode) { btnNextLvl.style.display = 'flex'; } else { btnNextLvl.style.display = 'none'; }
 
@@ -1476,14 +1282,88 @@
             window.updateDashboardProgress();
 
             if (isNextLevel) {
-                currentPathNodeIndex = activePathNodes.findIndex(n => !n.completed);
-                if (currentPathNodeIndex !== -1) {
-                    let nextNode = activePathNodes[currentPathNodeIndex];
+                window.currentPathNodeIndex = window.activePathNodes.findIndex(n => !n.completed);
+                if (window.currentPathNodeIndex !== -1) {
+                    let nextNode = window.activePathNodes[window.currentPathNodeIndex];
                     window.renderDynamicPath(); 
-                    setTimeout(() => { window.startSession(nextNode.type, nextNode.count, currentPathNodeIndex); }, 500); 
+                    setTimeout(() => { window.startSession(nextNode.type, nextNode.count, window.currentPathNodeIndex); }, 500); 
                 }
             } else {
                 window.renderDynamicPath();
+            }
+        };
+
+    </script>
+
+    <!-- GÜVENLİ FIREBASE MODÜLÜ -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        let auth = null, db = null, appId = 'default', currentUser = null;
+
+        window.firebaseLoginHook = async function() {
+            try {
+                // Not: Güvenlik için token kontrolü veya anonim giriş yapılıyor.
+                // Firebase modülü dışarıya aktarılıyor, eğer sorun çıkarsa Catch'e düşer ve lokal devam eder.
+                const firebaseConfig = typeof window.__firebase_config !== 'undefined' ? JSON.parse(window.__firebase_config) : null;
+                
+                if (!firebaseConfig) throw new Error("Firebase config bulunamadı.");
+
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app); 
+                db = getFirestore(app);
+                appId = typeof window.__app_id !== 'undefined' ? window.__app_id : 'b1kamp-default';
+                
+                let customToken = typeof window.__initial_auth_token !== 'undefined' ? window.__initial_auth_token : null;
+                if (customToken) { 
+                    await signInWithCustomToken(auth, customToken); 
+                } else { 
+                    await signInAnonymously(auth); 
+                }
+
+                return new Promise((resolve) => {
+                    onAuthStateChanged(auth, async (userObj) => {
+                        if(userObj) {
+                            currentUser = userObj;
+                            // Buluttan veriyi çek
+                            const docRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
+                            const docSnap = await getDoc(docRef);
+                            if (docSnap.exists()) {
+                                const data = docSnap.data();
+                                window.totalXP = data.totalXP !== undefined ? data.totalXP : window.totalXP;
+                                window.hearts = data.hearts !== undefined ? data.hearts : window.hearts;
+                                window.stageProgress = data.stageProgress || window.stageProgress;
+                                window.selectedGoal = data.selectedGoal || window.selectedGoal;
+                            }
+                            
+                            // Save metodunu Override et (Buluta kaydetsin)
+                            const originalSave = window.saveProgress;
+                            window.saveProgress = async function() {
+                                originalSave(); // Önce locale yaz
+                                try {
+                                    const updateRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'b1kamp', 'progress');
+                                    await setDoc(updateRef, {
+                                        totalXP: window.totalXP,
+                                        hearts: window.hearts,
+                                        stageProgress: window.stageProgress,
+                                        selectedGoal: window.selectedGoal
+                                    }, { merge: true });
+                                } catch(e){}
+                            };
+                            
+                            const syncText = document.getElementById('cloud-sync-text');
+                            if(syncText) {
+                                syncText.innerText = "Bulut senkronizasyonu aktif!";
+                                syncText.classList.replace('text-indigo-400', 'text-teal-500');
+                            }
+                        }
+                        resolve();
+                    });
+                });
+            } catch(e) {
+                console.warn("Firebase Bulut Sistemi başlatılamadı, Lokal modda çalışılıyor.", e);
             }
         };
     </script>
