@@ -48,6 +48,7 @@
         .btn-indigo { background: var(--c-indigo); border-color: var(--c-indigo-dark); color: white; }
         .btn-indigo:hover:not(:disabled) { background: #5a5ce6; }
         .btn-rose { background: var(--c-rose); border-color: var(--c-rose-dark); color: white; }
+        .btn-rose:hover:not(:disabled) { background: #e11d48; }
         .btn-amber { background: var(--c-amber); border-color: var(--c-amber-dark); color: white; }
         .btn-purple { background: var(--c-purple); border-color: var(--c-purple-dark); color: white; }
         .btn-white { background: #ffffff; border-color: #e2e8f0; color: var(--c-indigo); }
@@ -62,6 +63,14 @@
         .opt-btn.selected { border-color: var(--c-indigo); background: #eef2ff; color: var(--c-indigo-dark); }
         .opt-btn.correct { border-color: var(--c-teal); background: #f0fdfa; color: var(--c-teal-dark); }
         .opt-btn.wrong { border-color: var(--c-rose); background: #fff1f2; color: var(--c-rose-dark); }
+
+        .survey-btn {
+            display: flex; align-items: center; gap: 1rem; background: #ffffff; border: 1px solid #e2e8f0; border-bottom-width: 3px; border-radius: 16px;
+            color: #475569; font-weight: 600; font-size: 1rem; transition: all 0.15s; cursor: pointer;
+            padding: 1rem; margin-bottom: 1rem; width: 100%; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+        }
+        .survey-btn:active { border-bottom-width: 1px; transform: translateY(2px); }
+        .survey-btn:hover { background-color: #f8fafc; border-color: #cbd5e1; }
 
         .bottom-sheet { position: fixed; bottom: -100%; left: 0; right: 0; transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 50; box-shadow: 0 -10px 25px rgba(0,0,0,0.03); border-top-left-radius: 24px; border-top-right-radius: 24px; }
         .bottom-sheet.show { bottom: 0; }
@@ -95,6 +104,26 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.03); max-width: 80%; line-height: 1.4;
         }
 
+        .guarantee-badge {
+            background: linear-gradient(135deg, var(--c-amber) 0%, #f97316 100%);
+            color: white; padding: 0.4rem 1rem; border-radius: 99px;
+            font-weight: 800; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.3rem;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); border: 2px solid #fff;
+        }
+
+        .word-bank-btn {
+            background: #ffffff; border: 2px solid #e2e8f0; border-bottom-width: 4px; border-radius: 12px;
+            color: #334155; font-weight: 600; font-size: 1rem; padding: 0.5rem 1rem;
+            cursor: pointer; transition: all 0.1s; display: inline-block; margin: 0.25rem;
+        }
+        .word-bank-btn:active { border-bottom-width: 2px; transform: translateY(2px); }
+        .word-bank-btn.used { background: #f1f5f9; color: transparent; border-color: #f1f5f9; pointer-events: none; }
+        
+        .sentence-slot {
+            min-height: 3rem; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem;
+            border-bottom: 2px dashed #cbd5e1; margin-bottom: 1rem; align-items: center;
+        }
     </style>
 </head>
 <body class="h-screen w-full flex flex-col md:flex-row overflow-hidden relative">
@@ -102,28 +131,28 @@
     <!-- YÜKLEME EKRANI -->
     <div id="loader">
         <div class="chat-bubble bg-white border border-slate-200 text-slate-700 rounded-3xl rounded-br-none mb-6 shadow-sm">
-            <p class="text-center text-lg font-bold">"Für dich, Baby"<br><span class="text-slate-400 text-sm font-medium">-Talha</span></p>
+            <p class="text-center text-lg font-bold">"Seni B1 yapacağım!"<br><span class="text-slate-400 text-sm font-medium">-Talha</span></p>
         </div>
         <img src="assets/talhaarkaplansiz.png" alt="Talha" onerror="this.onerror=null; this.src='https://placehold.co/150x150/6366f1/ffffff?text=Talha'" class="h-32 md:h-40 object-contain mb-8 drop-shadow-lg">
         <div class="w-64 h-2 bg-slate-200 rounded-full overflow-hidden mb-8 shadow-inner">
             <div id="loader-progress" class="h-full bg-indigo-500 rounded-full w-0 transition-all duration-[2.5s] ease-in-out"></div>
         </div>
-        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/400x100/ffffff/6366f1?text=Talha+Ozturk'" class="h-24 md:h-32 object-contain opacity-80">
-        <p id="cloud-sync-text" class="text-indigo-400 font-medium text-sm mt-4 animate-pulse hidden">Bağlantı kuruluyor...</p>
+        <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/400x100/ffffff/6366f1?text=Talha+Ozturk'" class="h-32 md:h-40 object-contain opacity-80">
     </div>
 
     <!-- EKRAN 0: LOGIN -->
     <section id="screen-login" class="screen active flex-col flex-1 absolute inset-0 z-[60] items-center justify-center p-6 text-center" style="background: radial-gradient(circle at center, #ffffff 0%, var(--bg-main) 100%);">
         <div class="max-w-sm w-full bg-white border border-slate-100 rounded-3xl p-8 shadow-lg">
+            <div class="mb-6 flex justify-center"><div class="guarantee-badge"><i class="ph-fill ph-seal-check text-lg"></i> %100 Başarı Kampı</div></div>
             <img src="assets/imzatalhaozturk.png" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/300x80/6366f1/ffffff?text=Akademi'" class="h-12 mx-auto mb-8 object-contain">
             <h2 class="text-xl font-bold text-slate-700 mb-6 tracking-wide">Öğrenci Girişi</h2>
             
-            <input type="text" id="login-user" placeholder="Hesap Adı" autocomplete="off" class="w-full border border-slate-200 rounded-xl px-4 py-3 mb-4 font-medium text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white transition-all text-center">
-            <input type="password" id="login-pass" placeholder="Şifre" autocomplete="off" class="w-full border border-slate-200 rounded-xl px-4 py-3 mb-6 font-medium text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white transition-all text-center">
+            <input type="text" id="login-user" placeholder="Hesap Adı (nisan)" autocomplete="off" class="w-full border border-slate-200 rounded-xl px-4 py-3 mb-4 font-medium text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white transition-all text-center">
+            <input type="password" id="login-pass" placeholder="Şifre (talha)" autocomplete="off" class="w-full border border-slate-200 rounded-xl px-4 py-3 mb-6 font-medium text-slate-700 outline-none focus:border-indigo-400 bg-slate-50 focus:bg-white transition-all text-center">
             
             <p id="login-error" class="text-rose-500 font-medium text-sm mb-4 hidden bg-rose-50 p-2 rounded-lg border border-rose-100">Kullanıcı adı veya şifre hatalı.</p>
             
-            <button id="btn-login" onclick="window.attemptLogin()" class="app-btn btn-indigo w-full py-3.5 text-lg mt-2 shadow-md shadow-indigo-500/20">Giriş Yap</button>
+            <button id="btn-login" onclick="attemptLogin()" class="app-btn btn-indigo w-full py-3.5 text-lg mt-2 shadow-md shadow-indigo-500/20">Giriş Yap</button>
         </div>
     </section>
 
@@ -132,13 +161,13 @@
         <div class="hidden md:flex items-center justify-center gap-3 mb-10 mt-2 px-2 lg:justify-start">
             <img src="assets/imzatalhaozturk.png" alt="İmza" onerror="this.onerror=null; this.src='https://placehold.co/300x100/ffffff/6366f1?text=Akademi'" class="h-12 w-full object-contain">
         </div>
-        <button onclick="window.switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col lg:flex-row items-center gap-1 lg:gap-4 p-2 lg:p-3 rounded-xl font-semibold">
+        <button onclick="switchScreen('dashboard')" id="nav-dashboard" class="nav-item active flex md:w-full flex-col lg:flex-row items-center gap-1 lg:gap-4 p-2 lg:p-3 rounded-xl font-semibold">
             <i class="ph ph-books text-2xl md:text-3xl"></i><span class="text-[10px] lg:text-sm tracking-wide mt-1 lg:mt-0">Dersler</span>
         </button>
-        <button onclick="window.switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col lg:flex-row items-center gap-1 lg:gap-4 p-2 lg:p-3 rounded-xl font-semibold mt-0 md:mt-2">
+        <button onclick="switchScreen('dialogues')" id="nav-dialogues" class="nav-item flex md:w-full flex-col lg:flex-row items-center gap-1 lg:gap-4 p-2 lg:p-3 rounded-xl font-semibold mt-0 md:mt-2">
             <i class="ph ph-chats-circle text-2xl md:text-3xl"></i><span class="text-[10px] lg:text-sm tracking-wide mt-1 lg:mt-0">Diyalog</span>
         </button>
-        <button onclick="window.switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col lg:flex-row items-center gap-1 lg:gap-4 p-2 lg:p-3 rounded-xl font-semibold mt-0 md:mt-2">
+        <button onclick="switchScreen('profile')" id="nav-profile" class="nav-item flex md:w-full flex-col lg:flex-row items-center gap-1 lg:gap-4 p-2 lg:p-3 rounded-xl font-semibold mt-0 md:mt-2">
             <i class="ph ph-user-circle text-2xl md:text-3xl"></i><span class="text-[10px] lg:text-sm tracking-wide mt-1 lg:mt-0">Profil</span>
         </button>
     </nav>
@@ -149,54 +178,73 @@
         <!-- ÜST BAR -->
         <header id="main-header" style="display: none;" class="w-full p-4 flex justify-between items-center max-w-5xl mx-auto border-b border-slate-100 bg-white/80 backdrop-blur-sm z-10 sticky top-0">
             <div class="flex items-center gap-2 font-medium text-slate-500">
-                <span id="header-title" class="text-xs sm:text-sm text-slate-600 tracking-wide font-bold uppercase tracking-widest text-indigo-500">B1 Akademisi</span>
+                <span id="header-level" class="text-xs sm:text-sm font-bold uppercase tracking-widest text-indigo-500 bg-indigo-50 px-3 py-1 rounded-lg">Seviye 1</span>
             </div>
             <div class="flex gap-2 md:gap-4 font-bold text-xs sm:text-sm">
-                <div class="flex items-center gap-1.5 text-amber-500"><i class="ph-fill ph-fire text-lg"></i><span>1</span></div>
+                <div class="flex items-center gap-1.5 text-amber-500"><i class="ph-fill ph-fire text-lg"></i><span id="streak-counter">0</span></div>
                 <div class="flex items-center gap-1.5 text-indigo-500"><i class="ph-fill ph-lightning text-lg"></i><span id="xp-counter">0</span></div>
                 <div class="flex items-center gap-1.5 text-rose-500"><i class="ph-fill ph-heart text-lg"></i><span id="hearts-counter">10</span></div>
             </div>
         </header>
 
-        <!-- EKRAN 1: DASHBOARD -->
+        <!-- EKRAN 1: DASHBOARD (ÜNİTELER) -->
         <section id="screen-dashboard" class="screen flex-col flex-1 overflow-y-auto items-center p-4 md:p-8 pb-24">
             <div class="max-w-2xl w-full">
                 
-                <!-- PDF SEÇİMİ -->
                 <div id="view-stage-selection" class="w-full relative">
-                    <h2 class="text-xl font-bold text-slate-800 mb-6">PDF Materyalleri (Mega Kamp)</h2>
+                    <h2 class="text-xl font-bold text-slate-800 mb-6">Öğrenme Planı (A1 -> B1)</h2>
                     
-                    <button onclick="window.openStage('b1_1')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-indigo-300 transition-colors text-left group">
-                        <div class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-file-pdf text-2xl"></i></div>
+                    <button onclick="openStage('unit1')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-indigo-300 transition-colors text-left group">
+                        <div class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-airplane-tilt text-2xl"></i></div>
                         <div class="flex-1">
-                            <h3 class="font-bold text-slate-800 text-sm md:text-base">B1.1 Kelime Listesi</h3>
-                            <p class="text-xs text-slate-500">Tüm kelimeler. Sıfırdan %100'e uzun yol.</p>
+                            <h3 class="font-bold text-slate-800 text-sm md:text-base">Ünite 1: Seyahat & Konaklama</h3>
+                            <p class="text-xs text-slate-500">Gute Reise! Otel, Havalimanı (B1.1)</p>
                             <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
-                                <div id="prog-bar-b1_1" class="bg-indigo-400 h-full rounded-full transition-all duration-1000 w-0"></div>
+                                <div id="prog-bar-unit1" class="bg-indigo-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
                         </div>
                     </button>
 
-                    <button onclick="window.openStage('b1_2')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-teal-300 transition-colors text-left">
-                        <div class="w-14 h-14 bg-teal-50 text-teal-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-file-pdf text-2xl"></i></div>
+                    <button id="btn-unit2" onclick="openStage('unit2')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-teal-300 transition-colors text-left node-locked">
+                        <div class="w-14 h-14 bg-teal-50 text-teal-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-tree-evergreen text-2xl"></i></div>
                         <div class="flex-1">
-                            <h3 class="font-bold text-slate-800 text-sm md:text-base">B1.2 İleri Seviye Kelimeler</h3>
-                            <p class="text-xs text-slate-500">Tam liste. Kilitli maraton sistemi.</p>
+                            <h3 class="font-bold text-slate-800 text-sm md:text-base">Ünite 2: Çevre & Doğa</h3>
+                            <p class="text-xs text-slate-500">Umweltschutz, İklim, Doğa (B1.1)</p>
                             <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
-                                <div id="prog-bar-b1_2" class="bg-teal-400 h-full rounded-full transition-all duration-1000 w-0"></div>
+                                <div id="prog-bar-unit2" class="bg-teal-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
                         </div>
                     </button>
 
-                    <button onclick="window.openStage('arena')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-amber-300 transition-colors text-left">
-                        <div class="w-14 h-14 bg-amber-50 rounded-xl flex items-center justify-center shrink-0 p-2 overflow-hidden">
-                            <img src="assets/arenab1wortliste.PNG" alt="Arena" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f59e0b/ffffff?text=Arena'" class="w-full h-full object-contain">
-                        </div>
+                    <button id="btn-unit3" onclick="openStage('unit3')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-amber-300 transition-colors text-left node-locked">
+                        <div class="w-14 h-14 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-briefcase text-2xl"></i></div>
                         <div class="flex-1">
-                            <h3 class="font-bold text-slate-800 text-sm md:text-base">Arena B1 Tam Liste</h3>
-                            <p class="text-xs text-slate-500">Arena özel eğitim yolu.</p>
+                            <h3 class="font-bold text-slate-800 text-sm md:text-base">Ünite 3: İş Hayatı & Başvuru</h3>
+                            <p class="text-xs text-slate-500">Bewerbung, Büroalltag (B1.2)</p>
                             <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
-                                <div id="prog-bar-arena" class="bg-amber-400 h-full rounded-full transition-all duration-1000 w-0"></div>
+                                <div id="prog-bar-unit3" class="bg-amber-400 h-full rounded-full transition-all duration-1000 w-0"></div>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button id="btn-unit4" onclick="openStage('unit4')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-purple-300 transition-colors text-left node-locked">
+                        <div class="w-14 h-14 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-text-t text-2xl"></i></div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-slate-800 text-sm md:text-base">Ünite 4: B1 Gramer Kampı</h3>
+                            <p class="text-xs text-slate-500">Akkusativ, Dativ, Nebensätze, Perfekt</p>
+                            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                                <div id="prog-bar-unit4" class="bg-purple-400 h-full rounded-full transition-all duration-1000 w-0"></div>
+                            </div>
+                        </div>
+                    </button>
+                    
+                    <button id="btn-unit5" onclick="openStage('unit5')" class="w-full mb-4 border border-slate-200 border-b-2 bg-white rounded-2xl p-5 flex items-center gap-5 hover:border-rose-300 transition-colors text-left node-locked">
+                        <div class="w-14 h-14 bg-rose-50 text-rose-500 rounded-xl flex items-center justify-center shrink-0"><i class="ph-fill ph-crown text-2xl"></i></div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-slate-800 text-sm md:text-base">Ünite 5: Arena B1 Final</h3>
+                            <p class="text-xs text-slate-500">Sınav Kelimeleri & Karma Tekrar</p>
+                            <div class="w-full bg-slate-100 h-2 rounded-full mt-2 overflow-hidden">
+                                <div id="prog-bar-unit5" class="bg-rose-400 h-full rounded-full transition-all duration-1000 w-0"></div>
                             </div>
                         </div>
                     </button>
@@ -204,7 +252,7 @@
 
                 <!-- DİNAMİK YOL (HARİTA) -->
                 <div id="view-learning-path" class="w-full hidden">
-                    <button onclick="window.goBackToStages()" class="text-slate-500 font-medium hover:text-slate-700 flex items-center gap-2 mb-6 text-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> PDF Seçimine Dön</button>
+                    <button onclick="goBackToStages()" class="text-slate-500 font-medium hover:text-slate-700 flex items-center gap-2 mb-6 text-sm transition-colors"><i class="ph-bold ph-arrow-left"></i> Ünitelere Dön</button>
                     
                     <div id="path-header" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm mb-8 text-center relative overflow-hidden">
                         <h2 class="text-xl font-bold text-slate-800 relative z-10" id="path-title">Eğitim Yolu</h2>
@@ -225,7 +273,7 @@
         <!-- EKRAN 2: DİYALOGLAR -->
         <section id="screen-dialogues" class="screen flex-col flex-1 overflow-y-auto items-center p-4 md:p-8 pb-24">
             <div class="max-w-2xl w-full">
-                <h2 class="text-xl font-bold text-slate-800 mb-6">Pratik Diyaloglar</h2>
+                <h2 class="text-xl font-bold text-slate-800 mb-6">Konuşma & Dinleme Pratikleri</h2>
                 <div class="space-y-4" id="dialogues-container">
                     <!-- JS ile eklenecek -->
                 </div>
@@ -244,17 +292,18 @@
                     <div class="grid grid-cols-2 gap-4 mt-6 mb-6">
                         <div class="bg-slate-50 rounded-2xl p-4 flex flex-col items-center gap-1 border border-slate-100">
                             <i class="ph-fill ph-fire text-2xl text-amber-500"></i>
-                            <p class="text-xl font-bold text-slate-700">1</p>
-                            <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Seri</p>
+                            <p class="text-xl font-bold text-slate-700" id="profile-streak">0</p>
+                            <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Gün Serisi</p>
                         </div>
                         <div class="bg-slate-50 rounded-2xl p-4 flex flex-col items-center gap-1 border border-slate-100">
                             <i class="ph-fill ph-lightning text-2xl text-indigo-500"></i>
                             <p class="text-xl font-bold text-slate-700" id="profile-xp">0</p>
-                            <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">XP</p>
+                            <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Toplam XP</p>
                         </div>
                     </div>
-
-                    <button onclick="window.location.reload()" class="app-btn btn-white w-full py-3.5 text-sm font-semibold border-slate-200 text-rose-500 hover:bg-rose-50"><i class="ph-bold ph-sign-out mr-2"></i> Çıkış Yap</button>
+                    
+                    <button onclick="resetProgress()" class="app-btn btn-rose w-full py-3.5 text-sm font-semibold mb-3 shadow-sm border-rose-200"><i class="ph-bold ph-trash mr-2"></i> İlerlemeyi Sıfırla</button>
+                    <button onclick="window.location.reload()" class="app-btn btn-white w-full py-3.5 text-sm font-semibold border-slate-200 text-slate-500"><i class="ph-bold ph-sign-out mr-2"></i> Çıkış Yap</button>
                 </div>
             </div>
         </section>
@@ -262,7 +311,9 @@
         <!-- EKRAN 4: EĞİTİM / OYUN OTURUMU -->
         <section id="screen-session" class="screen flex-col flex-1 absolute inset-0 bg-white z-20">
             <div class="w-full max-w-3xl mx-auto p-4 flex items-center gap-4 border-b border-slate-100">
-                <button onclick="window.quitSession()" class="text-slate-400 hover:text-slate-600 transition-colors p-1"><i class="ph-bold ph-x text-2xl"></i></button>
+                <button onclick="quitSession()" class="text-slate-500 hover:text-slate-700 transition-colors p-2 flex items-center gap-2 font-bold text-sm bg-slate-100 rounded-xl hover:bg-slate-200">
+                    <i class="ph-bold ph-arrow-left text-xl"></i> Geri Dön
+                </button>
                 <div class="flex-1 progress-bar-bg"><div id="session-progress" class="progress-bar-fill"></div></div>
                 <div class="flex items-center gap-1 font-bold text-rose-500 text-sm"><i class="ph-fill ph-heart text-lg"></i><span id="session-hearts">10</span></div>
             </div>
@@ -286,7 +337,7 @@
             <!-- ALT KONTROL -->
             <div class="w-full p-4 border-t border-slate-200 bg-white flex justify-center fixed bottom-0 z-30">
                 <div class="max-w-2xl w-full">
-                    <button id="btn-check" onclick="window.checkAnswer()" disabled class="app-btn btn-indigo w-full py-3.5 text-lg shadow-sm">Kontrol Et</button>
+                    <button id="btn-check" onclick="checkAnswer()" disabled class="app-btn btn-indigo w-full py-3.5 text-lg shadow-sm">Kontrol Et</button>
                 </div>
             </div>
 
@@ -296,7 +347,7 @@
                     <div id="feedback-icon" class="w-12 h-12 rounded-full flex items-center justify-center text-2xl shrink-0 border border-slate-100 bg-white"></div>
                     <div><h2 id="feedback-title" class="text-xl font-bold mb-0.5 tracking-tight"></h2><p id="feedback-desc" class="text-sm font-medium text-slate-600"></p></div>
                 </div>
-                <button id="btn-next" onclick="window.nextQuestion()" class="app-btn w-full md:w-40 py-3 text-base"></button>
+                <button id="btn-next" onclick="nextQuestion()" class="app-btn w-full md:w-40 py-3 text-base"></button>
             </div>
         </section>
 
@@ -319,22 +370,43 @@
                 </div>
             </div>
             
-            <button onclick="window.finishSession(true)" id="btn-next-level" class="app-btn btn-indigo w-full max-w-sm py-3.5 text-base relative z-10 mb-3 shadow-sm">Sonraki Bölüm</button>
-            <button onclick="window.finishSession(false)" class="app-btn btn-white w-full max-w-sm py-3.5 text-base relative z-10 border-slate-200">Kapat</button>
+            <button onclick="finishSession(true)" id="btn-next-level" class="app-btn btn-indigo w-full max-w-sm py-3.5 text-base relative z-10 mb-3 shadow-sm">Sonraki Bölüme Geç <i class="ph-bold ph-arrow-right ml-2"></i></button>
+            <button onclick="finishSession(false)" class="app-btn btn-white w-full max-w-sm py-3.5 text-base relative z-10 border-slate-200">Haritaya Dön</button>
             
             <div id="star-container" class="absolute inset-0 pointer-events-none"></div>
         </section>
     </main>
 
-    <!-- CORE UYGULAMA MANTIĞI & GÜVENLİ SCRİPT -->
+    <!-- CORE UYGULAMA MANTIĞI & SCRİPT -->
     <script>
-        const LOCAL_STORAGE_KEY = 'b1kamp_data_v7_mega'; 
+        const LOCAL_STORAGE_KEY = 'b1kamp_data_final_v16'; 
 
-        window.totalXP = 0; 
-        window.hearts = 10; 
-        window.stageProgress = { 'b1_1': 0, 'b1_2': 0, 'arena': 0 }; 
-        
-        window.addEventListener('load', () => {
+        const AppState = {
+            totalXP: 0, 
+            hearts: 10, 
+            streak: 0,
+            lastLogin: null,
+            level: 1,
+            unlockedUnits: ['unit1'], 
+            stageProgress: { 'unit1': 0, 'unit2': 0, 'unit3': 0, 'unit4': 0, 'unit5': 0 }, 
+            activeStage: null,
+            activePathNodes: [],
+            currentPathNodeIndex: 0,
+            activeSessionNodeIdx: 0,
+            totalQuestionsAtStart: 0,
+            sessionQuestions: [],
+            currentQIndex: 0,
+            selectedOptionBtn: null,
+            correctAnswersCount: 0,
+            matchSelections: [],
+            sentenceSelection: [],
+            sessionType: 'vocab',
+            speechMatch: undefined,
+            audioCtx: null
+        };
+
+        // Yükleme Ekranı Kontrolü
+        document.addEventListener('DOMContentLoaded', () => {
             const progress = document.getElementById('loader-progress');
             if (progress) progress.style.width = '100%';
             
@@ -345,30 +417,103 @@
                     setTimeout(() => { loader.style.display = 'none'; }, 500);
                 }
             }, 2500);
+            loadProgress();
         });
 
-        window.loadProgress = function() {
+        function calculateStreak() {
+            const today = new Date().toDateString();
+            if (AppState.lastLogin !== today) {
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                
+                if (AppState.lastLogin === yesterday.toDateString()) {
+                    AppState.streak++;
+                } else if (AppState.lastLogin !== null) {
+                    AppState.streak = 1;
+                } else {
+                    AppState.streak = 1;
+                }
+                AppState.lastLogin = today;
+                saveProgress();
+            }
+        }
+
+        function calculateLevel() {
+            AppState.level = Math.floor(AppState.totalXP / 200) + 1;
+            const lvlEl = document.getElementById('header-level');
+            if(lvlEl) lvlEl.innerText = `Seviye ${AppState.level}`;
+        }
+
+        function unlockUnits() {
+            if (AppState.stageProgress['unit1'] >= 100 && !AppState.unlockedUnits.includes('unit2')) AppState.unlockedUnits.push('unit2');
+            if (AppState.stageProgress['unit2'] >= 100 && !AppState.unlockedUnits.includes('unit3')) AppState.unlockedUnits.push('unit3');
+            if (AppState.stageProgress['unit3'] >= 100 && !AppState.unlockedUnits.includes('unit4')) AppState.unlockedUnits.push('unit4');
+            if (AppState.stageProgress['unit4'] >= 100 && !AppState.unlockedUnits.includes('unit5')) AppState.unlockedUnits.push('unit5');
+            
+            ['unit2', 'unit3', 'unit4', 'unit5'].forEach(u => {
+                const btn = document.getElementById(`btn-${u}`);
+                if(btn) {
+                    if (AppState.unlockedUnits.includes(u)) {
+                        btn.classList.remove('node-locked');
+                    } else {
+                        btn.classList.add('node-locked');
+                    }
+                }
+            });
+        }
+
+        function updateTopBar() {
+            const els = ['xp-counter', 'profile-xp', 'hearts-counter', 'session-hearts', 'streak-counter', 'profile-streak'];
+            els.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    if(id.includes('xp')) el.innerText = AppState.totalXP;
+                    else if(id.includes('hearts')) el.innerText = AppState.hearts;
+                    else if(id.includes('streak')) el.innerText = AppState.streak;
+                }
+            });
+            calculateLevel();
+            unlockUnits();
+        }
+
+        function loadProgress() {
             try { 
                 const localData = localStorage.getItem(LOCAL_STORAGE_KEY); 
                 if (localData) {
                     const loadedData = JSON.parse(localData);
-                    window.totalXP = loadedData.totalXP !== undefined ? loadedData.totalXP : 0;
-                    window.hearts = loadedData.hearts !== undefined ? loadedData.hearts : 10;
-                    window.stageProgress = loadedData.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0 };
+                    Object.assign(AppState, loadedData);
                 }
-            } catch(e) { console.warn("Local storage parse hatasi"); }
-        };
+            } catch(e) {}
+            calculateStreak();
+            updateTopBar();
+        }
 
-        window.saveProgress = function() {
-            const dataToSave = { 
-                totalXP: window.totalXP || 0, 
-                hearts: window.hearts || 10, 
-                stageProgress: window.stageProgress || { 'b1_1': 0, 'b1_2': 0, 'arena': 0 }
-            };
-            try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave)); } catch(e) {}
-        };
+        function saveProgress() {
+            try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(AppState)); } catch(e) {}
+        }
 
-        window.attemptLogin = async function() {
+        function resetProgress() {
+            if(confirm("Tüm ilerlemeniz, XP'niz ve ünite kilitleriniz sıfırlanacak. Emin misiniz?")) {
+                AppState.totalXP = 0;
+                AppState.hearts = 10;
+                AppState.streak = 0;
+                AppState.level = 1;
+                AppState.unlockedUnits = ['unit1'];
+                AppState.stageProgress = { 'unit1': 0, 'unit2': 0, 'unit3': 0, 'unit4': 0, 'unit5': 0 };
+                saveProgress();
+                window.location.reload();
+            }
+        }
+
+        function updateDashboardProgress() {
+            const keys = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5'];
+            keys.forEach(k => {
+                let bar = document.getElementById(`prog-bar-${k}`);
+                if(bar) bar.style.width = `${AppState.stageProgress[k] || 0}%`;
+            });
+        }
+
+        function attemptLogin() {
             const userEl = document.getElementById('login-user'); 
             const passEl = document.getElementById('login-pass'); 
             const errorEl = document.getElementById('login-error'); 
@@ -378,79 +523,236 @@
             const user = userEl.value.toLowerCase().trim(); 
             const pass = passEl.value.toLowerCase().trim();
             
-            // Login Check
-            if(user === 'talha' && pass === 'talha') {
+            if(user === 'nisan' && pass === 'talha') {
                 errorEl.classList.add('hidden'); 
                 btnEl.innerText = "Yükleniyor..."; 
                 btnEl.disabled = true;
-
-                if (typeof window.firebaseLoginHook === 'function') {
-                    try { await window.firebaseLoginHook(); } catch(e) {}
-                }
-                
-                window.completeLoginProcess();
+                completeLoginProcess();
             } else { 
                 errorEl.classList.remove('hidden'); 
             }
-        };
+        }
 
-        window.completeLoginProcess = function() {
-            window.loadProgress();
+        function completeLoginProcess() {
+            loadProgress();
             const sideNav = document.getElementById('side-nav'); 
             const mainHeader = document.getElementById('main-header'); 
-            const loader = document.getElementById('loader'); 
-            const btnEl = document.getElementById('btn-login');
             
             if (sideNav) sideNav.style.display = ''; 
             if (mainHeader) mainHeader.style.display = 'flex';
+            initAudio(); 
             
-            if (typeof window.initAudio === 'function') window.initAudio(); 
-            
-            window.switchScreen('dashboard');
-            window.updateTopBar(); 
-            window.updateDashboardProgress();
-            
-            if (loader) { loader.style.opacity = '0'; setTimeout(() => { loader.style.display = 'none'; }, 400); }
-            if (btnEl) { btnEl.innerText = "Giriş Yap"; btnEl.disabled = false; }
-        };
+            switchScreen('dashboard');
+            updateTopBar(); 
+            updateDashboardProgress();
+        }
 
-        window.setImgSrc = function(imgElement, src, fallbackText, color) {
+        function switchScreen(screenName) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            const screenEl = document.getElementById(`screen-${screenName}`);
+            if(screenEl) screenEl.classList.add('active');
+            
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            const navBtn = document.getElementById(`nav-${screenName}`);
+            if(navBtn) navBtn.classList.add('active');
+
+            const header = document.getElementById('main-header');
+            if(screenName === 'login' || screenName === 'session' || screenName === 'finish') {
+                if(header) header.style.display = 'none';
+            } else {
+                if(header) header.style.display = 'flex';
+                if(screenName === 'dashboard') {
+                    goBackToStages();
+                    updateDashboardProgress();
+                } else if(screenName === 'dialogues') {
+                    renderDialogues();
+                }
+            }
+        }
+
+        function openStage(stageId) {
+            if(!AppState.unlockedUnits.includes(stageId)) return; // Kilitli
+
+            AppState.activeStage = stageId;
+            const viewStageSel = document.getElementById('view-stage-selection');
+            if(viewStageSel) viewStageSel.classList.add('hidden');
+            
+            buildPath(stageId);
+        }
+
+        function goBackToStages() {
+            const path = document.getElementById('view-learning-path');
+            const stageSel = document.getElementById('view-stage-selection');
+            if(path) path.classList.add('hidden');
+            if(stageSel) stageSel.classList.remove('hidden');
+            AppState.activeStage = null;
+        }
+
+        function buildPath(unitId) {
+            const pathView = document.getElementById('view-learning-path');
+            if(pathView) pathView.classList.remove('hidden');
+
+            const title = document.getElementById('path-title');
+            let nodes = [];
+            const colors = ['purple', 'amber', 'indigo', 'rose', 'teal'];
+            
+            if(title) {
+                if(unitId === 'unit1') title.innerText = "Ünite 1: Seyahat";
+                else if(unitId === 'unit2') title.innerText = "Ünite 2: Çevre & Doğa";
+                else if(unitId === 'unit3') title.innerText = "Ünite 3: İş Hayatı";
+                else if(unitId === 'unit4') title.innerText = "Ünite 4: Gramer Kampı";
+                else if(unitId === 'unit5') title.innerText = "Ünite 5: Final Sınavı";
+            }
+
+            const nodeTypes = ['flashcards', 'vocab', 'listening', 'matching', 'writing', 'dictation', 'speaking', 'sentence_ordering', 'translation', 'fill_blanks'];
+            
+            const icons = {
+                'flashcards': '<i class="ph-fill ph-book-open"></i>',
+                'vocab': '<i class="ph-fill ph-star"></i>',
+                'listening': '<i class="ph-fill ph-headphones"></i>',
+                'matching': '<i class="ph-fill ph-puzzle-piece"></i>',
+                'writing': '<i class="ph-fill ph-pencil-simple"></i>',
+                'dictation': '<i class="ph-fill ph-waveform"></i>',
+                'speaking': '<i class="ph-fill ph-microphone"></i>',
+                'sentence_ordering': '<i class="ph-fill ph-list-numbers"></i>',
+                'translation': '<i class="ph-fill ph-translate"></i>',
+                'fill_blanks': '<i class="ph-fill ph-text-t"></i>'
+            };
+
+            // Uzun Uzun Yol (50 aşama normal ünite, 100 aşama final için)
+            let totalNodes = (unitId === 'unit5') ? 100 : 50; 
+            for (let i = 0; i < totalNodes; i++) {
+                let type;
+                if(unitId === 'unit4') {
+                    type = (i % 2 === 0) ? 'fill_blanks' : 'sentence_ordering';
+                } else {
+                    type = nodeTypes[i % nodeTypes.length];
+                    if (type === 'fill_blanks' || type === 'sentence_ordering') type = 'vocab'; 
+                }
+                
+                let count = 20 + Math.floor(Math.random() * 10); // Çok soru
+                nodes.push({
+                    type: type, count: count, label: `Ders ${i+1}`,
+                    color: colors[i % colors.length], icon: icons[type] || '<i class="ph-fill ph-star"></i>'
+                });
+            }
+
+            AppState.activePathNodes = nodes.map(n => ({...n, completed: false}));
+            
+            let currentPct = AppState.stageProgress[AppState.activeStage] || 0;
+            let completedCount = Math.floor((currentPct / 100) * AppState.activePathNodes.length);
+            for(let i=0; i<completedCount; i++) {
+                if(AppState.activePathNodes[i]) AppState.activePathNodes[i].completed = true;
+            }
+            
+            AppState.currentPathNodeIndex = AppState.activePathNodes.findIndex(n => !n.completed);
+            if(AppState.currentPathNodeIndex === -1) AppState.currentPathNodeIndex = AppState.activePathNodes.length - 1; 
+
+            renderDynamicPath();
+            updatePathProgressUI();
+        }
+
+        function renderDynamicPath() {
+            const container = document.getElementById('path-nodes-container');
+            if(!container) return;
+            
+            let html = `<div class="absolute w-2 md:w-3 bg-slate-100 top-4 bottom-10 -z-10 rounded-full shadow-inner"></div>`;
+            const positions = ['-translate-x-12 md:-translate-x-20', 'translate-x-0', 'translate-x-12 md:translate-x-20', 'translate-x-0'];
+
+            AppState.activePathNodes.forEach((node, idx) => {
+                let posClass = positions[idx % 4];
+                let btnClassStr = `btn-${node.color}`;
+                let isBoss = (idx === AppState.activePathNodes.length - 1);
+                let btnSize = isBoss ? 'w-20 h-20 md:w-24 md:h-24 text-3xl md:text-4xl' : 'w-16 h-16 md:w-20 md:h-20 text-2xl md:text-3xl';
+                let bounceClass = '';
+                let stateClass = '';
+                let clickAction = `startSession('${node.type}', ${node.count}, ${idx})`;
+                let displayIcon = node.icon;
+                
+                if (node.completed) {
+                    stateClass = 'node-completed shadow-md border-teal-200 p-0 overflow-hidden'; 
+                    displayIcon = `<img src="assets/nisanmutlu.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/14b8a6/ffffff?text=OK'" class="w-full h-full object-cover">`; 
+                    btnClassStr = 'bg-teal-50'; 
+                } else if (idx > AppState.currentPathNodeIndex) {
+                    stateClass = 'node-locked'; 
+                    clickAction = '';
+                    displayIcon = '<i class="ph-bold ph-lock-key text-slate-300"></i>';
+                    btnClassStr = 'bg-slate-100 border-slate-200 text-slate-400';
+                } else if (idx === AppState.currentPathNodeIndex) {
+                    bounceClass = 'pulse-btn border-white border-[3px] shadow-lg'; 
+                }
+
+                html += `
+                    <div class="relative w-full flex justify-center mb-6">
+                        <div class="flex flex-col items-center transform ${posClass} transition-transform hover:-translate-y-1">
+                            <div class="bg-white border border-slate-200 text-slate-600 font-semibold px-4 py-1.5 rounded-xl shadow-sm text-[10px] md:text-xs mb-2 text-center z-10">
+                                ${node.label}
+                            </div>
+                            <button onclick="${clickAction}" class="app-btn ${btnSize} rounded-[1.2rem] md:rounded-[1.5rem] shadow-sm ${bounceClass} ${stateClass} ${btnClassStr}">
+                                ${displayIcon}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function updatePathProgressUI() {
+            let pct = Math.floor((AppState.currentPathNodeIndex / AppState.activePathNodes.length) * 100);
+            if (AppState.activePathNodes.length > 0 && AppState.activePathNodes.every(n => n.completed)) pct = 100;
+            
+            const progBar = document.getElementById('path-main-progress');
+            if(progBar) progBar.style.width = `${pct}%`;
+            
+            if (AppState.activeStage) {
+                AppState.stageProgress[AppState.activeStage] = pct;
+                saveProgress();
+            }
+        }
+
+        // ================= SES KONTROLLERİ =================
+        function setImgSrc(imgElement, src, fallbackText, color) {
             if (!imgElement || imgElement.getAttribute('data-current-src') === src) return;
             imgElement.setAttribute('data-current-src', src);
             imgElement.onerror = function() { this.onerror = null; this.src = `https://placehold.co/100x100/${color}/ffffff?text=${fallbackText}`; };
             imgElement.src = src;
-        };
+        }
 
-        window.initAudio = function() {
-            if(!window.audioCtx) { const AudioContext = window.AudioContext || window.webkitAudioContext; window.audioCtx = new AudioContext(); }
-            if (window.audioCtx.state === 'suspended') { window.audioCtx.resume(); }
+        function initAudio() {
+            if(!AppState.audioCtx) { const AudioContext = window.AudioContext || window.webkitAudioContext; AppState.audioCtx = new AudioContext(); }
+            if (AppState.audioCtx.state === 'suspended') { AppState.audioCtx.resume(); }
         }
-        window.playCorrectSound = function() {
-            window.initAudio(); if(!window.audioCtx) return;
+
+        function playCorrectSound() {
+            initAudio(); if(!AppState.audioCtx) return;
             try {
-                const osc = window.audioCtx.createOscillator(); const gain = window.audioCtx.createGain();
-                osc.connect(gain); gain.connect(window.audioCtx.destination); osc.type = 'sine';
-                osc.frequency.setValueAtTime(523.25, window.audioCtx.currentTime); osc.frequency.setValueAtTime(659.25, window.audioCtx.currentTime + 0.1); 
-                gain.gain.setValueAtTime(0.05, window.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, window.audioCtx.currentTime + 0.3);
-                osc.start(); osc.stop(window.audioCtx.currentTime + 0.3);
+                const osc = AppState.audioCtx.createOscillator(); const gain = AppState.audioCtx.createGain();
+                osc.connect(gain); gain.connect(AppState.audioCtx.destination); osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, AppState.audioCtx.currentTime); osc.frequency.setValueAtTime(659.25, AppState.audioCtx.currentTime + 0.1); 
+                gain.gain.setValueAtTime(0.05, AppState.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, AppState.audioCtx.currentTime + 0.3);
+                osc.start(); osc.stop(AppState.audioCtx.currentTime + 0.3);
             } catch(e){}
         }
-        window.playWrongSound = function() {
-            window.initAudio(); if(!window.audioCtx) return;
+
+        function playWrongSound() {
+            initAudio(); if(!AppState.audioCtx) return;
             try {
-                const osc = window.audioCtx.createOscillator(); const gain = window.audioCtx.createGain();
-                osc.connect(gain); gain.connect(window.audioCtx.destination); osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(300, window.audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(150, window.audioCtx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.05, window.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, window.audioCtx.currentTime + 0.3);
-                osc.start(); osc.stop(window.audioCtx.currentTime + 0.3);
+                const osc = AppState.audioCtx.createOscillator(); const gain = AppState.audioCtx.createGain();
+                osc.connect(gain); gain.connect(AppState.audioCtx.destination); osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(300, AppState.audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(150, AppState.audioCtx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.05, AppState.audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.00001, AppState.audioCtx.currentTime + 0.3);
+                osc.start(); osc.stop(AppState.audioCtx.currentTime + 0.3);
             } catch(e){}
         }
-        window.speakWord = function(word) {
+
+        function speakWord(word) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(word); utterance.lang = 'de-DE'; utterance.rate = 0.9; window.speechSynthesis.speak(utterance);
             }
         }
-        window.triggerStars = function() {
+
+        function triggerStars() {
             const container = document.getElementById('star-container'); if(!container) return; container.innerHTML = '';
             for(let i=0; i<30; i++) {
                 const star = document.createElement('i'); star.className = 'ph-fill ph-star star-particle';
@@ -460,119 +762,80 @@
             }
         }
 
-        // ================= MEGA B1 VERİTABANI (Yüzlerce Kelime) =================
+        // ================= VERİTABANI =================
         const dbContent = {
-            'b1_1': [
-                { article: "der", word: "Abfall", tr: "atık" }, { article: "der", word: "Abflug", tr: "kalkış" }, { article: "die", word: "Absage", tr: "iptal" },
-                { article: "-", word: "aktiv", tr: "faal" }, { article: "der", word: "Alkohol", tr: "alkol" }, { article: "-", word: "angenehm", tr: "rahat" },
-                { article: "-", word: "annulliert", tr: "iptal edilmiş" }, { article: "die", word: "Anzeigetafel", tr: "ilan panosu" }, { article: "der", word: "Aufruf", tr: "çağrı" },
-                { article: "der", word: "Ausgang", tr: "çıkış" }, { article: "die", word: "Ausstattung", tr: "ekipman" }, { article: "der", word: "Behälter", tr: "kap" },
-                { article: "-", word: "betreten", tr: "girmek" }, { article: "der", word: "Bewohner", tr: "sakin" }, { article: "die", word: "Bordkarte", tr: "biniş kartı" },
-                { article: "der", word: "Camper", tr: "kampçı" }, { article: "der", word: "Campingplatz", tr: "kamp alanı" }, { article: "der", word: "Check-in-Schalter", tr: "check-in kontuarı" },
-                { article: "der", word: "Container", tr: "konteyner" }, { article: "die", word: "Dienstreise", tr: "iş seyahati" }, { article: "das", word: "Doppelbett", tr: "iki kişilik yatak" },
-                { article: "das", word: "Doppelzimmer", tr: "iki kişilik oda" }, { article: "-", word: "einchecken", tr: "giriş yapmak" }, { article: "die", word: "Einsteigezeit", tr: "biniş saati" },
-                { article: "das", word: "Einzelzimmer", tr: "tek kişilik oda" }, { article: "-", word: "erleben", tr: "deneyimlemek" }, { article: "der", word: "Flug", tr: "uçuş" },
-                { article: "der", word: "Flugbegleiter", tr: "uçuş görevlisi" }, { article: "der", word: "Fluggast", tr: "uçak yolcusu" }, { article: "die", word: "Fluggesellschaft", tr: "uçak şirketi" },
-                { article: "-", word: "führen", tr: "yönetmek" }, { article: "-", word: "füttern", tr: "beslemek" }, { article: "das", word: "Gate", tr: "kapı" },
-                { article: "das", word: "Gepäck", tr: "bagaj" }, { article: "die", word: "Gepäckausgabe", tr: "bagaj teslimi" }, { article: "das", word: "Handgepäck", tr: "el bagajı" },
-                { article: "-", word: "historisch", tr: "tarihi" }, { article: "das", word: "Hostel", tr: "yurt" }, { article: "-", word: "hygienisch", tr: "hijyenik" },
-                { article: "die", word: "Jugendherberge", tr: "öğrenci yurdu" }, { article: "der", word: "Katalog", tr: "katalog" }, { article: "-", word: "klettern", tr: "tırmanmak" },
-                { article: "-", word: "komfortabel", tr: "konforlu" }, { article: "die", word: "Lage", tr: "konum" }, { article: "das", word: "Lagerfeuer", tr: "kamp ateşi" },
-                { article: "-", word: "landen", tr: "konmak" }, { article: "der", word: "Lärm", tr: "gürültü" }, { article: "-", word: "lebhaft", tr: "canlı" },
-                { article: "die", word: "Leine", tr: "tasma" }, { article: "der", word: "Leuchtturm", tr: "fener kulesi" }, { article: "der", word: "Meerblick", tr: "deniz manzarası" },
-                { article: "der", word: "Nebel", tr: "sis" }, { article: "-", word: "neblig", tr: "puslu" }, { article: "das", word: "Paradies", tr: "cennet" },
-                { article: "der", word: "Passagier", tr: "yolcu" }, { article: "die", word: "Passkontrolle", tr: "pasaport kontrolü" }, { article: "der", word: "Pool", tr: "havuz" },
-                { article: "-", word: "rechtzeitig", tr: "zamanında" }, { article: "das", word: "Reisebüro", tr: "seyahat acentesi" }, { article: "der", word: "Reiseplan", tr: "yolculuk planı" },
-                { article: "-", word: "reiten", tr: "at binmek" }, { article: "die", word: "Ruhezeit", tr: "dinlenme zamanı" }, { article: "-", word: "sauber", tr: "temiz" },
-                { article: "die", word: "Sauberkeit", tr: "temizlik" }, { article: "der", word: "Schalter", tr: "şalter" }, { article: "die", word: "Schlange", tr: "kuyruk" },
-                { article: "der", word: "Sonnenschirm", tr: "şemsiye" }, { article: "die", word: "Sonnenterrasse", tr: "güneşlenme verandası" }, { article: "der", word: "Sonnenuntergang", tr: "güneş batışı" },
-                { article: "der", word: "Stern", tr: "yıldız" }, { article: "-", word: "stören", tr: "rahatsız etmek" }, { article: "das", word: "Streichholz", tr: "kibrit" },
-                { article: "-", word: "streiken", tr: "grev yapmak" }, { article: "die", word: "Taschenlampe", tr: "el feneri" }, { article: "das", word: "Taschenmesser", tr: "çakı" },
-                { article: "-", word: "traumhaft", tr: "rüya gibi" }, { article: "-", word: "übernachten", tr: "gecelemek" }, { article: "die", word: "Übernachtung", tr: "geceleme" },
-                { article: "die", word: "Umgebung", tr: "çevre" }, { article: "-", word: "verreisen", tr: "uzaklaşmak" }, { article: "-", word: "verschieben", tr: "ertelemek" },
-                { article: "der", word: "Wohnwagen", tr: "karavan" }, { article: "das", word: "Zelt", tr: "çadır" }, { article: "der", word: "Zoll", tr: "gümrük" },
-                { article: "der", word: "Ärger", tr: "öfke" }, { article: "die", word: "Ausnahme", tr: "istisna" }, { article: "-", word: "beleidigen", tr: "hakaret etmek" },
-                { article: "die", word: "Beleidigung", tr: "hakaret" }, { article: "-", word: "beschweren", tr: "yakınmak" }, { article: "der", word: "Blumentopf", tr: "saksı" },
-                { article: "die", word: "Entscheidung", tr: "karar" }, { article: "die", word: "Freude", tr: "neşe" }, { article: "der", word: "Konflikt", tr: "anlaşmazlık" },
-                { article: "die", word: "Kündigung", tr: "ihbar" }, { article: "der", word: "Mietvertrag", tr: "kira sözleşmesi" }, { article: "der", word: "Schaden", tr: "hasar" },
-                { article: "das", word: "Urteil", tr: "hüküm" }, { article: "das", word: "Verständnis", tr: "anlayış" }, { article: "der", word: "Verstoß", tr: "ihlal" },
-                { article: "das", word: "Abgas", tr: "egzoz gazı" }, { article: "das", word: "Abwasser", tr: "atık su" }, { article: "das", word: "Altpapier", tr: "atık kağıt" },
-                { article: "die", word: "Belastung", tr: "yük" }, { article: "der", word: "Beutel", tr: "kese" }, { article: "das", word: "Erdbeben", tr: "deprem" },
-                { article: "die", word: "Erde", tr: "toprak" }, { article: "die", word: "Erderwärmung", tr: "küresel ısınma" },
-                { article: "das", word: "Klima", tr: "iklim" }, { article: "der", word: "Klimawandel", tr: "iklim değişikliği" }, { article: "das", word: "Plastik", tr: "plastik" },
-                { article: "-", word: "recyceln", tr: "geri dönüştürmek" }, { article: "die", word: "Umweltverschmutzung", tr: "çevre kirliliği" }, { article: "das", word: "Unwetter", tr: "fırtına" },
-                { article: "der", word: "Verbraucher", tr: "tüketici" }, { article: "der", word: "Versand", tr: "sevkiyat" }, { article: "die", word: "Ware", tr: "mal/eşya" },
-                { article: "die", word: "Diskussion", tr: "tartışma" }, { article: "die", word: "Gewohnheit", tr: "alışkanlık" }, { article: "die", word: "Langeweile", tr: "sıkıntı" },
-                { article: "die", word: "Mehrheit", tr: "çoğunluk" }, { article: "die", word: "Minderheit", tr: "azınlık" }, { article: "das", word: "Rätsel", tr: "bilmece" },
-                { article: "die", word: "Amtssprache", tr: "resmi dil" }, { article: "die", word: "Arbeitslosigkeit", tr: "işsizlik" }, { article: "das", word: "Asyl", tr: "sığınma" },
-                { article: "die", word: "Demokratie", tr: "demokrasi" }, { article: "der", word: "Flüchtling", tr: "mülteci" }, { article: "die", word: "Grenze", tr: "sınır" },
-                { article: "die", word: "Heimat", tr: "vatan" }, { article: "der", word: "Krieg", tr: "savaş" }, { article: "die", word: "Mauer", tr: "duvar" },
-                { article: "die", word: "Regierung", tr: "hükümet" }, { article: "der", word: "Staat", tr: "devlet" }, { article: "das", word: "Visum", tr: "vize" },
-                { article: "die", word: "Wahl", tr: "seçim" }, { article: "-", word: "wählen", tr: "seçmek" }
+            'unit1': [ 
+                { article: "der", word: "Abflug", tr: "kalkış", sentence: "Der Abflug ist um 10 Uhr." },
+                { article: "die", word: "Bordkarte", tr: "biniş kartı", sentence: "Zeigen Sie mir bitte Ihre Bordkarte." },
+                { article: "das", word: "Gepäck", tr: "bagaj", sentence: "Haben Sie viel Gepäck?" },
+                { article: "der", word: "Passagier", tr: "yolcu", sentence: "Die Passagiere steigen ein." },
+                { article: "das", word: "Doppelzimmer", tr: "iki kişilik oda", sentence: "Wir möchten ein Doppelzimmer buchen." },
+                { article: "-", word: "einchecken", tr: "giriş yapmak", sentence: "Wir müssen um 14 Uhr einchecken." },
+                { article: "-", word: "übernachten", tr: "gecelemek", sentence: "Wir übernachten im Hotel." },
+                { article: "der", word: "Zoll", tr: "gümrük", sentence: "Er muss durch den Zoll." },
+                { article: "der", word: "Campingplatz", tr: "kamp alanı", sentence: "Der Campingplatz ist sehr ruhig." },
+                { article: "die", word: "Dienstreise", tr: "iş seyahati", sentence: "Er ist auf einer Dienstreise." },
+                { article: "das", word: "Handgepäck", tr: "el bagajı", sentence: "Das Handgepäck darf nicht zu schwer sein." },
+                { article: "die", word: "Umgebung", tr: "çevre", sentence: "Die Umgebung des Hotels ist schön." },
+                { article: "der", word: "Urlaubstag", tr: "tatil günü", sentence: "Das war ein schöner Urlaubstag." }
             ],
-            'b1_2': [
-                { article: "die", word: "Anerkennung", tr: "takdir" }, { article: "die", word: "Fähigkeit", tr: "beceri" }, { article: "das", word: "Heimweh", tr: "sıla hasreti" },
-                { article: "die", word: "Arbeitsstelle", tr: "çalışma yeri" }, { article: "die", word: "Berufserfahrung", tr: "mesleki tecrübe" }, { article: "das", word: "Gehalt", tr: "maaş" },
-                { article: "die", word: "Probezeit", tr: "deneme süresi" }, { article: "die", word: "Überstunde", tr: "fazla mesai" }, { article: "das", word: "Unternehmen", tr: "şirket" },
-                { article: "die", word: "Allergie", tr: "alerji" }, { article: "die", word: "Bedingung", tr: "koşul" }, { article: "die", word: "Ernährung", tr: "beslenme" },
-                { article: "der", word: "Unfall", tr: "kaza" }, { article: "die", word: "Scheibe", tr: "cam" }, { article: "die", word: "Überschwemmung", tr: "su baskını" },
-                { article: "die", word: "Beglaubigung", tr: "tasdik" }, { article: "die", word: "Enttäuschung", tr: "düş kırıklığı" }, { article: "die", word: "Fantasie", tr: "fantezi" },
-                { article: "das", word: "Führungszeugnis", tr: "adli sicil kaydı" }, { article: "die", word: "Geduld", tr: "sabır" }, { article: "die", word: "Kopie", tr: "kopya" },
-                { article: "die", word: "Abteilung", tr: "departman" }, { article: "die", word: "Arbeitszeit", tr: "iş saati" }, { article: "die", word: "Herausforderung", tr: "meydan okuma" },
-                { article: "die", word: "Qualifikation", tr: "nitelik" }, { article: "die", word: "Zusammenarbeit", tr: "işbirliği" }, { article: "der", word: "Verbrauch", tr: "tüketim" },
-                { article: "die", word: "Bevölkerung", tr: "nüfus" }, { article: "das", word: "Eiweiß", tr: "protein" }, { article: "das", word: "Getreide", tr: "tahıl" },
-                { article: "das", word: "Kennzeichen", tr: "plaka" }, { article: "der", word: "Reifen", tr: "lastik" }, { article: "die", word: "Vorfahrt", tr: "geçiş üstünlüğü" },
-                { article: "-", word: "amtlich", tr: "resmi" }, { article: "-", word: "anerkennen", tr: "tanımak/onaylamak" }, { article: "-", word: "beherrschen", tr: "hakim olmak" },
-                { article: "-", word: "finanziell", tr: "mali/finansal" }, { article: "-", word: "langfristig", tr: "uzun vadeli" }, { article: "-", word: "vegan", tr: "vegan" },
-                { article: "das", word: "Medikament", tr: "ilaç" }, { article: "die", word: "Apotheke", tr: "eczane" }, { article: "das", word: "Rezept", tr: "reçete" },
-                { article: "die", word: "Versicherung", tr: "sigorta" }, { article: "der", word: "Beitrag", tr: "katkı/prim" }, { article: "die", word: "Verletzung", tr: "yaralanma" },
-                { article: "der", word: "Notarzt", tr: "acil doktoru" }, { article: "die", word: "Operation", tr: "ameliyat" }, { article: "das", word: "Symptom", tr: "belirti" },
-                { article: "das", word: "Virus", tr: "virüs" }, { article: "die", word: "Infektion", tr: "enfeksiyon" }, { article: "die", word: "Therapie", tr: "terapi" },
-                { article: "die", word: "Forschung", tr: "araştırma" }, { article: "die", word: "Wissenschaft", tr: "bilim" }, { article: "das", word: "Experiment", tr: "deney" },
-                { article: "der", word: "Beweis", tr: "kanıt" }, { article: "die", word: "Methode", tr: "yöntem" }, { article: "das", word: "Ergebnis", tr: "sonuç" },
-                { article: "die", word: "Analyse", tr: "analiz" }
+            'unit2': [ 
+                { article: "der", word: "Klimawandel", tr: "iklim değişikliği", sentence: "Der Klimawandel ist ein Problem." },
+                { article: "der", word: "Umweltschutz", tr: "çevre koruma", sentence: "Umweltschutz ist sehr wichtig." },
+                { article: "das", word: "Plastik", tr: "plastik", sentence: "Wir müssen Plastik vermeiden." },
+                { article: "der", word: "Müll", tr: "çöp", sentence: "Werfen Sie den Müll in den Eimer." },
+                { article: "-", word: "recyceln", tr: "geri dönüştürmek", sentence: "Wir recyceln Altpapier." },
+                { article: "die", word: "Natur", tr: "doğa", sentence: "Ich liebe die Natur." },
+                { article: "das", word: "Erdbeben", tr: "deprem", sentence: "Gab es gestern ein Erdbeben?" },
+                { article: "die", word: "Erde", tr: "toprak/dünya", sentence: "Die Erde ist rund." },
+                { article: "das", word: "Klima", tr: "iklim", sentence: "Das Klima verändert sich." },
+                { article: "die", word: "Umweltverschmutzung", tr: "çevre kirliliği", sentence: "Umweltverschmutzung muss gestoppt werden." }
             ],
-            'arena': [
-                { article: "das", word: "Netzwerk", tr: "ağ / şebeke" }, { article: "die", word: "Entscheidung", tr: "karar" }, { article: "das", word: "Gefühl", tr: "duygu" },
-                { article: "das", word: "Erlebnis", tr: "deneyim" }, { article: "die", word: "Langeweile", tr: "can sıkıntısı" }, { article: "der", word: "Klimawandel", tr: "iklim değişikliği" },
-                { article: "die", word: "Zukunft", tr: "gelecek" }, { article: "das", word: "Nahrungsmittel", tr: "besin / gıda" }, { article: "die", word: "Wirtschaft", tr: "ekonomi" },
-                { article: "der", word: "Umweltschutz", tr: "çevre koruma" }, { article: "das", word: "Plastik", tr: "plastik" }, { article: "die", word: "Plattform", tr: "platform" },
-                { article: "das", word: "Zähneputzen", tr: "diş fırçalama" }, { article: "der", word: "Grund", tr: "sebep" }, { article: "die", word: "App", tr: "uygulama" },
-                { article: "das", word: "Smartphone", tr: "akıllı telefon" }, { article: "das", word: "Ergebnis", tr: "sonuç" }, { article: "die", word: "Alternative", tr: "alternatif" },
-                { article: "der", word: "Warentransport", tr: "mal taşımacılığı" }, { article: "das", word: "Frachtschiff", tr: "yük gemisi" }, { article: "die", word: "Lieferung", tr: "teslimat" },
-                { article: "der", word: "Haushalt", tr: "hane halkı" }, { article: "die", word: "Bewegung", tr: "hareket" }, { article: "die", word: "Nachbarschaft", tr: "mahalle" },
-                { article: "das", word: "Stadion", tr: "stadyum" }, { article: "die", word: "Bewerbung", tr: "başvuru" }, { article: "der", word: "Vorschlag", tr: "öneri" },
-                { article: "das", word: "Verbot", tr: "yasak" }, { article: "die", word: "Mahlzeit", tr: "öğün" }, { article: "das", word: "Gymnasium", tr: "lise" },
-                { article: "-", word: "löschen", tr: "silmek" }, { article: "-", word: "digital", tr: "dijital" }, { article: "-", word: "kreativ", tr: "yaratıcı" },
-                { article: "-", word: "transportieren", tr: "taşımak" }, { article: "-", word: "realistisch", tr: "gerçekçi" }, { article: "-", word: "konsumieren", tr: "tüketmek" },
-                { article: "die", word: "Vorschrift", tr: "kural/yönetmelik" }, { article: "die", word: "Entscheidungsfreiheit", tr: "karar özgürlüğü" }, { article: "die", word: "Studie", tr: "araştırma/çalışma" },
-                { article: "die", word: "Hausordnung", tr: "ev/bina kuralları" }, { article: "der", word: "Respekt", tr: "saygı" }, { article: "das", word: "Tuch", tr: "bez/havlu" },
-                { article: "der", word: "Reisebericht", tr: "seyahat raporu" }, { article: "die", word: "Entspannung", tr: "rahatlama" }, { article: "das", word: "Boot", tr: "tekne" },
-                { article: "der", word: "Hafen", tr: "liman" }, { article: "die", word: "Folge", tr: "sonuç/netice" }, { article: "der", word: "Konsum", tr: "tüketim" },
-                { article: "die", word: "Tradition", tr: "gelenek" }, { article: "das", word: "Werk", tr: "eser/yapıt" }, { article: "das", word: "Publikum", tr: "seyirci/kitle" },
-                { article: "die", word: "Liebesgeschichte", tr: "aşk hikayesi" }, { article: "die", word: "Werbung", tr: "reklam" }, { article: "die", word: "Leistung", tr: "performans" },
-                { article: "das", word: "Risiko", tr: "risk" }, { article: "-", word: "abhängig", tr: "bağımlı" },
-                { article: "der", word: "Eindruck", tr: "izlenim" }, { article: "die", word: "Lektion", tr: "ders" }, { article: "das", word: "Gedicht", tr: "şiir" },
-                { article: "die", word: "Gesellschaft", tr: "toplum" }, { article: "die", word: "Kultur", tr: "kültür" }, { article: "die", word: "Kunst", tr: "sanat" },
-                { article: "das", word: "Theater", tr: "tiyatro" }, { article: "die", word: "Ausstellung", tr: "sergi" }, { article: "das", word: "Konzert", tr: "konser" },
-                { article: "der", word: "Autor", tr: "yazar" }, { article: "der", word: "Regisseur", tr: "yönetmen" }, { article: "der", word: "Schauspieler", tr: "aktör" },
-                { article: "die", word: "Bühne", tr: "sahne" }, { article: "die", word: "Leinwand", tr: "tuval/perde" }, { article: "der", word: "Zuschauer", tr: "seyirci" },
-                { article: "die", word: "Kritik", tr: "eleştiri" }, { article: "der", word: "Erfolg", tr: "başarı" }, { article: "der", word: "Misserfolg", tr: "başarısızlık" },
-                { article: "die", word: "Medien", tr: "medya" }, { article: "das", word: "Internet", tr: "internet" }, { article: "die", word: "Suchmaschine", tr: "arama motoru" },
-                { article: "das", word: "Profil", tr: "profil" }, { article: "der", word: "Kommentar", tr: "yorum" }, { article: "-", word: "abonnieren", tr: "abone olmak" },
-                { article: "-", word: "teilen", tr: "paylaşmak" }, { article: "-", word: "liken", tr: "beğenmek" }
+            'unit3': [ 
+                { article: "die", word: "Bewerbung", tr: "başvuru", sentence: "Ich schreibe eine Bewerbung." },
+                { article: "das", word: "Gehalt", tr: "maaş", sentence: "Das Gehalt ist gut." },
+                { article: "die", word: "Erfahrung", tr: "tecrübe", sentence: "Ich habe viel Berufserfahrung." },
+                { article: "-", word: "kündigen", tr: "işten ayrılmak", sentence: "Er möchte kündigen." },
+                { article: "das", word: "Unternehmen", tr: "şirket", sentence: "Das Unternehmen ist groß." },
+                { article: "die", word: "Besprechung", tr: "toplantı", sentence: "Die Besprechung beginnt gleich." },
+                { article: "die", word: "Abteilung", tr: "departman", sentence: "In welcher Abteilung arbeiten Sie?" },
+                { article: "die", word: "Probezeit", tr: "deneme süresi", sentence: "Meine Probezeit dauert drei Monate." },
+                { article: "die", word: "Überstunde", tr: "fazla mesai", sentence: "Heute muss ich Überstunden machen." },
+                { article: "die", word: "Arbeitszeit", tr: "iş saati", sentence: "Wie sind Ihre Arbeitszeiten?" }
+            ],
+            'unit5': [ 
+                { article: "die", word: "Zukunft", tr: "gelecek", sentence: "Die Zukunft ist ungewiss." },
+                { article: "die", word: "Entscheidung", tr: "karar", sentence: "Das war eine gute Entscheidung." },
+                { article: "das", word: "Erlebnis", tr: "deneyim", sentence: "Das war ein tolles Erlebnis." },
+                { article: "die", word: "Wirtschaft", tr: "ekonomi", sentence: "Die Wirtschaft wächst." },
+                { article: "-", word: "erfolgreich", tr: "başarılı", sentence: "Er ist sehr erfolgreich." },
+                { article: "die", word: "Langeweile", tr: "can sıkıntısı", sentence: "Ich sterbe vor Langeweile." },
+                { article: "das", word: "Netzwerk", tr: "ağ/şebeke", sentence: "Das Netzwerk ist ausgefallen." },
+                { article: "der", word: "Schaden", tr: "hasar", sentence: "Der Schaden ist groß." },
+                { article: "das", word: "Ergebnis", tr: "sonuç", sentence: "Das Ergebnis ist positiv." }
+            ],
+            'grammar': [ 
+                { type: 'grammar', text: "Ich bleibe zu Hause, ___ es regnet.", options: ["weil", "obwohl", "dass", "wenn"], answer: "weil", tr: "Evde kalıyorum, çünkü yağmur yağıyor.", qType: "fill_blanks" },
+                { type: 'grammar', text: "___ es regnet, gehe ich spazieren.", options: ["Obwohl", "Weil", "Dass", "Wenn"], answer: "Obwohl", tr: "Yağmur yağmasına rağmen, yürüyüşe çıkıyorum.", qType: "fill_blanks" },
+                { type: 'grammar', text: "Ich denke, ___ du recht hast.", options: ["dass", "weil", "obwohl", "als"], answer: "dass", tr: "Bence haklısın.", qType: "fill_blanks" },
+                { type: 'grammar', text: "Das ist der Mann, ___ ich gestern gesehen habe.", options: ["den", "dem", "der", "des"], answer: "den", tr: "Bu dün gördüğüm adam.", qType: "fill_blanks" },
+                { type: 'grammar', text: "Das ist die Frau, ___ ich das Buch gegeben habe.", options: ["der", "die", "dem", "den"], answer: "der", tr: "Bu kitabı verdiğim kadın.", qType: "fill_blanks" },
+                { type: 'grammar', text: "Ich lege das Buch auf ___ Tisch.", options: ["den", "dem", "der", "das"], answer: "den", tr: "Kitabı masanın üzerine koyuyorum.", qType: "fill_blanks" },
+                { type: 'grammar', text: "Das Bild hängt an ___ Wand.", options: ["der", "die", "den", "dem"], answer: "der", tr: "Resim duvarda asılı.", qType: "fill_blanks" },
+                { type: 'grammar', text: "Gestern ___ ich ins Kino gegangen.", options: ["bin", "habe", "wurde", "war"], answer: "bin", tr: "Dün sinemaya gittim.", qType: "fill_blanks" },
+                { type: 'grammar', text: "Ich ___ das Buch schon gelesen.", options: ["habe", "bin", "wurde", "hatte"], answer: "habe", tr: "Kitabı çoktan okudum.", qType: "fill_blanks" },
+                { type: 'grammar', text: "Wenn ich Zeit ___, würde ich dir helfen.", options: ["hätte", "wäre", "habe", "bin"], answer: "hätte", tr: "Zamanım olsaydı, sana yardım ederdim.", qType: "fill_blanks" },
+                { type: 'grammar', text: "Ich ___ gerne einen Kaffee.", options: ["hätte", "wäre", "habe", "bin"], answer: "hätte", tr: "Bir kahve alırdım.", qType: "fill_blanks" }
             ]
         };
 
         const dialoguesData = [
             { title: "Havalimanında", icon: "ph-airplane-tilt", color: "indigo", a: "Entschuldigung, wo ist die <span class='font-bold text-indigo-600'>Gepäckausgabe</span>?", b: "Gehen Sie am <span class='font-bold text-teal-600'>Schalter</span> vorbei." },
-            { title: "Çevre (Umweltschutz)", icon: "ph-tree-evergreen", color: "teal", a: "Der <span class='font-bold text-indigo-600'>Klimawandel</span> ist ein großes Problem.", b: "Das stimmt. Wir müssen Plastik vermeiden." },
-            { title: "Parti Planlama", icon: "ph-confetti", color: "amber", a: "Wir sollten eine Party organisieren. Hast du Lust?", b: "Klar! Ich kümmere mich um die <span class='font-bold text-teal-600'>Getränke</span>." },
-            { title: "Doktorda", icon: "ph-first-aid", color: "rose", a: "Ich habe starke <span class='font-bold text-indigo-600'>Kopfschmerzen</span>.", b: "Ich verschreibe Ihnen ein Medikament." },
-            { title: "İş Görüşmesi", icon: "ph-briefcase", color: "purple", a: "Haben Sie bereits <span class='font-bold text-indigo-600'>Berufserfahrung</span>?", b: "Ja, ich habe drei Jahre in einer Bank gearbeitet." }
+            { title: "Çevre Koruma", icon: "ph-tree-evergreen", color: "teal", a: "Der <span class='font-bold text-indigo-600'>Klimawandel</span> ist ein Problem.", b: "Wir müssen Plastik vermeiden." },
+            { title: "İş Görüşmesi", icon: "ph-briefcase", color: "purple", a: "Haben Sie bereits <span class='font-bold text-indigo-600'>Berufserfahrung</span>?", b: "Ja, drei Jahre in einer Bank." }
         ];
 
-        window.renderDialogues = function() {
+        function renderDialogues() {
             const container = document.getElementById('dialogues-container');
             if(!container) return;
             container.innerHTML = '';
@@ -598,286 +861,287 @@
             });
         }
 
-        window.switchScreen = function(screenName) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            const screenEl = document.getElementById(`screen-${screenName}`);
-            if(screenEl) screenEl.classList.add('active');
-            
-            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-            const navBtn = document.getElementById(`nav-${screenName}`);
-            if(navBtn) navBtn.classList.add('active');
-
-            const header = document.getElementById('main-header');
-            if(screenName === 'login' || screenName === 'session' || screenName === 'finish') {
-                if(header) header.style.display = 'none';
-            } else {
-                if(header) header.style.display = 'flex';
-                if(screenName === 'dashboard') {
-                    window.goBackToStages();
-                    window.updateDashboardProgress();
-                } else if(screenName === 'dialogues') {
-                    window.renderDialogues();
-                }
+        // ================= OYUN MOTORU =================
+        function startSession(type, count, nodeIdx) {
+            if(AppState.hearts <= 0) {
+                alert("Canın bitti! Devam etmen için sana ekstra can veriyorum."); AppState.hearts = 10; updateTopBar(); saveProgress();
             }
-        };
-
-        window.openStage = function(stageId) {
-            window.activeStage = stageId;
-            document.getElementById('view-stage-selection').classList.add('hidden');
-            window.buildPath(); 
-        };
-
-        window.goBackToStages = function() {
-            document.getElementById('view-learning-path').classList.add('hidden');
-            document.getElementById('view-stage-selection').classList.remove('hidden');
-            window.activeStage = null;
-        };
-
-        // ================= MEGA HARİTA OLUŞTURUCU (0-100 UZUN SÜRELİ & MARATON) =================
-        window.activePathNodes = [];
-        window.currentPathNodeIndex = 0;
-        
-        window.buildPath = function() {
-            document.getElementById('view-stage-selection').classList.add('hidden');
-            document.getElementById('view-learning-path').classList.remove('hidden');
-
-            const title = document.getElementById('path-title');
-            title.innerText = "Mega Eğitim Yolu"; 
-
-            let nodes = [];
+            AppState.sessionType = type;
+            AppState.activeSessionNodeIdx = nodeIdx;
+            AppState.sessionQuestions = generateQuestions(type, count); 
+            AppState.totalQuestionsAtStart = AppState.sessionQuestions.length; 
+            AppState.currentQIndex = 0;
+            AppState.correctAnswersCount = 0;
             
-            // Mega Maraton İsteği İçin Aşama Sayısı 50 olarak ayarlandı
-            let totalNodes = 50;
-            const nodeTypes = ['flashcards', 'vocab', 'listening', 'artikel', 'matching', 'writing', 'dictation', 'speaking'];
-            const icons = {
-                'flashcards': '<i class="ph-fill ph-book-open"></i>',
-                'vocab': '<i class="ph-fill ph-star"></i>',
-                'listening': '<i class="ph-fill ph-headphones"></i>',
-                'artikel': '<span class="font-black text-xl">ART</span>',
-                'matching': '<i class="ph-fill ph-puzzle-piece"></i>',
-                'writing': '<i class="ph-fill ph-pencil-simple"></i>',
-                'dictation': '<i class="ph-fill ph-waveform"></i>',
-                'speaking': '<i class="ph-fill ph-microphone"></i>'
-            };
-            const colors = ['purple', 'amber', 'indigo', 'rose', 'teal'];
+            updateProgressBar();
+            switchScreen('session');
+            loadQuestion();
+        }
+        window.startSession = startSession;
 
-            for (let i = 0; i < totalNodes; i++) {
-                let type = nodeTypes[i % nodeTypes.length];
-                
-                // Soru sayıları oldukça artırıldı (Tam sınav pratiği için her aşama 20-35 soru)
-                let count = 20 + Math.floor(Math.random() * 15);
-
-                nodes.push({
-                    type: type,
-                    count: count, 
-                    label: `Bölüm ${i+1}`,
-                    color: colors[i % colors.length],
-                    icon: icons[type] || '<i class="ph-fill ph-star"></i>'
-                });
-            }
-
-            window.activePathNodes = nodes.map(n => ({...n, completed: false}));
-            
-            let currentPct = window.stageProgress[window.activeStage] || 0;
-            let completedCount = Math.floor((currentPct / 100) * window.activePathNodes.length);
-            for(let i=0; i<completedCount; i++) {
-                if(window.activePathNodes[i]) window.activePathNodes[i].completed = true;
-            }
-            
-            window.currentPathNodeIndex = window.activePathNodes.findIndex(n => !n.completed);
-            if(window.currentPathNodeIndex === -1) window.currentPathNodeIndex = window.activePathNodes.length - 1; 
-
-            window.renderDynamicPath();
-            window.updatePathProgressUI();
-        };
-
-        window.renderDynamicPath = function() {
-            const container = document.getElementById('path-nodes-container');
-            let html = `<div class="absolute w-2 md:w-3 bg-slate-100 top-4 bottom-10 -z-10 rounded-full shadow-inner"></div>`;
-            
-            const positions = ['-translate-x-12 md:-translate-x-20', 'translate-x-0', 'translate-x-12 md:translate-x-20', 'translate-x-0'];
-
-            window.activePathNodes.forEach((node, idx) => {
-                let posClass = positions[idx % 4];
-                let btnClassStr = `btn-${node.color}`;
-                let isBoss = (idx === window.activePathNodes.length - 1);
-                let btnSize = isBoss ? 'w-20 h-20 md:w-24 md:h-24 text-3xl md:text-4xl' : 'w-16 h-16 md:w-20 md:h-20 text-2xl md:text-3xl';
-                let bounceClass = '';
-                
-                let stateClass = '';
-                let clickAction = `window.startSession('${node.type}', ${node.count}, ${idx})`;
-                let displayIcon = node.icon;
-                
-                if (node.completed) {
-                    stateClass = 'node-completed shadow-md border-teal-200 p-0 overflow-hidden'; 
-                    displayIcon = `<img src="assets/nisanmutlu.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/14b8a6/ffffff?text=OK'" class="w-full h-full object-cover">`; 
-                    btnClassStr = 'bg-teal-50'; 
-                } else if (idx > window.currentPathNodeIndex) {
-                    stateClass = 'node-locked'; 
-                    clickAction = '';
-                    displayIcon = '<i class="ph-bold ph-lock-key text-slate-300"></i>';
-                    btnClassStr = 'bg-slate-100 border-slate-200 text-slate-400';
-                } else if (idx === window.currentPathNodeIndex) {
-                    bounceClass = 'pulse-btn border-white border-[3px] shadow-lg'; 
-                }
-
-                html += `
-                    <div class="relative w-full flex justify-center mb-6">
-                        <div class="flex flex-col items-center transform ${posClass} transition-transform hover:-translate-y-1">
-                            <div class="bg-white border border-slate-200 text-slate-600 font-semibold px-4 py-1.5 rounded-xl shadow-sm text-[10px] md:text-xs mb-2 text-center z-10">
-                                ${node.label}
-                            </div>
-                            <button onclick="${clickAction}" class="app-btn ${btnSize} rounded-[1.2rem] md:rounded-[1.5rem] shadow-sm ${bounceClass} ${stateClass} ${btnClassStr}">
-                                ${displayIcon}
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-            if(container) container.innerHTML = html;
-        };
-
-        window.updatePathProgressUI = function() {
-            let pct = Math.floor((window.currentPathNodeIndex / window.activePathNodes.length) * 100);
-            if (window.activePathNodes.every(n => n.completed)) pct = 100;
-            
-            const progBar = document.getElementById('path-main-progress');
-            if(progBar) progBar.style.width = `${pct}%`;
-            window.stageProgress[window.activeStage] = pct;
-            window.saveProgress();
-        };
-
-        window.updateDashboardProgress = function() {
-            const keys = ['arena', 'b1_1', 'b1_2'];
-            keys.forEach(k => {
-                let bar = document.getElementById(`prog-bar-${k}`);
-                if(bar) bar.style.width = `${window.stageProgress[k]}%`;
-            });
-        };
-
-        // ================= OYUN MOTORU & STATE =================
-        let activeSessionNodeIdx = 0; 
-        let totalQuestionsAtStart = 0; 
-        let sessionQuestions = [];
-        let currentQIndex = 0;
-        let selectedOptionBtn = null;
-        let correctAnswersCount = 0;
-        let matchSelections = []; 
-        let sessionType = 'vocab';
-
-        window.startSession = function(type, count, nodeIdx) {
-            if(window.hearts <= 0) {
-                alert("Canın bitti! Devam etmen için sana ekstra can veriyorum."); window.hearts = 10; window.updateTopBar(); window.saveProgress();
-            }
-            sessionType = type;
-            activeSessionNodeIdx = nodeIdx;
-            sessionQuestions = generateQuestions(type, count); 
-            totalQuestionsAtStart = sessionQuestions.length; 
-            currentQIndex = 0;
-            correctAnswersCount = 0;
-            
-            window.updateProgressBar();
-            window.switchScreen('session');
-            window.loadQuestion();
-        };
-
-        window.quitSession = function() {
+        function quitSession() {
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-            window.switchScreen('dashboard');
-            document.getElementById('view-stage-selection').classList.add('hidden');
-            document.getElementById('view-learning-path').classList.remove('hidden');
-        };
+            switchScreen('dashboard');
+            const viewPath = document.getElementById('view-learning-path');
+            const stageSel = document.getElementById('view-stage-selection');
+            if(viewPath) viewPath.classList.add('hidden');
+            if(stageSel) stageSel.classList.remove('hidden');
+            AppState.activeStage = null;
+        }
+        window.quitSession = quitSession;
 
         function generateQuestions(type, amount) {
             let questions = [];
+            let activePoolData = dbContent[AppState.activeStage] || dbContent['unit1']; 
             
-            let activePoolData = dbContent[window.activeStage] || dbContent['b1_1']; 
-            if(type === 'artikel' || type === 'writing') {
-                activePoolData = activePoolData.filter(item => item.article !== '-');
+            if(type === 'grammar' || type === 'sentence_ordering' || type === 'fill_blanks') {
+                activePoolData = dbContent['grammar'];
             }
 
             let pool = [...activePoolData];
             for(let i=0; i<amount; i++) {
                 if(pool.length === 0) pool = [...activePoolData]; 
                 let randIdx = Math.floor(Math.random() * pool.length);
-                questions.push(pool.splice(randIdx, 1)[0]);
+                let q = {...pool.splice(randIdx, 1)[0]};
+                q.qType = type; 
+                questions.push(q);
             }
             return questions;
         }
 
-        window.loadQuestion = function() {
-            selectedOptionBtn = null;
-            matchSelections = [];
-            document.getElementById('btn-check').disabled = true;
-            document.getElementById('btn-check').classList.remove('hidden');
-            document.getElementById('feedback-sheet').classList.remove('show');
-            document.getElementById('session-avatars').style.display = 'flex'; 
+        function setAvatars(mode) {
+            const nisanImg = document.getElementById('nisan-avatar');
+            const nisanBubble = document.getElementById('nisan-bubble');
+            const talhaImg = document.getElementById('talha-avatar');
+            const talhaBubble = document.getElementById('talha-bubble');
 
-            let q = sessionQuestions[currentQIndex];
+            setImgSrc(nisanImg, "assets/nisan.png", "Nisan", "f59e0b");
+            if(nisanImg) nisanImg.className = "w-14 h-14 md:w-20 md:h-20 rounded-full border-[3px] md:border-4 border-amber-200 object-cover bg-white shadow-md z-10";
+            
+            setImgSrc(talhaImg, "assets/talhaarkaplansiz.png", "Talha", "6366f1");
+            if(talhaImg) {
+                talhaImg.className = "w-14 h-14 md:w-20 md:h-20 rounded-full border-[3px] md:border-4 border-indigo-200 object-cover bg-white shadow-md z-10 anim-talk";
+                setTimeout(() => { talhaImg.classList.remove('anim-talk'); }, 2000); 
+            }
+
+            if(talhaBubble) {
+                if(mode.includes('grammar') || mode === 'fill_blanks') { talhaBubble.innerText = "Kuralları hatırlayalım!"; }
+                else if(mode === 'flashcards') { talhaBubble.innerText = "Dinle ve ezberle bebeğim!"; }
+                else if(mode === 'listening') { talhaBubble.innerText = "Ne duyduğunu anladın mı?"; }
+                else if(mode === 'writing') { talhaBubble.innerText = "Hadi, hatasız yaz bakalım!"; }
+                else if(mode === 'dictation') { talhaBubble.innerText = "Duyduğunu tam olarak yaz!"; }
+                else if(mode === 'matching') { talhaBubble.innerText = "Çiftleri doğru eşleştirebilecek misin?"; }
+                else if(mode === 'sentence_ordering') { talhaBubble.innerText = "Kelimeleri doğru sıraya diz!"; }
+                else if(mode === 'translation') { talhaBubble.innerText = "Bu cümlenin çevirisi nedir?"; }
+                else { talhaBubble.innerText = "Bunun anlamı nedir hayatım?"; }
+            }
+
+            if(nisanBubble) {
+                const nisanThoughts = ["Hımm, düşünüyoruum...", "Bunu biliyorum galiba!", "Odaklanmam lazım...", "Hallettim say!"];
+                nisanBubble.innerText = nisanThoughts[Math.floor(Math.random() * nisanThoughts.length)];
+            }
+        }
+
+        function reactNisan(isCorrect) {
+            const nisanImg = document.getElementById('nisan-avatar');
+            const nisanBubble = document.getElementById('nisan-bubble');
+            
+            if(nisanImg) {
+                nisanImg.classList.remove('anim-happy', 'anim-sad');
+                void nisanImg.offsetWidth; 
+            }
+
+            if(isCorrect) {
+                setImgSrc(nisanImg, "assets/nisanmutlu.png", "Mutlu", "14b8a6");
+                if(nisanImg) nisanImg.classList.add('anim-happy');
+                const happyTexts = ["İşte bu kadar!", "Bildiim! 😎", "Çok kolaydı sevgilim!", "Bana mısın demem!"];
+                if(nisanBubble) nisanBubble.innerText = happyTexts[Math.floor(Math.random() * happyTexts.length)];
+            } else {
+                setImgSrc(nisanImg, "assets/nisanuzuluyor.png", "Uzgun", "f43f5e");
+                if(nisanImg) nisanImg.classList.add('anim-sad');
+                const sadTexts = ["Tüh ya, nasıl kaçırdım...", "Off, yanlış oldu 😔", "Bir dahakine bileceğim!", "Aklım karıştı..."];
+                if(nisanBubble) nisanBubble.innerText = sadTexts[Math.floor(Math.random() * sadTexts.length)];
+            }
+        }
+
+        function loadQuestion() {
+            AppState.selectedOptionBtn = null;
+            AppState.matchSelections = [];
+            AppState.sentenceSelection = [];
+            
+            const btnCheck = document.getElementById('btn-check');
+            if(btnCheck) {
+                btnCheck.disabled = true;
+                btnCheck.classList.remove('hidden');
+            }
+            const feedSheet = document.getElementById('feedback-sheet');
+            if(feedSheet) feedSheet.classList.remove('show');
+            
+            let q = AppState.sessionQuestions[AppState.currentQIndex];
             const content = document.getElementById('session-content');
+            if(!content) return;
             content.innerHTML = ''; 
 
-            let mode = sessionType;
-            window.setAvatars(mode);
+            let mode = q.qType;
+            setAvatars(mode);
 
-            // --- 0.1 SPEAKING ---
-            if(mode === 'speaking') {
-                document.getElementById('btn-check').innerText = "Geç (Mikrofon Yoksa)";
-                document.getElementById('btn-check').disabled = false; 
+            // 1. FILL IN BLANKS (GRAMMAR)
+            if(mode === 'grammar' || mode === 'fill_blanks') {
+                if(btnCheck) btnCheck.innerText = "Kontrol Et";
+                let textParts = q.text.split('___');
+                content.innerHTML = `
+                    <div class="w-full flex items-center gap-4 mb-6 mt-2">
+                        <div class="border border-slate-200 rounded-3xl p-5 text-center w-full relative bg-white shadow-sm">
+                            <span class="text-lg md:text-xl font-bold text-slate-700 leading-relaxed">
+                                ${textParts[0]}<span class="text-indigo-500 underline decoration-2 underline-offset-4 mx-1" id="blank-space">_____</span>${textParts[1]}
+                            </span>
+                            <p class="text-xs text-slate-400 mt-2">${q.tr}</p>
+                        </div>
+                    </div>
+                    <div id="options-grid" class="grid grid-cols-2 gap-3 w-full"></div>
+                `;
+                const grid = document.getElementById('options-grid');
+                let opts = [...q.options].sort(() => Math.random() - 0.5);
+                opts.forEach(opt => {
+                    let btn = document.createElement('button');
+                    btn.className = "opt-btn py-3 px-4 w-full flex items-center justify-center text-center text-sm";
+                    btn.innerText = opt;
+                    btn.dataset.correct = (opt === q.answer);
+                    btn.onclick = () => {
+                        selectOption(btn);
+                        document.getElementById('blank-space').innerText = ` ${opt} `;
+                    };
+                    if(grid) grid.appendChild(btn);
+                });
+            }
+            
+            // 2. SENTENCE ORDERING
+            else if(mode === 'sentence_ordering') {
+                if(btnCheck) btnCheck.innerText = "Kontrol Et";
+                
+                let sentence = q.sentence || q.text.replace('___', q.answer);
+                let words = sentence.split(' ');
+                let shuffledWords = [...words].sort(() => Math.random() - 0.5);
+                
+                content.innerHTML = `
+                    <div class="w-full mt-2 mb-4 text-center">
+                        <p class="text-sm font-bold text-slate-500 mb-2">${q.tr}</p>
+                        <div id="sentence-slot" class="sentence-slot bg-slate-50 rounded-2xl"></div>
+                        <div id="word-bank" class="flex flex-wrap justify-center gap-2 mt-4"></div>
+                    </div>
+                `;
+                
+                const bank = document.getElementById('word-bank');
+                shuffledWords.forEach((word, idx) => {
+                    let btn = document.createElement('button');
+                    btn.className = "word-bank-btn";
+                    btn.innerText = word;
+                    btn.onclick = () => toggleWord(btn, word, idx);
+                    bank.appendChild(btn);
+                });
+                AppState.currentExpectedSentence = words.join(' ');
+            }
+
+            // 3. TRANSLATION (WRITE)
+            else if(mode === 'translation') {
+                if(btnCheck) btnCheck.innerText = "Kontrol Et";
+                let sentenceToTranslate = q.sentence || (q.article === '-' ? q.word : `${q.article} ${q.word}`);
+                content.innerHTML = `
+                    <div class="w-full flex items-center gap-4 mb-8 mt-4">
+                        <div class="border border-slate-200 rounded-[2rem] p-6 text-center w-full relative bg-slate-50 shadow-inner">
+                            <span class="text-sm font-semibold uppercase tracking-widest text-slate-400 block mb-1">Türkçeye Çevir:</span>
+                            <span class="text-xl md:text-2xl font-black text-slate-800 tracking-tight">${sentenceToTranslate}</span>
+                        </div>
+                    </div>
+                    <div class="w-full relative">
+                        <input type="text" id="write-input" placeholder="Anlamını buraya yaz" autocomplete="off" autocorrect="off" class="w-full border border-slate-300 rounded-2xl px-5 py-4 font-semibold text-slate-800 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 bg-white text-lg text-center shadow-sm transition-all">
+                    </div>
+                `;
+                setTimeout(() => { const el = document.getElementById('write-input'); if(el) el.focus(); }, 100);
+                document.getElementById('write-input').addEventListener('input', () => { if(btnCheck) btnCheck.disabled = false; });
+                document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') checkAnswer(); });
+            }
+
+            // 4. SPEAKING
+            else if(mode === 'speaking') {
+                if(btnCheck) { btnCheck.innerText = "Geç (Mikrofon Yoksa)"; btnCheck.disabled = false; }
+                let textToSpeak = q.sentence || q.word;
                 content.innerHTML = `
                     <div class="w-full flex items-center gap-4 mb-8 mt-4">
                         <div class="border border-slate-200 rounded-[2rem] p-6 text-center w-full relative bg-slate-50 shadow-inner">
                             <span class="text-sm font-semibold uppercase tracking-widest text-slate-400 block mb-1">Bunu Sesli Oku:</span>
-                            <span class="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">${q.word}</span>
+                            <span class="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">${textToSpeak}</span>
                         </div>
                     </div>
                     <div class="w-full text-center">
-                        <button id="mic-btn" onclick="window.startListening()" class="w-20 h-20 bg-teal-50 text-teal-500 rounded-full text-4xl mx-auto flex items-center justify-center border border-teal-200 shadow-sm active:translate-y-1 transition-colors">
+                        <button id="mic-btn" onclick="startListening()" class="w-20 h-20 bg-teal-50 text-teal-500 rounded-full text-4xl mx-auto flex items-center justify-center border border-teal-200 shadow-sm active:translate-y-1 transition-colors">
                             <i class="ph-fill ph-microphone"></i>
                         </button>
                         <p id="speech-result" class="text-sm font-medium text-slate-500 mt-4 h-6">Mikrofona dokun ve konuş...</p>
                     </div>
                 `;
             }
-            // --- 2. EZBER (FLASHCARDS) ---
+
+            // 5. FLASHCARDS
             else if(mode === 'flashcards') {
-                document.getElementById('btn-check').innerText = "Sonraki";
-                document.getElementById('btn-check').disabled = false;
+                if(btnCheck) { btnCheck.innerText = "Sonraki"; btnCheck.disabled = false; }
                 content.innerHTML = `
                     <div class="bg-white border border-slate-200 rounded-3xl p-6 w-full text-center shadow-sm mt-2">
-                        <button onclick="window.speakWord('${q.word}')" class="mb-4 w-16 h-16 bg-indigo-50 text-indigo-500 rounded-full text-3xl mx-auto flex items-center justify-center speaker-btn border border-indigo-100 shadow-sm active:translate-y-1">
+                        <button onclick="speakWord('${q.word}')" class="mb-4 w-16 h-16 bg-indigo-50 text-indigo-500 rounded-full text-3xl mx-auto flex items-center justify-center speaker-btn border border-indigo-100 shadow-sm active:translate-y-1">
                             <i class="ph-fill ph-speaker-high"></i>
                         </button>
                         <p class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-1">${q.article === '-' ? '' : q.article}</p>
-                        <h2 class="text-3xl font-black text-slate-800 mb-6 tracking-tight">${q.word}</h2>
+                        <h2 class="text-3xl font-black text-slate-800 mb-4 tracking-tight">${q.word}</h2>
+                        ${q.sentence ? `<p class="text-sm text-slate-500 mb-4 italic">"${q.sentence}"</p>` : ''}
                         <div class="border-t border-dashed border-slate-200 pt-4">
                             <p class="text-xl font-bold text-teal-600">${q.tr}</p>
                         </div>
                     </div>
                 `;
-                window.speakWord(q.word);
+                speakWord(q.word);
             }
-            // --- 3. DINLEME (LISTENING) ---
+
+            // 6. MATCHING
+            else if(mode === 'matching') {
+                if(btnCheck) btnCheck.classList.add('hidden'); 
+                
+                let pairs = [q];
+                let pool = dbContent[AppState.activeStage] || dbContent['unit1'];
+                while(pairs.length < 4) {
+                    let w = pool[Math.floor(Math.random() * pool.length)];
+                    if(!pairs.includes(w) && w.type !== 'grammar') pairs.push(w);
+                }
+                let buttonsHTML = [];
+                pairs.forEach((p, idx) => {
+                    let dispWord = p.article === '-' ? p.word : `${p.article} ${p.word}`;
+                    buttonsHTML.push(`<button onclick="selectMatch(this, 'de', ${idx})" class="opt-btn py-3 px-2 w-full text-center text-sm font-semibold shadow-sm">${dispWord}</button>`);
+                    buttonsHTML.push(`<button onclick="selectMatch(this, 'tr', ${idx})" class="opt-btn py-3 px-2 w-full text-center text-sm font-semibold shadow-sm">${p.tr}</button>`);
+                });
+                buttonsHTML.sort(() => Math.random() - 0.5);
+                content.innerHTML += `<div class="grid grid-cols-2 gap-3 w-full mt-2" id="matching-grid">${buttonsHTML.join('')}</div>`;
+                content.dataset.pairsFound = 0;
+            }
+
+            // 7. LISTENING
             else if(mode === 'listening') {
-                document.getElementById('btn-check').innerText = "Kontrol Et";
+                if(btnCheck) btnCheck.innerText = "Kontrol Et";
                 content.innerHTML = `
-                    <button onclick="window.speakWord('${q.word}')" class="mt-4 mb-6 w-20 h-20 bg-indigo-500 text-white rounded-full text-4xl mx-auto flex items-center justify-center speaker-btn shadow-md shadow-indigo-500/30 active:translate-y-1">
+                    <button onclick="speakWord('${q.word}')" class="mt-4 mb-6 w-20 h-20 bg-indigo-500 text-white rounded-full text-4xl mx-auto flex items-center justify-center speaker-btn shadow-md shadow-indigo-500/30 active:translate-y-1">
                         <i class="ph-fill ph-speaker-high"></i>
                     </button>
                     <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full"></div>
                 `;
-                window.speakWord(q.word);
-                window.generateOptions(q, 'options-grid');
+                speakWord(q.word);
+                generateOptions(q, 'options-grid');
             }
-            // --- 4. YAZMA (WRITING) ---
+            // 8. WRITING / DICTATION
             else if(mode === 'writing' || mode === 'dictation') {
-                document.getElementById('btn-check').innerText = "Kontrol Et";
-                document.getElementById('btn-check').disabled = false; 
+                if(btnCheck) btnCheck.innerText = "Kontrol Et";
                 
                 let topContent = '';
                 if(mode === 'dictation') {
-                    topContent = `<button onclick="window.speakWord('${q.word}')" class="mb-6 w-16 h-16 bg-purple-500 text-white rounded-full text-3xl mx-auto flex items-center justify-center speaker-btn shadow-md shadow-purple-500/30 active:translate-y-1"><i class="ph-fill ph-waveform"></i></button>`;
-                    window.speakWord(q.word);
+                    topContent = `<button onclick="speakWord('${q.word}')" class="mb-6 w-16 h-16 bg-purple-500 text-white rounded-full text-3xl mx-auto flex items-center justify-center speaker-btn shadow-md shadow-purple-500/30 active:translate-y-1"><i class="ph-fill ph-waveform"></i></button>`;
+                    speakWord(q.word);
                 } else {
                     topContent = `<div class="border border-slate-200 rounded-3xl p-5 text-center w-full relative bg-slate-50 shadow-inner mb-6"><span class="text-xl font-bold text-slate-800">${q.tr}</span></div>`;
                 }
@@ -889,54 +1153,12 @@
                     </div>
                 `;
                 setTimeout(() => { const el = document.getElementById('write-input'); if(el) el.focus(); }, 100);
-                document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') window.checkAnswer(); });
+                document.getElementById('write-input').addEventListener('input', () => { if(btnCheck) btnCheck.disabled = false; });
+                document.getElementById('write-input').addEventListener('keypress', function(e) { if (e.key === 'Enter') checkAnswer(); });
             }
-            // --- 5. EŞLEŞTİRME (MATCHING) ---
-            else if(mode === 'matching') {
-                document.getElementById('btn-check').classList.add('hidden'); 
-                
-                let pairs = [q];
-                let pool = dbContent[window.activeStage] || dbContent['b1_1'];
-                while(pairs.length < 4) {
-                    let w = pool[Math.floor(Math.random() * pool.length)];
-                    if(!pairs.includes(w)) pairs.push(w);
-                }
-                let buttonsHTML = [];
-                pairs.forEach((p, idx) => {
-                    let dispWord = p.article === '-' ? p.word : `${p.article} ${p.word}`;
-                    buttonsHTML.push(`<button onclick="window.selectMatch(this, 'de', ${idx})" class="opt-btn py-3 px-2 w-full text-center text-sm font-semibold shadow-sm">${dispWord}</button>`);
-                    buttonsHTML.push(`<button onclick="window.selectMatch(this, 'tr', ${idx})" class="opt-btn py-3 px-2 w-full text-center text-sm font-semibold shadow-sm">${p.tr}</button>`);
-                });
-                buttonsHTML.sort(() => Math.random() - 0.5);
-                content.innerHTML += `<div class="grid grid-cols-2 gap-3 w-full mt-2" id="matching-grid">${buttonsHTML.join('')}</div>`;
-                content.dataset.pairsFound = 0;
-            }
-            // --- 6. ARTIKEL SEÇİMİ ---
-            else if(mode === 'artikel') {
-                document.getElementById('btn-check').innerText = "Kontrol Et";
-                content.innerHTML = `
-                    <div class="w-full flex flex-col items-center mb-8 mt-4 bg-white border border-slate-100 rounded-[2rem] p-6 shadow-sm">
-                        <span class="text-xl font-bold uppercase tracking-widest text-slate-300 block mb-1">___</span>
-                        <span class="text-3xl md:text-5xl font-black text-slate-800 text-center tracking-tight">${q.word}</span>
-                        <span class="text-sm md:text-base font-bold text-indigo-500 mt-4 bg-indigo-50 border border-indigo-100 px-4 py-1.5 rounded-full">${q.tr}</span>
-                    </div>
-                    <div id="options-grid" class="grid grid-cols-3 gap-3 md:gap-4 w-full"></div>
-                `;
-                
-                const artikels = ['der', 'die', 'das'];
-                const grid = document.getElementById('options-grid');
-                artikels.forEach(art => {
-                    let btn = document.createElement('button');
-                    btn.className = "opt-btn py-6 md:py-8 px-2 w-full text-xl sm:text-2xl font-black uppercase tracking-wider text-center";
-                    btn.innerText = art;
-                    btn.dataset.correct = (art === q.article);
-                    btn.onclick = () => window.selectOption(btn);
-                    grid.appendChild(btn);
-                });
-            }
-            // --- 7. KLASİK VOCAB (OKUMA/ANLAM) ---
+            // 9. VOCAB / ARTIKEL
             else {
-                document.getElementById('btn-check').innerText = "Kontrol Et";
+                if(btnCheck) btnCheck.innerText = "Kontrol Et";
                 let dispArticle = q.article === '-' ? '' : `<span class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 block mb-1">${q.article}</span>`;
                 content.innerHTML = `
                     <div class="w-full flex items-center gap-3 mb-6 mt-2">
@@ -944,17 +1166,41 @@
                             ${dispArticle}
                             <span class="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">${q.word}</span>
                         </div>
-                        <button onclick="window.speakWord('${q.word}')" class="w-14 h-14 bg-indigo-100 text-indigo-500 rounded-2xl text-2xl flex items-center justify-center shrink-0 border border-indigo-200 active:translate-y-1 transition-transform">
+                        <button onclick="speakWord('${q.word}')" class="w-14 h-14 bg-indigo-100 text-indigo-500 rounded-2xl text-2xl flex items-center justify-center shrink-0 border border-indigo-200 active:translate-y-1 transition-transform">
                             <i class="ph-fill ph-speaker-high"></i>
                         </button>
                     </div>
                     <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full"></div>
                 `;
-                window.generateOptions(q, 'options-grid');
+                generateOptions(q, 'options-grid');
             }
-        };
+        }
+        window.loadQuestion = loadQuestion;
 
-        window.startListening = function() {
+        function toggleWord(btn, word, idx) {
+            const slot = document.getElementById('sentence-slot');
+            if(btn.classList.contains('used')) {
+                btn.classList.remove('used');
+                let inSlot = document.getElementById(`slot-word-${idx}`);
+                if(inSlot) slot.removeChild(inSlot);
+                AppState.sentenceSelection = AppState.sentenceSelection.filter(w => w.idx !== idx);
+            } else {
+                btn.classList.add('used');
+                let slotBtn = document.createElement('div');
+                slotBtn.className = "bg-indigo-500 text-white px-3 py-1.5 rounded-lg font-semibold shadow-sm cursor-pointer";
+                slotBtn.innerText = word;
+                slotBtn.id = `slot-word-${idx}`;
+                slotBtn.onclick = () => toggleWord(btn, word, idx);
+                slot.appendChild(slotBtn);
+                AppState.sentenceSelection.push({word, idx});
+            }
+            
+            const btnCheck = document.getElementById('btn-check');
+            if(btnCheck) btnCheck.disabled = AppState.sentenceSelection.length === 0;
+        }
+        window.toggleWord = toggleWord;
+
+        function startListening() {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
                 alert("Tarayıcınız mikrofon desteklemiyor. Lütfen atla butonunu kullanın.");
@@ -969,43 +1215,56 @@
             const micBtn = document.getElementById('mic-btn');
             const resultText = document.getElementById('speech-result');
             
-            micBtn.classList.add('animate-pulse', 'bg-rose-500', 'text-white');
-            micBtn.classList.remove('bg-teal-50', 'text-teal-500');
-            resultText.innerText = "Dinleniyor...";
+            if(micBtn) {
+                micBtn.classList.add('animate-pulse', 'bg-rose-500', 'text-white');
+                micBtn.classList.remove('bg-teal-50', 'text-teal-500');
+            }
+            if(resultText) resultText.innerText = "Dinleniyor...";
 
             recognition.start();
 
             recognition.onresult = function(event) {
                 const speechResult = event.results[0][0].transcript.toLowerCase();
-                const expected = sessionQuestions[currentQIndex].word.toLowerCase();
-                resultText.innerText = `Duyulan: "${speechResult}"`;
+                let q = AppState.sessionQuestions[AppState.currentQIndex];
+                let expected = (q.sentence || q.word).toLowerCase();
+                if(resultText) resultText.innerText = `Duyulan: "${speechResult}"`;
 
-                if (speechResult.includes(expected) || expected.includes(speechResult) || expected.replace(/[^a-zäöüß]/g, '') === speechResult.replace(/[^a-zäöüß]/g, '')) {
-                    document.getElementById('btn-check').disabled = false;
-                    window.speechMatch = true;
-                    micBtn.classList.replace('bg-rose-500', 'bg-teal-500');
+                const btnCheck = document.getElementById('btn-check');
+                if(btnCheck) btnCheck.disabled = false;
+
+                let cleanSpeech = speechResult.replace(/[^a-zäöüß]/g, '');
+                let cleanExpected = expected.replace(/[^a-zäöüß]/g, '');
+
+                if (cleanSpeech.includes(cleanExpected) || cleanExpected.includes(cleanSpeech)) {
+                    AppState.speechMatch = true;
+                    if(micBtn) micBtn.classList.replace('bg-rose-500', 'bg-teal-500');
                 } else {
-                    document.getElementById('btn-check').disabled = false;
-                    window.speechMatch = false;
-                    micBtn.classList.remove('bg-rose-500', 'text-white');
-                    micBtn.classList.add('bg-teal-50', 'text-teal-500');
+                    AppState.speechMatch = false;
+                    if(micBtn) {
+                        micBtn.classList.remove('bg-rose-500', 'text-white');
+                        micBtn.classList.add('bg-teal-50', 'text-teal-500');
+                    }
                 }
-                micBtn.classList.remove('animate-pulse');
+                if(micBtn) micBtn.classList.remove('animate-pulse');
             };
 
             recognition.onerror = function(event) {
-                micBtn.classList.remove('animate-pulse', 'bg-rose-500', 'text-white');
-                micBtn.classList.add('bg-teal-50', 'text-teal-500');
-                resultText.innerText = "Ses anlaşılamadı, tekrar dokun.";
+                if(micBtn) {
+                    micBtn.classList.remove('animate-pulse', 'bg-rose-500', 'text-white');
+                    micBtn.classList.add('bg-teal-50', 'text-teal-500');
+                }
+                if(resultText) resultText.innerText = "Ses anlaşılamadı, tekrar dokun.";
             };
-        };
+        }
+        window.startListening = startListening;
 
-        window.generateOptions = function(q, gridId) {
+        function generateOptions(q, gridId) {
             let options = [q];
-            let pool = dbContent[window.activeStage] || dbContent['b1_1'];
+            let pool = dbContent[AppState.activeStage] || dbContent['unit1'];
+
             while(options.length < 4) {
                 let w = pool[Math.floor(Math.random() * pool.length)];
-                if(!options.includes(w)) options.push(w);
+                if(!options.includes(w) && w.type !== 'grammar') options.push(w);
             }
             options.sort(() => Math.random() - 0.5);
             const grid = document.getElementById(gridId);
@@ -1014,133 +1273,177 @@
                 btn.className = "opt-btn py-3 px-4 w-full flex items-center justify-center text-center text-sm md:text-base";
                 btn.innerText = opt.tr;
                 btn.dataset.correct = (opt === q);
-                btn.onclick = () => { window.selectOption(btn); if(sessionType === 'listening') window.speakWord(opt.word); };
-                grid.appendChild(btn);
+                btn.onclick = () => { selectOption(btn); if(AppState.sessionType === 'listening') speakWord(opt.word); };
+                if(grid) grid.appendChild(btn);
             });
-        };
+        }
+        window.generateOptions = generateOptions;
 
-        window.selectOption = function(btn) {
+        function selectOption(btn) {
             document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
-            selectedOptionBtn = btn;
-            document.getElementById('btn-check').disabled = false;
-        };
+            AppState.selectedOptionBtn = btn;
+            const btnCheck = document.getElementById('btn-check');
+            if(btnCheck) btnCheck.disabled = false;
+        }
+        window.selectOption = selectOption;
 
-        window.selectMatch = function(btn, lang, id) {
+        function selectMatch(btn, lang, id) {
             if(btn.disabled || btn.classList.contains('correct')) return;
-            if(btn.classList.contains('selected')) { btn.classList.remove('selected'); matchSelections = []; return; }
+            if(btn.classList.contains('selected')) { btn.classList.remove('selected'); AppState.matchSelections = []; return; }
 
             btn.classList.add('selected');
-            matchSelections.push({btn, lang, id});
+            AppState.matchSelections.push({btn, lang, id});
 
-            if(matchSelections.length === 2) {
-                let first = matchSelections[0]; let second = matchSelections[1];
+            if(AppState.matchSelections.length === 2) {
+                let first = AppState.matchSelections[0]; let second = AppState.matchSelections[1];
 
                 if(first.lang !== second.lang && first.id === second.id) {
                     first.btn.classList.replace('selected', 'correct'); second.btn.classList.replace('selected', 'correct');
                     first.btn.disabled = true; second.btn.disabled = true;
-                    window.playCorrectSound();
+                    playCorrectSound();
                     
                     let content = document.getElementById('session-content');
-                    content.dataset.pairsFound = parseInt(content.dataset.pairsFound) + 1;
-                    
-                    if(parseInt(content.dataset.pairsFound) === 4) {
-                        correctAnswersCount++; window.reactNisan(true); 
-                        setTimeout(() => window.showFeedback(true, "Harika Eşleştirme!", ""), 800);
-                    } else {
-                        window.reactNisan(true); setTimeout(() => window.setAvatars(sessionType), 1000); 
+                    if(content) {
+                        content.dataset.pairsFound = parseInt(content.dataset.pairsFound) + 1;
+                        if(parseInt(content.dataset.pairsFound) === 4) {
+                            AppState.correctAnswersCount++; reactNisan(true); 
+                            setTimeout(() => showFeedback(true, "Harika Eşleştirme!", ""), 800);
+                        } else {
+                            reactNisan(true); setTimeout(() => setAvatars(AppState.sessionType), 1000); 
+                        }
                     }
                 } else {
                     first.btn.classList.replace('selected', 'wrong'); second.btn.classList.replace('selected', 'wrong');
-                    window.playWrongSound(); window.reactNisan(false); 
-                    window.hearts--; window.updateTopBar(); window.saveProgress();
+                    playWrongSound(); reactNisan(false); 
+                    AppState.hearts--; updateTopBar(); saveProgress();
                     
-                    sessionQuestions.push(sessionQuestions[currentQIndex]); 
+                    AppState.sessionQuestions.push(AppState.sessionQuestions[AppState.currentQIndex]); 
                     
                     setTimeout(() => {
                         first.btn.classList.remove('wrong'); second.btn.classList.remove('wrong');
-                        if(window.hearts <= 0) { alert("Canın bitti!"); window.quitSession(); }
-                        else { window.setAvatars(sessionType); } 
+                        if(AppState.hearts <= 0) { alert("Canın bitti!"); quitSession(); }
+                        else { setAvatars(AppState.sessionType); } 
                     }, 800);
                 }
-                matchSelections = [];
+                AppState.matchSelections = [];
             }
-        };
+        }
+        window.selectMatch = selectMatch;
 
-        window.checkAnswer = function() {
-            let mode = sessionType;
-            let q = sessionQuestions[currentQIndex];
+        function checkAnswer() {
+            let mode = AppState.sessionQuestions[AppState.currentQIndex].qType;
+            let q = AppState.sessionQuestions[AppState.currentQIndex];
+            const btnCheck = document.getElementById('btn-check');
 
             if(mode === 'flashcards') {
-                correctAnswersCount++; window.nextQuestion(); return;
+                AppState.correctAnswersCount++; nextQuestion(); return;
             }
 
             if(mode === 'speaking') {
-                document.getElementById('btn-check').disabled = true;
-                if(window.speechMatch === true) {
-                    correctAnswersCount++; window.playCorrectSound(); window.reactNisan(true);
-                    window.showFeedback(true, "Harika Telaffuz!", "Çok iyi söyledin.");
+                if(btnCheck) btnCheck.disabled = true;
+                if(AppState.speechMatch === true) {
+                    AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                    showFeedback(true, "Harika Telaffuz!", "Çok iyi söyledin.");
                 } else {
-                    if(window.speechMatch === undefined) { window.nextQuestion(); return; }
-                    window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
-                    window.showFeedback(false, "Yanlış Telaffuz", `Okunması gereken: ${q.word}`);
-                    sessionQuestions.push(q);
+                    if(AppState.speechMatch === undefined) { nextQuestion(); return; }
+                    AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
+                    showFeedback(false, "Yanlış Telaffuz", `Okunması gereken: ${q.sentence || q.word}`);
+                    AppState.sessionQuestions.push(q);
                 }
-                window.speechMatch = undefined;
+                AppState.speechMatch = undefined;
+                return;
+            }
+
+            if(mode === 'sentence_ordering') {
+                let userSentence = AppState.sentenceSelection.map(s => s.word).join(' ');
+                if(btnCheck) btnCheck.disabled = true;
+                
+                if(userSentence === AppState.currentExpectedSentence) {
+                    AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                    showFeedback(true, "Mükemmel!", "Cümleyi doğru kurdun.");
+                } else {
+                    AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
+                    showFeedback(false, "Yanlış Sıralama", `Doğrusu: ${AppState.currentExpectedSentence}`);
+                    AppState.sessionQuestions.push(q); 
+                }
+                return;
+            }
+
+            if(mode === 'translation') {
+                const inputEl = document.getElementById('write-input');
+                const userText = inputEl ? inputEl.value.toLowerCase().trim() : '';
+                const expected = q.tr.toLowerCase().trim();
+                
+                if(btnCheck) btnCheck.disabled = true; 
+                if(inputEl) inputEl.disabled = true;
+
+                let isCorrectStr = expected.includes(userText) && userText.length > 2;
+
+                if(isCorrectStr) {
+                    AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                    showFeedback(true, "Mükemmel Çeviri!", "Anlamı doğru bildin.");
+                } else {
+                    AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
+                    showFeedback(false, "Yanlış!", `Doğrusu: ${q.tr}`);
+                    AppState.sessionQuestions.push(q); 
+                }
                 return;
             }
 
             if(mode === 'writing' || mode === 'dictation') {
                 const inputEl = document.getElementById('write-input');
-                const userText = inputEl.value.toLowerCase().trim();
-                const expectedWithArticle = (q.article + " " + q.word).toLowerCase().trim();
+                const userText = inputEl ? inputEl.value.toLowerCase().trim() : '';
+                const expectedWithArticle = (q.article && q.article !== '-' ? `${q.article} ${q.word}` : q.word).toLowerCase().trim();
                 const expectedWordOnly = q.word.toLowerCase().trim();
                 
-                document.getElementById('btn-check').disabled = true; inputEl.disabled = true;
+                if(btnCheck) btnCheck.disabled = true; 
+                if(inputEl) inputEl.disabled = true;
 
-                let isCorrectStr = false;
-                if(q.article === '-' && userText === expectedWordOnly) isCorrectStr = true;
-                else if(userText === expectedWithArticle || userText === expectedWordOnly) isCorrectStr = true;
+                let isCorrectStr = (userText === expectedWithArticle || userText === expectedWordOnly);
 
                 if(isCorrectStr) {
-                    correctAnswersCount++; window.playCorrectSound(); window.reactNisan(true);
-                    window.showFeedback(true, "Mükemmel!", "Kusursuz yazdın.");
+                    AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                    showFeedback(true, "Mükemmel!", "Kusursuz yazdın.");
                 } else {
-                    window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
+                    AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
                     let corr = q.article === '-' ? q.word : `${q.article} ${q.word}`;
-                    window.showFeedback(false, "Yanlış!", `Doğrusu: ${corr}`);
-                    sessionQuestions.push(q); 
+                    showFeedback(false, "Yanlış!", `Doğrusu: ${corr}`);
+                    AppState.sessionQuestions.push(q); 
                 }
                 return;
             }
 
-            if(!selectedOptionBtn) return;
-            const isCorrect = selectedOptionBtn.dataset.correct === "true";
+            if(!AppState.selectedOptionBtn) return;
+            const isCorrect = AppState.selectedOptionBtn.dataset.correct === "true";
             
             document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
-            document.getElementById('btn-check').disabled = true;
+            if(btnCheck) btnCheck.disabled = true;
 
             if(isCorrect) {
-                selectedOptionBtn.classList.replace('selected', 'correct');
-                correctAnswersCount++; window.playCorrectSound(); window.reactNisan(true);
-                window.showFeedback(true, "Doğru!", "Harika gidiyorsun.");
+                AppState.selectedOptionBtn.classList.replace('selected', 'correct');
+                AppState.correctAnswersCount++; playCorrectSound(); reactNisan(true);
+                showFeedback(true, "Doğru!", "Harika gidiyorsun.");
             } else {
-                selectedOptionBtn.classList.replace('selected', 'wrong');
-                window.hearts--; window.updateTopBar(); window.saveProgress(); window.playWrongSound(); window.reactNisan(false);
+                AppState.selectedOptionBtn.classList.replace('selected', 'wrong');
+                AppState.hearts--; updateTopBar(); saveProgress(); playWrongSound(); reactNisan(false);
                 
                 document.querySelectorAll('.opt-btn').forEach(b => { if(b.dataset.correct === "true") b.classList.add('correct'); });
-                let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : `Doğrusu: ${q.tr}`;
-                window.showFeedback(false, "Hatalı!", desc);
-                sessionQuestions.push(q); 
+                let desc = mode === 'artikel' ? `Doğrusu: ${q.article}` : (mode.includes('grammar') || mode==='fill_blanks' ? `Doğrusu: ${q.answer}` : `Doğrusu: ${q.tr}`);
+                showFeedback(false, "Hatalı!", desc);
+                AppState.sessionQuestions.push(q); 
             }
-        };
+        }
+        window.checkAnswer = checkAnswer;
 
-        window.showFeedback = function(isCorrect, titleText, descText) {
+        function showFeedback(isCorrect, titleText, descText) {
             const sheet = document.getElementById('feedback-sheet');
             const title = document.getElementById('feedback-title');
             const desc = document.getElementById('feedback-desc');
             const icon = document.getElementById('feedback-icon');
             const nextBtn = document.getElementById('btn-next');
+
+            if(!sheet || !title || !desc || !icon || !nextBtn) return;
 
             sheet.style.backgroundColor = isCorrect ? '#f0fdfa' : '#fff1f2';
             sheet.style.borderColor = isCorrect ? '#14b8a6' : '#f43f5e';
@@ -1154,7 +1457,9 @@
             if(!isCorrect) {
                 desc.innerHTML = `${descText} <br><span class="text-[10px] mt-1 block opacity-80 font-medium">Öğrenene kadar tekrar sorulacak.</span>`;
             } else {
-                desc.innerText = descText;
+                let currentQ = AppState.sessionQuestions[AppState.currentQIndex];
+                let extra = (currentQ.qType === 'grammar' || currentQ.qType === 'fill_blanks') ? `<br><span class="text-[10px] mt-1 block opacity-80 font-medium">${currentQ.tr}</span>` : '';
+                desc.innerHTML = descText + extra;
             }
             desc.className = `text-sm font-medium ${isCorrect ? 'text-teal-600' : 'text-rose-600'}`;
             
@@ -1162,70 +1467,92 @@
             nextBtn.className = `app-btn w-full md:w-40 py-3 text-base shadow-sm ${isCorrect ? 'btn-teal' : 'btn-rose'}`;
             
             sheet.classList.add('show');
-        };
+        }
+        window.showFeedback = showFeedback;
 
-        window.nextQuestion = function() {
-            currentQIndex++;
-            window.updateProgressBar();
+        function nextQuestion() {
+            AppState.currentQIndex++;
+            updateProgressBar();
             
-            if(window.hearts <= 0) { alert("Canın bitti!"); window.quitSession(); return; }
+            if(AppState.hearts <= 0) { alert("Canın bitti!"); quitSession(); return; }
 
-            if(currentQIndex >= sessionQuestions.length) {
-                window.showFinishScreen();
+            if(AppState.currentQIndex >= AppState.sessionQuestions.length) {
+                showFinishScreen();
             } else {
-                window.loadQuestion();
+                loadQuestion();
             }
-        };
+        }
+        window.nextQuestion = nextQuestion;
 
-        window.updateProgressBar = function() {
-            const pct = (currentQIndex / sessionQuestions.length) * 100;
-            document.getElementById('session-progress').style.width = `${pct}%`;
-        };
+        function updateProgressBar() {
+            const pct = (AppState.currentQIndex / AppState.sessionQuestions.length) * 100;
+            const progBar = document.getElementById('session-progress');
+            if(progBar) progBar.style.width = `${pct}%`;
+        }
+        window.updateProgressBar = updateProgressBar;
 
-        window.showFinishScreen = function() {
+        function showFinishScreen() {
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-            document.getElementById('feedback-sheet').classList.remove('show');
-            document.getElementById('screen-session').classList.remove('active');
-            
-            window.triggerStars();
-            setTimeout(window.playCorrectSound, 100); setTimeout(window.playCorrectSound, 400);
+            const feedbackSheet = document.getElementById('feedback-sheet');
+            const sessionScreen = document.getElementById('screen-session');
+            const finishScreen = document.getElementById('screen-finish');
 
-            let xpGained = correctAnswersCount * 5; 
-            window.totalXP += xpGained;
+            if(feedbackSheet) feedbackSheet.classList.remove('show');
+            if(sessionScreen) sessionScreen.classList.remove('active');
             
-            window.activePathNodes[window.activeSessionNodeIdx].completed = true;
+            triggerStars();
+            setTimeout(playCorrectSound, 100); setTimeout(playCorrectSound, 400);
+
+            let xpGained = AppState.correctAnswersCount * 5; 
+            AppState.totalXP += xpGained;
             
-            let hasNextNode = window.activePathNodes.findIndex(n => !n.completed) !== -1;
+            if(AppState.activePathNodes[AppState.activeSessionNodeIdx]) {
+                AppState.activePathNodes[AppState.activeSessionNodeIdx].completed = true;
+            }
+            
+            let hasNextNode = AppState.activePathNodes.findIndex(n => !n.completed) !== -1;
             const btnNextLvl = document.getElementById('btn-next-level');
-            if(hasNextNode) { btnNextLvl.style.display = 'flex'; } else { btnNextLvl.style.display = 'none'; }
+            if(btnNextLvl) {
+                if(hasNextNode) { btnNextLvl.style.display = 'flex'; } else { btnNextLvl.style.display = 'none'; }
+            }
 
-            window.updatePathProgressUI();
-            window.updateTopBar();
-            window.saveProgress();
+            updatePathProgressUI();
+            updateTopBar();
+            saveProgress();
             
-            document.getElementById('earned-xp').innerText = `+${xpGained}`;
-            document.getElementById('accuracy-display').innerText = `${totalQuestionsAtStart} / ${sessionQuestions.length}`; 
+            const xpDisplay = document.getElementById('earned-xp');
+            const accDisplay = document.getElementById('accuracy-display');
+            if(xpDisplay) xpDisplay.innerText = `+${xpGained}`;
+            if(accDisplay) accDisplay.innerText = `${AppState.totalQuestionsAtStart} / ${AppState.sessionQuestions.length}`; 
             
-            document.getElementById('screen-finish').classList.add('active');
-        };
+            if(finishScreen) finishScreen.classList.add('active');
+        }
+        window.showFinishScreen = showFinishScreen;
 
-        window.finishSession = function(isNextLevel) {
-            window.switchScreen('dashboard');
-            document.getElementById('view-stage-selection').classList.add('hidden');
-            document.getElementById('view-learning-path').classList.remove('hidden');
-            window.updateDashboardProgress();
+        function finishSession(isNextLevel) {
+            switchScreen('dashboard');
+            const stageSel = document.getElementById('view-stage-selection');
+            const survey = document.getElementById('view-survey');
+            const pathView = document.getElementById('view-learning-path');
+            
+            if(stageSel) stageSel.classList.add('hidden');
+            if(survey) survey.classList.add('hidden');
+            if(pathView) pathView.classList.remove('hidden');
+            
+            updateDashboardProgress();
 
             if (isNextLevel) {
-                window.currentPathNodeIndex = window.activePathNodes.findIndex(n => !n.completed);
-                if (window.currentPathNodeIndex !== -1) {
-                    let nextNode = window.activePathNodes[window.currentPathNodeIndex];
-                    window.renderDynamicPath(); 
-                    setTimeout(() => { window.startSession(nextNode.type, nextNode.count, window.currentPathNodeIndex); }, 500); 
+                AppState.currentPathNodeIndex = AppState.activePathNodes.findIndex(n => !n.completed);
+                if (AppState.currentPathNodeIndex !== -1) {
+                    let nextNode = AppState.activePathNodes[AppState.currentPathNodeIndex];
+                    renderDynamicPath(); 
+                    setTimeout(() => { startSession(nextNode.type, nextNode.count, AppState.currentPathNodeIndex); }, 500); 
                 }
             } else {
-                window.renderDynamicPath();
+                renderDynamicPath();
             }
-        };
+        }
+        window.finishSession = finishSession;
 
     </script>
 
